@@ -96,8 +96,8 @@ As part of each assignment, assessment, the semester long project, and case stud
 - RT 10: Interactive tutorial covering week’s material
 
 ### Week 11:
-- Lecture 21: A brief foray quantifying uncertainty around estimates
-- Lecture 22: Data science ethics
+- Lecture 21: Data science ethics
+- Lecture 22: Text analysis
 - Lab 11: Project presentations
 - OQ 11: Review and recap
 - No HW
