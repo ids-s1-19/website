@@ -8,12 +8,12 @@ As part of each assignment, assessment, the semester long project, and case stud
 
 ## Tentative course schedule
 
-- Lab: Computing lab -- Completed in class, in teams, formative: part auto graded, part peer reviewed
-- HW: Homework -- Completed out of class, formative: part auto graded, part instructor/tutor graded
-- OQ: Online quiz -- Completed out of class, formative: auto graded
-- Project proposals: Completed out of class, in teams, formative: instructor graded
-- Project: Completed out of class, presented in class, in teams, formative: instructor graded
-- RT: R Tutorial -- Completed out of class, summative: no grading
+**Lab:** Computing lab -- Completed in class, in teams, formative: part auto graded, part peer reviewed
+**HW:** Homework -- Completed out of class, formative: part auto graded, part instructor/tutor graded
+**OQ:** Online quiz -- Completed out of class, formative: auto graded
+**Project proposals:** Completed out of class, in teams, formative: instructor graded
+**Project:** Completed out of class, presented in class, in teams, formative: instructor graded
+**RT:** R Tutorial -- Completed out of class, summative: no grading
 
 ### Week 1:
 - Lecture 01: Welcome to Data Science!
@@ -32,12 +32,12 @@ As part of each assignment, assessment, the semester long project, and case stud
 - RT 02: Interactive tutorial covering week’s material
 
 ### Week 3:
-Lecture 05: Data wrangling and manipulating
-Lecture 06: Rectanling and reshaping data
-Lab 03: Data gymnastics
-OQ 03: Tidy data principles
-HW 03: Tidying open data 
-RT 03: Interactive tutorial covering week’s material
+- Lecture 05: Data wrangling and manipulating
+- Lecture 06: Rectanling and reshaping data
+- Lab 03: Data gymnastics
+- OQ 03: Tidy data principles
+- HW 03: Tidying open data 
+- RT 03: Interactive tutorial covering week’s material
 
 ### Week 4:
 - Lecture 07: Summarizing numerical and categorical data 
