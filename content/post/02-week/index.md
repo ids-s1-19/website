@@ -20,7 +20,7 @@ title: 'Week 2 - Data Visualization'
 |------------|----------|
 | Lecture 03 | Fundamentals of data and data visualization |
 | Lecture 04 | Tips for effective data visualization |
-| Lab 02     | Data visualization + version control practice
-| OQ 02      | Critiquing and improving data visualizations and their interpretations
-| HW 02      | Ugly charts
-| RT 02      | Interactive tutorial covering week’s material
+| Lab 02     | Data visualization + version control practice |
+| OQ 02      | Critiquing and improving data visualizations and their interpretations |
+| HW 02      | Ugly charts |
+| RT 02      | Interactive tutorial covering week’s material |
