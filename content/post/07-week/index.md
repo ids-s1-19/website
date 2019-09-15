@@ -1,19 +1,19 @@
 ---
 authors:
 - admin
-date: "2019-10-14T00:00:00Z"
+date: "2019-10-28T00:00:00Z"
 draft: false
 featured: false
 image:
-  caption: 'Image credit: [**Unsplash**](https://unsplash.com/photos/Qp0lt8ehfjg)'
+  caption: 'Image credit: [**Unsplash**](https://unsplash.com/photos/nbKaLT4cmRM)'
   focal_point: ""
   placement: 2
   preview_only: true
-lastmod: "2019-10-14T00:00:00Z"
+lastmod: "2019-10-28T00:00:00Z"
 projects: []
-subtitle: 'Effective and efficient workflows for organizing and styling your code, and communicating results :speech_bubble:'
-summary: Effective and efficient workflows for organizing and styling your code, and communicating results
-title: 'Week 5 - Workflows, style, and communication'
+subtitle: 'Modeling relationships with simple linear regression :dango:'
+summary: Modeling relationships with simple linear regression
+title: 'Week 7 - The language of models'
 ---
 
 |            |  |
@@ -24,4 +24,3 @@ title: 'Week 5 - Workflows, style, and communication'
 | OQ 05      | Coding best practices |
 | HW 05      | Project proposals |
 | RT 05      | Interactive tutorial covering week’s material |
-
