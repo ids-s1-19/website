@@ -5,8 +5,8 @@ headless = true  # This file represents a page section.
 active = true  # Activate this widget? true/false
 weight = 20  # Order that this section will appear.
 
-title = "Info"
-subtitle = "Lectures on Mondays and Wednesdays, computing labs on Tuesdays"
+title = "Timetable"
+subtitle = "Lectures on Mondays and Wednesdays, computing labs on Tuesdays. Access official course information [here](http://www.drps.ed.ac.uk/19-20/dpt/cxmath08077.htm)."
 
 # Showcase important course info at a glance.
 # 
