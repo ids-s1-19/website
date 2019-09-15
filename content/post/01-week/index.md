@@ -9,7 +9,7 @@ image:
   focal_point: ""
   placement: 2
   preview_only: true
-lastmod: "2019-09-16T00:00:00Z"
+lastmod: "2019-09-01T00:00:00Z"
 projects: []
 subtitle: 'Get acquainted with the course, the technology, and the skills you will acquire throughout the semester :toolbox:'
 summary: Get acquainted with the course, the technology, and the skills you will acquire throughout the semester.
