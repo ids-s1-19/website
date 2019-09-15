@@ -90,7 +90,7 @@ phone = ""
 
 # Address
 # For country_code, use the 2-letter ISO code (see https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2 )
-address = {street = "2257 James Clerk Maxwell Building"}
+address = {street = "2257 James Clerk Maxwell Building, King's Buildings"}
 
 # Geographic coordinates
 # To get your coordinates, right-click on Google Maps and choose "What's here?". The coords will show up at the bottom.
@@ -101,17 +101,13 @@ directions = ""
 
 # Office hours
 # A list of your office hours. To remove, set to an empty list `[]`.
-office_hours = ["TBA"]
+office_hours = ["Tuesdays 14:30 - 16:30"]
 
 # Contact links
 #   Set to `[]` to disable, or comment out unwanted lines with a hash `#`.
 contact_links = [
-  {icon = "comments", icon_pack = "fas", name = "Piazza", link = "PIAZZA"},
+  {icon = "piazza", icon_pack = "ai", name = "Piazza", link = "piazza.com/ed.ac.uk/fall2019/math08077/home"},
   {icon = "envelope", icon_pack = "fas", name = "Email", link = "mailto:mine.cetinkaya-rundel@ed.ac.uk"},
-  # {icon = "twitter", icon_pack = "fab", name = "DM Me", link = "https://twitter.com/minebocek"},
-  # {icon = "skype", icon_pack = "fab", name = "Skype Me", link = "skype:echo123?call"},
-  # {icon = "keybase", icon_pack = "fab", name = "Chat on Keybase", link = "https://keybase.io/"},
-  # {icon = "telegram", icon_pack = "fab", name = "Telegram Me", link = "https://telegram.me/@Telegram"},
   ]
   
 # Enter an optional link for booking appointments (e.g. calendly.com).
