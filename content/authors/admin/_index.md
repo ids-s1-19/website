@@ -9,9 +9,6 @@ social:
 - icon: github
   icon_pack: fab
   link: https://github.com/ids-s1-19
-- icon: github
-  icon_pack: fab
-  link: https://github.com/ids-s1-19
 - icon: piazza
   icon_pack: ai
   link: https://piazza.com/ed.ac.uk/fall2019/math08077/home
