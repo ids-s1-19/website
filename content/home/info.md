@@ -5,7 +5,7 @@ headless = true  # This file represents a page section.
 active = true  # Activate this widget? true/false
 weight = 20  # Order that this section will appear.
 
-title = "Meetings"
+title = "Info"
 subtitle = "Lectures on Mondays and Wednesdays, computing labs on Tuesdays"
 
 # Showcase important course info at a glance.
