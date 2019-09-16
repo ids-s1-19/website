@@ -42,6 +42,8 @@ Please refrain from texting or using your computer for anything other than cours
 
 Class time is designed to be as interactive as possible. My role as instructor is to introduce you new tools and techniques, but it is up to you to take them and make use of them. Programming is a skill that is best learned by doing, so as much as possible you will be working on a variety of tasks and activities throughout each class. Attendance will not be be used to determine your mark but you are expected to attend all lectures and meaningfully contribute to in-class exercises and homework assignments.
 
+Class sessions are recorded, and the recordings will be available on Learn after class. Think of the recordings not as a replacement for attending class, but as a supplement!
+
 ### Teams 
 
 For all of the team based assignments in this class you will be randomly assigned to teams of 3 or 4 students - these teams will change after each assignment. You will work in these teams during class and on the homework assignment. For team based assignments, all team members are expected to contribute equally to the completion of each assignment and you will be asked to evaluate your team members after each assignment is due. Failure to adequately contribute to an assignment will result in a penalty to your mark relative to the team's overall mark.
