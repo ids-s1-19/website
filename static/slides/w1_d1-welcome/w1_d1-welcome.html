@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <title>Welcome to Data Science   🙌</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Dr. Çetinkaya-Rundel" />
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Welcome to Data Science <br> 🙌
+### Dr. Çetinkaya-Rundel
+
+---
+
+
+
+
+
+layout: true
+  
+&lt;div class="my-footer"&gt;
+&lt;span&gt;
+Dr. Mine Çetinkaya-Rundel -
+&lt;a href="https://introds.org" target="_blank"&gt;introds.org
+&lt;/a&gt;
+&lt;/span&gt;
+&lt;/div&gt; 
+
+---
+
+
+
+class: center, middle
+
+# Hello world!
+
+---
+
+## What is data science?
+
+- &lt;i class="fa fa-database fa"&gt;&lt;/i&gt; + &lt;i class="fa fa-flask fa"&gt;&lt;/i&gt; = data science?
+--
+
+- &lt;i class="fa fa-database fa"&gt;&lt;/i&gt; + &lt;i class="fa fa-code fa"&gt;&lt;/i&gt; = data science?
+--
+
+- &lt;i class="fa fa-database fa"&gt;&lt;/i&gt; + &lt;i class="fa fa-user fa"&gt;&lt;/i&gt; + &lt;i class="fa fa-code fa"&gt;&lt;/i&gt; = data science?
+--
+
+- &lt;i class="fa fa-database fa"&gt;&lt;/i&gt; + &lt;i class="fa fa-users fa"&gt;&lt;/i&gt; + &lt;i class="fa fa-code fa"&gt;&lt;/i&gt; = data science?
+--
+
+&lt;br&gt;
+
+Data science is an exciting discipline that allows you to turn raw data into understanding, insight, and knowledge. We're going to learn to do this in a `tidy` way -- more on that later!
+
+---
+
+# What is this course?
+
+This is a course on introduction to data science, with an emphasis on statistical thinking.
+
+--
+
+**Q - What data science background does this course assume?**  
+A - None.
+
+--
+
+**Q - Is this an intro stat course?**  
+A - While statistics `\(\ne\)` data science, they are very closely related and have tremendous of overlap. Hence, this course is a great way to get started with statistics. However this course is **not** your typical high school statistics course.
+
+--
+
+**Q - Will we be doing computing?**   
+A - Yes.
+
+---
+
+# What is this course?
+
+**Q - Is this an intro CS course?**  
+A - No, but many themes are shared.
+
+--
+
+**Q - What computing language will we learn?**  
+A - R.
+
+--
+
+**Q: Why not language X?**  
+A: We can discuss that over ☕.
+
+
+---
+
+## Where is this course?
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+
+.large[
+.center[
+[introds.org](https://introds.org)
+]
+]
+
+---
+
+class: center, middle
+
+# Data in the wild
+
+---
+
+# Data from wearables
+
+**A year as told by fitbit**
+
+.pull-left[
+by Nick Strayer
+
+http://livefreeordichotomize.com/2017/12/27/a-year-as-told-by-fitbit/
+]
+.pull-right[
+![A year as told by fitbit](img/nick-strayer-fitbit.png)
+]
+---
+
+# R-Ladies chapters
+
+**R-Ladies global tour**
+
+.pull-left[
+by Maelle Salmon
+
+http://www.masalmon.eu/2017/10/06/globalrladiestour/
+]
+.pull-right[
+![R Ladies Global Tour](img/maelle-salmon-rladies.png)
+]
+
+---
+
+# Trump's tweets
+
+**Text analysis of Trump's tweets confirms he writes only the (angrier) Android half**
+
+.pull-left[
+by David Robinson (Stack Overflow)
+
+http://varianceexplained.org/r/trump-tweets/
+]
+.pull-right[
+![Trump tweets](img/david-robinson-trump-tweets.png)
+]
+
+---
+
+## Greatest Twitter scheme of all time
+
+&lt;img src="img/bohemian-rhapsody.png" width="381" style="display: block; margin: auto;" /&gt;
+
+.small[
+https://gist.github.com/mine-cetinkaya-rundel/03d7516dea1e5f2613a5d71c28edb08d
+]
+
+---
+
+class: center, middle
+
+# Your turn!
+
+---
+
+## Create a GitHub account
+
+.instructions[
+Go to [github.com](https://github.com/), and create an account (unless you already have one). 
+]
+
+Tips for selecting a username:&lt;sup&gt;✦&lt;/sup&gt;
+
+.midi[
+- Incorporate your actual name.
+- Reuse username from other contexts, e.g., Twitter or Slack.
+- Pick a username you'll be comfortable revealing to your future boss.
+- Shorter is better than longer.
+- Be as unique as possible in as few characters as possible.
+- Make it timeless. Don’t highlight your current university, employer, etc.
+- Avoid words laden with special meaning in programming, like `NA`.
+]
+
+.instructions[
+Once done, place a green sticky on your laptop. If you have questions, place a pink sticky.
+]
+
+.footnote[ 
+&lt;sup&gt;✦&lt;/sup&gt; Source: [Happy git with R](http://happygitwithr.com/github-acct.html#username-advice) by Jenny Bryan
+]
+
+---
+
+## Launch RStudio
+
+.instructions[
+Go to Learn or the [course homepage](https://introds.org), and launch RStudio.
+]
+
+---
+
+## Create your first data visualization
+
+- Once you log on to RStudio Cloud, click on this course's workspace "STA 112FS - Fall 2018".
+- Make a copy of the project called UN Votes, and launch it.
+- In the Files pane in the bottom right corner, spot the file called `unvotes.Rmd`. Open it, and then click on the "Knit" button.
+- Go back to the file and change your name on top (in the `yaml` -- we'll talk about what this means later) and knit again.
+- Then change the country names to those you're interested in. Your spelling and capitalization should match how the countries appear in the data, so take a peek at the Appendix to see how the country names are spelled. Knit again. And voila, your first data visualization!
+
+---
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightLines": true,
+"highlightStyle": "solarized-dark",
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
