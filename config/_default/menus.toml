@@ -27,10 +27,19 @@
   name = "People"
   url = "#people"
   weight = 60
+  
+[[main]]
+  name = "<i class='fab fa-github'></i>"
+  url = "https://github.com/ids-s1-19"
+  weight = 70
 
-# Link to a PDF of your resume/CV from the menu.
-# To enable, copy your resume/CV to `static/files/cv.pdf` and uncomment the lines below.
-# [[main]]
-#    name = "CV"
-#    url = "files/cv.pdf"
-#    weight = 70
+[[main]]
+  name = "<i class='fab fa-r-project'></i>"
+  url = "https://www.learn.ed.ac.uk/webapps/blackboard/content/listContentEditable.jsp?content_id=_3923957_1&course_id=_75012_1"
+  weight = 80
+
+[[main]]
+  name = "<i class='ai ai-piazza'></i>"
+  url = "https://piazza.com/ed.ac.uk/fall2019/math08077/home"
+  weight = 90
+  menu_align_right = true
