@@ -20,6 +20,8 @@ h1, h3 {
   font-family: 'Source Sans Pro', sans-serif;
   font-weight: bold;
   color: #A7D5E8;
+  margin-top: 0px;
+  margin-bottom: 20px;
 }
 a, a > code {
   font-family: 'Fira Mono', monospace;
@@ -28,7 +30,7 @@ a, a > code {
 }
 
 .remark-slide-content{
-  font-size: 24px;
+  font-size: 30px;
 }
 
 
@@ -211,12 +213,12 @@ div.my-footer a {
     content: "";
     position: absolute;
     bottom: 5px;
-    right: 810px;
-    height: 70px;
+    right: 1100px;
+    height: 60px;
     width: 81px;
     background-repeat: no-repeat;
     background-size: contain;
-    background-image: url("sta112-hex.png");
+    background-image: url("logo-hex.png");
 }
 
 
