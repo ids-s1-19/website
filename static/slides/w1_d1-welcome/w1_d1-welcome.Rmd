@@ -1,0 +1,210 @@
+---
+title: "Welcome to Data Science <br> `r emo::ji('raised_hands')`"
+author: "Dr. Çetinkaya-Rundel"
+output:
+  xaringan::moon_reader:
+    css: "../slides.css"
+    lib_dir: libs
+    nature:
+      highlightLines: true
+      highlightStyle: solarized-dark
+      countIncrementalSlides: false
+---
+
+```{r child = "../setup.Rmd"}
+```
+
+```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+```
+
+class: center, middle
+
+# Hello world!
+
+---
+
+## What is data science?
+
+- <i class="fa fa-database fa"></i> + <i class="fa fa-flask fa"></i> = data science?
+--
+
+- <i class="fa fa-database fa"></i> + <i class="fa fa-code fa"></i> = data science?
+--
+
+- <i class="fa fa-database fa"></i> + <i class="fa fa-user fa"></i> + <i class="fa fa-code fa"></i> = data science?
+--
+
+- <i class="fa fa-database fa"></i> + <i class="fa fa-users fa"></i> + <i class="fa fa-code fa"></i> = data science?
+--
+
+<br>
+
+Data science is an exciting discipline that allows you to turn raw data into understanding, insight, and knowledge. We're going to learn to do this in a `tidy` way -- more on that later!
+
+---
+
+# What is this course?
+
+This is a course on introduction to data science, with an emphasis on statistical thinking.
+
+--
+
+**Q - What data science background does this course assume?**  
+A - None.
+
+--
+
+**Q - Is this an intro stat course?**  
+A - While statistics $\ne$ data science, they are very closely related and have tremendous of overlap. Hence, this course is a great way to get started with statistics. However this course is **not** your typical high school statistics course.
+
+--
+
+**Q - Will we be doing computing?**   
+A - Yes.
+
+---
+
+# What is this course?
+
+**Q - Is this an intro CS course?**  
+A - No, but many themes are shared.
+
+--
+
+**Q - What computing language will we learn?**  
+A - R.
+
+--
+
+**Q: Why not language X?**  
+A: We can discuss that over `r emo::ji("coffee")`.
+
+
+---
+
+## Where is this course?
+
+<br><br><br><br><br><br><br>
+
+.large[
+.center[
+[introds.org](https://introds.org)
+]
+]
+
+---
+
+class: center, middle
+
+# Data in the wild
+
+---
+
+# Data from wearables
+
+**A year as told by fitbit**
+
+.pull-left[
+by Nick Strayer
+
+http://livefreeordichotomize.com/2017/12/27/a-year-as-told-by-fitbit/
+]
+.pull-right[
+![A year as told by fitbit](img/nick-strayer-fitbit.png)
+]
+---
+
+# R-Ladies chapters
+
+**R-Ladies global tour**
+
+.pull-left[
+by Maelle Salmon
+
+http://www.masalmon.eu/2017/10/06/globalrladiestour/
+]
+.pull-right[
+![R Ladies Global Tour](img/maelle-salmon-rladies.png)
+]
+
+---
+
+# Trump's tweets
+
+**Text analysis of Trump's tweets confirms he writes only the (angrier) Android half**
+
+.pull-left[
+by David Robinson (Stack Overflow)
+
+http://varianceexplained.org/r/trump-tweets/
+]
+.pull-right[
+![Trump tweets](img/david-robinson-trump-tweets.png)
+]
+
+---
+
+## Greatest Twitter scheme of all time
+
+```{r fig.width=15, fig.height=12, fig.align="center", echo=FALSE}
+knitr::include_graphics("img/bohemian-rhapsody.png")
+```
+
+.small[
+https://gist.github.com/mine-cetinkaya-rundel/03d7516dea1e5f2613a5d71c28edb08d
+]
+
+---
+
+class: center, middle
+
+# Your turn!
+
+---
+
+## Create a GitHub account
+
+.instructions[
+Go to [github.com](https://github.com/), and create an account (unless you already have one). 
+]
+
+Tips for selecting a username:<sup>✦</sup>
+
+.midi[
+- Incorporate your actual name.
+- Reuse username from other contexts, e.g., Twitter or Slack.
+- Pick a username you'll be comfortable revealing to your future boss.
+- Shorter is better than longer.
+- Be as unique as possible in as few characters as possible.
+- Make it timeless. Don’t highlight your current university, employer, etc.
+- Avoid words laden with special meaning in programming, like `NA`.
+]
+
+.instructions[
+Once done, place a green sticky on your laptop. If you have questions, place a pink sticky.
+]
+
+.footnote[ 
+<sup>✦</sup> Source: [Happy git with R](http://happygitwithr.com/github-acct.html#username-advice) by Jenny Bryan
+]
+
+---
+
+## Launch RStudio
+
+.instructions[
+Go to Learn or the [course homepage](https://introds.org), and launch RStudio.
+]
+
+---
+
+## Create your first data visualization
+
+- Once you log on to RStudio Cloud, click on this course's workspace "STA 112FS - Fall 2018".
+- Make a copy of the project called UN Votes, and launch it.
+- In the Files pane in the bottom right corner, spot the file called `unvotes.Rmd`. Open it, and then click on the "Knit" button.
+- Go back to the file and change your name on top (in the `yaml` -- we'll talk about what this means later) and knit again.
+- Then change the country names to those you're interested in. Your spelling and capitalization should match how the countries appear in the data, so take a peek at the Appendix to see how the country names are spelled. Knit again. And voila, your first data visualization!
+
+---

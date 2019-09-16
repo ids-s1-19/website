@@ -18,7 +18,7 @@ title: 'Week 1 - Welcome to IDS'
 
 |            |  |
 |------------|----------|
-| Lecture 01 | Welcome to Data Science! |
+| Lecture 01 | [Welcome to Data Science!](/slides/w1_d1-welcome/w1_d1-welcome.html) |
 | Lecture 02 | Meet the toolkit |
 | Lab 01     | Hello R! |
 | OQ 01      | Interpreting simple visualizations + R, RStudio, and Git/GitHub basics |
