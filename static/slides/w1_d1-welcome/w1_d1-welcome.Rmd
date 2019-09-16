@@ -206,3 +206,16 @@ Go to Learn or the [course homepage](https://introds.org), and launch RStudio.
 - Course technology kit
 - Hands on practice with creating data visualizations with R
 
+---
+
+## Course overview
+
+<br><br><br><br>
+
+.large[
+.center[
+[introds.org](https://introds.org)
+]
+]
+
+
