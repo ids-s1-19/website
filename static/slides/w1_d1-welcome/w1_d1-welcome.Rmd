@@ -6,6 +6,7 @@ output:
     css: "../slides.css"
     lib_dir: libs
     nature:
+      ratio: "16:9"
       highlightLines: true
       highlightStyle: solarized-dark
       countIncrementalSlides: false
@@ -26,21 +27,10 @@ class: center, middle
 
 ## What is data science?
 
-- <i class="fa fa-database fa"></i> + <i class="fa fa-flask fa"></i> = data science?
 --
 
-- <i class="fa fa-database fa"></i> + <i class="fa fa-code fa"></i> = data science?
---
-
-- <i class="fa fa-database fa"></i> + <i class="fa fa-user fa"></i> + <i class="fa fa-code fa"></i> = data science?
---
-
-- <i class="fa fa-database fa"></i> + <i class="fa fa-users fa"></i> + <i class="fa fa-code fa"></i> = data science?
---
-
-<br>
-
-Data science is an exciting discipline that allows you to turn raw data into understanding, insight, and knowledge. We're going to learn to do this in a `tidy` way -- more on that later!
+- Data science is an exciting discipline that allows you to turn raw data into understanding, insight, and knowledge. 
+- We're going to learn to do this in a `tidy` way -- more on that later!
 
 ---
 
@@ -85,7 +75,7 @@ A: We can discuss that over `r emo::ji("coffee")`.
 
 ## Where is this course?
 
-<br><br><br><br><br><br><br>
+<br><br><br><br>
 
 .large[
 .center[
@@ -101,47 +91,33 @@ class: center, middle
 
 ---
 
-# Data from wearables
+# The US of Bey
 
-**A year as told by fitbit**
+```{r echo=FALSE, alt="The US of Bey", out.width="55%"}
+knitr::include_graphics("img/brooke-watson-us-of-bey.gif")
+```
 
-.pull-left[
-by Nick Strayer
-
-http://livefreeordichotomize.com/2017/12/27/a-year-as-told-by-fitbit/
-]
-.pull-right[
-![A year as told by fitbit](img/nick-strayer-fitbit.png)
-]
----
-
-# R-Ladies chapters
-
-**R-Ladies global tour**
-
-.pull-left[
-by Maelle Salmon
-
-http://www.masalmon.eu/2017/10/06/globalrladiestour/
-]
-.pull-right[
-![R Ladies Global Tour](img/maelle-salmon-rladies.png)
-]
+by Brooke Watson, [blog.brooke.science/posts/the-us-of-bey](https://blog.brooke.science/posts/the-us-of-bey/)
 
 ---
 
-# Trump's tweets
+# Punctuation in literature
 
-**Text analysis of Trump's tweets confirms he writes only the (angrier) Android half**
+```{r echo=FALSE, alt="Punctuation", out.width="50%"}
+knitr::include_graphics("img/julia-silge-punctuation.png")
+```
 
-.pull-left[
-by David Robinson (Stack Overflow)
+by Julia Silge, [juliasilge.com/blog/punctution-literature](https://juliasilge.com/blog/punctution-literature/)
 
-http://varianceexplained.org/r/trump-tweets/
-]
-.pull-right[
-![Trump tweets](img/david-robinson-trump-tweets.png)
-]
+---
+
+# Text analysis of Trump's tweets
+
+```{r echo=FALSE, alt="Trump tweets", out.width="45%"}
+knitr::include_graphics("img/david-robinson-trump-tweets.png")
+```
+
+by David Robinson, [varianceexplained.org/r/trump-tweets](http://varianceexplained.org/r/trump-tweets)
 
 ---
 
@@ -197,14 +173,36 @@ Once done, place a green sticky on your laptop. If you have questions, place a p
 Go to Learn or the [course homepage](https://introds.org), and launch RStudio.
 ]
 
+- Click on the RStudio link, which will try to open a new window in your browser.
+- In the next window, select RStudio under "Start Personal Notebook", and hit Start.
+- In the next window, on the top right, click on New, and choose RStudio again. And voila!
+
 ---
 
 ## Create your first data visualization
 
-- Once you log on to RStudio Cloud, click on this course's workspace "STA 112FS - Fall 2018".
-- Make a copy of the project called UN Votes, and launch it.
-- In the Files pane in the bottom right corner, spot the file called `unvotes.Rmd`. Open it, and then click on the "Knit" button.
+- Go back to the [course homepage](https://introds.org) and navigate to the course GitHub organization.
+- Click on the repository called [`ex-01-unvotes`](https://github.com/ids-s1-19/ex-01-unvotes).
+- Click on the green button on the center right that says "Clone or download" and copy the repository URL by clicking on the clipboard icon. Make sure close with HTTPS is selected (always).
+- Go back to RStudio, click on File -> New Project -> Version Control -> Git:
+  - Repository URL: Paste repo url here
+  - Click tab and project name will be filled in for you
+  - Create Project
+- In the Files pane in the bottom right corner, spot the file called `ex-01-unvotes.Rmd`. Open it, and then click on the "Knit" button. (It might ask you to install some packages, say yes.)
+
+---
+
+## Create your first data visualization
+
 - Go back to the file and change your name on top (in the `yaml` -- we'll talk about what this means later) and knit again.
 - Then change the country names to those you're interested in. Your spelling and capitalization should match how the countries appear in the data, so take a peek at the Appendix to see how the country names are spelled. Knit again. And voila, your first data visualization!
 
 ---
+
+## Recap
+
+- A quick overview of R vs. RStudio and git vs. GitHub
+- A peek at R code for creating a complex data visualization
+- Course technology kit
+- Hands on practice with creating data visualizations with R
+
