@@ -7,15 +7,9 @@ weight = 40  # Order that this section will appear in.
 title = "Syllabus"
 +++
 
-## Communication
+## Code of conduct
 
-I will regularly send course announcements via email and Learn, make sure to check one or the other of these daily. We will be using Piazza to facilitate course communication, particularly around questions and answers. If you have a question outside of class or office hours, first check if it has already been asked on Piazza and if not post there. If you have a question or concern you don't feel confortable posting of Piazza feel free to reach out via email.
-
-## Professionalism
-
-Please refrain from texting or using your computer for anything other than coursework during class.
-
-## Diversity & Inclusiveness:
+### Diversity & Inclusiveness
 
 It is my intent that students from all diverse backgrounds and perspectives be well-served by this course, that students' learning needs be addressed both in and out of class, and that the diversity that the students bring to this class be viewed as a resource, strength and benefit. It is my intent to present materials and activities that are respectful of diversity: gender identity, sexuality, disability, age, socioeconomic status, ethnicity, race, nationality, religion, and culture. Your suggestions are encouraged and appreciated. Please let me know ways to improve the effectiveness of the course for you personally, or for other students or student groups.
 
@@ -25,6 +19,22 @@ Furthermore, I would like to create a learning environment for my students that 
 - Please let me know your preferred pronouns.
 - If you feel like your performance in the class is being impacted by your experiences outside of class, please don't hesitate to come and talk with me. I want to be a resource for you. If you prefer to speak with someone outside of the course, your personal tutor is an excellent resource.
 - I (like many people) am still in the process of learning about diverse perspectives and identities. If something was said in class (by anyone) that made you feel uncomfortable, please talk to me about it.
+
+### Academic integrity
+
+The University takes academic misconduct very seriously and is committed to ensuring that so far as possible it is detected and dealt with appropriately. Find out more about the University's official policies around academic misconduct [here](https://teaching.maths.ed.ac.uk/main/content-to-be-reused/pgt-and-ug-reusable-content/academic-misconduct).
+
+Cheating or plagiarising on assignments, lying about an illness or absence and other forms of academic dishonesty are a breach of trust with classmates and faculty, violate the University policies, and will not be tolerated. Such incidences will result in a 0 grade for all parties involved. Additionally, there may be penalties to your final class grade along with being reported to the School Academic Misconduct Office.
+
+*A note on sharing / reusing code:* I am well aware that a huge volume of code is available on the web to solve any number of problems. Unless I explicitly tell you not to use something the course's policy is that you may make use of any online resources (e.g. StackOverflow) but you must explicitly cite where you obtained any code you directly use (or use as inspiration). Any recycled code that is discovered and is not explicitly cited will be treated as plagiarism. On individual assignments you may not directly share code with another student in this class, and on team assignments you may not directly share code with another team in this class. Except for the take home exams, you are welcome to discuss the problems together and ask for advice, but you may not send or make use of code from another team. On the take home exams all communication with classmates is explicitly forbidden.
+
+### Communication
+
+I will regularly send course announcements via email and Learn, make sure to check one or the other of these daily. We will be using Piazza to facilitate course communication, particularly around questions and answers. If you have a question outside of class or office hours, first check if it has already been asked on Piazza and if not post there. If you have a question or concern you don't feel confortable posting of Piazza feel free to reach out via email.
+
+### Professionalism
+
+Please refrain from texting or using your computer for anything other than coursework during class.
 
 ## Course components
 
@@ -60,12 +70,18 @@ These weeklky R tutorials are designed to help with your learning. They are opti
 
 ## Grading
 
+### Scheme
+
 Your overall course grade will be comprised of the following components, and their weights:
 
 - Homework: 50%
 - Lab: 20%
 - Project: 20%
 - Quiz: 10%
+
+### Moderation and scaling
+
+Please review the official University and School policies  [here](https://teaching.maths.ed.ac.uk/main/undergraduate/studies/assessment/rules).
 
 ### Regrade requests 
 
@@ -74,15 +90,3 @@ Regrade requests must be made within one week of when the assignment is returned
 ### Late work policy
 
 Please review the official University and School policies  [here](https://teaching.maths.ed.ac.uk/main/content-to-be-reused/pgt-and-ug-reusable-content/extensions). Late work will not be accepted for homework assignments, labs, and online quizzes. Only the work you have completed by the deadline will be marked for those assignments. The projects will follow the standard University late work penalty of 5% of the maximum obtainable mark per calendar day up to seven calendar days after the deadline. If you intend to submit work late for the project, you must notify the course organizer before the original deadline as well as as soon as the completed work is submitted on GitHub.
-
-### Moderation and scaling
-
-Please review the official University and School policies  [here](https://teaching.maths.ed.ac.uk/main/undergraduate/studies/assessment/rules).
-
-## Academic integrity
-
-The University takes academic misconduct very seriously and is committed to ensuring that so far as possible it is detected and dealt with appropriately. Find out more about the University's official policies around academic misconduct [here](https://teaching.maths.ed.ac.uk/main/content-to-be-reused/pgt-and-ug-reusable-content/academic-misconduct).
-
-Cheating or plagiarising on assignments, lying about an illness or absence and other forms of academic dishonesty are a breach of trust with classmates and faculty, violate the University policies, and will not be tolerated. Such incidences will result in a 0 grade for all parties involved. Additionally, there may be penalties to your final class grade along with being reported to the School Academic Misconduct Office.
-
-*A note on sharing / reusing code:* I am well aware that a huge volume of code is available on the web to solve any number of problems. Unless I explicitly tell you not to use something the course's policy is that you may make use of any online resources (e.g. StackOverflow) but you must explicitly cite where you obtained any code you directly use (or use as inspiration). Any recycled code that is discovered and is not explicitly cited will be treated as plagiarism. On individual assignments you may not directly share code with another student in this class, and on team assignments you may not directly share code with another team in this class. Except for the take home exams, you are welcome to discuss the problems together and ask for advice, but you may not send or make use of code from another team. On the take home exams all communication with classmates is explicitly forbidden.
