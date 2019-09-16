@@ -85,6 +85,27 @@ A: We can discuss that over `r emo::ji("coffee")`.
 
 ---
 
+## Who am I?
+
+.pull-left[
+```{r fig.align="center", echo=FALSE, alt="Mine", out.width="70%"}
+knitr::include_graphics("img/mine.png")
+```
+]
+.pull-right[
+.midi[
+- **Office:** 2257 JCMB
+- **Student hours:** Tuesdays 14:30 - 16:30 and by appointment
+- **Email:** mine.cetinkaya-rundel@ed.ac.uk *(but post course questions on Piazza!)*
+- Where else can you find me?
+  - **Twitter:** [@minebocek](https://twitter.com/minebocek)
+  - **GitHub:** [mine-cetinkaya-rundel](https://github.com/mine-cetinkaya-rundel)
+  - **Blog:** [citizen-statistician.org](http://citizen-statistician.org)
+  ]
+]
+
+---
+
 class: center, middle
 
 # Data in the wild
@@ -93,43 +114,53 @@ class: center, middle
 
 # The US of Bey
 
-```{r echo=FALSE, alt="The US of Bey", out.width="55%"}
+```{r fig.align="center", echo=FALSE, alt="The US of Bey", out.width="65%"}
 knitr::include_graphics("img/brooke-watson-us-of-bey.gif")
 ```
 
-by Brooke Watson, [blog.brooke.science/posts/the-us-of-bey](https://blog.brooke.science/posts/the-us-of-bey/)
+Brooke Watson, [blog.brooke.science/posts/the-us-of-bey](https://blog.brooke.science/posts/the-us-of-bey/)
 
 ---
 
 # Punctuation in literature
 
-```{r echo=FALSE, alt="Punctuation", out.width="50%"}
+```{r fig.align="center", echo=FALSE, alt="Punctuation", out.width="48%"}
 knitr::include_graphics("img/julia-silge-punctuation.png")
 ```
 
-by Julia Silge, [juliasilge.com/blog/punctution-literature](https://juliasilge.com/blog/punctution-literature/)
+Julia Silge, [juliasilge.com/blog/punctution-literature](https://juliasilge.com/blog/punctution-literature/)
 
 ---
 
 # Text analysis of Trump's tweets
 
-```{r echo=FALSE, alt="Trump tweets", out.width="45%"}
+```{r fig.align="center", echo=FALSE, alt="Trump tweets", out.width="63%"}
 knitr::include_graphics("img/david-robinson-trump-tweets.png")
 ```
 
-by David Robinson, [varianceexplained.org/r/trump-tweets](http://varianceexplained.org/r/trump-tweets)
+David Robinson, [varianceexplained.org/r/trump-tweets](http://varianceexplained.org/r/trump-tweets)
 
 ---
 
 ## Greatest Twitter scheme of all time
 
-```{r fig.width=15, fig.height=12, fig.align="center", echo=FALSE}
+```{r fig.align="center", echo=FALSE, out.width = "43%"}
 knitr::include_graphics("img/bohemian-rhapsody.png")
 ```
 
 .small[
-https://gist.github.com/mine-cetinkaya-rundel/03d7516dea1e5f2613a5d71c28edb08d
+[gist.github.com/mine-cetinkaya-rundel/03d7516dea1e5f2613a5d71c28edb08d](https://gist.github.com/mine-cetinkaya-rundel/03d7516dea1e5f2613a5d71c28edb08d)
 ]
+
+---
+
+## Voting patterns in the UN
+
+```{r echo=FALSE, alt="UN Votes", out.width="100%"}
+knitr::include_graphics("img/unvotes.png")
+```
+
+[minecr.shinyapps.io/unvotes](https://minecr.shinyapps.io/unvotes/)
 
 ---
 
@@ -139,61 +170,42 @@ class: center, middle
 
 ---
 
-## Create a GitHub account
-
-.instructions[
-Go to [github.com](https://github.com/), and create an account (unless you already have one). 
-]
-
-Tips for selecting a username:<sup>✦</sup>
-
-.midi[
-- Incorporate your actual name.
-- Reuse username from other contexts, e.g., Twitter or Slack.
-- Pick a username you'll be comfortable revealing to your future boss.
-- Shorter is better than longer.
-- Be as unique as possible in as few characters as possible.
-- Make it timeless. Don’t highlight your current university, employer, etc.
-- Avoid words laden with special meaning in programming, like `NA`.
-]
-
-.instructions[
-Once done, place a green sticky on your laptop. If you have questions, place a pink sticky.
-]
-
-.footnote[ 
-<sup>✦</sup> Source: [Happy git with R](http://happygitwithr.com/github-acct.html#username-advice) by Jenny Bryan
-]
-
----
-
 ## Launch RStudio
 
 .instructions[
-Go to Learn or the [course homepage](https://introds.org), and launch RStudio.
+Go to [introds.org](https://introds.org), and launch RStudio.
 ]
 
-- Click on the RStudio link, which will try to open a new window in your browser.
+- When you click on RStudio this will first take you to Learn so that you can log in.
+- Then, in Learn, click on the RStudio link, which will try to open a new window in your browser, say yes.
 - In the next window, select RStudio under "Start Personal Notebook", and hit Start.
 - In the next window, on the top right, click on New, and choose RStudio again. And voila!
 
 ---
 
-## Create your first data visualization
+## Get code from GitHub
 
-- Go back to the [course homepage](https://introds.org) and navigate to the course GitHub organization.
+.instructions[
+Go to [introds.org](https://introds.org), grab the code you need from GitHub, and bring it in to RStudio.
+]
+
+- From [introds.org](https://introds.org) navigate to the course GitHub organization.
 - Click on the repository called [`ex-01-unvotes`](https://github.com/ids-s1-19/ex-01-unvotes).
 - Click on the green button on the center right that says "Clone or download" and copy the repository URL by clicking on the clipboard icon. Make sure close with HTTPS is selected (always).
 - Go back to RStudio, click on File -> New Project -> Version Control -> Git:
   - Repository URL: Paste repo url here
   - Click tab and project name will be filled in for you
   - Create Project
-- In the Files pane in the bottom right corner, spot the file called `ex-01-unvotes.Rmd`. Open it, and then click on the "Knit" button. (It might ask you to install some packages, say yes.)
 
 ---
 
 ## Create your first data visualization
 
+.instructions[
+Modify the visualization code for a country of your own choice, and discuss your findings with your neighbor.
+]
+
+- In RStudio, locate the Files pane in the bottom right corner. - In the Files pane, spot the file called `ex-01-unvotes.Rmd`. Open it, and then click on the "Knit" button. (It might ask you to install some packages, say yes.)
 - Go back to the file and change your name on top (in the `yaml` -- we'll talk about what this means later) and knit again.
 - Then change the country names to those you're interested in. Your spelling and capitalization should match how the countries appear in the data, so take a peek at the Appendix to see how the country names are spelled. Knit again. And voila, your first data visualization!
 
@@ -205,6 +217,15 @@ Go to Learn or the [course homepage](https://introds.org), and launch RStudio.
 - A peek at R code for creating a complex data visualization
 - Course technology kit
 - Hands on practice with creating data visualizations with R
+
+---
+
+## Homework (due tomorrow)
+
+Should take <15 mins!
+
+- Read the course syllabus and tips for getting help at [introds.org](https://introds.org)
+- Sign up for Piazza (linked from the help page on the course website)
 
 ---
 
