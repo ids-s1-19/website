@@ -122,11 +122,9 @@ a, a > code {
 .instructions {
   border-left: solid 5px #FFD748;
   background-color: #FFD74850;
-  font-size: 90%;
-  padding: 1px 16px;
-  margin-top: 12px;
-  margin-bottom: 12px;
-  font-size: 90%;
+  padding: 10px 16px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 .instructions li::before {
   content: ">"; 

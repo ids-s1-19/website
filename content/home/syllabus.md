@@ -90,3 +90,5 @@ Regrade requests must be made within one week of when the assignment is returned
 ### Late work policy
 
 Please review the official University and School policies  [here](https://teaching.maths.ed.ac.uk/main/content-to-be-reused/pgt-and-ug-reusable-content/extensions). Late work will not be accepted for homework assignments, labs, and online quizzes. Only the work you have completed by the deadline will be marked for those assignments. The projects will follow the standard University late work penalty of 5% of the maximum obtainable mark per calendar day up to seven calendar days after the deadline. If you intend to submit work late for the project, you must notify the course organizer before the original deadline as well as as soon as the completed work is submitted on GitHub.
+
+*Note:* If you've read this far in the syllabus, email me a puppy or kitten picture! Could be yours, or one you found online.
