@@ -11,13 +11,13 @@ social:
   link: https://github.com/ids-s1-19
 - icon: r-project
   icon_pack: fab
-  link: https://www.learn.ed.ac.uk/webapps/blackboard/content/listContentEditable.jsp?content_id=_3923957_1&course_id=_75012_1
+  link: https://www.learn.ed.ac.uk/webapps/blackboard/content/launchLink.jsp?course_id=_75012_1&content_id=_4244962_1&mode=cpview
 - icon: piazza
   icon_pack: ai
   link: https://piazza.com/ed.ac.uk/fall2019/math08077/home
-- icon: hands-helping
+- icon: play-circle
   icon_pack: fas
-  link: '#help'
+  link: https://www.learn.ed.ac.uk/webapps/osc-BasicLTI-BB5d1b15b77a8ac/tool.jsp?course_id=_75012_1&content_id=_4298466_1
   
 superuser: true
 ---
