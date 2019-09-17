@@ -96,7 +96,7 @@ On GitHub, click on the green **Clone or download** button, select **Use HTTPS**
 
 This step is a bit tedious, but it'll soon become second nature. Note that you can access RStudio anywhere using these steps, you don't need to be in the computer lab for it.
 
-- Go to the [course webpage](https//:introds.org), and click on R. 
+- Go to the [course webpage](https://introds.org/), and click on R. 
   - Note, if you're not already logged in to Learn this step will prompt you to log in.
   - If this happens, you may need to click on the RStudio link again in Learn.
   - And if you have pop-up windows blocked, you might need to explicitly allow RStudio to open in a new window.
