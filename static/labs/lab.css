@@ -149,3 +149,7 @@ ol>li:before {
 ol ol {
 	counter-reset: subitem;
 }
+
+ul ul {
+  width: 100%;
+}
