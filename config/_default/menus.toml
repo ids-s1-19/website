@@ -35,11 +35,17 @@
 
 [[main]]
   name = "<i class='fab fa-r-project'></i>"
-  url = "https://www.learn.ed.ac.uk/webapps/blackboard/content/listContentEditable.jsp?content_id=_3923957_1&course_id=_75012_1"
+  url = "https://www.learn.ed.ac.uk/webapps/blackboard/content/launchLink.jsp?course_id=_75012_1&content_id=_4244962_1&mode=cpview"
   weight = 80
 
 [[main]]
   name = "<i class='ai ai-piazza'></i>"
   url = "https://piazza.com/ed.ac.uk/fall2019/math08077/home"
   weight = 90
+  menu_align_right = true
+
+[[main]]
+  name = "<i class='fas fa-play-circle'></i>"
+  url = "https://www.learn.ed.ac.uk/webapps/osc-BasicLTI-BB5d1b15b77a8ac/tool.jsp?course_id=_75012_1&content_id=_4298466_1"
+  weight = 100
   menu_align_right = true
