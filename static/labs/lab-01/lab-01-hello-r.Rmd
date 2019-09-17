@@ -147,9 +147,9 @@ knitr::include_graphics("img/rstudio-anatomy.png")
 
 - On the bottom right is the Files pane, as well as other panes that will come handy as we start our analysis.
 
-- If you click on a file, it will open in the editor, on the top right pane.
+- If you click on a file, it will open in the editor, on the top left pane.
 
-- Finally, the top left pane shows your Environment. If you define a variable it would show up there. Try typing `x <- 2` in the Console and hit enter, what do you get in the Environment pane? Importantly, this pane is also where the Git interface lives. We will be using that regularly throughout this lab.
+- Finally, the top right pane shows your Environment. If you define a variable it would show up there. Try typing `x <- 2` in the Console and hit enter, what do you get in the Environment pane? Importantly, this pane is also where the Git interface lives. We will be using that regularly throughout this lab.
 
 # Packages
 
