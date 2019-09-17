@@ -17,7 +17,7 @@ title: 'Week 1 - Welcome to IDS'
 ---
 
 |            |  | |
-|------------|--------| ------|
+|------------|--------| ----------|
 | Lecture 01 | [Welcome to Data Science!](/slides/w1_d1-welcome/w1_d1-welcome.html) |
 | Lab 01     | [Hello R!](/labs/lab-01/lab-01-hello-R.html) | **Due:** Tue, 17 Sep, 14:00 |
 | Survey     | [Getting to know you](https://forms.office.com/Pages/ResponsePage.aspx?id=sAafLmkWiUWHiRCgaTTcYRiRHjHRDWhOuLE_6JyNA0dUN0FDUVBVMVo5NzhMSTA5MFZGQTNRWkNZVS4u) | **Due:** Wed, 18 Sep, 11:00 |
