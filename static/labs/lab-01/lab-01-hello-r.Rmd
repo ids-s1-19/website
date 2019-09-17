@@ -8,17 +8,36 @@ output:
 link-citations: yes
 ---
 
+# Learning goals
+
+- Get acquainted with R and RStudio, which we will be using throughout the course to analyze data as well as to learn the statistical concepts discussed in the course. 
+- Get practice using with Git and GitHub.
+- Appreciate the value of visualization in exploring the relationship between variables.
+- Start using R for building plots and calculating summary statistics.
+
+# Terminology
+
+We've already thrown around a few new terms, so let's define them before we proceed.
+
 ```{marginfigure}
-R is the name of the programming language itself and RStudio is a convenient interface.
+You can think about it as R is the engine of the car, and RStudio is the dashboard.
 ```
 
-The main goal of this lab is to introduce you to R and RStudio, which we will be using throughout the course to analyze data as well as to learn the statistical concepts discussed in the course. 
+- **R**: Name of the programming language we will be using throughout the course.
+- **RStudio**: An integrated development environment for R. In other words, a convenient interface for writing and running R code.
 
 ```{marginfigure}
-Git is a version control system (like "Track Changes" features from Microsoft Word on steroids) and GitHub is the home for your Git-based projects on the internet (like DropBox but much, much better).
+Git is like the "Track Changes" features from Microsoft Word on steroids, and GitHub is the home for your Git-based projects on the internet (like DropBox but much, much better).
 ```
 
-An additional goal is to introduce you to Git and GitHub, which is the collaboration and version control system that we will be using throughout the course.
+- **Git**: A version control system.
+- **GitHub**: A web platform for hosting version controlled files and faciliating collaboration among users.
+- **Repository**: A Git repository repository contains all of your project's files and stores each file's revision history. It's common to refer to a repository as a repo. 
+  - In this course, each assignment you work on will be contained in a Git repo. 
+  - For individual assignments, only you will have access to the repo. For team assignments, all team members will have access to a single repo where they work collaboratively.
+  - All repos associated with this course are housed in a GitHub organization: [`ids-s1-19`](https://github.com/ids-s1-19). The organization is set up such that students can only see repos they have access to, but the course staff can see all of them.
+
+# Starting slow
 
 As the labs progress, you are encouraged to explore beyond what the labs dictate; a willingness to experiment will make you a much better programmer. Before we get to that stage, however, you need to build some basic fluency in R. Today we begin with the fundamental building blocks of R and RStudio: the interface, reading in data, and basic commands.
 
@@ -26,7 +45,9 @@ And to make versioning simpler, this is a solo lab. Additionally, we want to mak
 
 # Getting started
 
-## 1. Create a GitHub account:
+Before you can get started with the analysis, you will first need a GitHub account, and to associate that account with the GitHub organization.
+
+## Create a GitHub account
 
 Go to [github.com](https://github.com/) and create an account (unless you already have one). Below are some tips for selecting a username:^[[Happy git with R](http://happygitwithr.com/github-acct.html#username-advice) by Jenny Bryan]
 
@@ -38,50 +59,101 @@ Go to [github.com](https://github.com/) and create an account (unless you alread
 - Make it timeless. Don’t highlight your current university, employer, etc.
 - Avoid words laden with special meaning in programming, like `NA`.
 
-## 2. Accept assignment and join course organization:
+## Join the course organization
 
 - Go to https://classroom.github.com/a/CrmxfqIs to accept your lab assignment. Since this is the first assignment, clicking on this link will also allow you to join the course GitHub organization. Log in with your GitHub username and password and click on **Authorize github**.
 
-```{r github-classroom, fig.margin = TRUE, echo = FALSE, fig.width=3}
+```{r github-classroom, fig.margin = TRUE, echo = FALSE}
 knitr::include_graphics("img/github-classroom.png")
 ```
 
 - In the next screen you will see a course roster with last names and student ID numbers of students enrolled in this course. Select your last name from the list. Note that there may be other students with the same last name, so make sure to confirm your student ID number before making your selection.
 
-- In the next screen, click on **Accept this assignment**. This will create the  GitHub repository (which we'll refer to as "repo" going forward) for the assignment. This repo contains a template you can build on to complete your assignment. Click on the repository link created for you to get started.
+- Then, in the next screen, click on **Accept this assignment**. This will create the  GitHub repo for the assignment. This repo contains a template you can build on to complete your assignment. Click on the repository link created for you to get started.
 
-## 3. Clone the repo
+# Workflow overview
 
-The starter code you will build upon for this assignment now lives in the GitHub 
-repo you just created. The next step is to bring this code into RStudio so that 
-you can edit it, run it, view your results, and interpret them. This action is 
-called *cloning*.
+```{marginfigure}
+This action is called *cloning*.
+```
+
+For each assignment in this course you will start with a GitHub repo that I created for you and that contains the starter documents you will build upon when working on your assignment. The first step is always to bring these files into RStudio so that you can edit them, run them, view your results, and interpret them.
+
+Then you will work in RStudio on the data analysis, making *commit*s along the way (snapshots of your changes) and finally *push* all your work back to GitHub.
+
+The next few steps will walk you through the process of getting information of the repo to be cloned, launching RStudio, and cloning your repo, and getting started with the analysis.
+
+## 1. Get URL of repo to be cloned
+
 
 ```{r clone-repo-link, fig.margin = TRUE, echo = FALSE, fig.width=3}
 knitr::include_graphics("img/clone-repo-link.png")
 ```
 
-- On GitHub, click on the green **Clone or download** button, select **Use HTTPS** (this might already be selected by default, and if it is, you'll see the text **Clone with HTTPS** as in the image below). Click on the clipboard icon to copy the repo URL.
+On GitHub, click on the green **Clone or download** button, select **Use HTTPS** (this might already be selected by default, and if it is, you'll see the text **Clone with HTTPS** as in the image below). Click on the clipboard icon to copy the repo URL.
 
-- Go to the course webpage, and launch RStudio: 
-  - When you click on RStudio this will first take you to Learn so that you can log in. 
-  - Then, in Learn, click on the RStudio link, which will try to open a new window in your browser, say yes. 
-  - In the next window, select RStudio under "Start Personal Notebook", and hit Start. 
-  - In the next window, on the top right, click on New, and choose RStudio again. And voila!
+## 2. Launch RStudio
 
-- In RStudio, click on File > New Project > Version Control > Git:
-  - Repository URL: Paste repo url you grabbed from GitHub here 
+This step is a bit tedious, but it'll soon become second nature. Note that you can access RStudio anywhere using these steps, you don't need to be in the computer lab for it.
+
+- Go to the [course webpage](https//:introds.org), and click on R. 
+  - Note, if you're not already logged in to Learn this step will prompt you to log in.
+  - If this happens, you may need to click on the RStudio link again in Learn.
+  - And if you have pop-up windows blocked, you might need to explicitly allow RStudio to open in a new window.
+  
+```{r noteable-step-1, fig.margin = TRUE, echo = FALSE, fig.width=3}
+knitr::include_graphics("img/noteable-step-1.png")
+```
+
+- In the next window, select RStudio under "Start Personal Notebook", and hit Start. 
+
+```{r noteable-step-2, fig.margin = TRUE, echo = FALSE, fig.width=2}
+knitr::include_graphics("img/noteable-step-2.png")
+```
+
+- And finally, on the top right, click on New, and choose RStudio again. And voila!
+
+<br><br>
+
+## 3. Clone the repo
+
+And finally we clone the GitHub repo into an RStudio project.
+
+```{r clone-repo-rstudio, fig.fullwidth=TRUE, echo = FALSE}
+knitr::include_graphics("img/clone-repo-rstudio.png")
+```
+
+- In RStudio, click on File > New Project
+- In the next window, select Git
+- In the final window:
+  - Repository URL: Paste repo url you grabbed from GitHub here
   - Click the tab button on your keyboard, and the project name will be filled in for you
   - Hit Create Project
-  - Enter your GitHub username and password, and you're good to go!
+- Enter your GitHub username and password, and you're good to go!
 
 ## 4. Get working!
 
 Open the R Markdown (Rmd) file called `lab-01-hello-r.Rmd`. It will likely ask you if you would like to install a package that is required, click Install.
 
+# Hello RStudio!
+
+RStudio is comprised of four panes.
+
+```{r rstudio-anatomy, fig.fullwidth=TRUE, echo = FALSE}
+knitr::include_graphics("img/rstudio-anatomy.png")
+```
+
+- On the bottom left is the Console, this is where you can write code that will be evaluated. Try typing `2 + 2` here and hit enter, what do you get?
+
+- On the bottom right is the Files pane, as well as other panes that will come handy as we start our analysis.
+
+- If you click on a file, it will open in the editor, on the top right pane.
+
+- Finally, the top left pane shows your Environment. If you define a variable it would show up there. Try typing `x <- 2` in the Console and hit enter, what do you get in the Environment pane? Importantly, this pane is also where the Git interface lives. We will be using that regularly throughout this lab.
+
 # Packages
 
-In this lab we will work with three packages: `datasauRus` which contains the dataset, `tidyverse` which is a collection of packages for doing data analysis in a "tidy" way, and `usethis` for setting our Git credentials.
+R is an open-source language, and developers contribute functionality to R via packages. In this lab we will work with three packages: `datasauRus` which contains the dataset, `tidyverse` which is a collection of packages for doing data analysis in a "tidy" way, and `usethis` for setting our Git credentials.
 
 Load these packages by running the following in the Console.
 
@@ -93,7 +165,7 @@ library(usethis)
 
 Note that the packages are also loaded with the same commands in your R Markdown document.
 
-# Housekeeping
+# Hello Git!
 
 ```{marginfigure}
 Your email address is the address tied to your GitHub account and your name should be first and last name.
@@ -116,7 +188,7 @@ Before we introduce the data, let's warm up with some simple exercises.
 The top portion of your R Markdown file (between the three dashed lines) is called YAML. It stands for "YAML Ain't Markup Language". It is a human friendly data serialization standard for all programming languages. All you need to know is that this area is called the YAML (we will refer to it as such) and that it contains meta information about your document.
 ```
 
-## YAML: 
+## YAML
 
 Open the R Markdown (Rmd) file in your project, change the author name to your name, and knit the document.
 
@@ -124,7 +196,7 @@ Open the R Markdown (Rmd) file in your project, change the author name to your n
 knitr::include_graphics("img/yaml-raw-to-rendered.png")
 ```
 
-## Commiting changes:
+## Commit
 
 Then Go to the Git pane in your RStudio.
 
@@ -136,13 +208,13 @@ knitr::include_graphics("img/update-author-name-commit.png")
 
 You don't have to commit after every change, this would get quite cumbersome. You should consider committing states that are *meaningful to you* for inspection, comparison, or restoration. In the first few assignments we will tell you exactly when to commit and in some cases, what commit message to use. As the semester progresses we will let you make these decisions.
 
-## Pushing changes: 
+## Push
 
 Now that you have made an update and committed this change, it's time to push these changes to the web! Or more specifically, to your repo on GitHub. Why? So that others can see your changes. And by others, we mean the course teaching team (your repos in this course are private to you and us, only). 
 
 In order to push your changes to GitHub, click on **Push**. This will prompt a dialogue box where you first need to enter your user name, and then your password. This might feel cumbersome. Bear with me... We *will* teach you how to save your password so you don't have to enter it every time. But for this one assignment you'll have to manually enter each time you push in order to gain some experience with it.
 
-## Thought exercise:
+## Thought exercise
 
 For which of the above steps (changing project name, making updates to the document, committing, and pushing changes) do you need to have an internet connection? Discuss with your classmates.
 
@@ -162,8 +234,7 @@ Let's take a look at what these datasets are. To do so we can make a *frequency 
 
 ```{r}
 datasaurus_dozen %>%
-  count(dataset) %>%
-  print(13)
+  count(dataset)
 ```
 
 ```{marginfigure}
@@ -238,6 +309,14 @@ ggplot(datasaurus_dozen, aes(x = x, y = y, color = dataset))+
 
 And we can use the `group_by` function to generate all the summary correlation coefficients.
 
+```{r first-10-r, eval=FALSE}
+datasaurus_dozen %>%
+  group_by(dataset) %>%
+  summarize(r = cor(x, y))
+```
+
+This prints out only the top 10 rows. If you want to see all correlation coefficients, use the following:
+
 ```{r all-r, eval=FALSE}
 datasaurus_dozen %>%
   group_by(dataset) %>%
@@ -272,7 +351,17 @@ Once again click on the gear icon in on top of the R Markdown document, and sele
 <br>
 
 ```{marginfigure}
-Not sure how to use emojis on your computer? Maybe a teammate can help? Or you can ask your tutor as well!
+Not sure how to use emojis on your computer? Maybe a class mate can help? Or you can ask your tutor as well!
 ```
 
 *Yay, you're done! Commit all remaining changes, use the commit message "Done with Lab 1! `r emo::ji("muscle")`", and push. Before you wrap up the assignment, make sure all documents are updated on your GitHub repo.*
+
+<br>
+
+---
+
+# Getting to know you
+
+If you're done with your lab, use the remaining time to take the [Getting to know you survey](https://forms.office.com/Pages/ResponsePage.aspx?id=sAafLmkWiUWHiRCgaTTcYRiRHjHRDWhOuLE_6JyNA0dUN0FDUVBVMVo5NzhMSTA5MFZGQTNRWkNZVS4u). If time is up for the lab session, complete the survey at home before tomorrow's class.
+
+
