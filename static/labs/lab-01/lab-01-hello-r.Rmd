@@ -307,21 +307,12 @@ ggplot(datasaurus_dozen, aes(x = x, y = y, color = dataset))+
   theme(legend.position = "none")
 ```
 
-And we can use the `group_by` function to generate all the summary correlation coefficients.
+And we can use the `group_by` function to generate all correlation coefficients.
 
 ```{r first-10-r, eval=FALSE}
 datasaurus_dozen %>%
   group_by(dataset) %>%
   summarize(r = cor(x, y))
-```
-
-This prints out only the top 10 rows. If you want to see all correlation coefficients, use the following:
-
-```{r all-r, eval=FALSE}
-datasaurus_dozen %>%
-  group_by(dataset) %>%
-  summarize(r = cor(x, y)) %>%
-  print(13)
 ```
 
 You're done with the data analysis exercises, but we'd like you to do two more things:
