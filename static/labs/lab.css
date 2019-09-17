@@ -75,6 +75,17 @@ strong {
 	font-family: "Source Sans Pro";
 }
 
+
+/* Demo */
+.demo {
+  border-left: solid 5px #FFD748;
+  background-color: #FFD74850;
+  padding: 10px 16px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+
 /* Code formatting */
 
 @media screen and (max-width: 760px) {
