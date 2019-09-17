@@ -68,7 +68,7 @@ These weekly multiple choice quizzes will help you evaluate your learning contin
 
 ### R tutorials
 
-These weeklky R tutorials are designed to help with your learning. They are optional, and not graded. You can complete them individually, online.
+These weekly R tutorials are designed to help with your learning. They are optional, and not graded. You can complete them individually, online.
 
 ## Grading
 
