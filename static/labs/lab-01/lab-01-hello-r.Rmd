@@ -157,7 +157,7 @@ R is an open-source language, and developers contribute functionality to R via p
 
 Load these packages by running the following in the Console.
 
-```{r eval = FALSE, message=FALSE}
+```{r message=FALSE}
 library(tidyverse) 
 library(datasauRus)
 library(usethis)
@@ -175,7 +175,7 @@ Before we can get started we need to take care of some required housekeeping. Sp
 
 Run the following (but update it for your name and email!) in the Console to configure git:
 
-```{r git-config}
+```{r git-config, eval=FALSE}
 use_git_config(user.name = "Your Name", 
                user.email = "your.email@address.com")
 ``` 
