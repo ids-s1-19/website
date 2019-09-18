@@ -8,7 +8,7 @@ output:
     nature:
       ratio: "16:9"
       highlightLines: true
-      highlightStyle: solarized-dark
+      highlightStyle: solarized-light
       countIncrementalSlides: false
 ---
 
@@ -28,13 +28,20 @@ library(tidyverse)
 - Clarifications requested:
   - One language: R
   - Teamwork: labs, project (assessed) + in class activities (suggested)
-- And some of you still need to complete...
+  - Student hours: Tue 14:30-16:30, questions/conversation
+- And some of you still need to complete:
   - Syllabus review
-  - Piazza sign up
-  - Getting to know you survey
+  - Piazza sign up 
+  - Getting to know you survey (deadline extended to tonight by 8pm!)
+
+---
+
+class: center, middle
 
 .question[
+.large[
 Any questions?
+]
 ]
 
 ---
@@ -83,7 +90,7 @@ class: center, middle
 
 class: center, middle
 
-# R and RStudio
+# R
 
 ---
 
@@ -99,7 +106,7 @@ class: center, middle
 an observation, and each column a variable.
 
 ```{r}
-head(mtcars)
+mtcars
 ```
 
 ---
@@ -123,12 +130,19 @@ do_that(to_this, to_that, with_those)
 
 ## R
 
-- Packages are installed with the `install.packages` function and loaded with the `library` function, once per session:
+- In R, the fundamental unit of shareable code is the package.
+- As of September 2019, there are over 14,000 packages available on the **C**omprehensive **R** **A**rchive **N**twork (CRAN), the public clearing house for R packages. 
+- This huge variety of packages is one reason why R is so successful: the chances are that someone has already solved a problem that you’re working on, and you can benefit from their work by downloading their package.
+- Using R packages:
+  - Install them from CRAN with `install.packages("x")`.
+  - Use them in R with `library(x)`.
+  - Get help on them with package `?x` and `help(package = "x")`
 
-```{r eval=FALSE}
-install.packages("package_name")
-library(package_name)
-```
+---
+
+class: center, middle
+
+# RStudio
 
 ---
 
@@ -137,23 +151,6 @@ library(package_name)
 ```{r echo=FALSE, out.width="80%"}
 knitr::include_graphics("img/rstudio-anatomy.png")
 ```
-
----
-
-## tidyverse
-
-.pull-left[
-```{r echo=FALSE, out.width="60%"}
-knitr::include_graphics("img/tidyverse.png")
-```
-]
-.pull-right[
-.center[
-[tidyverse.org](https://www.tidyverse.org/)
-]
-- The tidyverse is an opinionated collection of R packages designed for data science. 
-- All packages share an underlying philosophy and a common grammar. 
-]
 
 ---
 
@@ -173,8 +170,10 @@ knitr::include_graphics("img/rmarkdown-anatomy.png")
 
 ## R Markdown tips
 
-- Keep the [R Markdown cheat sheet](https://github.com/rstudio/cheatsheets/raw/master/rmarkdown-2.0.pdf) and Markdown Quick Reference (Help -> Markdown Quick Reference) handy, we'll refer to it often as the course progresses
-- The workspace of your R Markdown document is separate from the Console
+- Most importantly: environment of your R Markdown document is separate from that of the Console
+- Help:
+  - [R Markdown cheat sheet](https://github.com/rstudio/cheatsheets/raw/master/rmarkdown-2.0.pdf) 
+  - Markdown Quick Reference (Help -> Markdown Quick Reference)
 
 ---
 
@@ -201,3 +200,11 @@ knitr::include_graphics("img/r-help.png")
 .tiny[
 Source: http://socviz.co/appendix.html#a-little-more-about-r
 ]
+
+---
+
+## Asking good questions
+
+- Always include your code and the error
+- Create a minimum working example (we'll keep working on this throughout the semester)
+- Use code formatting
