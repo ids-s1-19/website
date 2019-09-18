@@ -1,0 +1,203 @@
+---
+title: "Meet the toolkit <br> `r emo::ji('hammer_and_pick')`"
+author: "Dr. Çetinkaya-Rundel"
+output:
+  xaringan::moon_reader:
+    css: "../slides.css"
+    lib_dir: libs
+    nature:
+      ratio: "16:9"
+      highlightLines: true
+      highlightStyle: solarized-dark
+      countIncrementalSlides: false
+---
+
+```{r child = "../setup.Rmd"}
+```
+
+```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+```
+
+
+## So far this week...
+
+- Hands on practice with R, RStudio, Git, GitHub
+- First look at visualising and summarising data in R
+- Why summary statistics alone are not sufficient for data exploration
+- Clarifications requested:
+  - One language: R
+  - Teamwork: labs, project (assessed) + in class activities (suggested)
+- And some of you still need to complete...
+  - Syllabus review
+  - Piazza sign up
+  - Getting to know you survey
+
+.question[
+Any questions?
+]
+
+---
+
+class: center, middle
+
+# Toolkit overview
+
+---
+
+```{r echo=FALSE, out.width="100%"}
+knitr::include_graphics("img/whole-game-01.png")
+```
+
+---
+
+```{r echo=FALSE, out.width="100%"}
+knitr::include_graphics("img/whole-game-02.png")
+```
+
+---
+
+```{r echo=FALSE, out.width="100%"}
+knitr::include_graphics("img/whole-game-03.png")
+```
+
+---
+
+```{r echo=FALSE, out.width="100%"}
+knitr::include_graphics("img/whole-game-04.png")
+```
+
+---
+
+class: center, middle
+
+# The whole game
+
+---
+
+class: center, middle
+
+### DEMO: Edinburgh Airbnb prices
+
+---
+
+class: center, middle
+
+# R and RStudio
+
+---
+
+## R
+
+- R can be used as a calculator.
+```{r}
+8738787213 / 1653
+```
+
+
+- The most commonly used data type in R is data frames, where each row represents 
+an observation, and each column a variable.
+
+```{r}
+head(mtcars)
+```
+
+---
+
+## R
+
+- We use the `$` operator to access a variable within a data frame.
+
+```{r}
+mtcars$mpg
+```
+
+- Functions are (often) verbs, followed by what they will be applied to in parantheses.
+
+```{r eval=FALSE}
+do_this(to_this)
+do_that(to_this, to_that, with_those)
+```
+
+---
+
+## R
+
+- Packages are installed with the `install.packages` function and loaded with the `library` function, once per session:
+
+```{r eval=FALSE}
+install.packages("package_name")
+library(package_name)
+```
+
+---
+
+## RStudio
+
+```{r echo=FALSE, out.width="80%"}
+knitr::include_graphics("img/rstudio-anatomy.png")
+```
+
+---
+
+## tidyverse
+
+.pull-left[
+```{r echo=FALSE, out.width="60%"}
+knitr::include_graphics("img/tidyverse.png")
+```
+]
+.pull-right[
+.center[
+[tidyverse.org](https://www.tidyverse.org/)
+]
+- The tidyverse is an opinionated collection of R packages designed for data science. 
+- All packages share an underlying philosophy and a common grammar. 
+]
+
+---
+
+class: center, middle
+
+# R Markdown
+
+---
+
+## R Markdown
+
+```{r echo=FALSE, out.width="100%"}
+knitr::include_graphics("img/rmarkdown-anatomy.png")
+```
+
+---
+
+## R Markdown tips
+
+- Keep the [R Markdown cheat sheet](https://github.com/rstudio/cheatsheets/raw/master/rmarkdown-2.0.pdf) and Markdown Quick Reference (Help -> Markdown Quick Reference) handy, we'll refer to it often as the course progresses
+- The workspace of your R Markdown document is separate from the Console
+
+---
+
+## How will we use R Markdown?
+
+- Every assignment / report / project / etc. is an R Markdown document
+- You'll always have a template R Markdown document to start with
+- The amount of scaffolding in the template will decrease over the semester
+
+---
+
+class: center, middle
+
+# Getting help in R
+
+---
+
+## Reading help files
+
+```{r echo=FALSE, out.width="50%"}
+knitr::include_graphics("img/r-help.png")
+```
+
+.tiny[
+Source: http://socviz.co/appendix.html#a-little-more-about-r
+]
