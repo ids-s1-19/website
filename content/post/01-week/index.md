@@ -21,7 +21,7 @@ title: 'Week 1 - Welcome to IDS'
 | Lecture 01 | [Welcome to Data Science!](/slides/w1_d1-welcome/w1_d1-welcome.html) |
 | Lab 01     | [Hello R!](/labs/lab-01/lab-01-hello-R.html) | **Due:** Tue, 17 Sep, 14:00 |
 | Survey     | [Getting to know you](https://forms.office.com/Pages/ResponsePage.aspx?id=sAafLmkWiUWHiRCgaTTcYRiRHjHRDWhOuLE_6JyNA0dUN0FDUVBVMVo5NzhMSTA5MFZGQTNRWkNZVS4u) | **Due:** Wed, 18 Sep, 11:00 |
-| Lecture 02 | Meet the toolkit |
+| Lecture 02 | [Meet the toolkit](/slides/w1_d2-toolkit/w1_d2-toolkit.html) |
 | OQ 01      | Interpreting simple visualizations + R, RStudio, and Git/GitHub basics |
 | HW 01      | Nailing down your data science workflow |
 | RT 01      | Interactive tutorial covering week’s material |
