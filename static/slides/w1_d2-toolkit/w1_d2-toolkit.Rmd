@@ -48,6 +48,42 @@ Any questions?
 
 class: center, middle
 
+# Reproducible data analysis
+
+---
+
+## Reproducibility checklist
+
+.question[
+What does it mean for a data analysis to be "reproducible"?
+]
+
+--
+
+Near-term goals:
+
+- Are the tables and figures reproducible from the code and data?
+- Does the code actually do what you think it does?
+- In addition to what was done, is it clear **why** it was done? 
+(e.g., how were parameter settings chosen?)
+
+Long-term goals:
+
+- Can the code be used for other data?
+- Can you extend the code to do other things?
+
+---
+
+## Toolkit
+
+- Scriptability $\rightarrow$ R
+- Literate programming (code, narrative, output in one place) $\rightarrow$ R Markdown
+- Version control $\rightarrow$ Git / GitHub
+
+---
+
+class: center, middle
+
 # Toolkit overview
 
 ---
