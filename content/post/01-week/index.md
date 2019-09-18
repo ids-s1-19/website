@@ -18,7 +18,7 @@ title: 'Week 1 - Welcome to IDS'
 
 ## Schedule
 
-| <div style="width:60px"></div>  | <div style="width:420px"></div> |  <div style="width:190px"></div> |
+| <div style="width:60px"></div>  | <div style="width:420px"></div> |  <div style="width:190px"></div>   |
 |---:|---|---|
 | Lec 01 | [Welcome to Data Science!](/slides/w1_d1-welcome/w1_d1-welcome.html) |
 | Lab 01 | [Hello R!](/labs/lab-01/lab-01-hello-R.html) | **Due:** Tue, 17 Sep, 14:00 |
