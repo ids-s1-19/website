@@ -24,7 +24,7 @@ title: 'Week 1 - Welcome to IDS'
 | Lab 01 | [Hello R!](/labs/lab-01/lab-01-hello-R.html) | **Due:** Tue, 17 Sep, 14:00 |
 | Lec 02 | [Meet the toolkit](/slides/w1_d2-toolkit/w1_d2-toolkit.html) |
 | OQ 01  | Interpreting simple visualizations + R, RStudio, and Git/GitHub basics |
-| HW 01  | Nailing down your data science workflow |
+| HW 01  | [Airbnb listings in Edinburgh](/hw/hw-01/hw-01-airbnb-edi.html) |
 | RT 01  | [Data Visualization Basics](https://rstudio.cloud/learn/primers/1.1) |
 
 ## Readings
