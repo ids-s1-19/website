@@ -33,7 +33,7 @@ If you have any questions about the assignment, please post them on Piazza!
 ## Getting started
 
 ```{marginfigure}
-**IMPORTANT:** If there is no GitHub repo created for you for this assignment, it means you have not completed the survey yet. Please do so asap, and as part of the survey, let me know your GitHub name so that I can create your repo.
+**IMPORTANT:** If there is no GitHub repo created for you for this assignment, it means I didn't have your GitHub username as of when I assigned the homework. Please let me know your GitHub username asap, and I can create your repo.
 ```
 
 Go to the course [GitHub organization](https://github.com/ids-s1-19) and locate your HW 1 repo, which should be named `hw-01-airbnb-edi-YOUR_GITHUB_USERNAME`. Grab the URL of the repo, and clone it in RStudio. Refer to [Lab 01](/labs/lab-01/lab-01-hello-r) if you would like to see step-by-step instructions for cloning a repo into an RStudio project.
@@ -53,7 +53,7 @@ library(tidyverse)
 The data is in a CSV (comma separated values) file called `listings.csv` in the `data/` folder in your repository. You can load this file into R using the `read_csv()` function.
 
 ```{r include=FALSE}
-listings <- read_csv(here::here("data/listings.csv"))
+listings <- read_csv(here::here("csv/listings.csv"))
 ```
 
 ```{r eval=FALSE}
