@@ -1,8 +1,5 @@
 base
 methods
-devtools
-usethis
-testthat
 datasets
 utils
 grDevices
@@ -18,4 +15,3 @@ dplyr
 stringr
 forcats
 magick
-gridExtra
