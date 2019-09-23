@@ -25,7 +25,7 @@ title: 'Week 1 - Welcome to IDS'
 | Lec 02 | [Meet the toolkit](/slides/w1_d2-toolkit/w1_d2-toolkit.html) |
 | HW 01  | [Airbnb listings in Edinburgh](/hw/hw-01/hw-01-airbnb-edi.html) | **Due:** Wed, 25 Sep, 17:00
 | RT 01  | [Data Visualization Basics](https://rstudio.cloud/learn/primers/1.1) | 
-| OQ 01  | Interpreting simple visualizations + R, RStudio, and Git/GitHub basics | **Due:** Fri, 27 Sep, 17:00
+| OQ 01  | [Syllabus, data frames, and plotting](https://minecr.shinyapps.io/ids-01-overview) | **Due:** Fri, 27 Sep, 17:00
 
 ### Readings
 
