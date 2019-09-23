@@ -38,7 +38,7 @@ If you have any questions about the assignment, please post them on Piazza!
 
 Go to the course [GitHub organization](https://github.com/ids-s1-19) and locate your HW 1 repo, which should be named `hw-01-airbnb-edi-YOUR_GITHUB_USERNAME`. Grab the URL of the repo, and clone it in RStudio. Refer to [Lab 01](/labs/lab-01/lab-01-hello-r) if you would like to see step-by-step instructions for cloning a repo into an RStudio project.
 
-First, open the R Markdown document `hw-01-airbnb-edi.Rmd` and Knit it. Mke sure it compiles without errors. The output will be in the file markdown `.md` file with the same name.
+First, open the R Markdown document `hw-01-airbnb-edi.Rmd` and Knit it. Make sure it compiles without errors. The output will be in the file markdown `.md` file with the same name.
 
 ## Packages
 
@@ -68,7 +68,7 @@ listings <- read_csv("data/listings.csv")
 
 2. How many observations (rows) does the dataset have? Instead of hard coding the number in your answer, use inline code. 
 
-`r emo::ji("white_check_mark")` `r emo::ji("arrow_up")` *Now is a good time to commit and push your changes to GitHub with an appropriate commit message. Make sure to commit and push all changed files so that your Git pane is clered up afterwards.*
+`r emo::ji("white_check_mark")` `r emo::ji("arrow_up")` *Now is a good time to commit and push your changes to GitHub with an appropriate commit message. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
 
 Each column represents a variable. We can get a list of the variables in the data frame using the `names()` function.
 
