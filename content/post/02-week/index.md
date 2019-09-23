@@ -20,7 +20,7 @@ title: 'Week 2 - Data visualization'
 
 | <div style="width:60px"></div>  | <div style="width:420px"></div> |  <div style="width:190px"></div>   |
 |---:|---|---|
-| Lec 03 | [Fundamentals of data and data visualization](/slides/w1_d2-fund-data-viz/w1_d2-fund-data-viz.html) |
+| Lec 03 | [Fundamentals of data and data visualization](/slides/w2_d1-dataviz/w2_d1-dataviz.html) |
 | Lab 02 | Building data visualizations | **Due:** Fri, 27 Sep, 17:00 |
 | Lec 04 | Visualizing relationships between many variables |
 | HW 02  | Data visualization | **Due:** Wed, 2 Oct, 17:00
