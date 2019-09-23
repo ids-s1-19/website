@@ -23,10 +23,11 @@ library(magick)
 
 ## Week 2
 
-- Due this week: HW-01 (Wednesday) + OQ-01 (Friday)
-  - Neither of these are graded, but you're strongly recommended to complete them
+- Preparing for tomorrow's workshop: Make sure you have completed Lab 01, and ask questions if you get stuck, complete survey asap
 - Workshop tomorrow: Individual to give you some more practice on your own + hold off on setting teams till after drop/add
-- Please complete the survey if you have not yet done so
+- Due this week: HW 01 (Wednesday) + OQ 01 (Friday)
+  - Neither of these are graded, but you're strongly recommended to complete them
+- Student hours for this week only: After class today + no student hours on Tuesday (but I'll be answering questions on Piazza)
 - Thanks to all asking and answering questions on Piazza!
 
 .question[
@@ -34,6 +35,42 @@ library(magick)
 Any questions?
 ]
 ]
+
+---
+
+class: center, middle
+
+# Getting help in R
+
+---
+
+## Reading help files
+
+```{r echo=FALSE, out.width="50%"}
+knitr::include_graphics("img/r-help.png")
+```
+
+.tiny[
+Source: http://socviz.co/appendix.html#a-little-more-about-r
+]
+
+---
+
+## Asking good questions
+
+.pull-left[
+- **Good:** Describe your intention and include your code and the error
+- **Better:** Describe your intention and create a minimum working example
+- **Best:** Write a **rep**roducible **ex**ample (reprex) -- we'll introduce this concept more formally and teach you the tools for it a little later in the semester
+]
+--
+.pull-right[
+![](https://media.giphy.com/media/uRb2p09vY8lEs/giphy.gif)
+- Use code formatting
+- For issues with R code: copy / paste your code and resulting error, don't use screenshots 
+]
+
+
 
 ---
 
@@ -189,11 +226,9 @@ starwars
 
 Take a `glimpse` at the data: 
 
-.small[
 ```{r}
 glimpse(starwars)
 ```
-]
 
 ---
 
@@ -377,16 +412,13 @@ class: center, middle
 
 ---
 
-.small[
-```{r out.width="70%", warning=FALSE}
+```{r out.width="80%", warning=FALSE}
 ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
   facet_grid(. ~ gender) + #<<
   geom_point() +
   labs(title = "Mass vs. height of Starwars characters",
-       subtitle = "Faceted by gender",  #<<
-       x = "Height (cm)", y = "Weight (kg)")
+       subtitle = "Faceted by gender")  #<<
 ```
-]
 
 ---
 
