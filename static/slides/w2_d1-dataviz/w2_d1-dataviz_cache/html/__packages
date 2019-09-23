@@ -1,7 +1,10 @@
 base
-devtools
-usethis
-testthat
+methods
+datasets
+utils
+grDevices
+graphics
+stats
 tidyverse
 ggplot2
 tibble
@@ -12,4 +15,3 @@ dplyr
 stringr
 forcats
 magick
-gridExtra
