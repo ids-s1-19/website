@@ -7,10 +7,6 @@
 
 /* Tufte CSS styles */
 
-html {
-	font-size: 12px;
-}
-
 body {
 	font-family: 'Source Sans Pro', sans-serif;
 	font-weight: 300;
@@ -76,44 +72,40 @@ strong {
 }
 
 
-/* Demo */
-.demo {
-  border-left: solid 5px #FFD748;
-  background-color: #FFD74850;
-  padding: 10px 16px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
-
 /* Code formatting */
 
 @media screen and (max-width: 760px) {
 	pre {
 		width: 100%;
 		font-size: 16px;
+     	overflow-x: auto;
 	}
 }
 
 code {
 	font-family: 'Source Code Pro', Consolas, "Liberation Mono", Menlo, Courier, monospace;
-	font-size: 15px;
 	line-height: 1.6;
 }
 
-pre code {
-	font-size: 15px;
+pre {
+	background-color: #FFFFFF;
+	border-color: #CCCCCC;
+	border-style: solid;	
+	border-width: 1px;
+    border-radius: 4px;
+	width: 50%;
+	overflow-x: auto;
+ 	padding: 1em;
+}
+
+pre.r {
+	background-color: #F5F5F5;	
+	border-color: #CCCCCC
 }
 
 .marginnote code,
 .sidenote code {
 	font-size: 1rem;
-}
-
-pre {
-		width: 100%;
-		font-size: 16px;
-		overflow-x: auto;
 }
 
 /* Exercise counter */
@@ -132,7 +124,7 @@ ol>li {
 	padding-top: 10px;
 	padding-bottom: 10px;
 	padding-right: 0;
-	padding-left: 90px;
+	padding-left: 120px;
 }
 
 ol>li:before {

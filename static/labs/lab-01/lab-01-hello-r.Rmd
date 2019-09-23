@@ -96,7 +96,7 @@ On GitHub, click on the green **Clone or download** button, select **Use HTTPS**
 
 This step is a bit tedious, but it'll soon become second nature. Note that you can access RStudio anywhere using these steps, you don't need to be in the computer lab for it.
 
-- Go to the [course webpage](https//:introds.org), and click on R. 
+- Go to the [course webpage](https://introds.org/), and click on R. 
   - Note, if you're not already logged in to Learn this step will prompt you to log in.
   - If this happens, you may need to click on the RStudio link again in Learn.
   - And if you have pop-up windows blocked, you might need to explicitly allow RStudio to open in a new window.
@@ -147,9 +147,9 @@ knitr::include_graphics("img/rstudio-anatomy.png")
 
 - On the bottom right is the Files pane, as well as other panes that will come handy as we start our analysis.
 
-- If you click on a file, it will open in the editor, on the top right pane.
+- If you click on a file, it will open in the editor, on the top left pane.
 
-- Finally, the top left pane shows your Environment. If you define a variable it would show up there. Try typing `x <- 2` in the Console and hit enter, what do you get in the Environment pane? Importantly, this pane is also where the Git interface lives. We will be using that regularly throughout this lab.
+- Finally, the top right pane shows your Environment. If you define a variable it would show up there. Try typing `x <- 2` in the Console and hit enter, what do you get in the Environment pane? Importantly, this pane is also where the Git interface lives. We will be using that regularly throughout this lab.
 
 # Packages
 
@@ -157,7 +157,7 @@ R is an open-source language, and developers contribute functionality to R via p
 
 Load these packages by running the following in the Console.
 
-```{r eval = FALSE, message=FALSE}
+```{r message=FALSE}
 library(tidyverse) 
 library(datasauRus)
 library(usethis)
@@ -175,7 +175,7 @@ Before we can get started we need to take care of some required housekeeping. Sp
 
 Run the following (but update it for your name and email!) in the Console to configure git:
 
-```{r git-config}
+```{r git-config, eval=FALSE}
 use_git_config(user.name = "Your Name", 
                user.email = "your.email@address.com")
 ``` 
@@ -307,21 +307,12 @@ ggplot(datasaurus_dozen, aes(x = x, y = y, color = dataset))+
   theme(legend.position = "none")
 ```
 
-And we can use the `group_by` function to generate all the summary correlation coefficients.
+And we can use the `group_by` function to generate all correlation coefficients.
 
 ```{r first-10-r, eval=FALSE}
 datasaurus_dozen %>%
   group_by(dataset) %>%
   summarize(r = cor(x, y))
-```
-
-This prints out only the top 10 rows. If you want to see all correlation coefficients, use the following:
-
-```{r all-r, eval=FALSE}
-datasaurus_dozen %>%
-  group_by(dataset) %>%
-  summarize(r = cor(x, y)) %>%
-  print(13)
 ```
 
 You're done with the data analysis exercises, but we'd like you to do two more things:
