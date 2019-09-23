@@ -1,13 +1,7 @@
 base
-methods
 devtools
 usethis
 testthat
-datasets
-utils
-grDevices
-graphics
-stats
 tidyverse
 ggplot2
 tibble

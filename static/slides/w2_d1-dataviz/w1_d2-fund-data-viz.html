@@ -38,10 +38,11 @@ Dr. Mine Çetinkaya-Rundel -
 
 ## Week 2
 
-- Due this week: HW-01 (Wednesday) + OQ-01 (Friday)
-  - Neither of these are graded, but you're strongly recommended to complete them
+- Preparing for tomorrow's workshop: Make sure you have completed Lab 01, and ask questions if you get stuck, complete survey asap
 - Workshop tomorrow: Individual to give you some more practice on your own + hold off on setting teams till after drop/add
-- Please complete the survey if you have not yet done so
+- Due this week: HW 01 (Wednesday) + OQ 01 (Friday)
+  - Neither of these are graded, but you're strongly recommended to complete them
+- Student hours for this week only: After class today + no student hours on Tuesday (but I'll be answering questions on Piazza)
 - Thanks to all asking and answering questions on Piazza!
 
 .question[
@@ -49,6 +50,40 @@ Dr. Mine Çetinkaya-Rundel -
 Any questions?
 ]
 ]
+
+---
+
+class: center, middle
+
+# Getting help in R
+
+---
+
+## Reading help files
+
+&lt;img src="img/r-help.png" width="50%" /&gt;
+
+.tiny[
+Source: http://socviz.co/appendix.html#a-little-more-about-r
+]
+
+---
+
+## Asking good questions
+
+.pull-left[
+- **Good:** Describe your intention and include your code and the error
+- **Better:** Describe your intention and create a minimum working example
+- **Best:** Write a **rep**roducible **ex**ample (reprex) -- we'll introduce this concept more formally and teach you the tools for it a little later in the semester
+]
+--
+.pull-right[
+![](https://media.giphy.com/media/uRb2p09vY8lEs/giphy.gif)
+- Use code formatting
+- For issues with R code: copy / paste your code and resulting error, don't use screenshots 
+]
+
+
 
 ---
 
@@ -118,7 +153,7 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
 ## Warning: Removed 28 rows containing missing values (geom_point).
 ```
 
-&lt;img src="w1_d2-fund-data-viz_files/figure-html/unnamed-chunk-4-1.png" width="70%" /&gt;
+&lt;img src="w1_d2-fund-data-viz_files/figure-html/unnamed-chunk-5-1.png" width="70%" /&gt;
 
 ---
 
@@ -159,7 +194,7 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
        x = "Height (cm)", y = "Weight (kg)")
 ```
 
-&lt;img src="w1_d2-fund-data-viz_files/figure-html/unnamed-chunk-6-1.png" width="70%" /&gt;
+&lt;img src="w1_d2-fund-data-viz_files/figure-html/unnamed-chunk-7-1.png" width="70%" /&gt;
 
 ---
 
@@ -233,7 +268,6 @@ starwars
 
 Take a `glimpse` at the data: 
 
-.small[
 
 ```r
 glimpse(starwars)
@@ -257,7 +291,6 @@ glimpse(starwars)
 ## $ starships   &lt;list&gt; [&lt;"X-wing", "Imperial shuttle"&gt;, &lt;&gt;, &lt;&gt;, "TIE Advan…
 ## $ hair_color2 &lt;fct&gt; blond, NA, NA, Other, brown, Other, brown, NA, black…
 ```
-]
 
 ---
 
@@ -288,7 +321,7 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
 ## Warning: Removed 28 rows containing missing values (geom_point).
 ```
 
-&lt;img src="w1_d2-fund-data-viz_files/figure-html/unnamed-chunk-13-1.png" width="70%" /&gt;
+&lt;img src="w1_d2-fund-data-viz_files/figure-html/unnamed-chunk-14-1.png" width="70%" /&gt;
 
 ---
 
@@ -315,7 +348,7 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
 *      x = "Height (cm)", y = "Weight (kg)")
 ```
 
-&lt;img src="w1_d2-fund-data-viz_files/figure-html/unnamed-chunk-14-1.png" width="70%" /&gt;
+&lt;img src="w1_d2-fund-data-viz_files/figure-html/unnamed-chunk-15-1.png" width="70%" /&gt;
 ]
 
 ---
@@ -327,7 +360,7 @@ How would you describe this relationship? What other variables would help us und
 ]
 
 .small[
-&lt;img src="w1_d2-fund-data-viz_files/figure-html/unnamed-chunk-15-1.png" width="70%" /&gt;
+&lt;img src="w1_d2-fund-data-viz_files/figure-html/unnamed-chunk-16-1.png" width="70%" /&gt;
 ]
 
 ---
@@ -378,7 +411,7 @@ ggplot(data = starwars,
   geom_point()
 ```
 
-&lt;img src="w1_d2-fund-data-viz_files/figure-html/unnamed-chunk-17-1.png" width="70%" /&gt;
+&lt;img src="w1_d2-fund-data-viz_files/figure-html/unnamed-chunk-18-1.png" width="70%" /&gt;
 
 ---
 
@@ -392,7 +425,7 @@ ggplot(data = starwars,
   geom_point()
 ```
 
-&lt;img src="w1_d2-fund-data-viz_files/figure-html/unnamed-chunk-18-1.png" width="70%" /&gt;
+&lt;img src="w1_d2-fund-data-viz_files/figure-html/unnamed-chunk-19-1.png" width="70%" /&gt;
 
 ---
 
@@ -407,7 +440,7 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass, color = gender)) +
 * geom_point(size = 2)
 ```
 
-&lt;img src="w1_d2-fund-data-viz_files/figure-html/unnamed-chunk-19-1.png" width="70%" /&gt;
+&lt;img src="w1_d2-fund-data-viz_files/figure-html/unnamed-chunk-20-1.png" width="70%" /&gt;
 
 ---
 
@@ -440,19 +473,16 @@ class: center, middle
 
 ---
 
-.small[
 
 ```r
 ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
 * facet_grid(. ~ gender) +
   geom_point() +
   labs(title = "Mass vs. height of Starwars characters",
-*      subtitle = "Faceted by gender",
-       x = "Height (cm)", y = "Weight (kg)")
+*      subtitle = "Faceted by gender")
 ```
 
-&lt;img src="w1_d2-fund-data-viz_files/figure-html/unnamed-chunk-20-1.png" width="70%" /&gt;
-]
+&lt;img src="w1_d2-fund-data-viz_files/figure-html/unnamed-chunk-21-1.png" width="80%" /&gt;
 
 ---
 
@@ -482,7 +512,7 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
   facet_grid(gender ~ .)
 ```
 
-&lt;img src="w1_d2-fund-data-viz_files/figure-html/unnamed-chunk-21-1.png" width="90%" /&gt;
+&lt;img src="w1_d2-fund-data-viz_files/figure-html/unnamed-chunk-22-1.png" width="90%" /&gt;
 
 ---
 
@@ -493,7 +523,7 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
   facet_grid(. ~ gender)
 ```
 
-&lt;img src="w1_d2-fund-data-viz_files/figure-html/unnamed-chunk-22-1.png" width="90%" /&gt;
+&lt;img src="w1_d2-fund-data-viz_files/figure-html/unnamed-chunk-23-1.png" width="90%" /&gt;
 
 ---
 
@@ -504,7 +534,7 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
   facet_wrap(~ eye_color)
 ```
 
-&lt;img src="w1_d2-fund-data-viz_files/figure-html/unnamed-chunk-23-1.png" width="95%" /&gt;
+&lt;img src="w1_d2-fund-data-viz_files/figure-html/unnamed-chunk-24-1.png" width="95%" /&gt;
 
 ---
 
@@ -568,7 +598,7 @@ ggplot(data = starwars, mapping = aes(x = height)) +
 ## Warning: Removed 6 rows containing non-finite values (stat_bin).
 ```
 
-&lt;img src="w1_d2-fund-data-viz_files/figure-html/unnamed-chunk-24-1.png" width="75%" /&gt;
+&lt;img src="w1_d2-fund-data-viz_files/figure-html/unnamed-chunk-25-1.png" width="75%" /&gt;
 
 ---
 
@@ -584,7 +614,7 @@ ggplot(data = starwars, mapping = aes(x = height)) +
 ## Warning: Removed 6 rows containing non-finite values (stat_density).
 ```
 
-&lt;img src="w1_d2-fund-data-viz_files/figure-html/unnamed-chunk-25-1.png" width="75%" /&gt;
+&lt;img src="w1_d2-fund-data-viz_files/figure-html/unnamed-chunk-26-1.png" width="75%" /&gt;
 
 ---
 
@@ -600,7 +630,7 @@ ggplot(data = starwars, mapping = aes(y = height, x = gender)) +
 ## Warning: Removed 6 rows containing non-finite values (stat_boxplot).
 ```
 
-&lt;img src="w1_d2-fund-data-viz_files/figure-html/unnamed-chunk-26-1.png" width="75%" /&gt;
+&lt;img src="w1_d2-fund-data-viz_files/figure-html/unnamed-chunk-27-1.png" width="75%" /&gt;
 
 ---
 
@@ -618,7 +648,7 @@ ggplot(data = starwars, mapping = aes(x = gender)) +
   geom_bar()
 ```
 
-&lt;img src="w1_d2-fund-data-viz_files/figure-html/unnamed-chunk-27-1.png" width="80%" /&gt;
+&lt;img src="w1_d2-fund-data-viz_files/figure-html/unnamed-chunk-28-1.png" width="80%" /&gt;
 
 ---
 
@@ -630,7 +660,7 @@ ggplot(data = starwars, mapping = aes(x = gender, fill = hair_color)) +
   geom_bar()
 ```
 
-&lt;img src="w1_d2-fund-data-viz_files/figure-html/unnamed-chunk-28-1.png" width="80%" /&gt;
+&lt;img src="w1_d2-fund-data-viz_files/figure-html/unnamed-chunk-29-1.png" width="80%" /&gt;
 
 ---
 
@@ -658,7 +688,7 @@ ggplot(data = starwars,
   coord_flip()
 ```
 
-&lt;img src="w1_d2-fund-data-viz_files/figure-html/unnamed-chunk-30-1.png" width="70%" /&gt;
+&lt;img src="w1_d2-fund-data-viz_files/figure-html/unnamed-chunk-31-1.png" width="70%" /&gt;
 
 ---
 
@@ -672,7 +702,7 @@ ggplot(data = starwars,
   coord_flip()
 ```
 
-&lt;img src="w1_d2-fund-data-viz_files/figure-html/unnamed-chunk-31-1.png" width="70%" /&gt;
+&lt;img src="w1_d2-fund-data-viz_files/figure-html/unnamed-chunk-32-1.png" width="70%" /&gt;
 
 ```r
   labs(y = "proportion")
@@ -692,9 +722,9 @@ ggplot(data = starwars,
 Which bar plot is a more useful representation for visualizing the relationship between gender and hair color?
 ]
 
-&lt;img src="w1_d2-fund-data-viz_files/figure-html/unnamed-chunk-32-1.png" width="50%" /&gt;
-
 &lt;img src="w1_d2-fund-data-viz_files/figure-html/unnamed-chunk-33-1.png" width="50%" /&gt;
+
+&lt;img src="w1_d2-fund-data-viz_files/figure-html/unnamed-chunk-34-1.png" width="50%" /&gt;
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
