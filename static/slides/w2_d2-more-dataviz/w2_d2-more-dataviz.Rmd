@@ -30,7 +30,7 @@ library(dsbox)
 - More practice with R, RStudio, Git, GitHub
 - From the survey:
   - So many people said they've never coded before, which is exactly who this course is designed for!
-  - If you have recently joined and have questions, let's chat after class or make an appointment or Tuesday during student hours
+  - If you have recently joined and have questions not cleared on Piazza: make an appointment or stop by Tuesday during student hours
 
 .question[
 .large[
@@ -64,18 +64,15 @@ class: center, middle
 * shape:
     * skewness: right-skewed, left-skewed, symmetric (skew is to the side of the longer tail)
     * modality: unimodal, bimodal, multimodal, uniform
---
 * center: mean (`mean`), median (`median`), mode (not always useful)
---
 * spread: range (`range`), standard deviation (`sd`), inter-quartile range (`IQR`)
---
 * unusal observations
 
 ---
 
 ## Histograms
 
-```{r out.width="75%"}
+```{r out.width="75%", warning=FALSE}
 ggplot(data = starwars, mapping = aes(x = height)) +
   geom_histogram(binwidth = 10)
 ```
@@ -93,7 +90,7 @@ ggplot(data = starwars, mapping = aes(x = height)) +
 
 ## Box plots
 
-```{r out.width="25%", warning = FALSE}
+```{r out.width="60%", warning = FALSE}
 ggplot(data = starwars, mapping = aes(y = height)) +
   geom_boxplot()
 ```
@@ -108,7 +105,7 @@ class: center, middle
 
 ## Side-by-side box plots
 
-```{r out.width="75%"}
+```{r out.width="75%", warning=FALSE}
 ggplot(data = starwars, mapping = aes(y = height, x = gender)) +
   geom_boxplot()
 ```
@@ -119,7 +116,7 @@ ggplot(data = starwars, mapping = aes(y = height, x = gender)) +
 
 This is not a great representation of these data.
 
-```{r out.width="60%"}
+```{r out.width="60%", warning=FALSE}
 ggplot(data = starwars, mapping = aes(y = height, x = gender)) +
   geom_point()
 ```
@@ -128,7 +125,7 @@ ggplot(data = starwars, mapping = aes(y = height, x = gender)) +
 
 ## Violin plots
 
-```{r out.width="75%"}
+```{r out.width="75%", warning=FALSE}
 ggplot(data = starwars, mapping = aes(y = height, x = gender)) +
   geom_violin()
 ```
@@ -142,7 +139,7 @@ set.seed(1234)
 ```
 
 
-```{r out.width="75%"}
+```{r out.width="75%", warning=FALSE}
 ggplot(data = starwars, mapping = aes(y = height, x = gender)) +
   geom_jitter()
 ```

@@ -42,7 +42,7 @@ Dr. Mine Çetinkaya-Rundel -
 - More practice with R, RStudio, Git, GitHub
 - From the survey:
   - So many people said they've never coded before, which is exactly who this course is designed for!
-  - If you have recently joined and have questions, let's chat after class or make an appointment or Tuesday during student hours
+  - If you have recently joined and have questions not cleared on Piazza: make an appointment or stop by Tuesday during student hours
 
 .question[
 .large[
@@ -76,11 +76,8 @@ class: center, middle
 * shape:
     * skewness: right-skewed, left-skewed, symmetric (skew is to the side of the longer tail)
     * modality: unimodal, bimodal, multimodal, uniform
---
 * center: mean (`mean`), median (`median`), mode (not always useful)
---
 * spread: range (`range`), standard deviation (`sd`), inter-quartile range (`IQR`)
---
 * unusal observations
 
 ---
@@ -91,10 +88,6 @@ class: center, middle
 ```r
 ggplot(data = starwars, mapping = aes(x = height)) +
   geom_histogram(binwidth = 10)
-```
-
-```
-## Warning: Removed 6 rows containing non-finite values (stat_bin).
 ```
 
 &lt;img src="w2_d2-more-dataviz_files/figure-html/unnamed-chunk-2-1.png" width="75%" /&gt;
@@ -121,7 +114,7 @@ ggplot(data = starwars, mapping = aes(y = height)) +
   geom_boxplot()
 ```
 
-&lt;img src="w2_d2-more-dataviz_files/figure-html/unnamed-chunk-4-1.png" width="25%" /&gt;
+&lt;img src="w2_d2-more-dataviz_files/figure-html/unnamed-chunk-4-1.png" width="60%" /&gt;
 
 ---
 
@@ -139,10 +132,6 @@ ggplot(data = starwars, mapping = aes(y = height, x = gender)) +
   geom_boxplot()
 ```
 
-```
-## Warning: Removed 6 rows containing non-finite values (stat_boxplot).
-```
-
 &lt;img src="w2_d2-more-dataviz_files/figure-html/unnamed-chunk-5-1.png" width="75%" /&gt;
 
 ---
@@ -157,10 +146,6 @@ ggplot(data = starwars, mapping = aes(y = height, x = gender)) +
   geom_point()
 ```
 
-```
-## Warning: Removed 6 rows containing missing values (geom_point).
-```
-
 &lt;img src="w2_d2-more-dataviz_files/figure-html/unnamed-chunk-6-1.png" width="60%" /&gt;
 
 ---
@@ -171,10 +156,6 @@ ggplot(data = starwars, mapping = aes(y = height, x = gender)) +
 ```r
 ggplot(data = starwars, mapping = aes(y = height, x = gender)) +
   geom_violin()
-```
-
-```
-## Warning: Removed 6 rows containing non-finite values (stat_ydensity).
 ```
 
 &lt;img src="w2_d2-more-dataviz_files/figure-html/unnamed-chunk-7-1.png" width="75%" /&gt;
@@ -190,10 +171,6 @@ ggplot(data = starwars, mapping = aes(y = height, x = gender)) +
 ```r
 ggplot(data = starwars, mapping = aes(y = height, x = gender)) +
   geom_jitter()
-```
-
-```
-## Warning: Removed 6 rows containing missing values (geom_point).
 ```
 
 &lt;img src="w2_d2-more-dataviz_files/figure-html/unnamed-chunk-9-1.png" width="75%" /&gt;
