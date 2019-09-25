@@ -24,7 +24,7 @@ title: 'Week 2 - Data visualization'
 | Lab 02 | [Plastic waste](/labs/lab-02/lab-02-plastic-waste.html) | **Due:** Fri, 27 Sep, 17:00 |
 | Lec 04 | [Building plots for various data types](/slides/w2_d2-more-dataviz/w2_d2-more-dataviz.html) |
 | HW 02  | Data visualization | **Due:** Wed, 2 Oct, 17:00
-| RT 02  | Interactive tutorial covering week’s material | 
+| RT 02  | [Interactive tutorial covering week’s material](https://rstudio.cloud/learn/primers/3) | 
 | OQ 02  | Building and interpreting data visualizations | **Due:** Fri, 4 Oct, 17:00
 
 ### Readings
