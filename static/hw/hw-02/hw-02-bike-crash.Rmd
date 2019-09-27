@@ -1,0 +1,200 @@
+---
+title: "HW 02 - Bike crashes"
+output: 
+  tufte::tufte_html:
+    css: ../hw.css
+    tufte_variant: "envisioned"
+    highlight: pygments
+link-citations: yes
+---
+
+```{r setup, include=FALSE}
+library(here)
+```
+
+
+```{r grassmarket, fig.margin = TRUE, echo = FALSE, fig.width=3, fig.cap="Photo by Andhika Soreng on Unsplash"}
+knitr::include_graphics("img/bike.jpg")
+```
+
+Biking is the environmentally friendly way to commute, and a fun activity for kids. But bike crashes are no joke!
+
+```{marginfigure}
+Note, this is the Durham in North Carolina, US, not the Durham in England.
+```
+
+
+The data for this assignment comes from [Durham Open Data](https://live-durhamnc.opendata.arcgis.com/). The data contains bike crashes between 2007 and 2014.
+
+## Learning goals
+
+The goal of this assignment is to keep you practicing your data visualization skills while also adding on tasks for data manipulation like filtering and transforming.
+
+## Getting help
+
+If you have any questions about the assignment, please post them on Piazza!
+
+## Getting started
+
+```{marginfigure}
+**IMPORTANT:** If there is no GitHub repo created for you for this assignment, it means I didn't have your GitHub username as of when I assigned the homework. Please let me know your GitHub username asap, and I can create your repo.
+```
+
+Go to the course [GitHub organization](https://github.com/ids-s1-19) and locate your HW 1 repo, which should be named `hw-02-bike-crash-YOUR_GITHUB_USERNAME`. Grab the URL of the repo, and clone it in RStudio. Refer to [Lab 01](/labs/lab-01/lab-01-hello-r) if you would like to see step-by-step instructions for cloning a repo into an RStudio project.
+
+First, open the R Markdown document `hw-02-bike-crash.Rmd` and Knit it. Make sure it compiles without errors. The output will be in the file markdown `.md` file with the same name.
+
+## Packages
+
+We'll use the **tidyverse** package for the analysis, as usual. This package is already installed for you, so you load it as usual by running the following in your Console:
+
+```{r load-packages, message=FALSE}
+library(tidyverse)
+```
+
+## Data
+
+The data is in a CSV (comma separated values) file called `ncbikecrash.csv` in the `data/` folder in your repository. You can load this file into R using the `read_csv()` function.
+
+```{r include=FALSE}
+ncbikecrash <- read_csv(here::here("csv/ncbikecrash.csv"))
+```
+
+```{r eval=FALSE}
+ncbikecrash <- read_csv("data/ncbikecrash.csv")
+```
+
+Below is the full data dictionary. Note that it is long (there are lots of variables in the data), but we will be using a limited sed of the variables for our analysis.
+
+- `object_id`: Crash ID
+- `city`: City of crash
+- `county`: County of crash
+- `region`: Region of crash
+- `development`: Development area of crash
+- `locality`: Locality of crash
+- `on_road`: Road where crash happened
+- `rural_urban`: Whether crash happened on rural or urban road
+- `speed_limit`: Speed limit where crash happened
+- `traffic_control`: Type of traffic control where crash happened
+- `weather`: Weather at the time of crash
+- `workzone`: Whether crash happened in a work zone
+- `bike_age`: Age of biker
+- `bike_age_group`: Age group of biker
+- `bike_alcohol`: Whether biker had alcohol
+- `bike_alcohol_drugs`: Whether biker had alcohol or drugs
+- `bike_direction`: Direction of bike at the time of crash
+- `bike_injury`: Injury of biker
+- `bike_position`: Position of bike at the time of crash
+- `bike_race`: Race of biker
+- `bike_sex`: Sex of biker
+- `driver_age`: Age of driver
+- `driver_age_group`: Age group of driver
+- `driver_alcohol`: Whether driver had alcohol
+- `driver_alcohol_drugs`: Whether driver had alcohol or drugs
+- `driver_est_speed`: Estimated speed of driver
+- `driver_injury`: Injury of driver
+- `driver_race`: Race of driver
+- `driver_sex`: Sex of driver
+- `driver_vehicle_type`: Type of vehicle involved in crash
+- `crash_alcohol`: Whether alcohol was involved in crash
+- `crash_date`: Date of crash
+- `crash_day`: Day of crash
+- `crash_group`: Type of crash
+- `crash_hour`: Hour of crash
+- `crash_location`: Location of crash
+- `crash_month`: Month of crash
+- `crash_severity`: Severity of crash
+- `crash_time`: Time of crash
+- `crash_type`: Type of crash
+- `crash_year`: Year of crash
+- `ambulance_req`: Whether ambulance was required
+- `hit_run`: Whether accident was a hit and run
+- `light_condition`: Light condition at the time of crash
+- `road_character`: Road characteristics
+- `road_class`: Road class
+- `road_condition`: Road condition
+- `road_configuration`: Road configuration
+- `road_defects`: Road defects
+- `road_feature`: Road feature
+- `road_surface`: Road surface
+- `num_lanes`: Number of lanes
+- `geo_point`: Latitude and longitude of crash
+
+
+1. Load the data in the Console with the code above, and observe that an object called `ncbikecrash` has been added to your environment (in the Environment tab) in the top right. Click on this object to view the data in the data viewer. What does each row in the dataset represent?
+
+```{marginfigure}
+**Hint:** The Markdown Quick Reference sheet has an example of inline R code that might be helpful. You can access it from the Help menu in RStudio. Last week you used `nrow()` to find the number of rows. Use `ncol()` for the number of columns.
+```
+
+2. How many bike crashes were recorded in NC between 2007 and 2014? How many 
+variables are recorded on these crashes? Use inline R code when answering this 
+question.
+
+`r emo::ji("white_check_mark")` `r emo::ji("arrow_up")` *Now is a good time to commit and push your changes to GitHub with an appropriate commit message (e.g. "Dimensions of data"). Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
+
+3. How many bike crashes occurred in residential development areas where the 
+driver was between 0 and 19 years old?
+
+`r emo::ji("white_check_mark")` `r emo::ji("arrow_up")` *This is again a good time to commit and push your changes to GitHub with an appropriate commit message (e.g. "Filter for residential and young driver"). Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
+
+```{marginfigure}
+**Hint:** See the help for the `count()` function, specifically the 
+`sort` argument for reporting the frequency table in descending order of counts, 
+i.e. highest on top.
+```
+
+4. Create a frequency table of the estimated speed of the car (`driver_est_speed`) 
+involved in the crash. What is the most common estimated speed range in the 
+dataset?
+
+Don't forget to label your R chunk as well (where it says `label-me-1`). Your 
+label should be short, informative, and shouldn't include spaces. It also 
+shouldn't repeat a previuous label, otherwise R Markdown will give you an 
+error about repeated R chunk labels.
+
+`r emo::ji("white_check_mark")` `r emo::ji("arrow_up")` *Commit and push your changes again with an appropriate commit message (e.g. "Most common estimated speed"). Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
+
+5. Recreate the following plot, and describe in context of the data what it 
+shows.
+
+Don't forget to label your R chunk as well (where it says `label-me-2`). Your 
+label should be short, informative, shouldn't include spaces, and shouldn't
+shouldn't repeat a previuous label.
+
+Play around with the `fig.height` and `fig.width` options in the R chunk 
+definitions until you're satisfied with the dimensions of the figure.
+
+```{marginfigure}
+**Hint:** To match the colors, you can use `scale_fill_viridis_d()`.
+```
+
+```{r fig.width=7, fig.height=3, echo=FALSE}
+ggplot(ncbikecrash, aes(x = crash_alcohol, fill = crash_severity)) +
+  geom_bar(position = "fill") +
+  coord_flip() +
+  labs(y = "Proportion", x = "Did the crash involve alcohol?",
+       fill = "Crash severity", 
+       title = "Involvement of alcohol and severity of bike crashes") +
+  scale_fill_viridis_d()
+```
+
+`r emo::ji("white_check_mark")` `r emo::ji("arrow_up")` *This is a another good place to pause, commit changes with the commit message like "Recreated crash severity and alcohol figure". Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
+
+```{marginfigure}
+**Hint:** Instead of changing the legend, change how the data are represented 
+in the `crash_severity` variable with `mutate()`.
+```
+
+6. Recreate the same figure, but this time change the labels of the crash 
+severity variable such that text like `A:`, `B:`, etc. doesn't show up.
+
+For this question you'll need to add an R chunk, label it, and define 
+preferences for the figure's height and width.
+
+```{marginfigure}
+Not sure how to use emojis on your computer? Maybe a classmate can help? Or you 
+can ask on Piazza or student hours!
+```
+
+ `r emo::ji("white_check_mark")` `r emo::ji("arrow_up")` *Yay, you're done! Commit all remaining changes, use the commit message "Recreated figure with cleaner labels, done with HW 2! `r emo::ji("muscle")`", and push. Before you wrap up the assignment, make sure all documents are updated on your GitHub repo.*
