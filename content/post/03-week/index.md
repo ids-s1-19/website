@@ -33,3 +33,6 @@ title: 'Week 3 - Data wrangling'
 | :open_book: | R4DS: [Chp 4, Workflow: basics](https://r4ds.had.co.nz/workflow-basics.html) | **Required** |
 | :open_book: | R4DS: [Chp 5, Data transformation](https://r4ds.had.co.nz/transform.html) | **Required** |
 | :open_book: | OS: [Chp 2, Summarizing data](https://www.openintro.org/stat/textbook.php?stat_book=os) | **Required** |
+| :fountain_pen: | [Data Wrangling Part 1: Basic to Advanced Ways to Select Columns](https://suzan.rbind.io/2018/01/dplyr-tutorial-1/) | Optional |
+| :fountain_pen: | [Data Wrangling Part 2: Transforming your columns into the right shape
+](https://suzan.rbind.io/2018/02/dplyr-tutorial-2/#spreading-and-gathering-data) | Optional |
