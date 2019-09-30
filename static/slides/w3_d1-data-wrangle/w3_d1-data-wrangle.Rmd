@@ -23,7 +23,6 @@ library(tidyverse)
 ## Week 3
 
 - Preparing for tomorrow's workshop: Check your email tomorrow morning for your lab team assignment, find your teammates when you get in the workshop classroom, and sit together.
-- Due this week: HW 02 (Wednesday) + OQ 02 (Friday)
 - Student hours back to usual time: Tuesdays 14:30 - 16:30
 - Piazza: Code as reproducible example + Verbatim error + Informative title 
 
