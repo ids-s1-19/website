@@ -27,25 +27,30 @@
   name = "People"
   url = "#people"
   weight = 60
+
+[[main]]
+  name = "Resources"
+  url = "#resources"
+  weight = 70
   
 [[main]]
   name = "<i class='fab fa-github'></i>"
   url = "https://github.com/ids-s1-19"
-  weight = 70
+  weight = 80
 
 [[main]]
   name = "<i class='fab fa-r-project'></i>"
   url = "https://www.learn.ed.ac.uk/webapps/blackboard/content/launchLink.jsp?course_id=_75012_1&content_id=_4244962_1&mode=cpview"
-  weight = 80
+  weight = 90
 
 [[main]]
   name = "<i class='ai ai-piazza'></i>"
   url = "https://piazza.com/ed.ac.uk/fall2019/math08077/home"
-  weight = 90
+  weight = 100
   menu_align_right = true
 
 [[main]]
   name = "<i class='fas fa-play-circle'></i>"
   url = "https://www.learn.ed.ac.uk/webapps/osc-BasicLTI-BB5d1b15b77a8ac/tool.jsp?course_id=_75012_1&content_id=_4298466_1"
-  weight = 100
+  weight = 110
   menu_align_right = true
