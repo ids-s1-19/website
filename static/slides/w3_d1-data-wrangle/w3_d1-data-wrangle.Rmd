@@ -25,6 +25,7 @@ library(tidyverse)
 - Preparing for tomorrow's workshop: Check your email tomorrow morning for your lab team assignment, find your teammates when you get in the workshop classroom, and sit together.
 - Student hours back to usual time: Tuesdays 14:30 - 16:30
 - Piazza: Code as reproducible example + Verbatim error + Informative title 
+- New section on website with links to cheat sheets + more...
 
 .question[
 .large[
