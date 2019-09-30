@@ -21,10 +21,9 @@ title: 'Week 3 - Data wrangling'
 | Lecture 05 | [Tidy data and data wrangling](/slides/w3_d1-data-wrangle/w3_d1-data-wrangle.html) |
 | Lab 03     | Simpson's paradox |
 | Lecture 06 | Rectanling and reshaping data |
-| OQ 03      | Tidy data principles |
 | HW 03      | Tidying open data |
-| RT 03      | Interactive tutorial covering week’s material |
-
+| RT 03      | [Interactive tutorial covering week’s material](https://rstudio.cloud/learn/primers/2) |
+| OQ 03      | Tidy data principles |
 
 ### Readings
 
