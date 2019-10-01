@@ -24,7 +24,19 @@ recreate some of their visualizations as well as explore new questions.
 - Manipulate and transform data to prepare it for visualization.
 - Recreate visualizations.
 - Summarise data.
-- Get more practice with merge conflicts on GitHub.
+- Get more practice working as a team.
+
+# Hello teams!
+
+First things first: get to know your team members. You can find your team assignment [here](https://github.com/ids-s1-19/team-assignments/blob/master/roster_team.csv).
+
+Your first task as a team is to come up with a team name. Then, the **team lead** for this week should submit this information [here](https://forms.office.com/Pages/ResponsePage.aspx?id=sAafLmkWiUWHiRCgaTTcYRiRHjHRDWhOuLE_6JyNA0dUNVBWSk1VVldNR082UzhURUk5RVdSUjRLUS4u).
+
+# Workflow
+
+This is the first week you're working in teams. You have a team repository that each member of the team has access to. You can all push to this repository, but **for this week only** we will keep things simple and ask that the **team lead for the week is the only one who pushes** while others work on together with them.
+
+Starting next week we'll show you how you can all collectively work in a repo, the (mini) chaos that might result in (called a merge conflict), and how to resolve it.
 
 # Getting started
 
@@ -80,13 +92,9 @@ In a few cases the name of the city/country changed after laureate was given (e.
 - `city_original`: Original city where laureate lived at the time of winning the award
 - `country_original`: Original country where laureate lived at the time of winning the award
 
-## Workflow
+# Exercises
 
-This is the first week you're working in teams. You have a team repository that each member of the team has access to. You can all push to this repository, but for this week only we will keep things simple and ask that the team leader for the week is the only one who pushes while others work on together with them.
-
-Starting next week we'll show you how you can all collectively work in a repo, the (mini) chaos that might result in (called a merge conflict), and how to resolve it.
-
-## Getting started
+## Get to know your data
 
 1. How many observations and how many variables are in the dataset? Use inline code to answer this question.
 
@@ -149,7 +157,7 @@ Note that your bar plot won't exactly match the one from the Buzzfeed article. T
 
 `r emo::ji("white_check_mark")` `r emo::ji("arrow_up")` *Commit and push your changes to GitHub with an appropriate commit message again. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
 
-## Wrapping up
+# Wrapping up
 
 Go back through your write up to make sure you're following coding style guidelines we discussed in class. Make any edits as needed.
 
@@ -157,6 +165,8 @@ Also, make sure all of your R chunks are properly labeled, and your figures are 
 
 Once the team leader for the week pushes their final changes, others should also clone the team repo (or if you've already done so, *pull* on the Git pane) and knit the R Markdown document to confirm that they can reproduce the report.
 
-## Interested in how Buzzfeed made their visualizations?
+If you haven't yet submitted your team name, don't forget to do so  [here](https://forms.office.com/Pages/ResponsePage.aspx?id=sAafLmkWiUWHiRCgaTTcYRiRHjHRDWhOuLE_6JyNA0dUNVBWSk1VVldNR082UzhURUk5RVdSUjRLUS4u).
+
+# Interested in how Buzzfeed made their visualizations?
 
 The plots in the Buzzfeed article are called waffle plots. You can find the code used for making these plots in Buzzfeed's GitHub repo (yes, they have one!) [here](https://buzzfeednews.github.io/2017-01-immigration-and-science/). You're not expected to recreate them as part of your assignment, but you're welcomed to do so for fun!
