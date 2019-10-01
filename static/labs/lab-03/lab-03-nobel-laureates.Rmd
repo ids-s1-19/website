@@ -28,7 +28,7 @@ recreate some of their visualizations as well as explore new questions.
 
 # Hello teams!
 
-First things first: get to know your team members. You can find your team assignment [here](https://github.com/ids-s1-19/team-assignments/blob/master/roster_team.csv).
+First things first: get to know your team members. You can find your team assignment [here](https://github.com/ids-s1-19/team-assignments/blob/master/roster-team-lab-03.csv).
 
 Your first task as a team is to come up with a team name. Then, the **team lead** for this week should submit this information [here](https://forms.office.com/Pages/ResponsePage.aspx?id=sAafLmkWiUWHiRCgaTTcYRiRHjHRDWhOuLE_6JyNA0dUNVBWSk1VVldNR082UzhURUk5RVdSUjRLUS4u).
 
