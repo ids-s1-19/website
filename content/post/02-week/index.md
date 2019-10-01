@@ -25,7 +25,7 @@ title: 'Week 2 - Data visualization'
 | Lec 04 | [Building plots for various data types](/slides/w2_d2-more-dataviz/w2_d2-more-dataviz.html) |
 | HW 02  | [Bike crashes](/hw/hw-02/hw-02-bike-crash.html) | **Due:** Wed, 2 Oct, 17:00
 | RT 02  | [Interactive tutorial covering week’s material](https://rstudio.cloud/learn/primers/3) | 
-| OQ 02  | Building and interpreting data visualizations | **Due:** Fri, 4 Oct, 17:00
+| OQ 02  | [Data visualization](https://minecr.shinyapps.io/02-dataviz/) | **Due:** Sat, 5 Oct, 17:00
 
 ### Readings
 
