@@ -14,7 +14,7 @@ knitr::opts_chunk$set(eval = FALSE)
 
 In January 2017, Buzzfeed published an article on why Nobel laureates show 
 immigration is so important for American science. You can read the article 
-[here](). In the article they show that while most living Nobel laureates in the 
+[here](https://www.buzzfeednews.com/article/peteraldhous/immigration-and-science). In the article they show that while most living Nobel laureates in the 
 sciences are based in the US, many of them were born in other countries. 
 This is one reason why scientific leaders say that immigration is vital for progress. In this lab we will work with the data from this article to 
 recreate some of their visualizations as well as explore new questions.
@@ -114,6 +114,10 @@ Confirm that once you have filtered for these characteristics you are left with 
 ... says the Buzzfeed article. Let's see if that's true.
 
 First, we'll create a new variable to identify whether the laureate was in the US when they won their prize. We'll use the `mutate()` function for this. The following pipeline mutates the `nobel_living` data frame by adding a new variable called `country_us`. We use an if statement to create this variable. The first argument in the `if_else()` function we're using to write this if statement is the condition we're testing for. If `country` is equal to `"USA"`, we set `country_us` to `"USA"`. If not, we set the `country_us` to `"Other"`.
+
+```{marginfigure}
+Note that we can achieve the same result using the `fct_other()` function we've seen before (i.e. with `country_us = fct_other(country, "USA")`). We decided to use the `if_else()` here to show you one example of an if statement in R.
+```
 
 ```{r}
 nobel_living <- nobel_living %>%

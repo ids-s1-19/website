@@ -453,7 +453,7 @@ width: 100%;
 
 
 
-<p>In January 2017, Buzzfeed published an article on why Nobel laureates show immigration is so important for American science. You can read the article <a href>here</a>. In the article they show that while most living Nobel laureates in the sciences are based in the US, many of them were born in other countries. This is one reason why scientific leaders say that immigration is vital for progress. In this lab we will work with the data from this article to recreate some of their visualizations as well as explore new questions.</p>
+<p>In January 2017, Buzzfeed published an article on why Nobel laureates show immigration is so important for American science. You can read the article <a href="https://www.buzzfeednews.com/article/peteraldhous/immigration-and-science">here</a>. In the article they show that while most living Nobel laureates in the sciences are based in the US, many of them were born in other countries. This is one reason why scientific leaders say that immigration is vital for progress. In this lab we will work with the data from this article to recreate some of their visualizations as well as explore new questions.</p>
 <div id="learning-goals" class="section level1">
 <h1>Learning goals</h1>
 <ul>
@@ -543,6 +543,7 @@ width: 100%;
 <h2>Most living Nobel laureates were based in the US when they won their prizes</h2>
 <p>… says the Buzzfeed article. Let’s see if that’s true.</p>
 <p>First, we’ll create a new variable to identify whether the laureate was in the US when they won their prize. We’ll use the <code>mutate()</code> function for this. The following pipeline mutates the <code>nobel_living</code> data frame by adding a new variable called <code>country_us</code>. We use an if statement to create this variable. The first argument in the <code>if_else()</code> function we’re using to write this if statement is the condition we’re testing for. If <code>country</code> is equal to <code>&quot;USA&quot;</code>, we set <code>country_us</code> to <code>&quot;USA&quot;</code>. If not, we set the <code>country_us</code> to <code>&quot;Other&quot;</code>.</p>
+<p><label for="tufte-mn-1" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-1" class="margin-toggle"><span class="marginnote"><span style="display: block;">Note that we can achieve the same result using the <code>fct_other()</code> function we’ve seen before (i.e. with <code>country_us = fct_other(country, “USA”)</code>). We decided to use the <code>if_else()</code> here to show you one example of an if statement in R.</span></span></p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">nobel_living &lt;-<span class="st"> </span>nobel_living <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb3-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate</span>(</a>
 <a class="sourceLine" id="cb3-3" data-line-number="3">    <span class="dt">country_us =</span> <span class="kw">if_else</span>(country <span class="op">==</span><span class="st"> &quot;USA&quot;</span>, <span class="st">&quot;USA&quot;</span>, <span class="st">&quot;Other&quot;</span>)</a>
@@ -558,7 +559,7 @@ width: 100%;
 </div>
 <div id="but-of-those-us-based-nobel-laureates-many-were-born-in-other-countries" class="section level2">
 <h2>But of those US-based Nobel laureates, many were born in other countries</h2>
-<p><label for="tufte-mn-1" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-1" class="margin-toggle"><span class="marginnote"><span style="display: block;"><strong>Hint:</strong> You should be able to <del>cheat</del> borrow from code you used earlier to create the <code>country_us</code> variable.</span></span></p>
+<p><label for="tufte-mn-2" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-2" class="margin-toggle"><span class="marginnote"><span style="display: block;"><strong>Hint:</strong> You should be able to <del>cheat</del> borrow from code you used earlier to create the <code>country_us</code> variable.</span></span></p>
 <ol start="4" style="list-style-type: decimal">
 <li><p>Create a new variable called <code>born_country_us</code> that has the value <code>&quot;USA&quot;</code> if the laureate is born in the US, and <code>&quot;Other&quot;</code> otherwise.</p></li>
 <li><p>Add a second variable to your visualization from Exercise 3 based on whether the laureate was born in the US or not. Your final visualization should contain a facet for each category, within each facet a bar for whether they won the award in the US or not, and within each bar whether they were born in the US or not. Based on your visualization, do the data appear to support Buzzfeed’s claim? Explain your reasoning in 1-2 sentences.</p></li>
@@ -567,7 +568,7 @@ width: 100%;
 </div>
 <div id="heres-where-those-immigrant-nobelists-were-born" class="section level2">
 <h2>Here’s where those immigrant Nobelists were born</h2>
-<p><label for="tufte-mn-2" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-2" class="margin-toggle"><span class="marginnote"><span style="display: block;">Note that your bar plot won’t exactly match the one from the Buzzfeed article. This is likely because the data has been updated since the article was published.</span></span></p>
+<p><label for="tufte-mn-3" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-3" class="margin-toggle"><span class="marginnote"><span style="display: block;">Note that your bar plot won’t exactly match the one from the Buzzfeed article. This is likely because the data has been updated since the article was published.</span></span></p>
 <ol start="6" style="list-style-type: decimal">
 <li>In a single pipeline, filter for laureates who won their prize in the US, but were born outside of the US, and then create a frequency table (with the <code>count()</code>) function for their birth country, <code>born_country</code>, and arrange the resulting data frame in descending order of number of observations for each country.</li>
 </ol>
