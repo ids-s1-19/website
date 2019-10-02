@@ -20,10 +20,10 @@ title: 'Week 3 - Data wrangling'
 |------------|----------|
 | Lec 05 | [Tidy data and data wrangling](/slides/w3_d1-data-wrangle/w3_d1-data-wrangle.html) |
 | Lab 03 | [Nobel laureates](/labs/lab-03/lab-03-nobel-laureates.html) | **Due:** Fri, 4 Oct, 17:00 |
-| Lec 06 | Rectanling and reshaping data |
+| Lec 06 | [Data types and recoding data](/slides/w3_d2-data-types-recoding/w3_d2-data-types-recoding.html) |
 | HW 03  | Tidying open data |
 | RT 03  | [Interactive tutorial covering week’s material](https://rstudio.cloud/learn/primers/2) |
-| OQ 03  | Tidy data principles |
+| OQ 03  | Data wrangling    |
 
 ### Readings
 
