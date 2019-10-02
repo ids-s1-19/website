@@ -21,16 +21,11 @@ library(DT)
 library(here)
 ```
 
-class: center, middle
-
-# Please sit with your teams!
-
----
-
 ## So far this week...
 
 - Data wrangling, transforming, manipulating
-- Workshops: Teams are set! You need to be in class during the workshop to get credit for the labs. If you haven't met team members yesterday, let's help you find them today.
+- Teams: Please sit with your teams in lectures and in workshops.
+- Workshops: You need to be in class during the workshop to get credit for the labs. If you haven't met team members yesterday, let's help you find them today.
 - OQ 2: Posted. Due date pushed back one day to Saturday 17:00 if you need extra time.
 - HW 2: Due today at 17:00
 
