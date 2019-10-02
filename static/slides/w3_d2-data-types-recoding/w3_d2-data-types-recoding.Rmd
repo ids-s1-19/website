@@ -100,7 +100,7 @@ ncbikecrash %>%
     crash_hour > 5    & crash_hour <= 11 ~ "morning",
     crash_hour > 11   & crash_hour <= 17 ~ "afternoon",
     crash_hour > 17   & crash_hour <= 23 ~ "evening",
-    crash_hour == 24  | crash_hour <= 6  ~ "night",
+    crash_hour == 24  | crash_hour <= 5  ~ "night",
   )) %>%
   select(crash_hour, crash_time_of_day)
 ```
