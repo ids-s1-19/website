@@ -19,6 +19,7 @@ title: 'Week 4 - Diving deeper into visualization'
 ### Schedule
 
 | <div style="width:60px"></div>  | <div style="width:420px"></div> |  <div style="width:190px"></div>   |
+|---:|---|---|
 | Lec 07 | Tips for effective data visualization |
 | Lab 04 | Ugly charts |
 | Lec 08 | Mapping |
@@ -30,12 +31,12 @@ title: 'Week 4 - Diving deeper into visualization'
 
 | <div style="width:60px"></div>  | <div style="width:420px"></div>  |  <div style="width:190px"></div> |
 |----:|---|---|
-|  :page_with_curl:     | [Tidy data](https://tidyr.tidyverse.org/articles/tidy-data.html)
-|  :page_with_curl:     | [Pivoting](https://tidyr.tidyverse.org/articles/pivot.html)
-|  :fountain_pen:  | [Pulling the multi-national story out, step by step](https://junkcharts.typepad.com/junk_charts/2019/09/pulling-the-multi-national-story-out-step-by-step.html) | Optional
-|  :fountain_pen:  | [Why do cats & dogs...?](https://whydocatsanddogs.com/) | Optional
-|  :page_with_curl:     | How do data scientists spend their time? - [https://www.forbes.com/sites/gilpress/2016/03/23/data-preparation-most-time-consuming-least-enjoyable-data-science-task-survey-says/](https://tidyr.tidyverse.org/articles/tidy-data.html) (short) | Optional
-|  :page_with_curl:     | How do data scientists spend their time? - [What Data Scientists Really Do, According to 35 Data Scientists](https://hbr.org/2018/08/what-data-scientists-really-do-according-to-35-data-scientists) (long) | Optional
+|  :page_with_curl: | [Tidy data](https://tidyr.tidyverse.org/articles/tidy-data.html) | **Required** |
+|  :page_with_curl: | [Pivoting](https://tidyr.tidyverse.org/articles/pivot.html)      | **Required** |
+|  :fountain_pen:   | [Pulling the multi-national story out, step by step](https://junkcharts.typepad.com/junk_charts/2019/09/pulling-the-multi-national-story-out-step-by-step.html) | Optional |
+|  :fountain_pen:   | [Why do cats & dogs...?](https://whydocatsanddogs.com/) | Optional |
+|  :page_with_curl: | How do data scientists spend their time? - [https://www.forbes.com/sites/gilpress/2016/03/23/data-preparation-most-time-consuming-least-enjoyable-data-science-task-survey-says/](https://tidyr.tidyverse.org/articles/tidy-data.html) (short) | Optional |
+|  :page_with_curl: | How do data scientists spend their time? - [What Data Scientists Really Do, According to 35 Data Scientists](https://hbr.org/2018/08/what-data-scientists-really-do-according-to-35-data-scientists) (long) | Optional |
 
 
 
