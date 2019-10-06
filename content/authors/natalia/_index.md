@@ -1,14 +1,14 @@
 ---
 
-name: Guopeng Li
+name: Natalia Bochkina
 organizations:
 - name: University of Edinburgh 
   url: ""
-role: Postgraduate Student
+role: Reader
 social:
 - icon: home
   icon_pack: fas
-  link: http://www.maxwell.ac.uk/migsaa/people/guopeng-li
+  link: https://www.maths.ed.ac.uk/~nbochkin/
 user_groups:
 - Tutors
 
