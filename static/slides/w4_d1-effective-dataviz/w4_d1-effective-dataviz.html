@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <title>Tips for effective data visualization   💅</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Dr. Çetinkaya-Rundel" />
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Tips for effective data visualization <br> 💅
+### Dr. Çetinkaya-Rundel
+
+---
+
+
+
+
+
+layout: true
+  
+&lt;div class="my-footer"&gt;
+&lt;span&gt;
+Dr. Mine Çetinkaya-Rundel -
+&lt;a href="https://introds.org" target="_blank"&gt;introds.org
+&lt;/a&gt;
+&lt;/span&gt;
+&lt;/div&gt; 
+
+---
+
+
+
+## Week 4
+
+- Preparing for tomorrow's workshop: Make sure you complete the required reading for the week, and check your email before workshop to find out if there were any changes to your team.
+- Pull requests for feedback on code style.
+
+.question[
+.large[
+Any questions?
+]
+]
+
+---
+
+class: center, middle
+
+# Wrapping up last week's material...
+
+---
+
+
+
+## Vectors vs. lists
+
+.pull-left[
+.small[
+
+```r
+x &lt;- c(8,4,7)
+```
+]
+.small[
+
+```r
+x[1]
+```
+
+```
+## [1] 8
+```
+]
+.small[
+
+```r
+x[[1]]
+```
+
+```
+## [1] 8
+```
+]
+]
+--
+.pull-right[
+.small[
+
+```r
+y &lt;- list(8,4,7)
+```
+]
+.small[
+
+```r
+y[2]
+```
+
+```
+## [[1]]
+## [1] 4
+```
+]
+.small[
+
+```r
+y[[2]]
+```
+
+```
+## [1] 4
+```
+]
+]
+
+--
+
+&lt;br&gt;
+
+**Note:** When using tidyverse code you'll rarely need to refer to elements using square brackets, but it's good to be aware of this syntax, especially since you might encounter it when searching for help online.
+
+---
+
+&lt;img src="img/hadley-salt-pepper.png" width="90%" /&gt;
+
+
+---
+
+class: center, middle
+
+# Data "set"
+
+---
+
+## Data "sets" in R
+
+- "set" is in quotation marks because it is not a formal data class
+- A tidy data "set" can be one of the following types:
+    + `tibble`
+    + `data.frame`
+- We'll often work with `tibble`s:
+    + `readr` package (e.g. `read_csv` function) loads data as a `tibble` by default
+    + `tibble`s are part of the tidyverse, so they work well with other packages we are using
+    + they make minimal assumptions about your data, so are less likely to cause hard to track bugs in your code
+
+---
+
+## Data frames
+
+- A data frame is the most commonly used data structure in R, they are just a list of equal length vectors (usually atomic, but you can use generic as well). Each vector is treated as a column and elements of the vectors as rows.
+- A tibble is a type of data frame that ... makes your life (i.e. data analysis) easier.
+- Most often a data frame will be constructed by reading in from a file, but we can also create them from scratch.
+
+---
+
+## Data frames (cont.)
+
+
+```r
+df &lt;- tibble(
+  x = 1:3, 
+  y = c("a", "b", "c")
+  )
+class(df)
+```
+
+```
+## [1] "tbl_df"     "tbl"        "data.frame"
+```
+
+```r
+glimpse(df)
+```
+
+```
+## Observations: 3
+## Variables: 2
+## $ x &lt;int&gt; 1, 2, 3
+## $ y &lt;chr&gt; "a", "b", "c"
+```
+
+---
+
+## Data frames (cont.)
+
+
+```r
+attributes(df)
+```
+
+```
+## $names
+## [1] "x" "y"
+## 
+## $row.names
+## [1] 1 2 3
+## 
+## $class
+## [1] "tbl_df"     "tbl"        "data.frame"
+```
+.pull-left[
+
+```r
+class(df$x)
+```
+
+```
+## [1] "integer"
+```
+]
+.pull-right[
+
+```r
+class(df$y)
+```
+
+```
+## [1] "character"
+```
+]
+
+---
+
+
+
+
+## Working with tibbles in pipelines
+
+.question[
+How many of the 60 respondents have below average number of cats?
+]
+
+
+```r
+# Calculate mean number of cats and store it
+mean_cats &lt;- cat_lovers %&gt;%
+  summarise(mean_cats = mean(number_of_cats))
+
+# Filter for where number_of_cats is less than mean_cats
+cat_lovers %&gt;%
+  filter(number_of_cats &lt; mean_cats) %&gt;%
+  nrow()
+```
+
+```
+## [1] 60
+```
+
+--
+
+.question[
+Do you believe this number? Why, why not?
+]
+
+---
+
+## A result of a pipeline is always a tibble
+
+
+```r
+mean_cats
+```
+
+```
+## # A tibble: 1 x 1
+##   mean_cats
+##       &lt;dbl&gt;
+## 1     0.817
+```
+
+```r
+class(mean_cats)
+```
+
+```
+## [1] "tbl_df"     "tbl"        "data.frame"
+```
+
+---
+
+## `pull()` can be your new best friend
+
+But use it sparingly!
+
+
+```r
+mean_cats &lt;- cat_lovers %&gt;%
+  summarise(mean_cats = mean(number_of_cats)) %&gt;%
+  pull()
+
+mean_cats
+```
+
+```
+## [1] 0.8166667
+```
+
+```r
+cat_lovers %&gt;%
+  filter(number_of_cats &lt; mean_cats) %&gt;%
+  nrow()
+```
+
+```
+## [1] 33
+```
+
+--
+
+.pull-left[
+
+```r
+mean_cats
+```
+
+```
+## [1] 0.8166667
+```
+]
+.pull-right[
+
+```r
+class(mean_cats)
+```
+
+```
+## [1] "numeric"
+```
+]
+
+---
+
+class: center, middle
+
+# Factors
+
+---
+
+## Factors
+
+Factor objects are how R stores data for categorical variables (fixed numbers of discrete values).
+
+
+```r
+(x = factor(c("BS", "MS", "PhD", "MS")))
+```
+
+```
+## [1] BS  MS  PhD MS 
+## Levels: BS MS PhD
+```
+
+
+```r
+glimpse(x)
+```
+
+```
+##  Factor w/ 3 levels "BS","MS","PhD": 1 2 3 2
+```
+
+
+```r
+typeof(x)
+```
+
+```
+## [1] "integer"
+```
+
+---
+
+## Read data in as character strings
+
+
+```r
+glimpse(cat_lovers)
+```
+
+```
+## Observations: 60
+## Variables: 3
+## $ name           &lt;chr&gt; "Bernice Warren", "Woodrow Stone", "Willie Bass",…
+## $ number_of_cats &lt;dbl&gt; 0, 0, 1, 3, 3, 2, 1, 1, 0, 0, 0, 0, 1, 3, 3, 2, 1…
+## $ handedness     &lt;chr&gt; "left", "left", "left", "left", "left", "left", "…
+```
+
+---
+
+## But coerce to factor when plotting
+
+
+```r
+ggplot(cat_lovers, mapping = aes(x = handedness)) +
+  geom_bar()
+```
+
+&lt;img src="w4_d1-effective-dataviz_files/figure-html/unnamed-chunk-23-1.png" width="80%" /&gt;
+
+---
+
+## Use forcats to manipulate factors
+
+
+```r
+cat_lovers &lt;- cat_lovers %&gt;%
+  mutate(handedness = fct_relevel(
+    handedness,
+    "right", "left", "ambidextrous"
+  ))
+```
+
+&lt;img src="w4_d1-effective-dataviz_files/figure-html/unnamed-chunk-25-1.png" width="70%" /&gt;
+
+---
+
+## Come for the functionality
+
+.pull-left[
+... stay for the logo
+]
+.pull-right[
+&lt;img src="img/forcats-part-of-tidyverse.png" width="60%" /&gt;
+]
+
+- R uses factors to handle categorical variables, variables that have a fixed and known set of possible values. Historically, factors were much easier to work with than character vectors, so many base R functions automatically convert character vectors to factors.
+- Factors are useful when you have true categorical data, and when you want to override the ordering of character vectors to improve display. The **forcats** package provides a suite of useful tools that solve common problems with factors.
+
+.footnote[
+Source: [forcats.tidyverse.org](http://forcats.tidyverse.org/)
+]
+
+---
+
+## Recap
+
+- Always best to think of data as part of a tibble
+    + This plays nicely with the `tidyverse` as well
+    + Rows are observations, columns are variables
+--
+- Be careful about data types / classes
+    + Sometimes `R` makes silly assumptions about your data class 
+        + Using `tibble`s help, but it might not solve all issues
+        + Think about your data in context, e.g. 0/1 variable is most likely a `factor`
+    + If a plot/output is not behaving the way you expect, first
+    investigate the data class
+    + If you are absolutely sure of a data class, overwrite it in your
+    tibble so that you don't need to keep having to keep track of it
+        + `mutate` the variable with the correct class
+
+---
+
+class: center, middle
+
+# Designing effective visualizations
+
+---
+
+## Keep it simple
+
+&lt;img src="img/pie-3d.jpg" width="300" style="display: block; margin: auto;" /&gt;
+
+&lt;img src="w4_d1-effective-dataviz_files/figure-html/pie-to-bar-1.png" width="600" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Use	color	to	draw	attention
+
+
+&lt;img src="w4_d1-effective-dataviz_files/figure-html/unnamed-chunk-27-1.png" width="500" style="display: block; margin: auto;" /&gt;
+
+&lt;img src="w4_d1-effective-dataviz_files/figure-html/unnamed-chunk-28-1.png" width="600" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Tell a story
+
+&lt;img src="img/time-series.story.png" width="800" style="display: block; margin: auto;" /&gt;
+
+.footnote[
+Credit: Angela Zoss and Eric Monson, Duke DVS
+]
+
+---
+
+class: center, middle
+
+# Principles	for	effective	visualizations
+
+---
+
+## Principles	for	effective	visualizations
+
+- Order matters
+- Put long categories on the y-axis
+- Keep	scales consistent
+- Select meaningful colors
+- Use meaningful and nonredundant labels
+
+---
+
+## Data
+
+In September 2019, YouGov survey asked 1,639 GB adults the following question:
+
+&gt; In hindsight, do you think Britain was right/wrong to vote to leave EU?
+&gt;
+&gt;- Right to leave  
+&gt;- Wrong to leave  
+&gt;- Don't know
+
+
+
+
+.footnote[ 
+Source: [YouGov Survey Results](https://d25d2506sfb94s.cloudfront.net/cumulus_uploads/document/x0msmggx08/YouGov%20-%20Brexit%20and%202019%20election.pdf), retrieved Oct 7, 2019
+]
+
+---
+
+class: center, middle
+
+# Order matters
+
+---
+
+## Alphabetical order is rarely ideal
+
+
+```r
+ggplot(data = brexit, aes(x = opinion)) +
+  geom_bar()
+```
+
+&lt;img src="w4_d1-effective-dataviz_files/figure-html/unnamed-chunk-31-1.png" width="85%" /&gt;
+
+---
+
+## Order by frequency
+
+`fct_infreq`: Reorder factors levels by frequency
+
+
+```r
+ggplot(data = brexit, aes(x = fct_infreq(opinion))) +
+  geom_bar()
+```
+
+&lt;img src="w4_d1-effective-dataviz_files/figure-html/unnamed-chunk-32-1.png" width="75%" /&gt;
+
+---
+
+## Clean up labels
+
+
+```r
+ggplot(data = brexit, aes(x = opinion)) +
+  geom_bar() +
+  labs(x = "Opinion", y = "Count")
+```
+
+&lt;img src="w4_d1-effective-dataviz_files/figure-html/unnamed-chunk-33-1.png" width="80%" /&gt;
+
+---
+
+## Alphabetical order is rarely ideal
+
+
+```r
+ggplot(data = brexit, aes(x = region)) +
+  geom_bar()
+```
+
+&lt;img src="w4_d1-effective-dataviz_files/figure-html/unnamed-chunk-34-1.png" width="85%" /&gt;
+
+---
+
+## Use inherent level order
+
+`fct_relevel`: Reorder factor levels using a custom order
+
+.midi[
+
+```r
+brexit &lt;- brexit %&gt;%
+  mutate(
+    region = fct_relevel(
+      region,
+      "london", "rest_of_south", "midlands_wales", "north", "scot"
+    )
+  )
+```
+]
+
+&lt;img src="w4_d1-effective-dataviz_files/figure-html/unnamed-chunk-36-1.png" width="55%" /&gt;
+
+---
+
+## Clean up labels
+
+
+```r
+brexit &lt;- brexit %&gt;%
+  mutate(
+    region = fct_recode(
+      region,
+      London = "london", 
+      `Rest of South` = "rest_of_south", 
+      `Midlands / Wales` = "midlands_wales", 
+      North = "north", 
+      Scotland = "scot"
+    )
+  )
+```
+
+---
+
+## Clean up labels (cont.)
+
+
+```r
+ggplot(data = brexit, aes(x = region)) +
+  geom_bar()
+```
+
+&lt;img src="w4_d1-effective-dataviz_files/figure-html/unnamed-chunk-38-1.png" width="85%" /&gt;
+
+---
+
+class: center, middle
+
+# Put long categories on 
+# the y-axis
+
+---
+
+## Long categories can be hard to read
+
+
+```r
+ggplot(data = brexit, aes(x = region)) +
+  geom_bar()
+```
+
+&lt;img src="w4_d1-effective-dataviz_files/figure-html/unnamed-chunk-39-1.png" width="85%" /&gt;
+
+---
+
+## Move them to the y-axis
+
+
+```r
+ggplot(data = brexit, aes(x = region)) +
+  geom_bar() +
+  coord_flip()
+```
+
+&lt;img src="w4_d1-effective-dataviz_files/figure-html/unnamed-chunk-40-1.png" width="80%" /&gt;
+
+---
+
+## Move them to the y-axis
+
+
+```r
+*ggplot(data = brexit, aes(x = fct_rev(region))) +
+  geom_bar() +
+  coord_flip()
+```
+
+&lt;img src="w4_d1-effective-dataviz_files/figure-html/unnamed-chunk-41-1.png" width="80%" /&gt;
+
+---
+
+## Clean up labels
+
+
+```r
+ggplot(data = brexit, aes(x = fct_rev(region))) +
+  geom_bar() +
+* labs(x = "Region", y = "") +
+  coord_flip()
+```
+
+&lt;img src="w4_d1-effective-dataviz_files/figure-html/unnamed-chunk-42-1.png" width="80%" /&gt;
+
+---
+
+class: center, middle
+
+# Pick a purpose
+
+---
+
+## Segmented bar plots can be hard to read
+
+
+```r
+ggplot(data = brexit, aes(x = region, fill = opinion)) +
+  geom_bar() +
+  coord_flip()
+```
+
+&lt;img src="w4_d1-effective-dataviz_files/figure-html/unnamed-chunk-43-1.png" width="80%" /&gt;
+
+---
+
+## Use facets
+
+
+```r
+ggplot(data = brexit, aes(x = opinion, fill = region)) +
+  geom_bar() +
+  coord_flip() +
+  facet_grid(. ~ region)
+```
+
+&lt;img src="w4_d1-effective-dataviz_files/figure-html/unnamed-chunk-44-1.png" width="80%" /&gt;
+
+---
+
+## Avoid redundancy
+
+
+```r
+ggplot(data = brexit, aes(x = opinion)) +
+  geom_bar() +
+  coord_flip() +
+  facet_grid(. ~ region)
+```
+
+&lt;img src="w4_d1-effective-dataviz_files/figure-html/unnamed-chunk-45-1.png" width="80%" /&gt;
+
+---
+
+## Informative labels
+
+
+```r
+ggplot(data = brexit, aes(x = opinion)) +
+  geom_bar() +
+  coord_flip() +
+  facet_grid(. ~ region) +
+  labs(
+    title = "Was Britain right/wrong to vote to leave EU?",
+*   x = "",
+*   y = ""
+  ) 
+```
+
+---
+
+&lt;img src="w4_d1-effective-dataviz_files/figure-html/unnamed-chunk-47-1.png" width="90%" /&gt;
+
+---
+
+## A bit more info
+
+
+```r
+ggplot(data = brexit, aes(x = opinion)) +
+  geom_bar() +
+  coord_flip() +
+  facet_grid(. ~ region) +
+  labs(
+    title = "Was Britain right/wrong to vote to leave EU?",
+*   subtitle = "YouGov Survey Results, 2-3 September 2019",
+*   caption = "Source: https://d25d2506sfb94s.cloudfront.net/cumulus_uploads/document/x0msmggx08/YouGov%20-%20Brexit%20and%202019%20election.pdf",
+    x = "", 
+    y = "")
+```
+
+---
+
+![](w4_d1-effective-dataviz_files/figure-html/unnamed-chunk-49-1.png)&lt;!-- --&gt;
+
+---
+
+## Let's do better
+
+
+```r
+ggplot(data = brexit, aes(x = opinion)) +
+  geom_bar() +
+  coord_flip() +
+  facet_grid(. ~ region) +
+  labs(
+    title = "Was Britain right/wrong to vote to leave EU?",
+    subtitle = "YouGov Survey Results, 2-3 September 2019",
+*   caption = "Source: bit.ly/2lCJZVg",
+    x = "", 
+    y = ""
+  )
+```
+
+---
+
+![](w4_d1-effective-dataviz_files/figure-html/unnamed-chunk-51-1.png)&lt;!-- --&gt;
+
+---
+
+## Fix up facet labels
+
+
+```r
+ggplot(data = brexit, aes(x = opinion)) +
+  geom_bar() +
+  coord_flip() +
+* facet_grid(. ~ region, labeller = label_wrap_gen(width = 12)) +
+  labs(
+    title = "Was Britain right/wrong to vote to leave EU?",
+    subtitle = "YouGov Survey Results, 2-3 September 2019",
+    caption = "Source: bit.ly/2lCJZVg",
+    x = "", 
+    y = ""
+  )
+```
+
+---
+
+![](w4_d1-effective-dataviz_files/figure-html/unnamed-chunk-53-1.png)&lt;!-- --&gt;
+
+---
+
+class: center, middle
+
+# Select meaningful colors
+
+---
+
+## Rainbow colors are not always the right choice
+
+
+```r
+ggplot(data = brexit, aes(x = region, fill = opinion)) +
+  geom_bar(position = "fill") +
+  coord_flip()
+```
+
+&lt;img src="w4_d1-effective-dataviz_files/figure-html/unnamed-chunk-54-1.png" width="85%" /&gt;
+
+---
+
+## Viridis scale works well with ordinal data 
+
+
+```r
+ggplot(data = brexit, aes(x = region, fill = opinion)) +
+  geom_bar(position = "fill") +
+  coord_flip() +
+  scale_fill_viridis_d()
+```
+
+&lt;img src="w4_d1-effective-dataviz_files/figure-html/unnamed-chunk-55-1.png" width="85%" /&gt;
+
+---
+
+## Clean up labels
+
+&lt;img src="w4_d1-effective-dataviz_files/figure-html/unnamed-chunk-56-1.png" width="85%" /&gt;
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightLines": true,
+"highlightStyle": "solarized-light",
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

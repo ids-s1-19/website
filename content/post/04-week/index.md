@@ -20,7 +20,7 @@ title: 'Week 4 - Diving deeper into visualization'
 
 | <div style="width:60px"></div>  | <div style="width:420px"></div> |  <div style="width:190px"></div>   |
 |---:|---|---|
-| Lec 07 | Tips for effective data visualization |
+| Lec 07 | [Tips for effective data visualization](/slides/w4_d1-effective-dataviz/w4_d1-effective-dataviz.html) |
 | Lab 04 | Ugly charts |
 | Lec 08 | Mapping |
 | HW 04  | Visualizing and wrangling spatial data |
@@ -37,6 +37,12 @@ title: 'Week 4 - Diving deeper into visualization'
 |  :fountain_pen:   | [Why do cats & dogs...?](https://whydocatsanddogs.com/) | Optional |
 |  :page_with_curl: | How do data scientists spend their time? - [https://www.forbes.com/sites/gilpress/2016/03/23/data-preparation-most-time-consuming-least-enjoyable-data-science-task-survey-says/](https://tidyr.tidyverse.org/articles/tidy-data.html) (short) | Optional |
 |  :page_with_curl: | How do data scientists spend their time? - [What Data Scientists Really Do, According to 35 Data Scientists](https://hbr.org/2018/08/what-data-scientists-really-do-according-to-35-data-scientists) (long) | Optional |
+
+### Videos
+
+| <div style="width:60px"></div>  | <div style="width:420px"></div>  |
+|----:|---|
+| :film_projector: | [Hans Rosling: 200 Years in 2 Minutes](https://www.youtube.com/embed/Z8t4k0Q8e8Y) |
 
 
 
