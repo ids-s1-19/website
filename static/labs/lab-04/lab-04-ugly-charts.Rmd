@@ -59,6 +59,7 @@ Before we can get started we need to take care of some required housekeeping. Sp
 Run the following (but update it for your name and email!) in the Console to configure git:
 
 ```{r git-config, eval=FALSE}
+library(usethis)
 use_git_config(user.name = "Your Name", 
                user.email = "your.email@address.com")
 ``` 

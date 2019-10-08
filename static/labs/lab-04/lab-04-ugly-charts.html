@@ -503,8 +503,9 @@ width: 100%;
 <p><label for="tufte-mn-1" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-1" class="margin-toggle"><span class="marginnote"><span style="display: block;">Your email address is the address tied to your GitHub account and your name should be first and last name.</span></span></p>
 <p>Before we can get started we need to take care of some required housekeeping. Specifically, we need to do some configuration so that RStudio can communicate with GitHub. This requires two pieces of information: your email address and your name.</p>
 <p>Run the following (but update it for your name and email!) in the Console to configure git:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">use_git_config</span>(<span class="dt">user.name =</span> <span class="st">&quot;Your Name&quot;</span>, </a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">               <span class="dt">user.email =</span> <span class="st">&quot;your.email@address.com&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(usethis)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">use_git_config</span>(<span class="dt">user.name =</span> <span class="st">&quot;Your Name&quot;</span>, </a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">               <span class="dt">user.email =</span> <span class="st">&quot;your.email@address.com&quot;</span>)</a></code></pre></div>
 </div>
 <div id="workflow" class="section level1">
 <h1>Workflow</h1>
