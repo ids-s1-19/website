@@ -113,7 +113,7 @@ knitr::include_graphics("img/staff-employment.png")
 
 Let's start by loadong the data used to create this plot.
 
-```{r load-data, message=FALSE, eval=TRUE}
+```{r load-data-staff, message=FALSE, eval=TRUE}
 staff <- read_csv("data/instructional-staff.csv")
 ```
 
@@ -215,6 +215,10 @@ knitr::include_graphics("img/fisheries.png")
 3. Can you help them make improve it? First, brainstorm how you would improve 
 it. Then create the improved visualization and write up the changes/decisions 
 you made as bullet points.
+
+```{r load-data-fisheries, eval=FALSE}
+fisheries <- read_csv("data/fisheries.csv")
+```
 
 `r emo::ji("white_check_mark")` `r emo::ji("arrow_up")` *Commit and push your changes to GitHub with an appropriate commit message again. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
 
