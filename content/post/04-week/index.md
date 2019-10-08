@@ -21,7 +21,7 @@ title: 'Week 4 - Diving deeper into visualization'
 | <div style="width:60px"></div>  | <div style="width:420px"></div> |  <div style="width:190px"></div>   |
 |---:|---|---|
 | Lec 07 | [Tips for effective data visualization](/slides/w4_d1-effective-dataviz/w4_d1-effective-dataviz.html) |
-| Lab 04 | Ugly charts |
+| Lab 04 | [Ugly charts](/labs/lab-03/lab-04-ugly-charts.html) | **Due:** Fri, 11 Oct, 17:00 |
 | Lec 08 | Mapping |
 | HW 04  | Visualizing and wrangling spatial data |
 | RT 04  | Interactive tutorial covering week’s material |
