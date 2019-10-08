@@ -40,9 +40,9 @@ If there are any issues with the team roster, please let one of the tutors or th
 
 # Getting started
 
-Go to the course [GitHub organization](https://github.com/ids-s1-19) and locate your Lab 04 repo, which should be named `lab-03-ugly-charts-YOUR_TEAMNAME`. Grab the URL of the repo, and clone it in RStudio. Refer to [Lab 01](/labs/lab-01/lab-01-hello-r) if you would like to see step-by-step instructions for cloning a repo into an RStudio project.
+Go to the course [GitHub organization](https://github.com/ids-s1-19) and locate your Lab 04 repo, which should be named `lab-04-ugly-charts-YOUR_TEAMNAME`. Grab the URL of the repo, and clone it in RStudio. Refer to [Lab 01](/labs/lab-01/lab-01-hello-r) if you would like to see step-by-step instructions for cloning a repo into an RStudio project.
 
-First, open the R Markdown document `lab-03-ugly-charts.Rmd` and Knit it. Make sure it compiles without errors. The output will be in the file markdown `.md` file with the same name.
+First, open the R Markdown document `lab-04-ugly-charts.Rmd` and Knit it. Make sure it compiles without errors. The output will be in the file markdown `.md` file with the same name.
 
 # Workflow
 
