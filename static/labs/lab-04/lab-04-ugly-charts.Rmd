@@ -214,7 +214,10 @@ knitr::include_graphics("img/fisheries.png")
 
 3. Can you help them make improve it? First, brainstorm how you would improve 
 it. Then create the improved visualization and write up the changes/decisions 
-you made as bullet points.
+you made as bullet points. It's ok if some of your improvements are aspirational, 
+i.e. you don't know how to implement it, but you think it's a good idea. Ask a 
+tutor for help, but also keep an eye on the time. Implement what you can and 
+leave note identfying the aspirational improvements.
 
 ```{r load-data-fisheries, eval=FALSE}
 fisheries <- read_csv("data/fisheries.csv")
