@@ -457,6 +457,7 @@ width: 100%;
 <li><a href="#learning-goals">Learning goals</a></li>
 <li><a href="#hello-again-teams">Hello (again) teams!</a></li>
 <li><a href="#getting-started">Getting started</a></li>
+<li><a href="#hello-git">Hello Git!</a></li>
 <li><a href="#workflow">Workflow</a><ul>
 <li><a href="#merge-conflicts">Merge conflicts</a></li>
 <li><a href="#set-up">Set up</a></li>
@@ -474,6 +475,8 @@ width: 100%;
 </ul>
 </div>
 
+<p><strong>NEW:</strong> Join RStudio Cloud here: <a href="https://rstudio.cloud/spaces/34062/join?access_code=%2FoMkTUWkzo8%2B7q86yRe0FlKhrcpmgwsk7sCNnNNH" class="uri">https://rstudio.cloud/spaces/34062/join?access_code=%2FoMkTUWkzo8%2B7q86yRe0FlKhrcpmgwsk7sCNnNNH</a></p>
+<p>And then click on new project from Git.</p>
 <p>Given below are three data visualizations that violate many data visualization best practices. Improve these visualizations using R and the tips for effective visualizations that we introduced in class. You should produce one visualization per dataset. Your visualizaiton should be accompanies by a brief paragraph describing the choices you made in your improvement, specifically discussing what you didn’t like in the original plots and why, and how you addressed them in the visualization you created.</p>
 <p>On the due date you will give a brief presentation describing one of your improved visualizations and the reasoning for the choices you made.</p>
 <div id="learning-goals" class="section level1">
@@ -494,6 +497,14 @@ width: 100%;
 <h1>Getting started</h1>
 <p>Go to the course <a href="https://github.com/ids-s1-19">GitHub organization</a> and locate your Lab 04 repo, which should be named <code>lab-04-ugly-charts-YOUR_TEAMNAME</code>. Grab the URL of the repo, and clone it in RStudio. Refer to <a href="/labs/lab-01/lab-01-hello-r">Lab 01</a> if you would like to see step-by-step instructions for cloning a repo into an RStudio project.</p>
 <p>First, open the R Markdown document <code>lab-04-ugly-charts.Rmd</code> and Knit it. Make sure it compiles without errors. The output will be in the file markdown <code>.md</code> file with the same name.</p>
+</div>
+<div id="hello-git" class="section level1">
+<h1>Hello Git!</h1>
+<p><label for="tufte-mn-1" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-1" class="margin-toggle"><span class="marginnote"><span style="display: block;">Your email address is the address tied to your GitHub account and your name should be first and last name.</span></span></p>
+<p>Before we can get started we need to take care of some required housekeeping. Specifically, we need to do some configuration so that RStudio can communicate with GitHub. This requires two pieces of information: your email address and your name.</p>
+<p>Run the following (but update it for your name and email!) in the Console to configure git:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">use_git_config</span>(<span class="dt">user.name =</span> <span class="st">&quot;Your Name&quot;</span>, </a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">               <span class="dt">user.email =</span> <span class="st">&quot;your.email@address.com&quot;</span>)</a></code></pre></div>
 </div>
 <div id="workflow" class="section level1">
 <h1>Workflow</h1>
@@ -539,11 +550,7 @@ width: 100%;
 </div>
 <div id="packages" class="section level1">
 <h1>Packages</h1>
-<p>The current version of a tidyverse package we will use today, <strong>tidyr</strong>, installed in Noteable is slightly out of date (v0.8.3 vs v1.0.0). To fix this run the following in the Console,</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">lib &lt;-<span class="st"> </span><span class="kw">Sys.getenv</span>(<span class="st">&quot;R_LIBS_USER&quot;</span>)</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">dir.create</span>(lib, <span class="dt">recursive =</span> <span class="ot">TRUE</span>, <span class="dt">showWarnings =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw">install.packages</span>(<span class="st">&quot;tidyr&quot;</span>, <span class="dt">lib =</span> lib)</a></code></pre></div>
-<p>Then, run the following code in the Console to load this package.</p>
+<p>Run the following code in the Console to load this package.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">library</span>(tidyverse)</a></code></pre></div>
 </div>
 <div id="take-a-sad-plot-and-make-it-better" class="section level1">

@@ -13,6 +13,10 @@ link-citations: yes
 knitr::opts_chunk$set(eval = TRUE)
 ```
 
+**NEW:** Join RStudio Cloud here: https://rstudio.cloud/spaces/34062/join?access_code=%2FoMkTUWkzo8%2B7q86yRe0FlKhrcpmgwsk7sCNnNNH
+
+And then click on new project from Git.
+
 Given below are three data visualizations that violate many data visualization 
 best practices. Improve these visualizations using R and the tips for effective 
 visualizations that we introduced in class. You should produce one visualization 
@@ -43,6 +47,21 @@ If there are any issues with the team roster, please let one of the tutors or th
 Go to the course [GitHub organization](https://github.com/ids-s1-19) and locate your Lab 04 repo, which should be named `lab-04-ugly-charts-YOUR_TEAMNAME`. Grab the URL of the repo, and clone it in RStudio. Refer to [Lab 01](/labs/lab-01/lab-01-hello-r) if you would like to see step-by-step instructions for cloning a repo into an RStudio project.
 
 First, open the R Markdown document `lab-04-ugly-charts.Rmd` and Knit it. Make sure it compiles without errors. The output will be in the file markdown `.md` file with the same name.
+
+# Hello Git!
+
+```{marginfigure}
+Your email address is the address tied to your GitHub account and your name should be first and last name.
+```
+
+Before we can get started we need to take care of some required housekeeping. Specifically,  we need to do some configuration so that RStudio can communicate with GitHub. This requires two pieces of information: your email address and your name.
+
+Run the following (but update it for your name and email!) in the Console to configure git:
+
+```{r git-config, eval=FALSE}
+use_git_config(user.name = "Your Name", 
+               user.email = "your.email@address.com")
+``` 
 
 # Workflow
 
@@ -80,17 +99,7 @@ Take turns in completing the exercise, only one member at a time.
 
 # Packages
 
-The current version of a tidyverse package we will use today, **tidyr**, installed 
-in Noteable is slightly out of date (v0.8.3 vs v1.0.0). To fix this run the following
-in the Console,
-
-```{r eval=FALSE}
-lib <- Sys.getenv("R_LIBS_USER")
-dir.create(lib, recursive = TRUE, showWarnings = FALSE)
-install.packages("tidyr", lib = lib)
-```
-
-Then, run the following code in the Console to load this package.
+Run the following code in the Console to load this package.
 
 ```{r load-packages, message=FALSE, eval=TRUE}
 library(tidyverse)
