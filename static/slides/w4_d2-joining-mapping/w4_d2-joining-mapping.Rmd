@@ -1,0 +1,655 @@
+---
+title: "Joining and mapping <br> `r emo::ji('world_map')`"
+author: "Dr. Çetinkaya-Rundel"
+output:
+  xaringan::moon_reader:
+    css: "../slides.css"
+    lib_dir: libs
+    nature:
+      ratio: "16:9"
+      highlightLines: true
+      highlightStyle: solarized-light
+      countIncrementalSlides: false
+---
+
+```{r child = "../setup.Rmd"}
+```
+
+```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(scales)
+library(here)
+```
+
+## So far this week...
+
+- Data tidying and reshaping
+- Improved data visualizations
+- ~~Merge conflicts~~
+- HW 03 due today at 17:00
+- OQ 03 due Friday at 17:00
+
+.question[
+.large[
+Any questions?
+]
+]
+
+---
+
+class: center, middle
+
+# Fisheries
+
+---
+
+Fisheries and Aquaculture Department of the Food and Agriculture Organization of 
+the United Nations collects data on fisheries production of countries. The (not-so-great) visualization belows shows the distribution of fishery harvest 
+of countries for 2016, by capture and aquaculture.
+
+```{r echo=FALSE, out.width="70%", fig.align="center"}
+knitr::include_graphics("img/fisheries.png")
+```
+
+.footnote[
+- Countries whose total harvest was less than 100,000 tons are not 
+included in the visualization.
+- Source: https://en.wikipedia.org/wiki/Fishing_industry_by_country
+]
+
+---
+
+.question[
+What are some ways your teams discussed/implemented for improving this visualization?
+]
+
+--
+
+- Calculate summary statistics at the continent level and visualize them.
+- Map the data.
+
+---
+
+## Data prep
+
+```{r include=FALSE}
+fisheries <- read_csv(here::here("csv/fisheries.csv"))
+continents <- read_csv(here::here("csv/continents.csv"))
+```
+
+Filter out countries whose total harvest was less than 100,000 tons since they 
+are not included in the visualization:
+
+```{r}
+fisheries <- fisheries %>%
+  filter(total > 100000)
+
+fisheries
+```
+
+---
+
+class: center, middle
+
+# Data joins
+
+---
+
+.pull-left[
+```{r}
+fisheries %>% select(country)
+```
+]
+.pull-right[
+```{r}
+continents
+```
+]
+
+---
+
+## Joining data frames
+
+```{r eval=FALSE}
+*_join(x, y)
+```
+
+- `inner_join()`: all rows from x where there are matching values in y, return 
+all combination of multiple matches in the case of multiple matches
+- `left_join()`: all rows from x
+- `right_join()`: all rows from y
+- `full_join()`: all rows from both x and y
+- `semi_join()`: all rows from x where there are matching values in y, keeping just columns from x.
+- `anti_join()`: return all rows from x where there are not matching values in y, , never duplicate rows of x
+- ...
+ 
+---
+
+## `inner_join()`
+
+.pull-left[
+.pull-left[
+```{r echo=FALSE}
+x <- data.frame(value = c(1, 2, 3))
+```
+```{r}
+x
+```
+
+]
+.pull-right[
+```{r echo=FALSE}
+y <- data.frame(value = c(1, 2, 4))
+```
+```{r}
+y
+```
+]
+```{r}
+inner_join(x, y)
+```
+]
+.pull-right[
+```{r echo=FALSE}
+knitr::include_graphics("img/inner-join.gif")
+```
+]
+
+---
+
+## `left_join()`
+
+.pull-left[
+.pull-left[
+```{r echo=FALSE}
+x <- data.frame(value = c(1, 2, 3))
+```
+```{r}
+x
+```
+
+]
+.pull-right[
+```{r echo=FALSE}
+y <- data.frame(value = c(1, 2, 4))
+```
+```{r}
+y
+```
+]
+```{r}
+left_join(x, y)
+```
+]
+.pull-right[
+```{r echo=FALSE}
+knitr::include_graphics("img/left-join.gif")
+```
+]
+
+---
+
+## `right_join()`
+
+.pull-left[
+.pull-left[
+```{r echo=FALSE}
+x <- data.frame(value = c(1, 2, 3))
+```
+```{r}
+x
+```
+
+]
+.pull-right[
+```{r echo=FALSE}
+y <- data.frame(value = c(1, 2, 4))
+```
+```{r}
+y
+```
+]
+```{r}
+right_join(x, y)
+```
+]
+.pull-right[
+```{r echo=FALSE}
+knitr::include_graphics("img/right-join.gif")
+```
+]
+
+---
+
+## `full_join()`
+
+.pull-left[
+.pull-left[
+```{r echo=FALSE}
+x <- data.frame(value = c(1, 2, 3))
+```
+```{r}
+x
+```
+
+]
+.pull-right[
+```{r echo=FALSE}
+y <- data.frame(value = c(1, 2, 4))
+```
+```{r}
+y
+```
+]
+```{r}
+full_join(x, y)
+```
+]
+.pull-right[
+```{r echo=FALSE}
+knitr::include_graphics("img/full-join.gif")
+```
+]
+
+---
+
+## `semi_join()`
+
+.pull-left[
+.pull-left[
+```{r echo=FALSE}
+x <- data.frame(value = c(1, 2, 3))
+```
+```{r}
+x
+```
+
+]
+.pull-right[
+```{r echo=FALSE}
+y <- data.frame(value = c(1, 2, 4))
+```
+```{r}
+y
+```
+]
+```{r}
+semi_join(x, y)
+```
+]
+.pull-right[
+```{r echo=FALSE}
+knitr::include_graphics("img/semi-join.gif")
+```
+]
+
+---
+
+## `anti_join()`
+
+.pull-left[
+.pull-left[
+```{r echo=FALSE}
+x <- data.frame(value = c(1, 2, 3))
+```
+```{r}
+x
+```
+
+]
+.pull-right[
+```{r echo=FALSE}
+y <- data.frame(value = c(1, 2, 4))
+```
+```{r}
+y
+```
+]
+```{r}
+anti_join(x, y)
+```
+]
+.pull-right[
+```{r echo=FALSE}
+knitr::include_graphics("img/anti-join.gif")
+```
+]
+
+---
+
+.question[
+We want to keep all rows and columns from `fisheries` and add a column for 
+corresponding continents. Which join function should we use?
+]
+
+.pull-left[
+```{r}
+fisheries %>% select(country)
+```
+]
+.pull-right[
+```{r}
+continents
+```
+]
+
+---
+
+## Join fisheries and continents 
+
+```{r}
+fisheries <- left_join(fisheries, continents) 
+```
+
+---
+
+## Check the data
+
+```{r}
+fisheries %>%
+  filter(is.na(continent))
+```
+
+---
+
+## Implement fixes
+
+```{r}
+fisheries <- fisheries %>%
+  mutate(continent = case_when(
+    country == "Democratic Republic of the Congo" ~ "Asia",
+    country == "Hong Kong"                        ~ "Asia",
+    country == "Myanmar"                          ~ "Asia",
+    TRUE                                          ~ continent
+    )
+  )
+```
+
+...and check again
+
+```{r}
+fisheries %>%
+  filter(is.na(continent))
+```
+
+---
+
+.question[
+What does the following code do?
+]
+
+```{r results=FALSE}
+fisheries_summary <- fisheries %>%
+  mutate(aquaculture_perc = aquaculture / total) %>%
+  group_by(continent) %>%
+  summarise(
+    min_ap  = min(aquaculture_perc),
+    mean_ap = mean(aquaculture_perc),
+    max_ap  = max(aquaculture_perc)
+  )
+```
+
+---
+
+## Summarise by continent
+
+```{r}
+fisheries_summary %>%
+  arrange(desc(mean_ap))
+```
+
+---
+
+## Visualize continent summary stats
+
+```{r fig.height=3}
+ggplot(fisheries_summary, aes(x = continent, y = mean_ap)) +
+  geom_col()
+```
+
+---
+
+## Improve visualization
+
+```{r eval=FALSE}
+ggplot(fisheries_summary, 
+       aes(x = reorder(continent, mean_ap), y = mean_ap)) +
+  geom_col() +
+  coord_flip() +
+  scale_y_continuous(labels = percent) + #<<
+  labs(
+    x = "", y = "",
+    title = "Average share of aquaculture by continent",
+    subtitle = "out of total fisheries harvest, 2016",
+    caption = "Source: bit.ly/2VrawTt"
+  ) +
+  theme_minimal()
+```
+
+---
+
+```{r echo=FALSE}
+ggplot(fisheries_summary, 
+       aes(x = reorder(continent, mean_ap), y = mean_ap)) +
+  geom_col() +
+  coord_flip() +
+  scale_y_continuous(labels = percent) + #<<
+  labs(
+    x = "", y = "",
+    title = "Average share of aquaculture by continent",
+    subtitle = "out of total fisheries harvest, 2016",
+    caption = "Source: bit.ly/2VrawTt"
+  ) +
+  theme_minimal()
+```
+
+---
+
+class: center, middle
+
+# Mapping
+
+---
+
+## Mapping the fisheries data
+
+- Obtain country boundaries and store as a data frame
+- Join the fisheries and country boundaries data frames
+- Plot the country boundaries, and fill by fisheries harvest data
+
+---
+
+## `map_data()`
+
+The `map_data()` function easily turns data from the maps package in to a data frame suitable for plotting with ggplot2:
+
+```{r}
+map_data("world")
+```
+
+---
+
+# A few fixes for better matching
+
+.question[
+What does the following code do?
+]
+
+```{r}
+world_map <- map_data("world") %>%
+  mutate(region = case_when(
+    region == "UK"           ~ "United Kingdom",
+    region == "USA"          ~ "United States",
+    subregion == "Hong Kong" ~ "Hong Kong",
+    TRUE                     ~ region
+    )
+  )
+```
+
+---
+
+## Map the world
+
+```{r}
+ggplot(world_map, aes(x = long, y = lat, group = group)) +
+  geom_polygon(fill = "gray") +
+  theme_minimal()
+```
+
+---
+
+## Join fisheries and world map
+
+.pull-left[
+```{r}
+fisheries %>% select(country)
+```
+]
+.pull-right[
+```{r}
+world_map %>% select(region)
+```
+]
+
+---
+
+## Join fisheries and world map
+
+```{r}
+fisheries_map <- left_join(fisheries, world_map, 
+                           by = c("country" = "region"))
+```
+
+```{r}
+glimpse(fisheries_map)
+```
+
+---
+
+## Mapping fisheries
+
+```{r}
+ggplot(fisheries_map, mapping = aes(x = long, y = lat, group = group)) +
+  geom_polygon(aes(fill = capture)) +
+  scale_fill_viridis_c() +
+  theme_minimal()
+```
+
+---
+
+.question[
+What is misleading about the following map?
+]
+
+```{r echo=FALSE}
+ggplot(fisheries_map, mapping = aes(x = long, y = lat, group = group)) +
+  geom_polygon(aes(fill = capture)) +
+  scale_fill_viridis_c() +
+  theme_minimal()
+```
+
+---
+
+## Putting it altogether
+
+```{r eval=FALSE}
+ggplot() +
+  geom_polygon(world_map, 
+               mapping = aes(x = long, y = lat, group = group), 
+               fill = "lightgray") + #<<
+  geom_polygon(fisheries_map, 
+               mapping = aes(x = long, y = lat, group = group, 
+                             fill = log(capture))) + #<<
+  scale_fill_viridis_c() +
+  theme_minimal() +
+  theme(legend.position = "bottom") +
+  labs(
+    x = "", y = "",
+    title = "Fisheries harvest 2016",
+    subtitle = "Capture, in logged tonnes",
+    caption = "Source: bit.ly/2VrawTt"
+  )
+```
+
+---
+
+```{r echo=FALSE}
+ggplot() +
+  geom_polygon(world_map, mapping = aes(x = long, y = lat, group = group), fill = "lightgray") +
+  geom_polygon(fisheries_map, mapping = aes(x = long, y = lat, group = group, fill = log(capture))) +
+  scale_fill_viridis_c() +
+  theme_minimal() +
+  theme(legend.position = "bottom") +
+  labs(
+    x = "", y = "",
+    title = "Fisheries harvest 2016",
+    subtitle = "Capture, in logged tonnes",
+    caption = "Source: bit.ly/2VrawTt"
+  )
+```
+
+---
+
+## Aquaculture
+
+```{r eval=FALSE}
+ggplot() +
+  geom_polygon(world_map, 
+               mapping = aes(x = long, y = lat, group = group), 
+               fill = "lightgray") +
+  geom_polygon(fisheries_map, 
+               mapping = aes(x = long, y = lat, group = group, 
+                             fill = log(aquaculture+1))) +
+  scale_fill_viridis_c() +
+  theme_minimal() +
+  theme(legend.position = "bottom") +
+  labs(
+    x = "", y = "",
+    title = "Fisheries harvest 2016",
+    subtitle = "Aquaculture, in logged tonnes",
+    fill = "log(aquaculture)",
+    caption = "Source: bit.ly/2VrawTt"
+  )
+```
+
+---
+
+## Aquaculture
+
+```{r echo=FALSE}
+ggplot() +
+  geom_polygon(world_map, mapping = aes(x = long, y = lat, group = group), fill = "lightgray") +
+  geom_polygon(fisheries_map, mapping = aes(x = long, y = lat, group = group, fill = log(aquaculture+1))) +
+  scale_fill_viridis_c() +
+  theme_minimal() +
+  theme(legend.position = "bottom") +
+  labs(
+    x = "", y = "",
+    title = "Fisheries harvest 2016",
+    subtitle = "Aquaculture, in logged tonnes",
+    fill = "log(aquaculture)",
+    caption = "Source: bit.ly/2VrawTt"
+  )
+```
+
+---
+
+```{r echo=FALSE}
+fisheries_map <- fisheries_map %>%
+  mutate(
+    aquaculture_perc = aquaculture / total
+  )
+
+ggplot() +
+  geom_polygon(world_map, mapping = aes(x = long, y = lat, group = group), fill = "lightgray") +
+  geom_polygon(fisheries_map, mapping = aes(x = long, y = lat, group = group, fill = aquaculture_perc)) +
+  scale_fill_viridis_c(labels = percent) +
+  theme_minimal() +
+  theme(legend.position = "bottom") +
+  labs(
+    x = "", y = "",
+    title = "Average share of aquaculture by continent",
+    subtitle = "out of total fisheries harvest, 2016",
+    caption = "Source: bit.ly/2VrawTt"
+  )
+```

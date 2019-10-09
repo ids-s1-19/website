@@ -1,0 +1,2178 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <title>Joining and mapping   🗺</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Dr. Çetinkaya-Rundel" />
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Joining and mapping <br> 🗺
+### Dr. Çetinkaya-Rundel
+
+---
+
+
+
+
+
+layout: true
+  
+&lt;div class="my-footer"&gt;
+&lt;span&gt;
+Dr. Mine Çetinkaya-Rundel -
+&lt;a href="https://introds.org" target="_blank"&gt;introds.org
+&lt;/a&gt;
+&lt;/span&gt;
+&lt;/div&gt; 
+
+---
+
+
+
+## So far this week...
+
+- Data tidying and reshaping
+- Improved data visualizations
+- ~~Merge conflicts~~
+- HW 03 due today at 17:00
+- OQ 03 due Friday at 17:00
+
+.question[
+.large[
+Any questions?
+]
+]
+
+---
+
+class: center, middle
+
+# Fisheries
+
+---
+
+Fisheries and Aquaculture Department of the Food and Agriculture Organization of 
+the United Nations collects data on fisheries production of countries. The (not-so-great) visualization belows shows the distribution of fishery harvest 
+of countries for 2016, by capture and aquaculture.
+
+&lt;img src="img/fisheries.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+.footnote[
+- Countries whose total harvest was less than 100,000 tons are not 
+included in the visualization.
+- Source: https://en.wikipedia.org/wiki/Fishing_industry_by_country
+]
+
+---
+
+.question[
+What are some ways your teams discussed/implemented for improving this visualization?
+]
+
+--
+
+- Calculate summary statistics at the continent level and visualize them.
+- Map the data.
+
+---
+
+## Data prep
+
+
+
+Filter out countries whose total harvest was less than 100,000 tons since they 
+are not included in the visualization:
+
+
+```r
+fisheries &lt;- fisheries %&gt;%
+  filter(total &gt; 100000)
+
+fisheries
+```
+
+```
+## # A tibble: 82 x 4
+##    country    capture aquaculture   total
+##    &lt;chr&gt;        &lt;dbl&gt;       &lt;dbl&gt;   &lt;dbl&gt;
+##  1 Angola      486490         655  487145
+##  2 Argentina   755226        3673  758899
+##  3 Australia   174629       96847  271476
+##  4 Bangladesh 1674770     2203554 3878324
+##  5 Brazil      705000      581230 1286230
+##  6 Cambodia    629950      172500  802450
+##  7 Cameroon    233190        2315  235505
+##  8 Canada      874727      200765 1075492
+##  9 Chad        110000          94  110094
+## 10 Chile      1829238     1050117 2879355
+## # … with 72 more rows
+```
+
+---
+
+class: center, middle
+
+# Data joins
+
+---
+
+.pull-left[
+
+```r
+fisheries %&gt;% select(country)
+```
+
+```
+## # A tibble: 82 x 1
+##    country   
+##    &lt;chr&gt;     
+##  1 Angola    
+##  2 Argentina 
+##  3 Australia 
+##  4 Bangladesh
+##  5 Brazil    
+##  6 Cambodia  
+##  7 Cameroon  
+##  8 Canada    
+##  9 Chad      
+## 10 Chile     
+## # … with 72 more rows
+```
+]
+.pull-right[
+
+```r
+continents
+```
+
+```
+## # A tibble: 245 x 2
+##    country           continent
+##    &lt;chr&gt;             &lt;chr&gt;    
+##  1 Afghanistan       Asia     
+##  2 Åland Islands     Europe   
+##  3 Albania           Europe   
+##  4 Algeria           Africa   
+##  5 American Samoa    Oceania  
+##  6 Andorra           Europe   
+##  7 Angola            Africa   
+##  8 Anguilla          Americas 
+##  9 Antigua &amp; Barbuda Americas 
+## 10 Argentina         Americas 
+## # … with 235 more rows
+```
+]
+
+---
+
+## Joining data frames
+
+
+```r
+*_join(x, y)
+```
+
+- `inner_join()`: all rows from x where there are matching values in y, return 
+all combination of multiple matches in the case of multiple matches
+- `left_join()`: all rows from x
+- `right_join()`: all rows from y
+- `full_join()`: all rows from both x and y
+- `semi_join()`: all rows from x where there are matching values in y, keeping just columns from x.
+- `anti_join()`: return all rows from x where there are not matching values in y, , never duplicate rows of x
+- ...
+ 
+---
+
+## `inner_join()`
+
+.pull-left[
+.pull-left[
+
+
+```r
+x
+```
+
+```
+##   value
+## 1     1
+## 2     2
+## 3     3
+```
+
+]
+.pull-right[
+
+
+```r
+y
+```
+
+```
+##   value
+## 1     1
+## 2     2
+## 3     4
+```
+]
+
+```r
+inner_join(x, y)
+```
+
+```
+## Joining, by = "value"
+```
+
+```
+##   value
+## 1     1
+## 2     2
+```
+]
+.pull-right[
+![](img/inner-join.gif)&lt;!-- --&gt;
+]
+
+---
+
+## `left_join()`
+
+.pull-left[
+.pull-left[
+
+
+```r
+x
+```
+
+```
+##   value
+## 1     1
+## 2     2
+## 3     3
+```
+
+]
+.pull-right[
+
+
+```r
+y
+```
+
+```
+##   value
+## 1     1
+## 2     2
+## 3     4
+```
+]
+
+```r
+left_join(x, y)
+```
+
+```
+## Joining, by = "value"
+```
+
+```
+##   value
+## 1     1
+## 2     2
+## 3     3
+```
+]
+.pull-right[
+![](img/left-join.gif)&lt;!-- --&gt;
+]
+
+---
+
+## `right_join()`
+
+.pull-left[
+.pull-left[
+
+
+```r
+x
+```
+
+```
+##   value
+## 1     1
+## 2     2
+## 3     3
+```
+
+]
+.pull-right[
+
+
+```r
+y
+```
+
+```
+##   value
+## 1     1
+## 2     2
+## 3     4
+```
+]
+
+```r
+right_join(x, y)
+```
+
+```
+## Joining, by = "value"
+```
+
+```
+##   value
+## 1     1
+## 2     2
+## 3     4
+```
+]
+.pull-right[
+![](img/right-join.gif)&lt;!-- --&gt;
+]
+
+---
+
+## `full_join()`
+
+.pull-left[
+.pull-left[
+
+
+```r
+x
+```
+
+```
+##   value
+## 1     1
+## 2     2
+## 3     3
+```
+
+]
+.pull-right[
+
+
+```r
+y
+```
+
+```
+##   value
+## 1     1
+## 2     2
+## 3     4
+```
+]
+
+```r
+full_join(x, y)
+```
+
+```
+## Joining, by = "value"
+```
+
+```
+##   value
+## 1     1
+## 2     2
+## 3     3
+## 4     4
+```
+]
+.pull-right[
+![](img/full-join.gif)&lt;!-- --&gt;
+]
+
+---
+
+## `semi_join()`
+
+.pull-left[
+.pull-left[
+
+
+```r
+x
+```
+
+```
+##   value
+## 1     1
+## 2     2
+## 3     3
+```
+
+]
+.pull-right[
+
+
+```r
+y
+```
+
+```
+##   value
+## 1     1
+## 2     2
+## 3     4
+```
+]
+
+```r
+semi_join(x, y)
+```
+
+```
+## Joining, by = "value"
+```
+
+```
+##   value
+## 1     1
+## 2     2
+```
+]
+.pull-right[
+![](img/semi-join.gif)&lt;!-- --&gt;
+]
+
+---
+
+## `anti_join()`
+
+.pull-left[
+.pull-left[
+
+
+```r
+x
+```
+
+```
+##   value
+## 1     1
+## 2     2
+## 3     3
+```
+
+]
+.pull-right[
+
+
+```r
+y
+```
+
+```
+##   value
+## 1     1
+## 2     2
+## 3     4
+```
+]
+
+```r
+anti_join(x, y)
+```
+
+```
+## Joining, by = "value"
+```
+
+```
+##   value
+## 1     3
+```
+]
+.pull-right[
+![](img/anti-join.gif)&lt;!-- --&gt;
+]
+
+---
+
+.question[
+We want to keep all rows and columns from `fisheries` and add a column for 
+corresponding continents. Which join function should we use?
+]
+
+.pull-left[
+
+```r
+fisheries %&gt;% select(country)
+```
+
+```
+## # A tibble: 82 x 1
+##    country   
+##    &lt;chr&gt;     
+##  1 Angola    
+##  2 Argentina 
+##  3 Australia 
+##  4 Bangladesh
+##  5 Brazil    
+##  6 Cambodia  
+##  7 Cameroon  
+##  8 Canada    
+##  9 Chad      
+## 10 Chile     
+## # … with 72 more rows
+```
+]
+.pull-right[
+
+```r
+continents
+```
+
+```
+## # A tibble: 245 x 2
+##    country           continent
+##    &lt;chr&gt;             &lt;chr&gt;    
+##  1 Afghanistan       Asia     
+##  2 Åland Islands     Europe   
+##  3 Albania           Europe   
+##  4 Algeria           Africa   
+##  5 American Samoa    Oceania  
+##  6 Andorra           Europe   
+##  7 Angola            Africa   
+##  8 Anguilla          Americas 
+##  9 Antigua &amp; Barbuda Americas 
+## 10 Argentina         Americas 
+## # … with 235 more rows
+```
+]
+
+---
+
+## Join fisheries and continents 
+
+
+```r
+fisheries &lt;- left_join(fisheries, continents) 
+```
+
+```
+## Joining, by = "country"
+```
+
+---
+
+## Check the data
+
+
+```r
+fisheries %&gt;%
+  filter(is.na(continent))
+```
+
+```
+## # A tibble: 3 x 5
+##   country                          capture aquaculture   total continent
+##   &lt;chr&gt;                              &lt;dbl&gt;       &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;    
+## 1 Democratic Republic of the Congo  237372        3161  240533 &lt;NA&gt;     
+## 2 Hong Kong                         142775        4258  147033 &lt;NA&gt;     
+## 3 Myanmar                          2072390     1017644 3090034 &lt;NA&gt;
+```
+
+---
+
+## Implement fixes
+
+
+```r
+fisheries &lt;- fisheries %&gt;%
+  mutate(continent = case_when(
+    country == "Democratic Republic of the Congo" ~ "Asia",
+    country == "Hong Kong"                        ~ "Asia",
+    country == "Myanmar"                          ~ "Asia",
+    TRUE                                          ~ continent
+    )
+  )
+```
+
+...and check again
+
+
+```r
+fisheries %&gt;%
+  filter(is.na(continent))
+```
+
+```
+## # A tibble: 0 x 5
+## # … with 5 variables: country &lt;chr&gt;, capture &lt;dbl&gt;, aquaculture &lt;dbl&gt;,
+## #   total &lt;dbl&gt;, continent &lt;chr&gt;
+```
+
+---
+
+.question[
+What does the following code do?
+]
+
+
+```r
+fisheries_summary &lt;- fisheries %&gt;%
+  mutate(aquaculture_perc = aquaculture / total) %&gt;%
+  group_by(continent) %&gt;%
+  summarise(
+    min_ap  = min(aquaculture_perc),
+    mean_ap = mean(aquaculture_perc),
+    max_ap  = max(aquaculture_perc)
+  )
+```
+
+---
+
+## Summarise by continent
+
+
+```r
+fisheries_summary %&gt;%
+  arrange(desc(mean_ap))
+```
+
+```
+## # A tibble: 5 x 4
+##   continent  min_ap mean_ap max_ap
+##   &lt;chr&gt;       &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;
+## 1 Asia      0        0.353   0.782
+## 2 Americas  0        0.192   0.529
+## 3 Europe    0.00682  0.165   0.618
+## 4 Oceania   0.0197   0.150   0.357
+## 5 Africa    0        0.0979  0.803
+```
+
+---
+
+## Visualize continent summary stats
+
+
+```r
+ggplot(fisheries_summary, aes(x = continent, y = mean_ap)) +
+  geom_col()
+```
+
+![](w4_d2-joining-mapping_files/figure-html/unnamed-chunk-52-1.png)&lt;!-- --&gt;
+
+---
+
+## Improve visualization
+
+
+```r
+ggplot(fisheries_summary, 
+       aes(x = reorder(continent, mean_ap), y = mean_ap)) +
+  geom_col() +
+  coord_flip() +
+* scale_y_continuous(labels = percent) +
+  labs(
+    x = "", y = "",
+    title = "Average share of aquaculture by continent",
+    subtitle = "out of total fisheries harvest, 2016",
+    caption = "Source: bit.ly/2VrawTt"
+  ) +
+  theme_minimal()
+```
+
+---
+
+![](w4_d2-joining-mapping_files/figure-html/unnamed-chunk-54-1.png)&lt;!-- --&gt;
+
+---
+
+class: center, middle
+
+# Mapping
+
+---
+
+## Mapping the fisheries data
+
+- Obtain country boundaries and store as a data frame
+- Join the fisheries and country boundaries data frames
+- Plot the country boundaries, and fill by fisheries harvest data
+
+---
+
+## `map_data()`
+
+The `map_data()` function easily turns data from the maps package in to a data frame suitable for plotting with ggplot2:
+
+
+```r
+map_data("world")
+```
+
+```
+##          long      lat group order      region subregion
+## 1   -69.89912 12.45200     1     1       Aruba      &lt;NA&gt;
+## 2   -69.89571 12.42300     1     2       Aruba      &lt;NA&gt;
+## 3   -69.94219 12.43853     1     3       Aruba      &lt;NA&gt;
+## 4   -70.00415 12.50049     1     4       Aruba      &lt;NA&gt;
+## 5   -70.06612 12.54697     1     5       Aruba      &lt;NA&gt;
+## 6   -70.05088 12.59707     1     6       Aruba      &lt;NA&gt;
+## 7   -70.03511 12.61411     1     7       Aruba      &lt;NA&gt;
+## 8   -69.97314 12.56763     1     8       Aruba      &lt;NA&gt;
+## 9   -69.91181 12.48047     1     9       Aruba      &lt;NA&gt;
+## 10  -69.89912 12.45200     1    10       Aruba      &lt;NA&gt;
+## 12   74.89131 37.23164     2    12 Afghanistan      &lt;NA&gt;
+## 13   74.84023 37.22505     2    13 Afghanistan      &lt;NA&gt;
+## 14   74.76738 37.24917     2    14 Afghanistan      &lt;NA&gt;
+## 15   74.73896 37.28564     2    15 Afghanistan      &lt;NA&gt;
+## 16   74.72666 37.29072     2    16 Afghanistan      &lt;NA&gt;
+## 17   74.66895 37.26670     2    17 Afghanistan      &lt;NA&gt;
+## 18   74.55899 37.23662     2    18 Afghanistan      &lt;NA&gt;
+## 19   74.37217 37.15771     2    19 Afghanistan      &lt;NA&gt;
+## 20   74.37617 37.13735     2    20 Afghanistan      &lt;NA&gt;
+## 21   74.49796 37.05722     2    21 Afghanistan      &lt;NA&gt;
+## 22   74.52646 37.03066     2    22 Afghanistan      &lt;NA&gt;
+## 23   74.54140 37.02217     2    23 Afghanistan      &lt;NA&gt;
+## 24   74.43106 36.98369     2    24 Afghanistan      &lt;NA&gt;
+## 25   74.19473 36.89688     2    25 Afghanistan      &lt;NA&gt;
+## 26   74.03887 36.82573     2    26 Afghanistan      &lt;NA&gt;
+## 27   74.00185 36.82310     2    27 Afghanistan      &lt;NA&gt;
+## 28   73.90781 36.85293     2    28 Afghanistan      &lt;NA&gt;
+## 29   73.76914 36.88848     2    29 Afghanistan      &lt;NA&gt;
+## 30   73.73183 36.88779     2    30 Afghanistan      &lt;NA&gt;
+## 31   73.41113 36.88169     2    31 Afghanistan      &lt;NA&gt;
+## 32   73.11680 36.86856     2    32 Afghanistan      &lt;NA&gt;
+## 33   72.99374 36.85161     2    33 Afghanistan      &lt;NA&gt;
+## 34   72.76621 36.83501     2    34 Afghanistan      &lt;NA&gt;
+## 35   72.62286 36.82959     2    35 Afghanistan      &lt;NA&gt;
+## 36   72.53135 36.80200     2    36 Afghanistan      &lt;NA&gt;
+## 37   72.43115 36.76582     2    37 Afghanistan      &lt;NA&gt;
+## 38   72.32696 36.74239     2    38 Afghanistan      &lt;NA&gt;
+## 39   72.24980 36.73472     2    39 Afghanistan      &lt;NA&gt;
+## 40   72.15674 36.70088     2    40 Afghanistan      &lt;NA&gt;
+## 41   72.09560 36.63374     2    41 Afghanistan      &lt;NA&gt;
+## 42   71.92070 36.53418     2    42 Afghanistan      &lt;NA&gt;
+## 43   71.82227 36.48608     2    43 Afghanistan      &lt;NA&gt;
+## 44   71.77266 36.43184     2    44 Afghanistan      &lt;NA&gt;
+## 45   71.71641 36.42656     2    45 Afghanistan      &lt;NA&gt;
+## 46   71.62051 36.43647     2    46 Afghanistan      &lt;NA&gt;
+## 47   71.54590 36.37769     2    47 Afghanistan      &lt;NA&gt;
+## 48   71.46328 36.29326     2    48 Afghanistan      &lt;NA&gt;
+## 49   71.31260 36.17119     2    49 Afghanistan      &lt;NA&gt;
+## 50   71.23291 36.12178     2    50 Afghanistan      &lt;NA&gt;
+## 51   71.18506 36.04209     2    51 Afghanistan      &lt;NA&gt;
+## 52   71.22021 36.00068     2    52 Afghanistan      &lt;NA&gt;
+## 53   71.34287 35.93853     2    53 Afghanistan      &lt;NA&gt;
+## 54   71.39756 35.88018     2    54 Afghanistan      &lt;NA&gt;
+## 55   71.42754 35.83374     2    55 Afghanistan      &lt;NA&gt;
+## 56   71.48359 35.71460     2    56 Afghanistan      &lt;NA&gt;
+## 57   71.51904 35.59751     2    57 Afghanistan      &lt;NA&gt;
+## 58   71.57198 35.54683     2    58 Afghanistan      &lt;NA&gt;
+## 59   71.58740 35.46084     2    59 Afghanistan      &lt;NA&gt;
+## 60   71.60059 35.40791     2    60 Afghanistan      &lt;NA&gt;
+## 61   71.57198 35.37041     2    61 Afghanistan      &lt;NA&gt;
+## 62   71.54551 35.32851     2    62 Afghanistan      &lt;NA&gt;
+## 63   71.54551 35.28886     2    63 Afghanistan      &lt;NA&gt;
+## 64   71.57725 35.24800     2    64 Afghanistan      &lt;NA&gt;
+## 65   71.60527 35.21177     2    65 Afghanistan      &lt;NA&gt;
+## 66   71.62051 35.18301     2    66 Afghanistan      &lt;NA&gt;
+## 67   71.60166 35.15068     2    67 Afghanistan      &lt;NA&gt;
+## 68   71.54551 35.10141     2    68 Afghanistan      &lt;NA&gt;
+## 69   71.51709 35.05112     2    69 Afghanistan      &lt;NA&gt;
+## 70   71.45508 34.96694     2    70 Afghanistan      &lt;NA&gt;
+## 71   71.35811 34.90962     2    71 Afghanistan      &lt;NA&gt;
+## 72   71.29414 34.86773     2    72 Afghanistan      &lt;NA&gt;
+## 73   71.22578 34.77954     2    73 Afghanistan      &lt;NA&gt;
+## 74   71.11328 34.68159     2    74 Afghanistan      &lt;NA&gt;
+## 75   71.06563 34.59961     2    75 Afghanistan      &lt;NA&gt;
+## 76   71.01631 34.55464     2    76 Afghanistan      &lt;NA&gt;
+## 77   70.96562 34.53037     2    77 Afghanistan      &lt;NA&gt;
+## 78   70.97891 34.48628     2    78 Afghanistan      &lt;NA&gt;
+## 79   71.02295 34.43115     2    79 Afghanistan      &lt;NA&gt;
+## 80   71.09570 34.36943     2    80 Afghanistan      &lt;NA&gt;
+## 81   71.09238 34.27324     2    81 Afghanistan      &lt;NA&gt;
+## 82   71.08906 34.20406     2    82 Afghanistan      &lt;NA&gt;
+## 83   71.09131 34.12027     2    83 Afghanistan      &lt;NA&gt;
+## 84   71.05156 34.04971     2    84 Afghanistan      &lt;NA&gt;
+## 85   70.84844 33.98188     2    85 Afghanistan      &lt;NA&gt;
+## 86   70.65401 33.95229     2    86 Afghanistan      &lt;NA&gt;
+## 87   70.41573 33.95044     2    87 Afghanistan      &lt;NA&gt;
+## 88   70.32568 33.96113     2    88 Afghanistan      &lt;NA&gt;
+## 89   70.25361 33.97598     2    89 Afghanistan      &lt;NA&gt;
+## 90   69.99473 34.05181     2    90 Afghanistan      &lt;NA&gt;
+## 91   69.88965 34.00727     2    91 Afghanistan      &lt;NA&gt;
+## 92   69.86806 33.89766     2    92 Afghanistan      &lt;NA&gt;
+## 93   70.05664 33.71987     2    93 Afghanistan      &lt;NA&gt;
+## 94   70.13418 33.62075     2    94 Afghanistan      &lt;NA&gt;
+## 95   70.21973 33.45469     2    95 Afghanistan      &lt;NA&gt;
+## 96   70.28418 33.36904     2    96 Afghanistan      &lt;NA&gt;
+## 97   70.26113 33.28901     2    97 Afghanistan      &lt;NA&gt;
+## 98   70.09023 33.19810     2    98 Afghanistan      &lt;NA&gt;
+## 99   69.92012 33.11250     2    99 Afghanistan      &lt;NA&gt;
+## 100  69.70371 33.09473     2   100 Afghanistan      &lt;NA&gt;
+## 101  69.56777 33.06416     2   101 Afghanistan      &lt;NA&gt;
+## 102  69.50156 33.02007     2   102 Afghanistan      &lt;NA&gt;
+## 103  69.45312 32.83281     2   103 Afghanistan      &lt;NA&gt;
+## 104  69.40459 32.76426     2   104 Afghanistan      &lt;NA&gt;
+## 105  69.40537 32.68272     2   105 Afghanistan      &lt;NA&gt;
+## 106  69.35947 32.59033     2   106 Afghanistan      &lt;NA&gt;
+## 107  69.28994 32.53057     2   107 Afghanistan      &lt;NA&gt;
+## 108  69.24140 32.43354     2   108 Afghanistan      &lt;NA&gt;
+## 109  69.25654 32.24946     2   109 Afghanistan      &lt;NA&gt;
+## 110  69.27930 31.93682     2   110 Afghanistan      &lt;NA&gt;
+## 111  69.18691 31.83809     2   111 Afghanistan      &lt;NA&gt;
+## 112  69.08311 31.73848     2   112 Afghanistan      &lt;NA&gt;
+## 113  68.97343 31.66738     2   113 Afghanistan      &lt;NA&gt;
+## 114  68.86895 31.63423     2   114 Afghanistan      &lt;NA&gt;
+## 115  68.78233 31.64643     2   115 Afghanistan      &lt;NA&gt;
+## 116  68.71367 31.70806     2   116 Afghanistan      &lt;NA&gt;
+## 117  68.67324 31.75972     2   117 Afghanistan      &lt;NA&gt;
+## 118  68.59766 31.80298     2   118 Afghanistan      &lt;NA&gt;
+## 119  68.52071 31.79414     2   119 Afghanistan      &lt;NA&gt;
+## 120  68.44326 31.75449     2   120 Afghanistan      &lt;NA&gt;
+## 121  68.31982 31.76767     2   121 Afghanistan      &lt;NA&gt;
+## 122  68.21397 31.80737     2   122 Afghanistan      &lt;NA&gt;
+## 123  68.16103 31.80298     2   123 Afghanistan      &lt;NA&gt;
+## 124  68.13017 31.76328     2   124 Afghanistan      &lt;NA&gt;
+## 125  68.01719 31.67798     2   125 Afghanistan      &lt;NA&gt;
+## 126  67.73985 31.54819     2   126 Afghanistan      &lt;NA&gt;
+## 127  67.62675 31.53877     2   127 Afghanistan      &lt;NA&gt;
+## 128  67.57822 31.50649     2   128 Afghanistan      &lt;NA&gt;
+## 129  67.59756 31.45332     2   129 Afghanistan      &lt;NA&gt;
+## 130  67.64706 31.40996     2   130 Afghanistan      &lt;NA&gt;
+## 131  67.73350 31.37925     2   131 Afghanistan      &lt;NA&gt;
+## 132  67.73789 31.34395     2   132 Afghanistan      &lt;NA&gt;
+## 133  67.66152 31.31299     2   133 Afghanistan      &lt;NA&gt;
+## 134  67.59639 31.27769     2   134 Afghanistan      &lt;NA&gt;
+## 135  67.45283 31.23462     2   135 Afghanistan      &lt;NA&gt;
+## 136  67.28730 31.21782     2   136 Afghanistan      &lt;NA&gt;
+## 137  67.11592 31.24292     2   137 Afghanistan      &lt;NA&gt;
+## 138  67.02773 31.30024     2   138 Afghanistan      &lt;NA&gt;
+## 139  66.92432 31.30561     2   139 Afghanistan      &lt;NA&gt;
+## 140  66.82929 31.26367     2   140 Afghanistan      &lt;NA&gt;
+## 141  66.73135 31.19453     2   141 Afghanistan      &lt;NA&gt;
+## 142  66.62422 31.04604     2   142 Afghanistan      &lt;NA&gt;
+## 143  66.59580 31.01997     2   143 Afghanistan      &lt;NA&gt;
+## 144  66.56680 30.99658     2   144 Afghanistan      &lt;NA&gt;
+## 145  66.49736 30.96455     2   145 Afghanistan      &lt;NA&gt;
+## 146  66.39717 30.91221     2   146 Afghanistan      &lt;NA&gt;
+## 147  66.34687 30.80278     2   147 Afghanistan      &lt;NA&gt;
+## 148  66.28691 30.60791     2   148 Afghanistan      &lt;NA&gt;
+## 149  66.30097 30.50298     2   149 Afghanistan      &lt;NA&gt;
+## 150  66.30547 30.32114     2   150 Afghanistan      &lt;NA&gt;
+## 151  66.28184 30.19346     2   151 Afghanistan      &lt;NA&gt;
+## 152  66.23848 30.10962     2   152 Afghanistan      &lt;NA&gt;
+## 153  66.24717 30.04351     2   153 Afghanistan      &lt;NA&gt;
+## 154  66.31338 29.96856     2   154 Afghanistan      &lt;NA&gt;
+## 155  66.28691 29.92002     2   155 Afghanistan      &lt;NA&gt;
+## 156  66.23125 29.86572     2   156 Afghanistan      &lt;NA&gt;
+## 157  66.17706 29.83559     2   157 Afghanistan      &lt;NA&gt;
+## 158  65.96162 29.77891     2   158 Afghanistan      &lt;NA&gt;
+## 159  65.66621 29.70132     2   159 Afghanistan      &lt;NA&gt;
+## 160  65.47099 29.65156     2   160 Afghanistan      &lt;NA&gt;
+## 161  65.18047 29.57763     2   161 Afghanistan      &lt;NA&gt;
+## 162  65.09550 29.55947     2   162 Afghanistan      &lt;NA&gt;
+## 163  64.91895 29.55278     2   163 Afghanistan      &lt;NA&gt;
+## 164  64.82734 29.56416     2   164 Afghanistan      &lt;NA&gt;
+## 165  64.70351 29.56714     2   165 Afghanistan      &lt;NA&gt;
+## 166  64.52110 29.56450     2   166 Afghanistan      &lt;NA&gt;
+## 167  64.39375 29.54433     2   167 Afghanistan      &lt;NA&gt;
+##  [ reached 'max' / getOption("max.print") -- omitted 99172 rows ]
+```
+
+---
+
+# A few fixes for better matching
+
+.question[
+What does the following code do?
+]
+
+
+```r
+world_map &lt;- map_data("world") %&gt;%
+  mutate(region = case_when(
+    region == "UK"           ~ "United Kingdom",
+    region == "USA"          ~ "United States",
+    subregion == "Hong Kong" ~ "Hong Kong",
+    TRUE                     ~ region
+    )
+  )
+```
+
+---
+
+## Map the world
+
+
+```r
+ggplot(world_map, aes(x = long, y = lat, group = group)) +
+  geom_polygon(fill = "gray") +
+  theme_minimal()
+```
+
+![](w4_d2-joining-mapping_files/figure-html/unnamed-chunk-57-1.png)&lt;!-- --&gt;
+
+---
+
+## Join fisheries and world map
+
+.pull-left[
+
+```r
+fisheries %&gt;% select(country)
+```
+
+```
+## # A tibble: 82 x 1
+##    country   
+##    &lt;chr&gt;     
+##  1 Angola    
+##  2 Argentina 
+##  3 Australia 
+##  4 Bangladesh
+##  5 Brazil    
+##  6 Cambodia  
+##  7 Cameroon  
+##  8 Canada    
+##  9 Chad      
+## 10 Chile     
+## # … with 72 more rows
+```
+]
+.pull-right[
+
+```r
+world_map %&gt;% select(region)
+```
+
+```
+##                    region
+## 1                   Aruba
+## 2                   Aruba
+## 3                   Aruba
+## 4                   Aruba
+## 5                   Aruba
+## 6                   Aruba
+## 7                   Aruba
+## 8                   Aruba
+## 9                   Aruba
+## 10                  Aruba
+## 11            Afghanistan
+## 12            Afghanistan
+## 13            Afghanistan
+## 14            Afghanistan
+## 15            Afghanistan
+## 16            Afghanistan
+## 17            Afghanistan
+## 18            Afghanistan
+## 19            Afghanistan
+## 20            Afghanistan
+## 21            Afghanistan
+## 22            Afghanistan
+## 23            Afghanistan
+## 24            Afghanistan
+## 25            Afghanistan
+## 26            Afghanistan
+## 27            Afghanistan
+## 28            Afghanistan
+## 29            Afghanistan
+## 30            Afghanistan
+## 31            Afghanistan
+## 32            Afghanistan
+## 33            Afghanistan
+## 34            Afghanistan
+## 35            Afghanistan
+## 36            Afghanistan
+## 37            Afghanistan
+## 38            Afghanistan
+## 39            Afghanistan
+## 40            Afghanistan
+## 41            Afghanistan
+## 42            Afghanistan
+## 43            Afghanistan
+## 44            Afghanistan
+## 45            Afghanistan
+## 46            Afghanistan
+## 47            Afghanistan
+## 48            Afghanistan
+## 49            Afghanistan
+## 50            Afghanistan
+## 51            Afghanistan
+## 52            Afghanistan
+## 53            Afghanistan
+## 54            Afghanistan
+## 55            Afghanistan
+## 56            Afghanistan
+## 57            Afghanistan
+## 58            Afghanistan
+## 59            Afghanistan
+## 60            Afghanistan
+## 61            Afghanistan
+## 62            Afghanistan
+## 63            Afghanistan
+## 64            Afghanistan
+## 65            Afghanistan
+## 66            Afghanistan
+## 67            Afghanistan
+## 68            Afghanistan
+## 69            Afghanistan
+## 70            Afghanistan
+## 71            Afghanistan
+## 72            Afghanistan
+## 73            Afghanistan
+## 74            Afghanistan
+## 75            Afghanistan
+## 76            Afghanistan
+## 77            Afghanistan
+## 78            Afghanistan
+## 79            Afghanistan
+## 80            Afghanistan
+## 81            Afghanistan
+## 82            Afghanistan
+## 83            Afghanistan
+## 84            Afghanistan
+## 85            Afghanistan
+## 86            Afghanistan
+## 87            Afghanistan
+## 88            Afghanistan
+## 89            Afghanistan
+## 90            Afghanistan
+## 91            Afghanistan
+## 92            Afghanistan
+## 93            Afghanistan
+## 94            Afghanistan
+## 95            Afghanistan
+## 96            Afghanistan
+## 97            Afghanistan
+## 98            Afghanistan
+## 99            Afghanistan
+## 100           Afghanistan
+## 101           Afghanistan
+## 102           Afghanistan
+## 103           Afghanistan
+## 104           Afghanistan
+## 105           Afghanistan
+## 106           Afghanistan
+## 107           Afghanistan
+## 108           Afghanistan
+## 109           Afghanistan
+## 110           Afghanistan
+## 111           Afghanistan
+## 112           Afghanistan
+## 113           Afghanistan
+## 114           Afghanistan
+## 115           Afghanistan
+## 116           Afghanistan
+## 117           Afghanistan
+## 118           Afghanistan
+## 119           Afghanistan
+## 120           Afghanistan
+## 121           Afghanistan
+## 122           Afghanistan
+## 123           Afghanistan
+## 124           Afghanistan
+## 125           Afghanistan
+## 126           Afghanistan
+## 127           Afghanistan
+## 128           Afghanistan
+## 129           Afghanistan
+## 130           Afghanistan
+## 131           Afghanistan
+## 132           Afghanistan
+## 133           Afghanistan
+## 134           Afghanistan
+## 135           Afghanistan
+## 136           Afghanistan
+## 137           Afghanistan
+## 138           Afghanistan
+## 139           Afghanistan
+## 140           Afghanistan
+## 141           Afghanistan
+## 142           Afghanistan
+## 143           Afghanistan
+## 144           Afghanistan
+## 145           Afghanistan
+## 146           Afghanistan
+## 147           Afghanistan
+## 148           Afghanistan
+## 149           Afghanistan
+## 150           Afghanistan
+## 151           Afghanistan
+## 152           Afghanistan
+## 153           Afghanistan
+## 154           Afghanistan
+## 155           Afghanistan
+## 156           Afghanistan
+## 157           Afghanistan
+## 158           Afghanistan
+## 159           Afghanistan
+## 160           Afghanistan
+## 161           Afghanistan
+## 162           Afghanistan
+## 163           Afghanistan
+## 164           Afghanistan
+## 165           Afghanistan
+## 166           Afghanistan
+## 167           Afghanistan
+## 168           Afghanistan
+## 169           Afghanistan
+## 170           Afghanistan
+## 171           Afghanistan
+## 172           Afghanistan
+## 173           Afghanistan
+## 174           Afghanistan
+## 175           Afghanistan
+## 176           Afghanistan
+## 177           Afghanistan
+## 178           Afghanistan
+## 179           Afghanistan
+## 180           Afghanistan
+## 181           Afghanistan
+## 182           Afghanistan
+## 183           Afghanistan
+## 184           Afghanistan
+## 185           Afghanistan
+## 186           Afghanistan
+## 187           Afghanistan
+## 188           Afghanistan
+## 189           Afghanistan
+## 190           Afghanistan
+## 191           Afghanistan
+## 192           Afghanistan
+## 193           Afghanistan
+## 194           Afghanistan
+## 195           Afghanistan
+## 196           Afghanistan
+## 197           Afghanistan
+## 198           Afghanistan
+## 199           Afghanistan
+## 200           Afghanistan
+## 201           Afghanistan
+## 202           Afghanistan
+## 203           Afghanistan
+## 204           Afghanistan
+## 205           Afghanistan
+## 206           Afghanistan
+## 207           Afghanistan
+## 208           Afghanistan
+## 209           Afghanistan
+## 210           Afghanistan
+## 211           Afghanistan
+## 212           Afghanistan
+## 213           Afghanistan
+## 214           Afghanistan
+## 215           Afghanistan
+## 216           Afghanistan
+## 217           Afghanistan
+## 218           Afghanistan
+## 219           Afghanistan
+## 220           Afghanistan
+## 221           Afghanistan
+## 222           Afghanistan
+## 223           Afghanistan
+## 224           Afghanistan
+## 225           Afghanistan
+## 226           Afghanistan
+## 227           Afghanistan
+## 228           Afghanistan
+## 229           Afghanistan
+## 230           Afghanistan
+## 231           Afghanistan
+## 232           Afghanistan
+## 233           Afghanistan
+## 234           Afghanistan
+## 235           Afghanistan
+## 236           Afghanistan
+## 237           Afghanistan
+## 238           Afghanistan
+## 239           Afghanistan
+## 240           Afghanistan
+## 241           Afghanistan
+## 242           Afghanistan
+## 243           Afghanistan
+## 244           Afghanistan
+## 245           Afghanistan
+## 246           Afghanistan
+## 247           Afghanistan
+## 248           Afghanistan
+## 249           Afghanistan
+## 250           Afghanistan
+## 251           Afghanistan
+## 252           Afghanistan
+## 253           Afghanistan
+## 254           Afghanistan
+## 255           Afghanistan
+## 256           Afghanistan
+## 257           Afghanistan
+## 258           Afghanistan
+## 259           Afghanistan
+## 260           Afghanistan
+## 261           Afghanistan
+## 262           Afghanistan
+## 263           Afghanistan
+## 264           Afghanistan
+## 265           Afghanistan
+## 266           Afghanistan
+## 267           Afghanistan
+## 268           Afghanistan
+## 269           Afghanistan
+## 270           Afghanistan
+## 271           Afghanistan
+## 272           Afghanistan
+## 273           Afghanistan
+## 274           Afghanistan
+## 275           Afghanistan
+## 276           Afghanistan
+## 277           Afghanistan
+## 278           Afghanistan
+## 279           Afghanistan
+## 280           Afghanistan
+## 281           Afghanistan
+## 282           Afghanistan
+## 283           Afghanistan
+## 284           Afghanistan
+## 285           Afghanistan
+## 286           Afghanistan
+## 287           Afghanistan
+## 288           Afghanistan
+## 289           Afghanistan
+## 290           Afghanistan
+## 291           Afghanistan
+## 292           Afghanistan
+## 293           Afghanistan
+## 294           Afghanistan
+## 295           Afghanistan
+## 296           Afghanistan
+## 297           Afghanistan
+## 298           Afghanistan
+## 299           Afghanistan
+## 300           Afghanistan
+## 301           Afghanistan
+## 302           Afghanistan
+## 303           Afghanistan
+## 304           Afghanistan
+## 305           Afghanistan
+## 306           Afghanistan
+## 307           Afghanistan
+## 308           Afghanistan
+## 309           Afghanistan
+## 310           Afghanistan
+## 311           Afghanistan
+## 312           Afghanistan
+## 313           Afghanistan
+## 314           Afghanistan
+## 315           Afghanistan
+## 316           Afghanistan
+## 317           Afghanistan
+## 318           Afghanistan
+## 319           Afghanistan
+## 320           Afghanistan
+## 321           Afghanistan
+## 322           Afghanistan
+## 323           Afghanistan
+## 324           Afghanistan
+## 325           Afghanistan
+## 326           Afghanistan
+## 327           Afghanistan
+## 328           Afghanistan
+## 329           Afghanistan
+## 330           Afghanistan
+## 331           Afghanistan
+## 332           Afghanistan
+## 333           Afghanistan
+## 334           Afghanistan
+## 335           Afghanistan
+## 336           Afghanistan
+## 337           Afghanistan
+## 338           Afghanistan
+## 339           Afghanistan
+## 340           Afghanistan
+## 341           Afghanistan
+## 342           Afghanistan
+## 343           Afghanistan
+## 344           Afghanistan
+## 345           Afghanistan
+## 346           Afghanistan
+## 347           Afghanistan
+## 348           Afghanistan
+## 349           Afghanistan
+## 350           Afghanistan
+## 351           Afghanistan
+## 352           Afghanistan
+## 353           Afghanistan
+## 354           Afghanistan
+## 355           Afghanistan
+## 356           Afghanistan
+## 357           Afghanistan
+## 358           Afghanistan
+## 359           Afghanistan
+## 360           Afghanistan
+## 361           Afghanistan
+## 362           Afghanistan
+## 363           Afghanistan
+## 364           Afghanistan
+## 365           Afghanistan
+## 366           Afghanistan
+## 367           Afghanistan
+## 368           Afghanistan
+## 369           Afghanistan
+## 370           Afghanistan
+## 371           Afghanistan
+## 372           Afghanistan
+## 373           Afghanistan
+## 374           Afghanistan
+## 375           Afghanistan
+## 376           Afghanistan
+## 377           Afghanistan
+## 378           Afghanistan
+## 379           Afghanistan
+## 380           Afghanistan
+## 381           Afghanistan
+## 382           Afghanistan
+## 383           Afghanistan
+## 384           Afghanistan
+## 385           Afghanistan
+## 386           Afghanistan
+## 387           Afghanistan
+## 388           Afghanistan
+## 389           Afghanistan
+## 390           Afghanistan
+## 391           Afghanistan
+## 392           Afghanistan
+## 393           Afghanistan
+## 394           Afghanistan
+## 395           Afghanistan
+## 396           Afghanistan
+## 397           Afghanistan
+## 398           Afghanistan
+## 399           Afghanistan
+## 400           Afghanistan
+## 401           Afghanistan
+## 402           Afghanistan
+## 403           Afghanistan
+## 404           Afghanistan
+## 405           Afghanistan
+## 406           Afghanistan
+## 407           Afghanistan
+## 408           Afghanistan
+## 409           Afghanistan
+## 410           Afghanistan
+## 411           Afghanistan
+## 412           Afghanistan
+## 413           Afghanistan
+## 414           Afghanistan
+## 415           Afghanistan
+## 416           Afghanistan
+## 417           Afghanistan
+## 418           Afghanistan
+## 419           Afghanistan
+## 420           Afghanistan
+## 421                Angola
+## 422                Angola
+## 423                Angola
+## 424                Angola
+## 425                Angola
+## 426                Angola
+## 427                Angola
+## 428                Angola
+## 429                Angola
+## 430                Angola
+## 431                Angola
+## 432                Angola
+## 433                Angola
+## 434                Angola
+## 435                Angola
+## 436                Angola
+## 437                Angola
+## 438                Angola
+## 439                Angola
+## 440                Angola
+## 441                Angola
+## 442                Angola
+## 443                Angola
+## 444                Angola
+## 445                Angola
+## 446                Angola
+## 447                Angola
+## 448                Angola
+## 449                Angola
+## 450                Angola
+## 451                Angola
+## 452                Angola
+## 453                Angola
+## 454                Angola
+## 455                Angola
+## 456                Angola
+## 457                Angola
+## 458                Angola
+## 459                Angola
+## 460                Angola
+## 461                Angola
+## 462                Angola
+## 463                Angola
+## 464                Angola
+## 465                Angola
+## 466                Angola
+## 467                Angola
+## 468                Angola
+## 469                Angola
+## 470                Angola
+## 471                Angola
+## 472                Angola
+## 473                Angola
+## 474                Angola
+## 475                Angola
+## 476                Angola
+## 477                Angola
+## 478                Angola
+## 479                Angola
+## 480                Angola
+## 481                Angola
+## 482                Angola
+## 483                Angola
+## 484                Angola
+## 485                Angola
+## 486                Angola
+## 487                Angola
+## 488                Angola
+## 489                Angola
+## 490                Angola
+## 491                Angola
+## 492                Angola
+## 493                Angola
+## 494                Angola
+## 495                Angola
+## 496                Angola
+## 497                Angola
+## 498                Angola
+## 499                Angola
+## 500                Angola
+## 501                Angola
+## 502                Angola
+## 503                Angola
+## 504                Angola
+## 505                Angola
+## 506                Angola
+## 507                Angola
+## 508                Angola
+## 509                Angola
+## 510                Angola
+## 511                Angola
+## 512                Angola
+## 513                Angola
+## 514                Angola
+## 515                Angola
+## 516                Angola
+## 517                Angola
+## 518                Angola
+## 519                Angola
+## 520                Angola
+## 521                Angola
+## 522                Angola
+## 523                Angola
+## 524                Angola
+## 525                Angola
+## 526                Angola
+## 527                Angola
+## 528                Angola
+## 529                Angola
+## 530                Angola
+## 531                Angola
+## 532                Angola
+## 533                Angola
+## 534                Angola
+## 535                Angola
+## 536                Angola
+## 537                Angola
+## 538                Angola
+## 539                Angola
+## 540                Angola
+## 541                Angola
+## 542                Angola
+## 543                Angola
+## 544                Angola
+## 545                Angola
+## 546                Angola
+## 547                Angola
+## 548                Angola
+## 549                Angola
+## 550                Angola
+## 551                Angola
+## 552                Angola
+## 553                Angola
+## 554                Angola
+## 555                Angola
+## 556                Angola
+## 557                Angola
+## 558                Angola
+## 559                Angola
+## 560                Angola
+## 561                Angola
+## 562                Angola
+## 563                Angola
+## 564                Angola
+## 565                Angola
+## 566                Angola
+## 567                Angola
+## 568                Angola
+## 569                Angola
+## 570                Angola
+## 571                Angola
+## 572                Angola
+## 573                Angola
+## 574                Angola
+## 575                Angola
+## 576                Angola
+## 577                Angola
+## 578                Angola
+## 579                Angola
+## 580                Angola
+## 581                Angola
+## 582                Angola
+## 583                Angola
+## 584                Angola
+## 585                Angola
+## 586                Angola
+## 587                Angola
+## 588                Angola
+## 589                Angola
+## 590                Angola
+## 591                Angola
+## 592                Angola
+## 593                Angola
+## 594                Angola
+## 595                Angola
+## 596                Angola
+## 597                Angola
+## 598                Angola
+## 599                Angola
+## 600                Angola
+## 601                Angola
+## 602                Angola
+## 603                Angola
+## 604                Angola
+## 605                Angola
+## 606                Angola
+## 607                Angola
+## 608                Angola
+## 609                Angola
+## 610                Angola
+## 611                Angola
+## 612                Angola
+## 613                Angola
+## 614                Angola
+## 615                Angola
+## 616                Angola
+## 617                Angola
+## 618                Angola
+## 619                Angola
+## 620                Angola
+## 621                Angola
+## 622                Angola
+## 623                Angola
+## 624                Angola
+## 625                Angola
+## 626                Angola
+## 627                Angola
+## 628                Angola
+## 629                Angola
+## 630                Angola
+## 631                Angola
+## 632                Angola
+## 633                Angola
+## 634                Angola
+## 635                Angola
+## 636                Angola
+## 637                Angola
+## 638                Angola
+## 639                Angola
+## 640                Angola
+## 641                Angola
+## 642                Angola
+## 643                Angola
+## 644                Angola
+## 645                Angola
+## 646                Angola
+## 647                Angola
+## 648                Angola
+## 649                Angola
+## 650                Angola
+## 651                Angola
+## 652                Angola
+## 653                Angola
+## 654                Angola
+## 655                Angola
+## 656                Angola
+## 657                Angola
+## 658                Angola
+## 659                Angola
+## 660                Angola
+## 661                Angola
+## 662                Angola
+## 663                Angola
+## 664                Angola
+## 665                Angola
+## 666                Angola
+## 667                Angola
+## 668                Angola
+## 669                Angola
+## 670                Angola
+## 671                Angola
+## 672                Angola
+## 673                Angola
+## 674                Angola
+## 675                Angola
+## 676                Angola
+## 677                Angola
+## 678                Angola
+## 679                Angola
+## 680                Angola
+## 681                Angola
+## 682                Angola
+## 683                Angola
+## 684                Angola
+## 685                Angola
+## 686                Angola
+## 687                Angola
+## 688                Angola
+## 689                Angola
+## 690                Angola
+## 691                Angola
+## 692                Angola
+## 693                Angola
+## 694                Angola
+## 695                Angola
+## 696                Angola
+## 697                Angola
+## 698                Angola
+## 699                Angola
+## 700                Angola
+## 701                Angola
+## 702                Angola
+## 703                Angola
+## 704                Angola
+## 705                Angola
+## 706                Angola
+## 707                Angola
+## 708                Angola
+## 709                Angola
+## 710                Angola
+## 711                Angola
+## 712                Angola
+## 713                Angola
+## 714                Angola
+## 715                Angola
+## 716                Angola
+## 717                Angola
+## 718                Angola
+## 719                Angola
+## 720                Angola
+## 721                Angola
+## 722                Angola
+## 723                Angola
+## 724                Angola
+## 725                Angola
+## 726                Angola
+## 727                Angola
+## 728                Angola
+## 729                Angola
+## 730                Angola
+## 731                Angola
+## 732                Angola
+## 733                Angola
+## 734                Angola
+## 735                Angola
+## 736                Angola
+## 737                Angola
+## 738                Angola
+## 739                Angola
+## 740                Angola
+## 741                Angola
+## 742                Angola
+## 743                Angola
+## 744                Angola
+## 745                Angola
+## 746                Angola
+## 747                Angola
+## 748                Angola
+## 749                Angola
+## 750                Angola
+## 751                Angola
+## 752                Angola
+## 753                Angola
+## 754                Angola
+## 755                Angola
+## 756                Angola
+## 757                Angola
+## 758                Angola
+## 759              Anguilla
+## 760              Anguilla
+## 761              Anguilla
+## 762              Anguilla
+## 763              Anguilla
+## 764              Anguilla
+## 765               Albania
+## 766               Albania
+## 767               Albania
+## 768               Albania
+## 769               Albania
+## 770               Albania
+## 771               Albania
+## 772               Albania
+## 773               Albania
+## 774               Albania
+## 775               Albania
+## 776               Albania
+## 777               Albania
+## 778               Albania
+## 779               Albania
+## 780               Albania
+## 781               Albania
+## 782               Albania
+## 783               Albania
+## 784               Albania
+## 785               Albania
+## 786               Albania
+## 787               Albania
+## 788               Albania
+## 789               Albania
+## 790               Albania
+## 791               Albania
+## 792               Albania
+## 793               Albania
+## 794               Albania
+## 795               Albania
+## 796               Albania
+## 797               Albania
+## 798               Albania
+## 799               Albania
+## 800               Albania
+## 801               Albania
+## 802               Albania
+## 803               Albania
+## 804               Albania
+## 805               Albania
+## 806               Albania
+## 807               Albania
+## 808               Albania
+## 809               Albania
+## 810               Albania
+## 811               Albania
+## 812               Albania
+## 813               Albania
+## 814               Albania
+## 815               Albania
+## 816               Albania
+## 817               Albania
+## 818               Albania
+## 819               Albania
+## 820               Albania
+## 821               Albania
+## 822               Albania
+## 823               Albania
+## 824               Albania
+## 825               Albania
+## 826               Albania
+## 827               Albania
+## 828               Albania
+## 829               Albania
+## 830               Albania
+## 831               Albania
+## 832               Albania
+## 833               Albania
+## 834               Albania
+## 835               Albania
+## 836               Albania
+## 837               Albania
+## 838               Albania
+## 839               Albania
+## 840               Albania
+## 841               Albania
+## 842               Albania
+## 843               Albania
+## 844               Albania
+## 845               Albania
+## 846               Albania
+## 847               Albania
+## 848               Albania
+## 849               Albania
+## 850               Albania
+## 851               Albania
+## 852               Albania
+## 853               Albania
+## 854               Albania
+## 855               Albania
+## 856               Albania
+## 857               Albania
+## 858               Albania
+## 859               Albania
+## 860               Albania
+## 861               Albania
+## 862               Albania
+## 863               Albania
+## 864               Albania
+## 865               Albania
+## 866               Albania
+## 867               Albania
+## 868               Albania
+## 869               Albania
+## 870               Albania
+## 871               Albania
+## 872               Albania
+## 873               Albania
+## 874               Albania
+## 875               Albania
+## 876               Albania
+## 877               Albania
+## 878               Finland
+## 879               Finland
+## 880               Finland
+## 881               Finland
+## 882               Finland
+## 883               Finland
+## 884               Finland
+## 885               Finland
+## 886               Finland
+## 887               Finland
+## 888               Finland
+## 889               Finland
+## 890               Finland
+## 891               Finland
+## 892               Finland
+## 893               Finland
+## 894               Finland
+## 895               Finland
+## 896               Finland
+## 897               Finland
+## 898               Finland
+## 899               Finland
+## 900               Finland
+## 901               Finland
+## 902               Finland
+## 903               Finland
+## 904               Finland
+## 905               Finland
+## 906               Finland
+## 907               Finland
+## 908               Finland
+## 909               Finland
+## 910               Finland
+## 911               Finland
+## 912               Finland
+## 913               Finland
+## 914               Finland
+## 915               Finland
+## 916               Finland
+## 917               Finland
+## 918               Finland
+## 919               Finland
+## 920               Finland
+## 921               Finland
+## 922               Finland
+## 923               Finland
+## 924               Finland
+## 925               Finland
+## 926               Finland
+## 927               Finland
+## 928               Finland
+## 929               Finland
+## 930               Andorra
+## 931               Andorra
+## 932               Andorra
+## 933               Andorra
+## 934               Andorra
+## 935               Andorra
+## 936               Andorra
+## 937               Andorra
+## 938               Andorra
+## 939               Andorra
+## 940               Andorra
+## 941               Andorra
+## 942               Andorra
+## 943               Andorra
+## 944               Andorra
+## 945               Andorra
+## 946               Andorra
+## 947               Andorra
+## 948               Andorra
+## 949  United Arab Emirates
+## 950  United Arab Emirates
+## 951  United Arab Emirates
+## 952  United Arab Emirates
+## 953  United Arab Emirates
+## 954  United Arab Emirates
+## 955  United Arab Emirates
+## 956  United Arab Emirates
+## 957  United Arab Emirates
+## 958  United Arab Emirates
+## 959  United Arab Emirates
+## 960  United Arab Emirates
+## 961  United Arab Emirates
+## 962  United Arab Emirates
+## 963  United Arab Emirates
+## 964  United Arab Emirates
+## 965  United Arab Emirates
+## 966  United Arab Emirates
+## 967  United Arab Emirates
+## 968  United Arab Emirates
+## 969  United Arab Emirates
+## 970  United Arab Emirates
+## 971  United Arab Emirates
+## 972  United Arab Emirates
+## 973  United Arab Emirates
+## 974  United Arab Emirates
+## 975  United Arab Emirates
+## 976  United Arab Emirates
+## 977  United Arab Emirates
+## 978  United Arab Emirates
+## 979  United Arab Emirates
+## 980  United Arab Emirates
+## 981  United Arab Emirates
+## 982  United Arab Emirates
+## 983  United Arab Emirates
+## 984  United Arab Emirates
+## 985  United Arab Emirates
+## 986  United Arab Emirates
+## 987  United Arab Emirates
+## 988  United Arab Emirates
+## 989  United Arab Emirates
+## 990  United Arab Emirates
+## 991  United Arab Emirates
+## 992  United Arab Emirates
+## 993  United Arab Emirates
+## 994  United Arab Emirates
+## 995  United Arab Emirates
+## 996  United Arab Emirates
+## 997  United Arab Emirates
+## 998  United Arab Emirates
+## 999  United Arab Emirates
+## 1000 United Arab Emirates
+##  [ reached 'max' / getOption("max.print") -- omitted 98338 rows ]
+```
+]
+
+---
+
+## Join fisheries and world map
+
+
+```r
+fisheries_map &lt;- left_join(fisheries, world_map, 
+                           by = c("country" = "region"))
+```
+
+
+```r
+glimpse(fisheries_map)
+```
+
+```
+## Observations: 72,685
+## Variables: 10
+## $ country     &lt;chr&gt; "Angola", "Angola", "Angola", "Angola", "Angola", "A…
+## $ capture     &lt;dbl&gt; 486490, 486490, 486490, 486490, 486490, 486490, 4864…
+## $ aquaculture &lt;dbl&gt; 655, 655, 655, 655, 655, 655, 655, 655, 655, 655, 65…
+## $ total       &lt;dbl&gt; 487145, 487145, 487145, 487145, 487145, 487145, 4871…
+## $ continent   &lt;chr&gt; "Africa", "Africa", "Africa", "Africa", "Africa", "A…
+## $ long        &lt;dbl&gt; 23.96650, 23.98828, 24.01006, 24.02559, 24.04141, 24…
+## $ lat         &lt;dbl&gt; -10.87178, -11.00283, -11.18477, -11.31563, -11.3741…
+## $ group       &lt;dbl&gt; 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3…
+## $ order       &lt;int&gt; 423, 424, 425, 426, 427, 428, 429, 430, 431, 432, 43…
+## $ subregion   &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …
+```
+
+---
+
+.question[
+What is misleading about the following map?
+]
+
+
+```r
+ggplot(fisheries_map, mapping = aes(x = long, y = lat, group = group)) +
+  geom_polygon(aes(fill = capture)) +
+  scale_fill_viridis_c() +
+  theme_minimal()
+```
+
+![](w4_d2-joining-mapping_files/figure-html/unnamed-chunk-62-1.png)&lt;!-- --&gt;
+
+---
+
+## Putting it altogether
+
+
+```r
+ggplot() +
+  geom_polygon(world_map, mapping = aes(x = long, y = lat, group = group), fill = "lightgray") +
+  geom_polygon(fisheries_map, mapping = aes(x = long, y = lat, group = group, fill = log(capture))) +
+  scale_fill_viridis_c() +
+  theme_minimal() +
+  theme(legend.position = "bottom") +
+  labs(
+    x = "", y = "",
+    title = "Fisheries harvest 2016",
+    subtitle = "Capture, in logged tonnes",
+    caption = "Source: bit.ly/2VrawTt"
+  )
+```
+
+---
+
+## Putting it altogether
+
+![](w4_d2-joining-mapping_files/figure-html/unnamed-chunk-64-1.png)&lt;!-- --&gt;
+
+---
+
+## Aquaculture
+
+
+```r
+ggplot() +
+  geom_polygon(world_map, mapping = aes(x = long, y = lat, group = group), fill = "lightgray") +
+  geom_polygon(fisheries_map, mapping = aes(x = long, y = lat, group = group, fill = log(aquaculture+1))) +
+  scale_fill_viridis_c() +
+  theme_minimal() +
+  theme(legend.position = "bottom") +
+  labs(
+    x = "", y = "",
+    title = "Fisheries harvest 2016",
+    subtitle = "Aquaculture, in logged tonnes",
+    fill = "log(aquaculture)",
+    caption = "Source: bit.ly/2VrawTt"
+  )
+```
+
+## Aquaculture
+
+![](w4_d2-joining-mapping_files/figure-html/unnamed-chunk-66-1.png)&lt;!-- --&gt;
+
+---
+
+![](w4_d2-joining-mapping_files/figure-html/unnamed-chunk-67-1.png)&lt;!-- --&gt;
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightLines": true,
+"highlightStyle": "solarized-light",
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

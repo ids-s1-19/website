@@ -22,9 +22,9 @@ title: 'Week 4 - Diving deeper into visualization'
 |---:|---|---|
 | Lec 07 | [Tips for effective data visualization](/slides/w4_d1-effective-dataviz/w4_d1-effective-dataviz.html) |
 | Lab 04 | [Ugly charts](/labs/lab-04/lab-04-ugly-charts.html) | **Due:** Fri, 11 Oct, 17:00 |
-| Lec 08 | Mapping |
+| Lec 08 | [Joining and mapping](/slides/w4_d1-effective-dataviz/w4_d1-effective-dataviz.html) |
 | HW 04  | Visualizing and wrangling spatial data |
-| RT 04  | Interactive tutorial covering week’s material |
+| RT 04  | Interactive tutorial covering week’s material: [Separate + unite](https://rstudio.cloud/learn/primers/4.2) + [Join](https://rstudio.cloud/learn/primers/4.3) |
 | OQ 04  | Critiquing and improving data visualizations and their interpretations |
 
 ### Readings
