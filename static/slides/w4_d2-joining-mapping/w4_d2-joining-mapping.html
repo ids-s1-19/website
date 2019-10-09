@@ -503,7 +503,7 @@ fisheries %&gt;%
 ```r
 fisheries &lt;- fisheries %&gt;%
   mutate(continent = case_when(
-    country == "Democratic Republic of the Congo" ~ "Asia",
+    country == "Democratic Republic of the Congo" ~ "Africa",
     country == "Hong Kong"                        ~ "Asia",
     country == "Myanmar"                          ~ "Asia",
     TRUE                                          ~ continent
@@ -557,11 +557,11 @@ fisheries_summary %&gt;%
 ## # A tibble: 5 x 4
 ##   continent  min_ap mean_ap max_ap
 ##   &lt;chr&gt;       &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;
-## 1 Asia      0        0.353   0.782
+## 1 Asia      0        0.367   0.782
 ## 2 Americas  0        0.192   0.529
 ## 3 Europe    0.00682  0.165   0.618
 ## 4 Oceania   0.0197   0.150   0.357
-## 5 Africa    0        0.0979  0.803
+## 5 Africa    0        0.0943  0.803
 ```
 
 ---

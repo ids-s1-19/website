@@ -291,7 +291,7 @@ fisheries %>%
 ```{r}
 fisheries <- fisheries %>%
   mutate(continent = case_when(
-    country == "Democratic Republic of the Congo" ~ "Asia",
+    country == "Democratic Republic of the Congo" ~ "Africa",
     country == "Hong Kong"                        ~ "Asia",
     country == "Myanmar"                          ~ "Asia",
     TRUE                                          ~ continent
