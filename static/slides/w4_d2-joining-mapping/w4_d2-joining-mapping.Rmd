@@ -110,7 +110,7 @@ continents
 
 ## Joining data frames
 
-```{r eval=FALSE}
+```
 *_join(x, y)
 ```
 
@@ -120,31 +120,37 @@ all combination of multiple matches in the case of multiple matches
 - `right_join()`: all rows from y
 - `full_join()`: all rows from both x and y
 - `semi_join()`: all rows from x where there are matching values in y, keeping just columns from x.
-- `anti_join()`: return all rows from x where there are not matching values in y, , never duplicate rows of x
+- `anti_join()`: return all rows from x where there are not matching values in y, never duplicate rows of x
 - ...
  
 ---
 
-## `inner_join()`
+## Setup
+
+For the next few slides...
 
 .pull-left[
-.pull-left[
 ```{r echo=FALSE}
-x <- data.frame(value = c(1, 2, 3))
+x <- tibble(value = c(1, 2, 3))
 ```
 ```{r}
 x
 ```
-
 ]
 .pull-right[
 ```{r echo=FALSE}
-y <- data.frame(value = c(1, 2, 4))
+y <- tibble(value = c(1, 2, 4))
 ```
 ```{r}
 y
 ```
 ]
+
+---
+
+## `inner_join()`
+
+.pull-left[
 ```{r}
 inner_join(x, y)
 ```
@@ -160,23 +166,6 @@ knitr::include_graphics("img/inner-join.gif")
 ## `left_join()`
 
 .pull-left[
-.pull-left[
-```{r echo=FALSE}
-x <- data.frame(value = c(1, 2, 3))
-```
-```{r}
-x
-```
-
-]
-.pull-right[
-```{r echo=FALSE}
-y <- data.frame(value = c(1, 2, 4))
-```
-```{r}
-y
-```
-]
 ```{r}
 left_join(x, y)
 ```
@@ -192,23 +181,6 @@ knitr::include_graphics("img/left-join.gif")
 ## `right_join()`
 
 .pull-left[
-.pull-left[
-```{r echo=FALSE}
-x <- data.frame(value = c(1, 2, 3))
-```
-```{r}
-x
-```
-
-]
-.pull-right[
-```{r echo=FALSE}
-y <- data.frame(value = c(1, 2, 4))
-```
-```{r}
-y
-```
-]
 ```{r}
 right_join(x, y)
 ```
@@ -224,23 +196,6 @@ knitr::include_graphics("img/right-join.gif")
 ## `full_join()`
 
 .pull-left[
-.pull-left[
-```{r echo=FALSE}
-x <- data.frame(value = c(1, 2, 3))
-```
-```{r}
-x
-```
-
-]
-.pull-right[
-```{r echo=FALSE}
-y <- data.frame(value = c(1, 2, 4))
-```
-```{r}
-y
-```
-]
 ```{r}
 full_join(x, y)
 ```
@@ -256,23 +211,6 @@ knitr::include_graphics("img/full-join.gif")
 ## `semi_join()`
 
 .pull-left[
-.pull-left[
-```{r echo=FALSE}
-x <- data.frame(value = c(1, 2, 3))
-```
-```{r}
-x
-```
-
-]
-.pull-right[
-```{r echo=FALSE}
-y <- data.frame(value = c(1, 2, 4))
-```
-```{r}
-y
-```
-]
 ```{r}
 semi_join(x, y)
 ```
@@ -288,23 +226,6 @@ knitr::include_graphics("img/semi-join.gif")
 ## `anti_join()`
 
 .pull-left[
-.pull-left[
-```{r echo=FALSE}
-x <- data.frame(value = c(1, 2, 3))
-```
-```{r}
-x
-```
-
-]
-.pull-right[
-```{r echo=FALSE}
-y <- data.frame(value = c(1, 2, 4))
-```
-```{r}
-y
-```
-]
 ```{r}
 anti_join(x, y)
 ```
@@ -339,6 +260,19 @@ continents
 
 ```{r}
 fisheries <- left_join(fisheries, continents) 
+```
+
+--
+
+.question[
+How does `left_join()` know to join the two data frames by `country`?
+]
+
+Hint:
+
+```{r}
+names(fisheries)
+names(continents)
 ```
 
 ---
@@ -402,7 +336,7 @@ fisheries_summary %>%
 
 ## Visualize continent summary stats
 
-```{r fig.height=3}
+```{r fig.height=4,fig.width=10}
 ggplot(fisheries_summary, aes(x = continent, y = mean_ap)) +
   geom_col()
 ```
@@ -413,10 +347,46 @@ ggplot(fisheries_summary, aes(x = continent, y = mean_ap)) +
 
 ```{r eval=FALSE}
 ggplot(fisheries_summary, 
-       aes(x = reorder(continent, mean_ap), y = mean_ap)) +
+       aes(x = reorder(continent, mean_ap), y = mean_ap)) + #<<
   geom_col() +
   coord_flip() +
   scale_y_continuous(labels = percent) + #<<
+  labs(
+    x = "", y = "",
+    title = "Average share of aquaculture by continent",
+    subtitle = "out of total fisheries harvest, 2016",
+    caption = "Source: bit.ly/2VrawTt"
+  ) +
+  theme_minimal() #<<
+```
+
+---
+
+```{r echo=FALSE}
+ggplot(fisheries_summary, 
+       aes(x = reorder(continent, mean_ap), y = mean_ap)) + #<<
+  geom_col() +
+  coord_flip() +
+  scale_y_continuous(labels = percent) + #<<
+  labs(
+    x = "", y = "",
+    title = "Average share of aquaculture by continent",
+    subtitle = "out of total fisheries harvest, 2016",
+    caption = "Source: bit.ly/2VrawTt"
+  ) +
+  theme_minimal() #<<
+```
+
+---
+
+## Improve visualization further
+
+```{r eval=FALSE}
+ggplot(fisheries_summary, 
+       aes(x = reorder(continent, mean_ap), y = mean_ap)) +
+  geom_col() +
+  coord_flip() +
+  scale_y_continuous(labels = percent_format(accuracy = 1)) + #<<
   labs(
     x = "", y = "",
     title = "Average share of aquaculture by continent",
@@ -433,7 +403,7 @@ ggplot(fisheries_summary,
        aes(x = reorder(continent, mean_ap), y = mean_ap)) +
   geom_col() +
   coord_flip() +
-  scale_y_continuous(labels = percent) + #<<
+  scale_y_continuous(labels = percent_format(accuracy = 1)) + #<<
   labs(
     x = "", y = "",
     title = "Average share of aquaculture by continent",
@@ -490,11 +460,14 @@ world_map <- map_data("world") %>%
 
 ## Map the world
 
-```{r}
+.midi[
+```{r fig.height=5, fig.width=12}
 ggplot(world_map, aes(x = long, y = lat, group = group)) +
   geom_polygon(fill = "gray") +
   theme_minimal()
 ```
+]
+
 
 ---
 
@@ -528,12 +501,14 @@ glimpse(fisheries_map)
 
 ## Mapping fisheries
 
-```{r}
+.midi[
+```{r fig.height=4.5, fig.width=12}
 ggplot(fisheries_map, mapping = aes(x = long, y = lat, group = group)) +
   geom_polygon(aes(fill = capture)) +
   scale_fill_viridis_c() +
   theme_minimal()
 ```
+]
 
 ---
 
@@ -541,12 +516,14 @@ ggplot(fisheries_map, mapping = aes(x = long, y = lat, group = group)) +
 What is misleading about the following map?
 ]
 
-```{r echo=FALSE}
+.midi[
+```{r echo=FALSE, fig.height=6, fig.width=12, fig.align="center"}
 ggplot(fisheries_map, mapping = aes(x = long, y = lat, group = group)) +
   geom_polygon(aes(fill = capture)) +
   scale_fill_viridis_c() +
   theme_minimal()
 ```
+]
 
 ---
 
@@ -559,21 +536,67 @@ ggplot() +
                fill = "lightgray") + #<<
   geom_polygon(fisheries_map, 
                mapping = aes(x = long, y = lat, group = group, 
-                             fill = log(capture))) + #<<
+                             fill = capture)) + #<<
   scale_fill_viridis_c() +
   theme_minimal() +
   theme(legend.position = "bottom") +
   labs(
     x = "", y = "",
-    title = "Fisheries harvest 2016",
-    subtitle = "Capture, in logged tonnes",
+    title = "Fisheries harvest by capture, 2016",
+    subtitle = "Capture measured in tonnes",
     caption = "Source: bit.ly/2VrawTt"
   )
 ```
 
 ---
 
-```{r echo=FALSE}
+```{r echo=FALSE, fig.height=7, fig.width=12, fig.align="center"}
+ggplot() +
+  geom_polygon(world_map, 
+               mapping = aes(x = long, y = lat, group = group), 
+               fill = "lightgray") +
+  geom_polygon(fisheries_map, 
+               mapping = aes(x = long, y = lat, group = group, 
+                             fill = capture)) +
+  scale_fill_viridis_c() +
+  theme_minimal() +
+  theme(legend.position = "bottom") +
+  labs(
+    x = "", y = "",
+    title = "Fisheries harvest by capture, 2016",
+    subtitle = "Capture measured in tonnes",
+    caption = "Source: bit.ly/2VrawTt"
+  )
+```
+
+---
+
+## Log scale
+
+```{r eval=FALSE}
+ggplot() +
+  geom_polygon(world_map, 
+               mapping = aes(x = long, y = lat, group = group), 
+               fill = "lightgray") +
+  geom_polygon(fisheries_map, 
+               mapping = aes(x = long, y = lat, group = group, 
+                                            fill = log(capture))) + #<<
+  scale_fill_viridis_c() +
+  theme_minimal() +
+  theme(legend.position = "bottom") +
+  labs(
+    x = "", y = "",
+    title = "Fisheries harvest by capture, 2016",
+    subtitle = "Capture measured in logged tonnes",
+    caption = "Source: bit.ly/2VrawTt"
+  )
+```
+
+---
+
+## Log scale
+
+```{r echo=FALSE, fig.height=7, fig.width=12, fig.align="center"}
 ggplot() +
   geom_polygon(world_map, mapping = aes(x = long, y = lat, group = group), fill = "lightgray") +
   geom_polygon(fisheries_map, mapping = aes(x = long, y = lat, group = group, fill = log(capture))) +
@@ -582,8 +605,8 @@ ggplot() +
   theme(legend.position = "bottom") +
   labs(
     x = "", y = "",
-    title = "Fisheries harvest 2016",
-    subtitle = "Capture, in logged tonnes",
+    title = "Fisheries harvest by capture, 2016",
+    subtitle = "Capture measured in logged tonnes",
     caption = "Source: bit.ly/2VrawTt"
   )
 ```
@@ -599,14 +622,14 @@ ggplot() +
                fill = "lightgray") +
   geom_polygon(fisheries_map, 
                mapping = aes(x = long, y = lat, group = group, 
-                             fill = log(aquaculture+1))) +
+                             fill = log(aquaculture+1))) + #<<
   scale_fill_viridis_c() +
   theme_minimal() +
   theme(legend.position = "bottom") +
   labs(
     x = "", y = "",
-    title = "Fisheries harvest 2016",
-    subtitle = "Aquaculture, in logged tonnes",
+    title = "Fisheries harvest by aquaculture, 2016",
+    subtitle = "Aquaculture measured in logged tonnes",
     fill = "log(aquaculture)",
     caption = "Source: bit.ly/2VrawTt"
   )
@@ -614,9 +637,7 @@ ggplot() +
 
 ---
 
-## Aquaculture
-
-```{r echo=FALSE}
+```{r echo=FALSE, fig.height=7, fig.width=12, fig.align="center"}
 ggplot() +
   geom_polygon(world_map, mapping = aes(x = long, y = lat, group = group), fill = "lightgray") +
   geom_polygon(fisheries_map, mapping = aes(x = long, y = lat, group = group, fill = log(aquaculture+1))) +
@@ -625,8 +646,8 @@ ggplot() +
   theme(legend.position = "bottom") +
   labs(
     x = "", y = "",
-    title = "Fisheries harvest 2016",
-    subtitle = "Aquaculture, in logged tonnes",
+    title = "Fisheries harvest by aquaculture, 2016",
+    subtitle = "Aquaculture measured in logged tonnes",
     fill = "log(aquaculture)",
     caption = "Source: bit.ly/2VrawTt"
   )
@@ -634,22 +655,27 @@ ggplot() +
 
 ---
 
-```{r echo=FALSE}
+```{r echo=FALSE, fig.height=7, fig.width=12, fig.align="center"}
 fisheries_map <- fisheries_map %>%
   mutate(
     aquaculture_perc = aquaculture / total
   )
 
 ggplot() +
-  geom_polygon(world_map, mapping = aes(x = long, y = lat, group = group), fill = "lightgray") +
-  geom_polygon(fisheries_map, mapping = aes(x = long, y = lat, group = group, fill = aquaculture_perc)) +
-  scale_fill_viridis_c(labels = percent) +
+  geom_polygon(world_map, 
+               mapping = aes(x = long, y = lat, group = group), 
+               fill = "lightgray") +
+  geom_polygon(fisheries_map, 
+               mapping = aes(x = long, y = lat, group = group, 
+                             fill = aquaculture_perc)) +
+  scale_fill_viridis_c(labels = percent_format(accuracy = 1)) +
   theme_minimal() +
-  theme(legend.position = "bottom") +
+  theme(legend.position = "bottom", legend.key.width = unit(2, "lines")) +
   labs(
     x = "", y = "",
-    title = "Average share of aquaculture by continent",
+    title = "Average share of aquaculture by country",
     subtitle = "out of total fisheries harvest, 2016",
-    caption = "Source: bit.ly/2VrawTt"
+    caption = "Source: bit.ly/2VrawTt",
+    fill = "Aquaculture %"
   )
 ```

@@ -173,8 +173,7 @@ continents
 
 ## Joining data frames
 
-
-```r
+```
 *_join(x, y)
 ```
 
@@ -184,14 +183,15 @@ all combination of multiple matches in the case of multiple matches
 - `right_join()`: all rows from y
 - `full_join()`: all rows from both x and y
 - `semi_join()`: all rows from x where there are matching values in y, keeping just columns from x.
-- `anti_join()`: return all rows from x where there are not matching values in y, , never duplicate rows of x
+- `anti_join()`: return all rows from x where there are not matching values in y, never duplicate rows of x
 - ...
  
 ---
 
-## `inner_join()`
+## Setup
 
-.pull-left[
+For the next few slides...
+
 .pull-left[
 
 
@@ -200,12 +200,13 @@ x
 ```
 
 ```
+## # A tibble: 3 x 1
 ##   value
+##   &lt;dbl&gt;
 ## 1     1
 ## 2     2
 ## 3     3
 ```
-
 ]
 .pull-right[
 
@@ -215,12 +216,20 @@ y
 ```
 
 ```
+## # A tibble: 3 x 1
 ##   value
+##   &lt;dbl&gt;
 ## 1     1
 ## 2     2
 ## 3     4
 ```
 ]
+
+---
+
+## `inner_join()`
+
+.pull-left[
 
 ```r
 inner_join(x, y)
@@ -231,7 +240,9 @@ inner_join(x, y)
 ```
 
 ```
+## # A tibble: 2 x 1
 ##   value
+##   &lt;dbl&gt;
 ## 1     1
 ## 2     2
 ```
@@ -245,35 +256,6 @@ inner_join(x, y)
 ## `left_join()`
 
 .pull-left[
-.pull-left[
-
-
-```r
-x
-```
-
-```
-##   value
-## 1     1
-## 2     2
-## 3     3
-```
-
-]
-.pull-right[
-
-
-```r
-y
-```
-
-```
-##   value
-## 1     1
-## 2     2
-## 3     4
-```
-]
 
 ```r
 left_join(x, y)
@@ -284,7 +266,9 @@ left_join(x, y)
 ```
 
 ```
+## # A tibble: 3 x 1
 ##   value
+##   &lt;dbl&gt;
 ## 1     1
 ## 2     2
 ## 3     3
@@ -299,35 +283,6 @@ left_join(x, y)
 ## `right_join()`
 
 .pull-left[
-.pull-left[
-
-
-```r
-x
-```
-
-```
-##   value
-## 1     1
-## 2     2
-## 3     3
-```
-
-]
-.pull-right[
-
-
-```r
-y
-```
-
-```
-##   value
-## 1     1
-## 2     2
-## 3     4
-```
-]
 
 ```r
 right_join(x, y)
@@ -338,7 +293,9 @@ right_join(x, y)
 ```
 
 ```
+## # A tibble: 3 x 1
 ##   value
+##   &lt;dbl&gt;
 ## 1     1
 ## 2     2
 ## 3     4
@@ -353,35 +310,6 @@ right_join(x, y)
 ## `full_join()`
 
 .pull-left[
-.pull-left[
-
-
-```r
-x
-```
-
-```
-##   value
-## 1     1
-## 2     2
-## 3     3
-```
-
-]
-.pull-right[
-
-
-```r
-y
-```
-
-```
-##   value
-## 1     1
-## 2     2
-## 3     4
-```
-]
 
 ```r
 full_join(x, y)
@@ -392,7 +320,9 @@ full_join(x, y)
 ```
 
 ```
+## # A tibble: 4 x 1
 ##   value
+##   &lt;dbl&gt;
 ## 1     1
 ## 2     2
 ## 3     3
@@ -408,35 +338,6 @@ full_join(x, y)
 ## `semi_join()`
 
 .pull-left[
-.pull-left[
-
-
-```r
-x
-```
-
-```
-##   value
-## 1     1
-## 2     2
-## 3     3
-```
-
-]
-.pull-right[
-
-
-```r
-y
-```
-
-```
-##   value
-## 1     1
-## 2     2
-## 3     4
-```
-]
 
 ```r
 semi_join(x, y)
@@ -447,7 +348,9 @@ semi_join(x, y)
 ```
 
 ```
+## # A tibble: 2 x 1
 ##   value
+##   &lt;dbl&gt;
 ## 1     1
 ## 2     2
 ```
@@ -461,35 +364,6 @@ semi_join(x, y)
 ## `anti_join()`
 
 .pull-left[
-.pull-left[
-
-
-```r
-x
-```
-
-```
-##   value
-## 1     1
-## 2     2
-## 3     3
-```
-
-]
-.pull-right[
-
-
-```r
-y
-```
-
-```
-##   value
-## 1     1
-## 2     2
-## 3     4
-```
-]
 
 ```r
 anti_join(x, y)
@@ -500,7 +374,9 @@ anti_join(x, y)
 ```
 
 ```
+## # A tibble: 1 x 1
 ##   value
+##   &lt;dbl&gt;
 ## 1     3
 ```
 ]
@@ -573,6 +449,31 @@ fisheries &lt;- left_join(fisheries, continents)
 
 ```
 ## Joining, by = "country"
+```
+
+--
+
+.question[
+How does `left_join()` know to join the two data frames by `country`?
+]
+
+Hint:
+
+
+```r
+names(fisheries)
+```
+
+```
+## [1] "country"     "capture"     "aquaculture" "total"       "continent"
+```
+
+```r
+names(continents)
+```
+
+```
+## [1] "country"   "continent"
 ```
 
 ---
@@ -673,7 +574,7 @@ ggplot(fisheries_summary, aes(x = continent, y = mean_ap)) +
   geom_col()
 ```
 
-![](w4_d2-joining-mapping_files/figure-html/unnamed-chunk-52-1.png)&lt;!-- --&gt;
+![](w4_d2-joining-mapping_files/figure-html/unnamed-chunk-32-1.png)&lt;!-- --&gt;
 
 ---
 
@@ -682,10 +583,34 @@ ggplot(fisheries_summary, aes(x = continent, y = mean_ap)) +
 
 ```r
 ggplot(fisheries_summary, 
-       aes(x = reorder(continent, mean_ap), y = mean_ap)) +
+*      aes(x = reorder(continent, mean_ap), y = mean_ap)) +
   geom_col() +
   coord_flip() +
 * scale_y_continuous(labels = percent) +
+  labs(
+    x = "", y = "",
+    title = "Average share of aquaculture by continent",
+    subtitle = "out of total fisheries harvest, 2016",
+    caption = "Source: bit.ly/2VrawTt"
+  ) +
+* theme_minimal()
+```
+
+---
+
+![](w4_d2-joining-mapping_files/figure-html/unnamed-chunk-34-1.png)&lt;!-- --&gt;
+
+---
+
+## Improve visualization further
+
+
+```r
+ggplot(fisheries_summary, 
+       aes(x = reorder(continent, mean_ap), y = mean_ap)) +
+  geom_col() +
+  coord_flip() +
+* scale_y_continuous(labels = percent_format(accuracy = 1)) +
   labs(
     x = "", y = "",
     title = "Average share of aquaculture by continent",
@@ -697,7 +622,7 @@ ggplot(fisheries_summary,
 
 ---
 
-![](w4_d2-joining-mapping_files/figure-html/unnamed-chunk-54-1.png)&lt;!-- --&gt;
+![](w4_d2-joining-mapping_files/figure-html/unnamed-chunk-36-1.png)&lt;!-- --&gt;
 
 ---
 
@@ -919,6 +844,7 @@ world_map &lt;- map_data("world") %&gt;%
 
 ## Map the world
 
+.midi[
 
 ```r
 ggplot(world_map, aes(x = long, y = lat, group = group)) +
@@ -926,7 +852,9 @@ ggplot(world_map, aes(x = long, y = lat, group = group)) +
   theme_minimal()
 ```
 
-![](w4_d2-joining-mapping_files/figure-html/unnamed-chunk-57-1.png)&lt;!-- --&gt;
+![](w4_d2-joining-mapping_files/figure-html/unnamed-chunk-39-1.png)&lt;!-- --&gt;
+]
+
 
 ---
 
@@ -1999,10 +1927,9 @@ glimpse(fisheries_map)
 
 ---
 
-.question[
-What is misleading about the following map?
-]
+## Mapping fisheries
 
+.midi[
 
 ```r
 ggplot(fisheries_map, mapping = aes(x = long, y = lat, group = group)) +
@@ -2011,7 +1938,18 @@ ggplot(fisheries_map, mapping = aes(x = long, y = lat, group = group)) +
   theme_minimal()
 ```
 
-![](w4_d2-joining-mapping_files/figure-html/unnamed-chunk-62-1.png)&lt;!-- --&gt;
+![](w4_d2-joining-mapping_files/figure-html/unnamed-chunk-44-1.png)&lt;!-- --&gt;
+]
+
+---
+
+.question[
+What is misleading about the following map?
+]
+
+.midi[
+&lt;img src="w4_d2-joining-mapping_files/figure-html/unnamed-chunk-45-1.png" style="display: block; margin: auto;" /&gt;
+]
 
 ---
 
@@ -2020,24 +1958,56 @@ ggplot(fisheries_map, mapping = aes(x = long, y = lat, group = group)) +
 
 ```r
 ggplot() +
-  geom_polygon(world_map, mapping = aes(x = long, y = lat, group = group), fill = "lightgray") +
-  geom_polygon(fisheries_map, mapping = aes(x = long, y = lat, group = group, fill = log(capture))) +
+  geom_polygon(world_map, 
+               mapping = aes(x = long, y = lat, group = group), 
+*              fill = "lightgray") +
+  geom_polygon(fisheries_map, 
+               mapping = aes(x = long, y = lat, group = group, 
+*                            fill = capture)) +
   scale_fill_viridis_c() +
   theme_minimal() +
   theme(legend.position = "bottom") +
   labs(
     x = "", y = "",
-    title = "Fisheries harvest 2016",
-    subtitle = "Capture, in logged tonnes",
+    title = "Fisheries harvest by capture, 2016",
+    subtitle = "Capture measured in tonnes",
     caption = "Source: bit.ly/2VrawTt"
   )
 ```
 
 ---
 
-## Putting it altogether
+&lt;img src="w4_d2-joining-mapping_files/figure-html/unnamed-chunk-47-1.png" style="display: block; margin: auto;" /&gt;
 
-![](w4_d2-joining-mapping_files/figure-html/unnamed-chunk-64-1.png)&lt;!-- --&gt;
+---
+
+## Log scale
+
+
+```r
+ggplot() +
+  geom_polygon(world_map, 
+               mapping = aes(x = long, y = lat, group = group), 
+               fill = "lightgray") +
+  geom_polygon(fisheries_map, 
+               mapping = aes(x = long, y = lat, group = group, 
+*                                           fill = log(capture))) +
+  scale_fill_viridis_c() +
+  theme_minimal() +
+  theme(legend.position = "bottom") +
+  labs(
+    x = "", y = "",
+    title = "Fisheries harvest by capture, 2016",
+    subtitle = "Capture measured in logged tonnes",
+    caption = "Source: bit.ly/2VrawTt"
+  )
+```
+
+---
+
+## Log scale
+
+&lt;img src="w4_d2-joining-mapping_files/figure-html/unnamed-chunk-49-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -2046,27 +2016,31 @@ ggplot() +
 
 ```r
 ggplot() +
-  geom_polygon(world_map, mapping = aes(x = long, y = lat, group = group), fill = "lightgray") +
-  geom_polygon(fisheries_map, mapping = aes(x = long, y = lat, group = group, fill = log(aquaculture+1))) +
+  geom_polygon(world_map, 
+               mapping = aes(x = long, y = lat, group = group), 
+               fill = "lightgray") +
+  geom_polygon(fisheries_map, 
+               mapping = aes(x = long, y = lat, group = group, 
+*                            fill = log(aquaculture+1))) +
   scale_fill_viridis_c() +
   theme_minimal() +
   theme(legend.position = "bottom") +
   labs(
     x = "", y = "",
-    title = "Fisheries harvest 2016",
-    subtitle = "Aquaculture, in logged tonnes",
+    title = "Fisheries harvest by aquaculture, 2016",
+    subtitle = "Aquaculture measured in logged tonnes",
     fill = "log(aquaculture)",
     caption = "Source: bit.ly/2VrawTt"
   )
 ```
 
-## Aquaculture
+---
 
-![](w4_d2-joining-mapping_files/figure-html/unnamed-chunk-66-1.png)&lt;!-- --&gt;
+&lt;img src="w4_d2-joining-mapping_files/figure-html/unnamed-chunk-51-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
-![](w4_d2-joining-mapping_files/figure-html/unnamed-chunk-67-1.png)&lt;!-- --&gt;
+&lt;img src="w4_d2-joining-mapping_files/figure-html/unnamed-chunk-52-1.png" style="display: block; margin: auto;" /&gt;
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
