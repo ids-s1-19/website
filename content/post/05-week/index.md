@@ -25,3 +25,9 @@ title: 'Week 5 - Extracting meaning from data'
 | HW 05      | Project proposals |
 | RT 05      | Interactive tutorial covering week’s material |
 
+| <div style="width:60px"></div>  | <div style="width:420px"></div>  |  <div style="width:190px"></div> |
+|----:|---|---|
+| :open_book: | R4DS: [Chp 7, Exploratory Data Analysis](https://r4ds.had.co.nz/exploratory-data-analysis.html) | **Required** |
+| :open_book: | OS: [Chp 1, Sec 1.3 and 1.4](https://www.openintro.org/stat/textbook.php?stat_book=os) | **Required** |
+| :open_book: | R4DS: [Chp 14, Strings, Sec 14.1 and 14.2](https://r4ds.had.co.nz/strings.html) | **Required** |
+| :open_book: | R4DS: [Chp 15, Factors](https://r4ds.had.co.nz/factors.html) | **Required** |
