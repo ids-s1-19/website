@@ -1,0 +1,115 @@
+---
+title: "HW 04 - Legos and instructors"
+output: 
+  tufte::tufte_html:
+    css: ../hw.css
+    tufte_variant: "envisioned"
+    highlight: pygments
+link-citations: yes
+---
+
+```{r setup, include=FALSE}
+library(here)
+```
+
+
+```{r grassmarket, fig.margin = TRUE, echo = FALSE, fig.width=3, fig.cap="Photo by Daniel Cheung on Unsplash"}
+knitr::include_graphics("img/daniel-cheung-ZqqlOZyGG7g-unsplash.jpg")
+```
+
+This week we'll do some data gymnastics to refesh and review what we 
+learned over the past few weeks.
+
+# Packages
+
+In this assignment we will work with the `tidyverse` as usual. In addition, we'll 
+use the `scales` package for formatting numerical values, and the `fivethirtyeight` 
+package for data.  `tidyverse` and `scales` packages are already installed for you,
+so you can load them with the following:
+
+```{r message=FALSE}
+library(tidyverse)
+library(scales)
+```
+
+## Legos
+
+We have data from lego sales in 2018 for a sample of customers who 
+bought legos in the US. Load the data using the following:
+
+```{r eval=FALSE}
+lego_sales <- read_csv("data/lego_sales.csv")
+```
+
+The codebook for the dataset is as follows.
+
+- `first_name`: First name of customer
+- `last_name`: Last name of customer
+- `age`: Age of customer
+- `phone_number`: Phone number of customer
+- `set_id`: Set ID of lego set purchased
+- `number`: Item number of lego set purchased
+- `theme`: Theme of lego set purchased
+- `subtheme`: Sub theme of lego set purchased
+- `year`: Year of purchase
+- `name`: Name of lego set purchased
+- `pieces`: Number of pieces of legos in set purchased
+- `us_price`: Price of set purchase in US Dollars
+- `image_url`: Image URL of lego set purchased
+- `quantity`: Quantity of lego set(s) purchased
+
+Answer the following questions using pipelines. For each question, state your 
+answer in a sentence, e.g. "The first three common names of purchasers are ...".
+
+1. What are the three most common first names of purchasers?
+
+2. What are the three most common themes of lego sets purchased?
+
+3. Among the most common theme of lego sets purchased, what is the most common 
+subtheme?
+
+```{marginfigure}
+*Hint:* Use the `case_when()` function.
+```
+
+4. Create a new variabled called `age_group` and group the ages into the 
+following categories: "18 and under", "19 - 25", "26 - 35", "36 - 50", "51 and over".
+
+```{marginfigure}
+*Hint:* You will need to consider quantity of purchases.
+```
+
+5. Which age group has purchased the highest number of lego sets. 
+
+```{marginfigure}
+*Hint:* You will need to consider quantity of purchases as well as price of 
+lego sets.
+```
+
+6. Which age group has spent the most money on legos?
+
+7. Come up with a question you want to answer using these data, and write it down. 
+Then, create a data visualization that answers the question, and explain how 
+your visualization answers the question.
+
+## Instructional staff employment trends
+
+You've already seen this data set in this week's lab. It's the one about trends 
+in instructional staff employees between 1975 and 2011. You can load this data 
+set using the following:
+
+```{r eval=FALSE}
+staff <- read_csv("data/instructional-staff.csv")
+```
+
+The data visualization in the report where these data come from was provided in 
+your lab (and can be accessed [here](https://introds.org/labs/lab-04/lab-04-ugly-charts.html#instructional-staff-employment-trends)). 
+During the workshop you had a chance to discuss with yout teammates how you 
+would improve upon this visualization if the main objective was to communicate 
+that the proportion of part-time faculty have gone up over time compared to 
+other instructional staff types.
+
+8. Implement the improvements and provide your improved visualization as part 
+of your answer. Also write a few sentences about why you chose to make these 
+improvements and how they address the main goal stated above. Feel free to reuse 
+any code from the lab.
