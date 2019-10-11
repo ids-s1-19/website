@@ -8,11 +8,6 @@ output:
 link-citations: yes
 ---
 
-```{r setup, include=FALSE}
-library(here)
-```
-
-
 ```{r grassmarket, fig.margin = TRUE, echo = FALSE, fig.width=3, fig.cap="Photo by Daniel Cheung on Unsplash"}
 knitr::include_graphics("img/daniel-cheung-ZqqlOZyGG7g-unsplash.jpg")
 ```
@@ -22,17 +17,13 @@ learned over the past few weeks.
 
 # Packages
 
-In this assignment we will work with the `tidyverse` as usual. In addition, we'll 
-use the `scales` package for formatting numerical values, and the `fivethirtyeight` 
-package for data.  `tidyverse` and `scales` packages are already installed for you,
-so you can load them with the following:
+In this assignment we will work with the `tidyverse` as usual.
 
 ```{r message=FALSE}
 library(tidyverse)
-library(scales)
 ```
 
-## Legos
+## Lego sales
 
 We have data from lego sales in 2018 for a sample of customers who 
 bought legos in the US. Load the data using the following:
