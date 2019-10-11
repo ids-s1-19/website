@@ -15,11 +15,51 @@ knitr::include_graphics("img/daniel-cheung-ZqqlOZyGG7g-unsplash.jpg")
 This week we'll do some data gymnastics to refesh and review what we 
 learned over the past few weeks.
 
+# RStudio Cloud
+
+We will continue to use RStudio Cloud on this assignment. If you have not yet 
+joined the RStudio Cloud workspace for this course, you can do so [here](https://rstudio.cloud/spaces/34062/join?access_code=%2FoMkTUWkzo8%2B7q86yRe0FlKhrcpmgwsk7sCNnNNH). If you were in workshop this week, you probably already 
+did it, but if not, this might be new to you.
+
+**Note:** If you have already joined the course workspace, you can simply go to 
+[rstudio.cloud](https://rstudio.cloud/) and log on. However it's important that 
+then you navigate to the course workspace (it should be listed as IDS - Fall 2019) 
+on the left menu. If you are in the correct workspace, your top bar should 
+look like the following:
+
+```{r echo=FALSE}
+knitr::include_graphics("img/rstudio-cloud-workspace.png")
+```
+
+And if you are not, once you get started on your work you will see a message 
+about packages you need not being installed. This should prompt you to navigate 
+to the course workspace, and continue your work there.
+
+Once you're in the workspace click on the Projects tab on top, and create a New 
+project from Git Repo.
+
+```{r echo=FALSE}
+knitr::include_graphics("img/rstudio-cloud-new-project.png")
+```
+
+Then, copy and paste the URL of your repo, as you do each time. This will clone 
+the repo and get you started with your assignment.
+
+The only new thing you need to do is to introduce yourself to Git once again. 
+Run the following, with replacing `"Your Name"` with your real name and last name,
+and `"your.email@address.com"` with the email address you used for GitHub.
+
+```{r use-git, eval=FALSE}
+library(usethis)
+use_git_config(user.name = "Your Name", 
+               user.email = "your.email@address.com")
+```
+
 # Packages
 
 In this assignment we will work with the `tidyverse` as usual.
 
-```{r message=FALSE}
+```{r load-package, eval=FALSE}
 library(tidyverse)
 ```
 
