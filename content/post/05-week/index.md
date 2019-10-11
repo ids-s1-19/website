@@ -16,8 +16,9 @@ summary: Extracting meaning from data and effective communication of results
 title: 'Week 5 - Extracting meaning from data'
 ---
 
-|            |  |
-|------------|----------|
+### Schedule
+
+| <div style="width:60px"></div>  | <div style="width:420px"></div> |  <div style="width:190px"></div>   |
 | Lecture 09 | Designing and interpreting the conclusions of scientific studies, confounding |
 | Lecture 10 | Communicating data science results effectively | 
 | Lab 05     | Simpson’s paradox |
