@@ -19,12 +19,12 @@ title: 'Week 5 - Extracting meaning from data'
 ### Schedule
 
 | <div style="width:60px"></div>  | <div style="width:420px"></div> |  <div style="width:190px"></div>   |
-| Lecture 09 | Designing and interpreting the conclusions of scientific studies, confounding |
-| Lecture 10 | Communicating data science results effectively | 
-| Lab 05     | Simpson’s paradox |
-| OQ 05      | Coding best practices |
-| HW 05      | Project proposals |
-| RT 05      | Interactive tutorial covering week’s material |
+| Lect 09 | Designing and interpreting the conclusions of scientific studies, confounding |
+| Lab 05     | Simpson’s paradox | **Due:** ___ |
+| Lec 10 | Communicating data science results effectively | 
+| HW 05      | Project proposals | **Due:** ___ |
+| OQ 05      | Coding best practices | **Due:** ___ |
+| RT 05      | Interactive tutorial covering week’s material | **Due:** ___ |
 
 | <div style="width:60px"></div>  | <div style="width:420px"></div>  |  <div style="width:190px"></div> |
 |----:|---|---|
