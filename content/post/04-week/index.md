@@ -25,7 +25,7 @@ title: 'Week 4 - Diving deeper into visualization'
 | Lec 08 | [Joining and mapping](/slides/w4_d2-joining-mapping/w4_d2-joining-mapping.html) |
 | HW 04  | [Legos and instructors](/hw/hw-04/hw-04-legos-instructors.html) | **Due:** Wed, 16 Oct, 17:00 |
 | RT 04  | Interactive tutorial covering week’s material: [Separate + unite](https://rstudio.cloud/learn/primers/4.2) + [Join](https://rstudio.cloud/learn/primers/4.3) |
-| OQ 04  | Critiquing and improving data visualizations and their interpretations |
+| OQ 04  | [Data joins and better visualizations](https://minecr.shinyapps.io/04-wrangleviz/) | **Due:** Fri, 18 Oct, 17:00
 
 ### Readings
 
