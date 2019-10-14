@@ -21,7 +21,7 @@ title: 'Week 5 - Extracting meaning from data'
 | <div style="width:60px"></div>  | <div style="width:420px"></div> |  <div style="width:190px"></div>   |
 |---:|---|---|
 | Lec 09 | [Scientific studies and confounding](/slides/w5_d1-studies-confounding/w5_d1-studies-confounding.html) |
-| Lab 05 | Simpson’s paradox| **Due:** Fri, 18 Oct, 17:00 |
+| Lab 05 | [Simpson’s paradox](/labs/lab-05/lab-05-simpsons-paradox.html)| **Due:** Fri, 18 Oct, 17:00 |
 | Lec 10 | Communicating data science results effectively |
 | HW 05  | Project proposals | **Due:** Wed, 23 Oct, 17:00 |
 | RT 05  | Interactive tutorial covering week’s material |

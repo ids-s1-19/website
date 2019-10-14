@@ -1,0 +1,300 @@
+---
+title: "Lab 05 - Simpson's paradox"
+output: 
+  tufte::tufte_html:
+    css: ../lab.css
+    tufte_variant: "envisioned"
+    highlight: pygments
+    toc: yes
+link-citations: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(eval = TRUE)
+library(kableExtra)
+library(tidyverse)
+```
+
+---
+
+```{marginfigure}
+**Learning goals:**  
++ Merge conflicts  
++ Deciphering Simpson's paradox with visualizations and summary statistics
+```
+
+This week in workshop the theme is paradoxes and conflicts. That is, we will 
+first (finally!) get to the bottom of merge conflicts and then return our 
+attention back to data analysis with Simpson's paradox.
+
+# Getting started
+
+```{marginfigure}
+You can find your team assignment for the rest of the semester [here](https://github.com/ids-s1-19/team-assignments/blob/master/roster-team.csv).
+If there are any issues with the team roster, please let one of the tutors or 
+the professor know asap!
+```
+
+Go to the course [GitHub organization](https://github.com/ids-s1-19) and locate 
+your Lab 05 repo, which should be named `lab-05-simpsons-paradox-YOUR_TEAMNAME`. 
+Grab the URL of the repo, and clone it in RStudio Cloud. Refer to [Lab 01](/labs/lab-01/lab-01-hello-r) if you would like to see step-by-step 
+instructions for cloning a repo into an RStudio project.
+
+First, open the R Markdown document `lab-05-simpsons-paradox.Rmd` and Knit it. 
+Make sure it compiles without errors. The output will be in the file markdown 
+`.md` file with the same name.
+
+# Workflow
+
+## Introduce yourself to Git
+
+```{marginfigure}
+Your email address is the address tied to your GitHub account and your name 
+should be first and last name.
+```
+
+Before we can get started we need to take care of some required housekeeping. 
+Specifically,  we need to do some configuration so that RStudio can communicate 
+with GitHub. This requires two pieces of information: your email address and your name.
+
+Run the following (but update it for your name and email!) in the Console to 
+configure Git:
+
+```{r git-config, eval=FALSE}
+library(usethis)
+use_git_config(user.name = "Your Name", 
+               user.email = "your.email@address.com")
+``` 
+
+## Merge conflicts
+
+This is the third week you're working in teams, so we're going to make things a 
+little more interesting and let all of you make changes and push those changes 
+to your team repository. Sometimes things will go swimmingly, and sometimes you'll 
+run into merge conflicts. So our first task today is to walk you through a merge conflict!
+
+- When two collaborators make changes to a file and push the file to their repo, 
+git merges these two files.
+- If these two files have conflicting content on the same line, git will produce 
+a **merge conflict**.
+
+### Set up
+
+- Clone the repo for your next assignment in RStudio, and open the .Rmd file.
+- Assign the numbers 1, 2, 3, and 4 to each of the team members.
+
+### Let's cause a merge conflict!
+
+Take turns in completing the exercise, only one member at a time.
+
+- **Member 1:** Change the team name to your actual team name, knit, commit, push.  
+`r emo::ji("stop_sign")` Wait for instructions before moving on to the next step.
+- **Member 2:** Change the team name to some other word, knit, commit, push. You should get an error. Pull. Take a look at the document with the merge conflict. Clear the merge conflict by choosing the correct/preferred change. Commit, and push.  
+`r emo::ji("stop_sign")` Wait for instructions before moving on to the next step.
+- **Member 3:** Add a label to the first code chunk, knit, commit, push. You should get an error. Pull. No merge conflicts should occur. Now push.  
+`r emo::ji("stop_sign")` Wait for instructions before moving on to the next step.
+- **Member 4:** Add a different label to the first code chunk, knit, commit, push. You should get an error. Pull. Take a look at the document with the merge conflict. Clear the merge conflict by choosing the correct/preferred change. Commit, and push.  
+`r emo::ji("stop_sign")` Wait for instructions before moving on to the next step.  
+- **All members:** Pull, and observe the changes in your document.
+
+## Tips for collaborating via GitHub
+
+- Always pull first before you start working.
+- Commit, and push, often to minimize merge conflicts and/or to make merge conflicts 
+easier to resolve.
+- If you find yourself in a situation that is difficult to resolve, ask questions 
+asap, don't let it linger and get bigger.
+
+# Simpson's paradox
+
+## What is Simpson's paradox?
+
+Consider the following dataset with two variables `x` and `y`.
+
+```{r echo=FALSE, message=FALSE}
+df <- tribble(
+  ~x, ~y, ~z,
+  2,   4,  "A",
+  3,   3,  "A",
+  4,   2,  "A",
+  5,   1,  "A",
+  6,   11, "B",
+  7,   10, "B",
+  8,   9,  "B",
+  9,   8,  "B"
+)
+df %>% 
+  select(x, y) %>% 
+  t() %>% 
+  knitr::kable() %>%
+  column_spec(1, bold = T, border_right = T)
+```
+
+Let's plot these variables:
+
+```{r echo=FALSE, fig.width=3, fig.height=1.25, fig.align="center"}
+ggplot(data = df) +
+  geom_point(aes(x = x, y = y), color = "darkgray") +
+  theme_minimal()
+```
+
+And fit a line through them:
+
+```{r echo=FALSE, fig.width=3, fig.height=1.25, fig.align="center", message=FALSE}
+ggplot(data = df) +
+  geom_point(aes(x = x, y = y), color = "darkgray") +
+  geom_smooth(aes(x = x, y = x), color = "darkgray") +
+  theme_minimal()
+```
+
+The relationship between `x` and `y` appears to be positive.
+
+Now let's reveal one more variable from the dataset, `z`, which shows that 
+some of these observations belong to Group A and some belong to Group B.
+
+```{r echo=FALSE, message=FALSE}
+df %>% 
+  select(x, y, z) %>% 
+  t() %>% 
+  knitr::kable() %>%
+  column_spec(1, bold = T, border_right = T)
+```
+
+And let's color the points by this grouping variable, `z`:
+
+```{r echo=FALSE, fig.width=3, fig.height=1.25, fig.align="center", message=FALSE}
+ggplot(data = df) +
+  geom_point(aes(x = x, y = y, color = z)) +
+  geom_smooth(aes(x = x, y = x), method = "lm", color = "darkgray") +
+  theme_minimal()
+```
+
+How would the relationship between `x` and `y` look, taking `z` into consideration?
+
+```{r echo=FALSE, fig.width=3, fig.height=1.25, fig.align="center", message=FALSE}
+ggplot(data = df) +
+  geom_point(aes(x = x, y = y, color = z)) +
+  geom_smooth(aes(x = x, y = x), method = "lm", color = "darkgray") +
+  geom_smooth(aes(x = x, y = y, color = z), method = "lm") +
+  theme_minimal()
+```
+
+Looks like the relationship is actually negative, as `x` increaes `y` decreases, 
+with data clustered in two groups.
+
+This is Simpson's paradox in action!
+
+It was only when we considered this third variable that the negative relationship 
+between `x` and `y` was revealed to be negative. Not considering an important 
+variable when studying a relationship can result in **Simpson's paradox**, which 
+illustrates the effect the omission of an explanatory variable can have on the 
+measure of association between another explanatory variable and a response variable. 
+
+## Age, smoking, and mortality in Whickham
+
+In this lab we will work with data on age, smoking, and mormatiligy from a 
+survey of the electoral roll in Whickham, a mixed urban and rural district near 
+Newcastle upon Tyne, in the UK. The survey was conducted in 1972-1974 to study 
+heart disease and thyroid disease. A follow-up on those in the survey was 
+conducted twenty years later.
+
+### Packages
+
+In this lab we will work with the `tidyverse` and `mosaicData` packages.
+
+```{r}
+library(tidyverse) 
+library(mosaicData) 
+```
+
+Note that these packages are also loaded in your R Markdown document.
+
+### The data
+
+The data is in the `mosaicData` package.
+
+Take a peek at the codebook with
+
+```{r eval=FALSE}
+?Whickham
+```
+
+### Exercises
+
+Take turns answering these questions. For example, the team leader can write the 
+responses to the first question, commit and push to GitHub. Then, all members 
+pull changes. Then, a second team member writes the answer for the second question, 
+and commits and pushes changes. Then, all members pull changes again, so on and 
+so forth. Ultimately all team members (who are present in workshop today) should 
+have some commits on GitHub.
+
+1. What type of study do you think these data come from: observational 
+   or experiment? Why?
+
+2. How many observations are in this dataset? What does each observation 
+   represent?
+
+3. How many variables are in this dataset? What type of variable is each? 
+   Display each variable using an appropriate visualization.
+
+4. What would you expect the relationship between smoking status and 
+   health outcome to be?
+
+5. Create a visualization depicting the relationship between smoking status 
+   and health outcome. Briefly describe the relationship, and evaluate whether 
+   this meets your expectations. Additionally, calculate the relevant
+   conditional probabilities to help your narrative. Here is some code to 
+   get you started:
+
+```{marginfigure}
+The code on the left gives you frequencies for Dead and Alive outcomes, grouped 
+by whether the respondent was a smoker or not. In order to obtain the conditional 
+probabilities needed to answer this question, you can add a new column to the 
+resulting data frame that calculates the proportions as `n / sum(n)`. Since the 
+data are grouped by smoking status, `sum(n)` will be calculated for each 
+smoker group.
+```
+
+```{r}
+Whickham %>%
+  group_by(smoker, outcome) %>%
+  summarise(n = n()) %>%
+  mutate(prop = n / sum(n))
+```
+
+6. Create a new variable called `age_cat` using the following scheme:
+
+- `age <= 44 ~ "18-44"`
+- `age > 44 & age <= 64 ~ "45-64"`
+- `age > 64 ~ "65+"`
+
+7. Re-create the visualization depicting the relationship between smoking 
+status and health outcome, faceted by `age_cat`. What changed? What might 
+explain this change? Extend the contingency table from earlier by 
+breaking it down by age category and use it to help your narrative.
+
+```{r eval=FALSE}
+Whickham %>%
+  count(smoker, age_cat, outcome)
+```
+
+`r emo::ji("white_check_mark")` `r emo::ji("arrow_up")` *Commit and push your changes to GitHub with an appropriate commit message again. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
+
+# Wrapping up
+
+Go back through your write up to make sure you're following coding style 
+guidelines we discussed in class. Make any edits as needed.
+
+Also, make sure all of your R chunks are properly labeled, and your figures 
+are reasonably sized.
+
+Once the team member who answered the last question pushes their final changes, 
+others should *pull* the changes and knit the R Markdown document to confirm 
+that they can reproduce the report.
+
+# More Simpson's paradox
+
+Want to read more Simpson's paradox examples?
+
+- [A great example of Simpson's Paradox: US median wage decline](https://blog.revolutionanalytics.com/2013/07/a-great-example-of-simpsons-paradox.html)
+- [Examples on Wikipedia](https://en.wikipedia.org/wiki/Simpson%27s_paradox#Examples)
