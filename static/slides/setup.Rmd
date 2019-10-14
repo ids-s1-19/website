@@ -19,6 +19,8 @@ knitr::knit_hooks$set(source = function(x, options) {
   x <- stringr::str_replace(x, "^[[:blank:]]?([^*].+?)[[:blank:]]*#<<[[:blank:]]*$", "*\\1")
   hook_source(x, options)
 })
+# countdown
+library(countdown)
 ```
 
 layout: true
