@@ -20,7 +20,7 @@ title: 'Week 11 - Wrap up'
 |------------|----------|
 | Lecture 21 | A brief foray quantifying uncertainty around estimates |
 | Lecture 22 | Data science ethics |
-| Lab 11     | Project presentations |
+| Lab 11     | Project presentations (JCMB 5327) |
 | OQ 11      | Review and recap |
 | No HW      |   |
 | RT 11      | Interactive tutorial covering week’s material |
