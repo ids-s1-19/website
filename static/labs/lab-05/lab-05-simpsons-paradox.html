@@ -481,7 +481,7 @@ width: 100%;
 </ul></li>
 </ul></li>
 <li><a href="#wrapping-up">Wrapping up</a></li>
-<li><a href="#more-ugly-charts">More ugly charts</a></li>
+<li><a href="#more-simpsons-paradox">More Simpson’s paradox</a></li>
 </ul>
 </div>
 
@@ -735,26 +735,19 @@ B
 </div>
 <div id="exercises" class="section level3">
 <h3>Exercises</h3>
+<p>Take turns answering these questions. For example, the team leader can write the responses to the first question, commit and push to GitHub. Then, all members pull changes. Then, a second team member writes the answer for the second question, and commits and pushes changes. Then, all members pull changes again, so on and so forth. Ultimately all team members (who are present in workshop today) should have some commits on GitHub.</p>
 <ol style="list-style-type: decimal">
-<li><p>What type of study do you think these data comne from: observational or experiment? Why?</p></li>
+<li><p>What type of study do you think these data come from: observational or experiment? Explain your reasoning.</p></li>
 <li><p>How many observations are in this dataset? What does each observation represent?</p></li>
 <li><p>How many variables are in this dataset? What type of variable is each? Display each variable using an appropriate visualization.</p></li>
-<li><p>What would you expect the relationship between smoking status and health outcome to be?</p></li>
+<li><p>What would you expect the relationship between smoking status and health outcome to be? Explain your reasoning.</p></li>
 <li><p>Create a visualization depicting the relationship between smoking status and health outcome. Briefly describe the relationship, and evaluate whether this meets your expectations. Additionally, calculate the relevant conditional probabilities to help your narrative. Here is some code to get you started:</p></li>
 </ol>
 <p><label for="tufte-mn-4" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-4" class="margin-toggle"><span class="marginnote"><span style="display: block;">The code on the left gives you frequencies for Dead and Alive outcomes, grouped by whether the respondent was a smoker or not. In order to obtain the conditional probabilities needed to answer this question, you can add a new column to the resulting data frame that calculates the proportions as <code>n / sum(n)</code>. Since the data are grouped by smoking status, <code>sum(n)</code> will be calculated for each smoker group.</span></span></p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">Whickham <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb4-2" data-line-number="2"><span class="st">  </span><span class="kw">group_by</span>(smoker, outcome) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb4-3" data-line-number="3"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">n =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">prop =</span> n <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(n))</a></code></pre></div>
-<pre><code>## # A tibble: 4 x 4
-## # Groups:   smoker [2]
-##   smoker outcome     n  prop
-##   &lt;fct&gt;  &lt;fct&gt;   &lt;int&gt; &lt;dbl&gt;
-## 1 No     Alive     502 0.686
-## 2 No     Dead      230 0.314
-## 3 Yes    Alive     443 0.761
-## 4 Yes    Dead      139 0.239</code></pre>
+<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="st">  </span>___</a></code></pre></div>
 <ol start="6" style="list-style-type: decimal">
 <li>Create a new variable called <code>age_cat</code> using the following scheme:</li>
 </ol>
@@ -766,8 +759,8 @@ B
 <ol start="7" style="list-style-type: decimal">
 <li>Re-create the visualization depicting the relationship between smoking status and health outcome, faceted by <code>age_cat</code>. What changed? What might explain this change? Extend the contingency table from earlier by breaking it down by age category and use it to help your narrative.</li>
 </ol>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">Whickham <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="st">  </span><span class="kw">count</span>(smoker, age_cat, outcome)</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">Whickham <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="st">  </span><span class="kw">count</span>(smoker, age_cat, outcome)</a></code></pre></div>
 <p>✅ ⬆️ <em>Commit and push your changes to GitHub with an appropriate commit message again. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.</em></p>
 </div>
 </div>
@@ -776,16 +769,14 @@ B
 <h1>Wrapping up</h1>
 <p>Go back through your write up to make sure you’re following coding style guidelines we discussed in class. Make any edits as needed.</p>
 <p>Also, make sure all of your R chunks are properly labeled, and your figures are reasonably sized.</p>
-<p>Once the team leader for the week pushes their final changes, others should <em>pull</em> the changes and knit the R Markdown document to confirm that they can reproduce the report.</p>
+<p>Once the team member who answered the last question pushes their final changes, others should <em>pull</em> the changes and knit the R Markdown document to confirm that they can reproduce the report.</p>
 </div>
-<div id="more-ugly-charts" class="section level1">
-<h1>More ugly charts</h1>
-<p>Want to see more ugly charts?</p>
+<div id="more-simpsons-paradox" class="section level1">
+<h1>More Simpson’s paradox</h1>
+<p>Want to read more Simpson’s paradox examples?</p>
 <ul>
-<li><a href="https://flowingdata.com/category/visualization/ugly-visualization/">Flowing Data - Ugly Charts</a></li>
-<li><a href="https://www.reddit.com/r/dataisugly/">Reddit - Data is ugly</a></li>
-<li><a href="http://www.datavis.ca/gallery/missed.php">Missed Opportunities and Graphical Failures</a></li>
-<li><a href="http://users.stat.umn.edu/~rend0020/Teaching/STAT8801-resources/graphics/index.html">(Mostly Bad) Graphics and Tables</a></li>
+<li><a href="https://blog.revolutionanalytics.com/2013/07/a-great-example-of-simpsons-paradox.html">A great example of Simpson’s Paradox: US median wage decline</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Simpson%27s_paradox#Examples">Examples on Wikipedia</a></li>
 </ul>
 </div>
 

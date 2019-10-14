@@ -229,7 +229,7 @@ so forth. Ultimately all team members (who are present in workshop today) should
 have some commits on GitHub.
 
 1. What type of study do you think these data come from: observational 
-   or experiment? Why?
+   or experiment? Explain your reasoning.
 
 2. How many observations are in this dataset? What does each observation 
    represent?
@@ -238,7 +238,7 @@ have some commits on GitHub.
    Display each variable using an appropriate visualization.
 
 4. What would you expect the relationship between smoking status and 
-   health outcome to be?
+   health outcome to be? Explain your reasoning.
 
 5. Create a visualization depicting the relationship between smoking status 
    and health outcome. Briefly describe the relationship, and evaluate whether 
@@ -255,11 +255,11 @@ data are grouped by smoking status, `sum(n)` will be calculated for each
 smoker group.
 ```
 
-```{r}
+```{r eval=FALSE}
 Whickham %>%
   group_by(smoker, outcome) %>%
   summarise(n = n()) %>%
-  mutate(prop = n / sum(n))
+  ___
 ```
 
 6. Create a new variable called `age_cat` using the following scheme:
