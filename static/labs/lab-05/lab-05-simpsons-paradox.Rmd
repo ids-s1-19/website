@@ -292,6 +292,14 @@ Once the team member who answered the last question pushes their final changes,
 others should *pull* the changes and knit the R Markdown document to confirm 
 that they can reproduce the report.
 
+# Mid-semester feedback
+
+Before you leave the workshop, please take a few minutes to provide mid-semester 
+feedback for the course [here](https://www.learn.ed.ac.uk/webapps/assessment/take/launchAssessment.jsp?course_id=_75012_1&content_id=_4369037_1&mode=cpview). This is an anomnymous survey, and 
+we will share results and any steps we're taking based on the feedback with you 
+next week. If you run out of time during the workshop, you have until Friday, 
+Oct 18, 17:00 to take the survey.
+
 # More Simpson's paradox
 
 Want to read more Simpson's paradox examples?
