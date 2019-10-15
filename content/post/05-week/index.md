@@ -35,3 +35,15 @@ title: 'Week 5 - Extracting meaning from data'
 | :open_book: | OS: [Chp 1, Sec 1.3 and 1.4](https://www.openintro.org/stat/textbook.php?stat_book=os) | **Required** |
 | :open_book: | R4DS: [Chp 14, Strings, Sec 14.1 and 14.2](https://r4ds.had.co.nz/strings.html) | **Required** |
 | :open_book: | R4DS: [Chp 15, Factors](https://r4ds.had.co.nz/factors.html) | **Required** |
+
+### Miscellaneous
+
+| <div style="width:60px"></div>  | <div style="width:420px"></div>  |  <div style="width:190px"></div> |
+|----:|---|---|
+| :radio_button:  | Take survey: [Mid-semester feedback (anonymous)](### Miscellaneous
+
+| <div style="width:60px"></div>  | <div style="width:420px"></div>  |  <div style="width:190px"></div> |
+|----:|---|---|
+| :radio_button:  | Take survey: [Getting to know you](https://forms.office.com/Pages/ResponsePage.aspx?id=sAafLmkWiUWHiRCgaTTcYRiRHjHRDWhOuLE_6JyNA0dUN0FDUVBVMVo5NzhMSTA5MFZGQTNRWkNZVS4u) | **Due:** Fri, 18 Oct, 17:00 |
+| :radio_button:  | Take survey: [Team feedback - Link to be posted]() | **Due:** Fri, 18 Oct, 17:00 |
+
