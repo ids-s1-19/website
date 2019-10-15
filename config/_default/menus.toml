@@ -40,7 +40,7 @@
 
 [[main]]
   name = "<i class='fab fa-r-project'></i>"
-  url = "https://www.learn.ed.ac.uk/webapps/blackboard/content/launchLink.jsp?course_id=_75012_1&content_id=_4244962_1&mode=cpview"
+  url = "https://rstudio.cloud/spaces/34062/projects"
   weight = 90
 
 [[main]]
