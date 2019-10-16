@@ -58,7 +58,7 @@ Beyond the in class activities, you will be assigned weekly larger programming t
 
 You will also complete weekly computing labs in teams during the Tuesday workshops. They are designed to be completed in class, and submitted as GitHub repositories. Lab with the lowest score for each student will be dropped.
 
-### Project
+### Final project
 
 You will be responsible for the completion of an open ended final project for this course, the goal of which is to tackle an "interesting" problem using the tools and techniques covered in this class. Additional details on the project will be provided as the course progresses. Each team's work will also be shared with and evaluated by at least one other team at an earlier stage in order to provide feedback in the form of code review. You must complete the final project and be in class to present it in order to pass this course.
 

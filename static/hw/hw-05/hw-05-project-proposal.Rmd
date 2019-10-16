@@ -1,0 +1,54 @@
+---
+title: "HW 05 - Project proposal"
+output: 
+  tufte::tufte_html:
+    css: ../hw.css
+    tufte_variant: "envisioned"
+    highlight: pygments
+link-citations: yes
+---
+
+```{r grassmarket, fig.margin = TRUE, echo = FALSE, fig.width=3, fig.cap="Photo by Jo Szczepanska on Unsplash"}
+knitr::include_graphics("img/jo-szczepanska-9OKGEVJiTKk-unsplash.jpg")
+```
+
+This week you'll be working on your project proposal. The main difference of this homework from others is that you're working in [teams](https://github.com/ids-s1-19/team-assignments/blob/master/roster-team.csv) in a single team repo.
+
+# RStudio Cloud
+
+We will continue to use RStudio Cloud on this assignment. You can access the course RStudio Cloud workspace [here](https://rstudio.cloud/spaces/34062). 
+
+**Note:** You can also go to 
+[rstudio.cloud](https://rstudio.cloud/) and log on. However it's important that 
+then you navigate to the course workspace (it should be listed as IDS - Fall 2019) 
+on the left menu. If you are in the correct workspace, your top bar should 
+look like the following:
+
+```{r echo=FALSE}
+knitr::include_graphics("img/rstudio-cloud-workspace.png")
+```
+
+And if you are not, once you get started on your work you will see a message 
+about packages you need not being installed. This should prompt you to navigate 
+to the course workspace, and continue your work there.
+
+Once you're in the workspace click on the Projects tab on top, and create a New 
+project from Git Repo.
+
+```{r echo=FALSE}
+knitr::include_graphics("img/rstudio-cloud-new-project.png")
+```
+
+Then, copy and paste the URL of your repo, as you do each time. This will clone 
+the repo and get you started with your assignment.
+
+Finally, introduce yourself to Git once again (you will need to do this once 
+per assignment on RStudio Cloud).
+Run the following, with replacing `"Your Name"` with your real name and last name,
+and `"your.email@address.com"` with the email address you used for GitHub.
+
+```{r use-git, eval=FALSE}
+library(usethis)
+use_git_config(user.name = "Your Name", 
+               user.email = "your.email@address.com")
+```
