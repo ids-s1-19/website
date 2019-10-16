@@ -66,10 +66,16 @@ homework assignments, or labs in the class.
 
 #### Proposal - due Wednesday, 23 Oct, at 17:00
 
-- Section 1 - Introduction: The introduction should introduce your general research question and your data (where it came from, how it was collected, what are the cases, what are the 
-variables, etc.).
-- Section 2 - Data analysis plan:
-  - The outcome (dependent, response, Y) and predictor (independent, explanatory, X) 
+- Section 1 - Introduction: The introduction should introduce your general 
+research question and your data (where it came from, how it was collected, 
+what are the cases, what are the  variables, etc.).
+
+- Section 2 - Data: Place your data in the `/data` folder, and add dimensions 
+and codebook to the README in that folder. Then print out the output of 
+`glimpse()` or `skim()` of your data frame.
+
+- Section 3 - Data analysis plan:
+  - The outcome (response, Y) and predictor (explanatory, X) 
 variables you will use to answer your question.
   - The comparison groups you will use, if applicable.
   - Very preliminary exploratory data analysis, including some summary statistics 
@@ -79,8 +85,6 @@ about your data. (You can add to these later as you work on your project.)
 question(s). (You can update these later as you work on your project.)
   -  What results from these specific statistical methods are needed to support 
 your hypothesized answer?
-- Section 3 - Data: Place your data in the `/data` folder, and add dimensions and codebook to the README in this folder. Then print out the output of `glimpse()` or `skim()` of 
-your data frame.
 
 Each section should be no more than 1 page (excluding figures). You can check a 
 print preview to confirm length. You will turn in your proposal as your HW 05 
@@ -92,11 +96,11 @@ in the course.
 
 Prepare a slide deck using the template in your repo. This template uses a 
 package called `xaringan`, and allows you to make presentation slides using 
-R Markdown syntax. There isn't a limit to how many slides you can use, just a 
-time limit (10 minutes total). Each team member should get a chance to speak during 
-the presentation. Your presentation should not just be an account of everything you 
-tried ("then we did this, then we did this, etc."), instead it should convey what 
-choices you made, and why, and what you found.
+R Markdown syntax. There isn't a limit to how many slides you can use, just a  
+time limit (10 minutes total). Each team member should get a chance to speak 
+during the presentation. Your presentation should not just be an account of 
+everything you tried ("then we did this, then we did this, etc."), instead it 
+should convey what choices you made, and why, and what you found.
 
 Before you finalize your presentation, make sure your chunks are turned off 
 with `echo = FALSE`. 
@@ -193,10 +197,11 @@ half the grade of the rest of the group.
 
 ### Late work policy
 
-- There is no late submission / make up for the presentation. You must be in class 
-on the day of the presentation to get credit for it.
+- There is no late submission / make up for the presentation. You must be in 
+class on the day of the presentation to get credit for it.
 
 - The late work policy for the summary is 5% of the maximum obtainable mark per 
-calendar day up to seven calendar days after the deadline. If you intend to submit 
-work late for the project, you must notify the course organizer before the original 
-deadline as well as as soon as the completed work is submitted on GitHub.
+calendar day up to seven calendar days after the deadline. If you intend to 
+submit work late for the project, you must notify the course organizer before 
+the original deadline as well as as soon as the completed work is submitted 
+on GitHub.
