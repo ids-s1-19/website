@@ -138,7 +138,7 @@ class: center, middle
 
 ---
 
-## What does group_by() do?
+## What does `group_by()` do?
 
 `group_by()` takes an existing `tbl` and converts it into a grouped `tbl` where operations are performed "by group":
 
@@ -156,7 +156,7 @@ ucb_admit %>%
 
 ---
 
-## What does group_by() not do?
+## What does `group_by()` not do?
 
 `group_by()` does not sort the data, `arrange()` does:
 
@@ -175,7 +175,7 @@ ucb_admit %>%
 
 ---
 
-## What does group_by() not do?
+## What does `group_by()` not do?
 
 `group_by()` does not create frequency tables, `count()` does:
 
@@ -194,7 +194,7 @@ ucb_admit %>%
 
 ---
 
-## Undo grouping with ungroup()
+## Undo grouping with `ungroup()`
 
 .pull-left[
 ```{r}
@@ -220,11 +220,11 @@ ucb_admit %>%
 
 class: center, middle
 
-# count
+# `count()`
 
 ---
 
-## count() is a short-hand
+## `count()` is a short-hand
 
 `count()` is a short-hand for `group_by()` and then `summarise()` to count the number of observations in each group:
 
@@ -244,7 +244,7 @@ ucb_admit %>%
 
 ---
 
-## count can take multiple arguments
+## `count()` can take multiple arguments
 
 .pull-left[
 ```{r}
@@ -262,9 +262,11 @@ ucb_admit %>%
 
 ---
 
-.question[
-What is the difference between the two outputs?
-]
+## `count()` vs. `group_by() %>% summarise()`
+
+- `count()` ungroups after itself
+- `summarise()` peels off one layer of grouping
+- The question mark just means that the number of groups is unkown right now, it will only be computed when/if the next line is executed
 
 .small[
 .pull-left[
@@ -278,17 +280,10 @@ ucb_admit %>%
 ```{r}
 ucb_admit %>%
   count(sex, admit)
+  
 ```
 ]
 ]
-
-<br><br>
-
---
-
-- `count()` ungroups after itself
-- `summarise()` peels off one layer of grouping
-- The question mark just means that the number of groups is unkown right now, it will only be computed when/if the next line is executed
 
 ---
 

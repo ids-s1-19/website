@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
   <head>
-    <title>Communicating data science results effectively   📜</title>
+    <title>Communicating data science results effectively   🗞</title>
     <meta charset="utf-8" />
     <meta name="author" content="Dr. Çetinkaya-Rundel" />
     <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
@@ -12,7 +12,7 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
-# Communicating data science results effectively <br> 📜
+# Communicating data science results effectively <br> 🗞
 ### Dr. Çetinkaya-Rundel
 
 ---
@@ -104,7 +104,7 @@ library(skimr)
 ##  n obs: 4526 
 ##  n variables: 3 
 ## 
-## ── Variable type:character ──────────────────────────────────────────────────────────────────────────────
+## ── Variable type:character ─────────────────────────────────────────────────────────
 ##  variable missing complete    n min max empty n_unique
 ##     admit       0     4526 4526   8   8     0        2
 ##      dept       0     4526 4526   1   1     0        6
@@ -180,7 +180,7 @@ class: center, middle
 
 ---
 
-## What does group_by() do?
+## What does `group_by()` do?
 
 `group_by()` takes an existing `tbl` and converts it into a grouped `tbl` where operations are performed "by group":
 
@@ -235,7 +235,7 @@ ucb_admit %&gt;%
 
 ---
 
-## What does group_by() not do?
+## What does `group_by()` not do?
 
 `group_by()` does not sort the data, `arrange()` does:
 
@@ -291,7 +291,7 @@ ucb_admit %&gt;%
 
 ---
 
-## What does group_by() not do?
+## What does `group_by()` not do?
 
 `group_by()` does not create frequency tables, `count()` does:
 
@@ -338,7 +338,7 @@ ucb_admit %&gt;%
 
 ---
 
-## Undo grouping with ungroup()
+## Undo grouping with `ungroup()`
 
 .pull-left[
 
@@ -387,11 +387,11 @@ ucb_admit %&gt;%
 
 class: center, middle
 
-# count
+# `count()`
 
 ---
 
-## count() is a short-hand
+## `count()` is a short-hand
 
 `count()` is a short-hand for `group_by()` and then `summarise()` to count the number of observations in each group:
 
@@ -429,7 +429,7 @@ ucb_admit %&gt;%
 
 ---
 
-## count can take multiple arguments
+## `count()` can take multiple arguments
 
 .pull-left[
 
@@ -470,9 +470,11 @@ ucb_admit %&gt;%
 
 ---
 
-.question[
-What is the difference between the two outputs?
-]
+## `count()` vs. `group_by() %&gt;% summarise()`
+
+- `count()` ungroups after itself
+- `summarise()` peels off one layer of grouping
+- The question mark just means that the number of groups is unkown right now, it will only be computed when/if the next line is executed
 
 .small[
 .pull-left[
@@ -512,14 +514,6 @@ ucb_admit %&gt;%
 ```
 ]
 ]
-
-&lt;br&gt;&lt;br&gt;
-
---
-
-- `count()` ungroups after itself
-- `summarise()` peels off one layer of grouping
-- The question mark just means that the number of groups is unkown right now, it will only be computed when/if the next line is executed
 
 ---
 
