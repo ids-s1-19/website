@@ -25,7 +25,8 @@ library(readxl)
 
 ## So far this week...
 
-- Designing studies, considering multivariable relationships, interpreting results
+- Designing studies, multivariable relationships, interpreting results
+- Check your HW 4 repo for styling suggestions!
 - Mid-semester feedback - due Friday
 - Team peer evaluations - due next Wednesday
 - Project: Find a dataset, and do something with it
