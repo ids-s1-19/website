@@ -58,6 +58,15 @@ depending on the source. If you are having trouble ask for help before it is too
 **Note on reusing datasets from class:** Do not reuse datasets used in examples,  
 homework assignments, or labs in the class.
 
+Below are a list of data repositories that might be of interest to browse. You're 
+not limited to these resources, and in fact you're encouraged to venture beyond 
+them. But you might find something interesting there:
+
+- [Kaggle Datasets](https://www.kaggle.com/datasets)
+- [TidyTuesday](https://github.com/rfordatascience/tidytuesday)
+- [OpenIntro Datasets](http://openintrostat.github.io/openintro-r-package/)
+- More to come... (if you know of others, let me know, and we'll add here)
+
 ### Deliverables
 
 1. Proposal     - due Wednesday, 23 Oct, at 17:00
