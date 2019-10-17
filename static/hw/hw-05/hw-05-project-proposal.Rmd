@@ -14,6 +14,9 @@ knitr::include_graphics("img/jo-szczepanska-9OKGEVJiTKk-unsplash.jpg")
 
 This week you'll be working on your project proposal. The main difference of this homework from others is that you're working in [teams](https://github.com/ids-s1-19/team-assignments/blob/master/roster-team.csv) in a single team repo.
 
+Instructions for what is expected for the full project, and specifically for the 
+proposal can be found [here](https://introds.org/#project).
+
 # RStudio Cloud
 
 We will continue to use RStudio Cloud on this assignment. You can access the course RStudio Cloud workspace [here](https://rstudio.cloud/spaces/34062). 
