@@ -62,8 +62,11 @@ Below are a list of data repositories that might be of interest to browse. You'r
 not limited to these resources, and in fact you're encouraged to venture beyond 
 them. But you might find something interesting there:
 
-- [Kaggle datasets](https://www.kaggle.com/datasets)
+- [NHS Scotland Open Data](https://www.opendata.nhs.scot/)
+- [Bikeshare data portal](https://www.bikeshare.com/data/)
+- [UK Gov Data](https://data.gov.uk/)
 - [TidyTuesday](https://github.com/rfordatascience/tidytuesday)
+- [Kaggle datasets](https://www.kaggle.com/datasets)
 - [OpenIntro datasets](http://openintrostat.github.io/openintro-r-package/)
 - [Awesome public datasets](https://github.com/awesomedata/awesome-public-datasets)
 - [Youth Risk Behavior Surveillance System (YRBSS)](https://chronicdata.cdc.gov/Youth-Risk-Behaviors/DASH-Youth-Risk-Behavior-Surveillance-System-YRBSS/q6p7-56au)
