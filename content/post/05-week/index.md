@@ -24,7 +24,7 @@ title: 'Week 5 - Extracting meaning from data'
 | Lab 05 | [Simpson’s paradox](/labs/lab-05/lab-05-simpsons-paradox.html)| **Due:** Fri, 18 Oct, 17:00 |
 | Lec 10 | [Communicating data science results effectively](/slides/w5_d2-effective-communication/w5_d2-effective-communication.html) |
 | HW 05  | [Project proposal](/hw/hw-05/hw-05-project-proposal.html) | **Due:** Wed, 23 Oct, 17:00 |
-| RT 05  | No interactive tutorial covering week’s material |
+| RT 05  | No interactive tutorial this week |
 | OQ 05  | Coding best practices |  **Due:** Fri, 25 Oct, 17:00 |
 
 ### Readings
