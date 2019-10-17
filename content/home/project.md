@@ -62,9 +62,13 @@ Below are a list of data repositories that might be of interest to browse. You'r
 not limited to these resources, and in fact you're encouraged to venture beyond 
 them. But you might find something interesting there:
 
-- [Kaggle Datasets](https://www.kaggle.com/datasets)
+- [Kaggle datasets](https://www.kaggle.com/datasets)
 - [TidyTuesday](https://github.com/rfordatascience/tidytuesday)
-- [OpenIntro Datasets](http://openintrostat.github.io/openintro-r-package/)
+- [OpenIntro datasets](http://openintrostat.github.io/openintro-r-package/)
+- [Awesome public datasets](https://github.com/awesomedata/awesome-public-datasets)
+- [Youth Risk Behavior Surveillance System (YRBSS)](https://chronicdata.cdc.gov/Youth-Risk-Behaviors/DASH-Youth-Risk-Behavior-Surveillance-System-YRBSS/q6p7-56au)
+- [PRISM Data Archive Project](https://www.icpsr.umich.edu/icpsrweb/content/ICPSR/fenway.html)
+- [Harvard Dataverse](https://dataverse.harvard.edu/)
 - More to come... (if you know of others, let me know, and we'll add here)
 
 ### Deliverables
