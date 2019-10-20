@@ -16,15 +16,16 @@ summary: Web scraping, functions, and iteration
 title: 'Week 6 - Web scraping and iteration'
 ---
 
-|            |  |
-|------------|----------|
-| Lecture 11 | Harvesting data from the web |
-| Lecture 12 | Functions and iteration |
-| Lab 06     | Scrape, visualize, analyze |
-| OQ 06      | Web scraping and iteration |
-| HW 06      | Money in politics |
-| RT 06      | Interactive tutorial covering week’s material |
+### Schedule
 
+| <div style="width:60px"></div>  | <div style="width:420px"></div> |  <div style="width:190px"></div>   |
+|---:|---|---|
+| Lec 11 | [Harvesting data from the web](/slides/w6_d1-webscraping/w6_d1-webscraping.html) |
+| Lab 06 | [TBA)| **Due:** Fri, 25 Oct, 17:00 |
+| Lec 12 | [Functions and iteration]() |
+| HW 06  | [TBA]() | **Due:** Wed, 30 Oct, 17:00 |
+| RT 05  | [Interactive tutorial covering week’s material]() |
+| OQ 05  | [TBA]() |  **Due:** Fri, 1 Nov, 17:00 |
 
 ### Readings
 
