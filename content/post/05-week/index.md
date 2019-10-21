@@ -25,7 +25,7 @@ title: 'Week 5 - Extracting meaning from data'
 | Lec 10 | [Communicating data science results effectively](/slides/w5_d2-effective-communication/w5_d2-effective-communication.html) |
 | HW 05  | [Project proposal](/hw/hw-05/hw-05-project-proposal.html) | **Due:** Wed, 23 Oct, 17:00 |
 | RT 05  | No interactive tutorial this week |
-| OQ 05  | Coding best practices |  **Due:** Fri, 25 Oct, 17:00 |
+| OQ 05  | [Coding best practices](https://minecr.shinyapps.io/05-coding/) |  **Due:** Fri, 25 Oct, 17:00 |
 
 ### Readings
 
