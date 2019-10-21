@@ -19,19 +19,19 @@ output:
 library(tidyverse)
 library(scales)
 library(here)
-library(kableExtra)
 library(rvest)
 library(DT)
 ```
 
 ## Week 6
 
-- Web scraping, and automating it via the use of functions and iterations
-- ... the latter of which is a topic we'll revisit many times over the rest of 
-the semester
-- Team peer evaluations - due Wednesday
-- Preparation for workshop tomorrow: make sure you have something, even if 
-not full proposal, pushed to your repo for peer review
+- Web scraping, and automating it via the use of functions and iteration 
+(which we'll revisit many times over the rest of the semester)
+- Team peer evaluations - due Thursday 17:00 (look for an email from TEAMMATES)
+- HW and OQ scores are in gradebook
+  - For OQ: 1 means you did it, 0 means you didn't
+  - For HW: See repo issues for actual feedback
+- Workshop tomorrow - Take a seat where everyone can work together and have access to a computer. If you know you'll be a few minutes late, let your teammates know so they can save a spot for you.
 
 .question[
 .large[
