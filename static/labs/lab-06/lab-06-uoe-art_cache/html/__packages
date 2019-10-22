@@ -1,0 +1,17 @@
+base
+usethis
+devtools
+testthat
+kableExtra
+tidyverse
+ggplot2
+tibble
+tidyr
+readr
+purrr
+dplyr
+stringr
+forcats
+robotstxt
+xml2
+rvest
