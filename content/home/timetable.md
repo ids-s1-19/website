@@ -30,6 +30,6 @@ subtitle = "Lectures on Mondays and Wednesdays, workshops on Tuesdays. Access of
   icon = "university"
   icon_pack = "fas"
   name = "Wednesday"
-  description = "11:10 - 12:00, Appleton Tower LT1"  
+  description = "11:10 - 12:00, Robson Building LT"  
 
 +++
