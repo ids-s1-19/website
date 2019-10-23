@@ -22,7 +22,7 @@ title: 'Week 6 - Web scraping and iteration'
 |---:|---|---|
 | Lec 11 | [Harvesting data from the web](/slides/w6_d1-webscraping/w6_d1-webscraping.html) |
 | Lab 06 | [University of Edinburgh Art Collection](/labs/lab-06/lab-06-uoe-art.html) | **Due:** Fri, 25 Oct, 17:00 |
-| Lec 12 | [Functions and iteration]() |
+| Lec 12 | [Functions and iteration](/slides/w6_d2-functions-iteration/w6_d2-functions-iteration.html) |
 | HW 06  | [TBA]() | **Due:** Wed, 30 Oct, 17:00 |
 | RT 05  | [Interactive tutorial covering week’s material]() |
 | OQ 05  | [TBA]() |  **Due:** Fri, 1 Nov, 17:00 |

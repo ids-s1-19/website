@@ -244,6 +244,14 @@ div.my-footer a {
   }
 }
 
+/* Image overlay */
+.imageoverlay {
+  position: absolute;
+  top: 10%;
+  left: 65%;
+  border: 1px solid #ddd;
+}
+
 
 /* What is this? */
 .element.style {
@@ -253,3 +261,5 @@ div.my-footer a {
     height: 685px;
     width: 700px;
 }
+
+
