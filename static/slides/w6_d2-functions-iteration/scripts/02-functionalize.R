@@ -6,8 +6,6 @@ library(rvest)
 
 scrape_art_info <- function(x){
   
-  #Sys.sleep(runif(1))
-
   # read page at url ----
   page <- read_html(x)
   
@@ -31,7 +29,7 @@ scrape_art_info <- function(x){
 
 # load data to get links -------------------------------------------------------
 
-uoe_art <- read_csv("data/uoe_art.csv")
+uoe_art <- read_csv("~/Desktop/ids-s1-19/website/csv/uoe-art.csv")
 
 # apply function ---------------------------------------------------------------
 

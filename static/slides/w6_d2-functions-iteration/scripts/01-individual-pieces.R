@@ -30,14 +30,48 @@ tibble(headers, values) %>%
 # second url --------------------------------------------------------------------
 
 ## set url ----
-second_info_url <- "___"
+second_info_url <- "https://collections.ed.ac.uk/art/record/21465?highlight=*:*"
 
-___
+## read page at url ----
+page <- read_html(second_info_url)
+
+## scrape headers ----
+headers <- page %>%
+  html_nodes("th") %>%
+  html_text()
+
+## scrape values ----
+values <- page %>%
+  html_nodes("td") %>%
+  html_text() %>%
+  str_squish()
+
+## put together in a tibble and add link to help keep track ----
+tibble(headers, values) %>%
+  pivot_wider(names_from = headers, values_from = values) %>%
+  add_column(link = first_info_url)
 
 
 # third url --------------------------------------------------------------------
 
 ## set url ----
-third_info_url <- "___"
+third_info_url <- "https://collections.ed.ac.uk/art/record/20937?highlight=*:*"
 
-___
+## read page at url ----
+page <- read_html(third_info_url)
+
+## scrape headers ----
+headers <- page %>%
+  html_nodes("th") %>%
+  html_text()
+
+## scrape values ----
+values <- page %>%
+  html_nodes("td") %>%
+  html_text() %>%
+  str_squish()
+
+## put together in a tibble and add link to help keep track ----
+tibble(headers, values) %>%
+  pivot_wider(names_from = headers, values_from = values) %>%
+  add_column(link = first_info_url)
