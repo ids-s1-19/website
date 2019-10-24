@@ -1,0 +1,416 @@
+---
+title: "HW 06 - Money in US politics"
+subtitle: "Individual assignment"
+date: "Due: Oct 16 at 10:05am"
+output: 
+  tufte::tufte_html:
+    tufte_variant: "envisioned"
+    highlight: pygments
+    css: ../hw.css
+---
+
+<div style= "float:right;position: relative; margin-left: 20px">
+```{r icon, echo=FALSE, fig.align="right", out.width=500}
+knitr::include_graphics("img/rawpixel-760036-unsplash.jpg")
+```
+</div>
+
+```{r setup, include=FALSE}
+library(DT)
+options(
+  htmltools.dir.version = FALSE, # for blogdown
+  show.signif.stars = FALSE      # for regression output
+  )
+knitr::opts_chunk$set(eval = FALSE)
+```
+
+```{marginfigure}
+Photo by [rawpixel](https://unsplash.com/@rawpixel) on [Unsplash](https://unsplash.com/).
+```
+
+Every election cycle brings its own brand of excitement -- and lots of money. 
+Political donations are of particular interest to political scientists and 
+other researchers studying politics and voting patterns. They are also of 
+interest to citizens who want to stay informed of how much money their candidates 
+raise and where that money comes from.
+
+Do you know how the amount of funds your candidates running for house or 
+senate races have raised and spent? And how they compare to other candidates 
+from other districts or states? In this assignment we scrape and analyze data 
+that will help us answer these questions.
+
+First, we will get data on candidates in North Carolina. Then, you will 
+use a similar approach to get data on candidates in a different state of your choosing.
+
+In order to complete this assignment you will need a Chrome browser with the 
+[Selector Gadget extension](http://selectorgadget.com/) installed.
+
+```{marginfigure}
+By now you should be familiar with instructions for getting started and setting 
+up your git configuration. If not, you can refer to one of the earlier assignments.
+```
+
+# Packages
+
+In this assignment we will work with the `tidyverse`, `rvest`, `robotstxt`, 
+and `lubridate` packages. These packages should already be installed in your 
+project, and you can load them with the following:
+
+```{r load-packages, eval=TRUE, message=FALSE}
+library(tidyverse)
+library(rvest)
+library(robotstxt)
+library(lubridate)
+```
+
+# The data
+
+```{r opensecrets, eval=TRUE, echo=FALSE, fig.margin = TRUE}
+knitr::include_graphics("img/opensecrets.png")
+```
+
+We will scrape and work with data on campain funds. The data come from 
+[OpenSecrets.org](https://www.opensecrets.org), a "website tracking the influence 
+of money on U.S. politics, and how that money affects policy and citizens' lives". 
+This website hosted by The Center for Responsive Politics, which is a nonpartisan, 
+independent nonprofit that "tracks money in U.S. politics and its effect on 
+elections and public policy."[^1]
+
+Before getting started, let's check that a bot has permissions to access pages 
+on this domain.
+
+```{r paths-allowed, eval=TRUE, warning=FALSE, message=FALSE}
+paths_allowed("https://www.opensecrets.org")
+```
+
+## North Carolina races
+
+```{r nc_races, eval=TRUE, echo=FALSE, fig.margin = TRUE}
+knitr::include_graphics("img/nc_races.png")
+```
+
+The goal of this exercise is scrape the data from a page that looks like the 
+the page shown on the right, and save it as a data frame that looks like the 
+data frame shown below.
+
+```{r read-nc-page, echo=FALSE, message=FALSE, eval=TRUE}
+nc_races <- read_csv("data/nc_races.csv")
+datatable(nc_races, width="60%")
+```
+
+<br>
+
+1. Based on the information on the [North Carolina congressional races page](https://www.opensecrets.org/races/election?id=NC), how many congressional 
+races are there in NC?
+
+The code for the following should go in the `scrape-nc.R` file.
+
+- `race`: Let's start with the names of the races. Use the selector gadget to 
+determine the path to the names of races, and create a character vector called 
+`race`, containing the names of the races from the first column of the table 
+shown in the screenshot above.
+
+- `race_link`: Next, grab the URLs of the races, and save them as a character 
+vector called `race_link`. Note that you need the full URL (as shown in the table 
+above), not just the relative link.
+
+- Then, create a data frame (a `tibble`) called `nc_races` with the variables 
+`race` and `race_link`.
+
+There are no senate elections in 2018 in North Carolina, but some of the other 
+states will have senate elections. In order for your code to accurately capture 
+data from other states as well, we'll add an indicator for the type of race: 
+`House` or `Senate`.
+
+- Mutate `nc_races` to add a new variable, `race_type`, that detects if the 
+word `Senate` appears in the value of the `race` variable for a given race. If 
+yes, value of `race_type` is set to `"Senate"`, and if no, it's set to `"House"`.
+Two functions will help you with this task -- `ifelse()` and `str_detect()`:
+
+```{r str-detect}
+race_type = ifelse(str_detect(race, "Senate"), "Senate", "House")
+```
+
+- Save this data frame as `nc_races.csv` into the `/data` folder using the 
+`write_csv` function : 
+
+```{r write-csv}
+write_csv(nc_races, path = "data/nc_races.csv")
+```
+
+2. Load `nc_races.csv` in your R Markdown file and save it as `nc_races`.
+
+3. How many rows and how many variables does `nc_races` have? Does this match up 
+with your expectation?
+
+## North Carolina candidates
+
+### Scrape candidates from District 1
+
+Next we scrape data on candidates in the first district of North Carolina.
+
+The code for the following should go in the `scrape-nc.R` file.
+
+```{marginfigure}
+Hint: The URL for this page is already saved in `nc_races$race_link[1]`.
+```
+
+- `race_page`: Read the page for the first district and save the result as `race_page`.
+
+- `candidate_info`: Scrape the candidate info and save as a character vector 
+called `candidate_info`. It will look something like the following.
+
+  ```
+  "G K Butterfield (D)\n • Incumbent" "Roger Allison (R)" 
+  ```
+
+```{marginfigure}
+Hint: You'll need to deal with the dollar signs (`$`) and commas (`,`) in the values.
+```
+
+- `raised`, `spent`, `cash_on_hand`: Scrape the raised, spent, and cash on hand 
+funds amounts and save them as numeric values.
+
+- `last_report`: Scrape the date of `last_report`. This variable should have a 
+`Date` class, formatted as `"yyyy-mm-dd"`, e.g. `"2018-06-30"`. You can use the
+`mdy()` function from the `lubridate` package. This function takes in a 
+character vector that is a date, and turns it into a vector with proper `Date` class.
+```{r mdy, eval=TRUE}
+mdy("06/30/2018")
+```
+
+- `race`: Scrape the name of the race from the header of the page. Note that 
+this text will say `"North Carolina District 01 2018 Race"`. Remove `" 2018 Race"` 
+from the character string so that it reads `""North Carolina District 01"`.
+
+- `candidates`: Combine this information in a data frame called `candidates` with 
+the variables `candidate_info`, `raised`, `spent`, `cash_on_hand`, `last_report`, 
+and `race`.
+
+Lastly, we need to clean up the information in the `candidate_info` data frame
+
+```{marginfigure}
+Hint: You'll need to escape the parantheses with backslashes.
+```
+
+- Create a new variable called `party` which has the following properties:
+  - If `candidate_info` contains the character string `(R)`, label `Republican`
+  - If `candidate_info` contains the character string `(D)`, label `Democrat`
+  - Otherwise label `Third party`
+
+- Create a new variable called `status` which has the value `Incumbent` if 
+`candidate_info` contains the character string `Incumbent`, otherwise label 
+`Challenger`
+
+- Create a new variable called `candidate_name` which has only the candidate 
+name from the `candidate_info` variable. This means deleting everything 
+starting with the first open paranthesis (`(`) and trimming the character 
+string. This is going to require getting fancy with **reg**ular **ex**pressions.
+To match line breaks, indicated with `\n`, use `"\\n"`. And to match 
+everything starting with the first `(`, use `"\\((.*)"`. For example, 
+
+```{marginfigure}
+At this point take a break to this [short but detailed article on regular expressions](https://stringr.tidyverse.org/articles/regular-expressions.html). 
+Learning a bit more on regular experessions will give you a lot of facilty for 
+working with text data.
+```
+    
+```{r regex, eval=TRUE}
+candidate_info <- "  G K Butterfield (D)\n • Incumbent\n    "
+
+# remove all line breaks
+candidate_info %>%
+  str_remove_all("\\n")
+
+# remove all line breaks + remove everything starting with (
+candidate_info %>%
+  str_remove_all("\\n") %>%
+  str_remove("\\((.*)")
+
+# remove all line breaks + remove everything starting with ( + trim white spaces
+candidate_info %>%
+  str_remove_all("\\n") %>%
+  str_remove("\\((.*)") %>%
+  str_trim()
+```
+
+```{marginfigure}
+Hint: `select(race, everything())` would reorder the columns to move `race` up to 
+be the first variable, and all the other variables would remain in the same 
+order as before.
+```
+    
+- Finally reorganize the data frame so that it only contains the variables 
+`candidate_name`, `race`, `raised`, `spent`, `cash_on_hand`, `last_report`,
+`party`, and `status`, in this order. Note that `candidate_info` is dropped. 
+You will need to use the `select()` function to reorder the columns. As a 
+requirement for this exercise, you should also use the `everything()` function, 
+which will allow you to not have to type out all the variable names. See the 
+help for this function to find out more about its usage.
+  
+- Save the resulting `candidates` data frame as `nc_candidates_dist01.csv` 
+in your `data` folder.
+
+4. Load `nc_candidates_dist01.csv` in your R Markdown document, save it as 
+`nc_candidates_dist01`, and print it. Confirm that the data you have matches 
+the one on the webpage.
+
+At this point make sure you've committed and pushed your work so far.
+
+### Scrape candidates from District 2
+
+In your `scrape-nc.R` file, copy and paste the code you developed in the previous 
+section for scraping District 1 data to the appropriate section for District 2. 
+Change the input URL to the link for the second district, `nc_races$race_link[2]`.
+
+The goal is to scrape the data for District 2 just like you scraped the data 
+for District 1 in the previous section. You might find that you need to make some 
+adjustments to your code. This is ok, go ahead and make them. But make sure to 
+implement the same changes in your code for scraping District 1 candidates as 
+well. You should get to a point where the same exact code works for both districts.
+
+Write out the resulting data frame as `nc_candidates_dist02.csv` in your `data/`
+folder.
+
+5. Load `nc_candidates_dist02.csv` in your R Markdown document, save it as 
+`nc_candidates_dist02`, and print it. Confirm that the data you have matches 
+the one on the webpage.
+
+Once again, make sure you've committed and pushed your work so far.
+
+```{r functionalize, eval=TRUE, echo=FALSE, fig.margin = TRUE}
+knitr::include_graphics("img/functionalize.png")
+```
+
+### Writing a function
+
+Now that you have confirmed your code works on two different pages, we'll work 
+on turning your code into a function.
+
+In the R script titled `scrape-race.R` create a function called `scrape_race` 
+that has one input, `url`, and that outputs a tibble with number of rows 
+corresponding to the number of candidates running for each race and six variables.
+
+6. Source this function in your R Markdown file with the `source()` function as 
+shown below. This will make the function available for use in the rest of your 
+R Markdown document.
+
+```{r source-fn}
+source("scrape-race.R)
+```
+
+7. Apply this function to the URL for the North Carolina's first district race,
+as shown below, and display the result. Confirm that your result matches your 
+answer in Exercise 4.
+
+```{r scrape-nc-dist1}
+scrape_race(nc_races$race_link[1])
+```
+
+8. Now apply this function to the URL for the North Carolina's first district 
+race, as shown below, and display the result. Confirm that your result matche 
+your answer in Exercise 5.
+
+```{r scrape-nc-dist2}
+scrape_race(nc_races$race_link[2])
+```
+
+### Mapping the function
+
+9. Now that you have confirmed that your function works for the first two 
+districts when applied one-by-one, map it over the links for these two NC 
+races and confirm that the result you get is a combination of the results from
+Exercises 7 and 8.
+
+```{r map-first-two}
+map_df(nc_races$race_link[1:2], scrape_race)
+```
+
+10. And now that you have confirmed that mapping works for the first two 
+districts, map the function over the links for *all* NC races and save the 
+result as `nc_candidates` as shown below. Then, `glimpse()` at the resulting 
+data frame.
+
+```{r map-all}
+nc_candidates <- map_df(nc_races$race_link, scrape_race)
+```
+
+If you're happy with your answer for Exercise 10, I recommend caching the results 
+of the code chunk so that your code for scraping data from all NC races does not 
+have to rerun every time you knit your document. To do this you need to is to add 
+the following option to your code chunk: `cache = TRUE`, e.g. if the label you 
+used for your code chunk is `map-all`, your code chunk definition will look like this:
+
+```
+{r map-all, cache = TRUE}
+```
+
+Then, knit your document one more time. Your code will run again, but this time 
+a new folder will be created in your project where cached results will be saved. 
+As with everything that changes in your repo, you will need to commit and push 
+this folder as well. Going forward your code will only rerun if the code in the 
+cached code chunk changes.
+
+```{marginfigure}
+Remember that you can use `everything()` for "all the other columns".
+```
+
+11. Join the `nc_candidates` and `nc_races` data frames by the `race` variable 
+using an `inner_join()`. Then, reorganize the columns of of the resulting data 
+frame to be in the following order: `candidate_name`, `race_type`, `race`, all 
+the other columns. Save the result as `nc_candidates`, and `glimpse()` at the 
+resulting data frame.
+
+12. Answer the following questions based on the `nc_candidates` data frame 
+you created in Exercise 11:  
+**a.** What is the median amount of funds raised by all candidates in NC?  
+**b.** What are the median amounts of funds raised by Republican, Democratic, 
+and third party candidates in NC?  
+**c.** Calculate the percentage of `cash_on_hand` compared to `raised` for all 
+candidates in NC. Save the result as a new variable in the data frame 
+called `perc_cash_on_hand`.  
+**d.** Among all NC candidates, which candidate has the highest percentage of 
+cash on hand?  
+**e.** On average, have incumbents or challengers raised more money? Does this 
+vary by party affiliation?
+  
+## Choose your own state
+
+```{marginfigure}
+You can copy and rename a file in RStudio using the menu items in the File pane 
+with the same names. Check the box next to the file you want to copy, then go 
+to More -> Copy. Then, check the box next to the newly created file to rename it 
+using the Rename menu.
+```
+
+Make a copy of the `scrape-nc.R` file, and rename it to match a state of your 
+own choosing, e.g. name it `scrape-ca.R` if you chose California.
+
+13. Repeat what you did in the previous section (potentially with some 
+modifications as needed) to  
+**-** Scrape the data on all races in the state of your choice, create a data frame 
+with variables `race`, `race_link`, and `race_type`, and save the data frame as 
+a csv file in your `data/` folder.  
+**-** Load this data file in your R Markdown document and, using the `scrape_races` 
+function you developed earlier, scrape information on the candidates running in 
+each of the races in your state. Save the result as a data frame.  
+**-** Join the two data frames you have for this state by the `race` variable, and 
+`glimpse()` at this data frame.  
+**-** Use caching as outlined in the previous section to avoid rerunning of code 
+that scrapes data.
+
+14. Answer the following questions based on the data frame you loaded in Exercise 13:  
+**a.** What is the median amount of funds raised by all candidates in your state?  
+**b.** What are the median amounts of funds raised by Republican, Democratic, and
+third party candidates in your state?  
+**c.** Calculate the percentage of `cash_on_hand` compared to `raised` for all 
+candidates in your state. Save the result as a new variable in the data frame 
+called `perc_cash_on_hand`.  
+**d.** Among all candidates in your state, which candidate has the highest 
+percentage of cash on hand?  
+**e.** On average, have incumbents or challengers raised more money? Does this 
+vary by party affiliation? How do your findings compare to your earlier findings 
+about NC?
+
+
+[^1]: https://www.opensecrets.org/about/
