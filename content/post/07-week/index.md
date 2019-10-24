@@ -16,11 +16,20 @@ summary: Modeling relationships with simple linear regression
 title: 'Week 7 - The language of models'
 ---
 
-|            |  |
-|------------|----------|
-| Lecture 09 | Data science workflows and coding style |
-| Lecture 10 | Communicating data science results effectively |
-| Lab 05     | Visualizing and wrangling spatial data |
-| OQ 05      | Coding best practices |
-| HW 05      | Project proposals |
-| RT 05      | Interactive tutorial covering week’s material |
+### Schedule
+
+| <div style="width:60px"></div>  | <div style="width:420px"></div> |  <div style="width:190px"></div>   |
+|---:|---|---|
+| Lec 13     | The language of models |
+| Lab 07     | TBA |
+| Lec 14     | Simple linear regression |
+| HW 07      | TBA |
+| OQ 07      | TBA |
+| RT 07      | Interactive tutorial covering week’s material |
+
+### Readings
+
+| <div style="width:60px"></div>  | <div style="width:420px"></div>  |  <div style="width:190px"></div> |
+|----:|---|---|
+| :open_book: | OS: [Chp 8 - Introduction to linear regression](https://www.openintro.org/stat/textbook.php?stat_book=os) | **Required** |
+
