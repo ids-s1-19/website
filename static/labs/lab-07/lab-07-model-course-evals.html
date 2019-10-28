@@ -471,6 +471,7 @@ text-align: center;
 <li><a href="#clone-your-repo">Clone your repo</a></li>
 <li><a href="#introduce-yourself-to-git">Introduce yourself to Git</a></li>
 <li><a href="#download-the-data">Download the data</a></li>
+<li><a href="#load-packages">Load packages</a></li>
 </ul></li>
 <li><a href="#part-1-data-manipulation">Part 1: Data Manipulation</a></li>
 <li><a href="#part-2-exploratory-data-analysis">Part 2: Exploratory Data Analysis</a></li>
@@ -602,14 +603,20 @@ text-align: center;
 <p>Then, you can load the data as usual using the following.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">evals &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/evals-mod.csv&quot;</span>)</a></code></pre></div>
 </div>
+<div id="load-packages" class="section level2">
+<h2>Load packages</h2>
+<p>We will use the following packages in this analysis:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">library</span>(tidyverse)</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw">library</span>(broom)</a></code></pre></div>
+</div>
 </div>
 <div id="part-1-data-manipulation" class="section level1">
 <h1>Part 1: Data Manipulation</h1>
 <ol style="list-style-type: decimal">
 <li>Create a new variable called <code>bty_avg</code> that is the average attractiveness score of the six students for each professor (<code>bty_f1lower</code> through <code>bty_m2upper</code>). Add this new variable to the <code>evals</code> data frame. Do this in one pipe, using the <code>rowMeans()</code> function within a <code>mutate()</code>.</li>
 </ol>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">evals &lt;-<span class="st"> </span>evals <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">bty_avg =</span> <span class="kw">rowMeans</span>(<span class="kw">select</span>(., bty_f1lower<span class="op">:</span>bty_m2upper)))</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">evals &lt;-<span class="st"> </span>evals <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">bty_avg =</span> <span class="kw">rowMeans</span>(<span class="kw">select</span>(., bty_f1lower<span class="op">:</span>bty_m2upper)))</a></code></pre></div>
 <p>Let’s pause for a second to see what is happening in this piece of code. We are mutating the <code>evals</code> data frame by adding a new variable, <code>bty_avg</code>, that is calculated as the mean of the columns titled <code>bty_f1lower</code> through <code>bty_m2upper</code> in the <code>evals</code> data frame (denoted with a <code>.</code> here).</p>
 </div>
 <div id="part-2-exploratory-data-analysis" class="section level1">

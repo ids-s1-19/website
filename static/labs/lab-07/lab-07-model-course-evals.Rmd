@@ -12,9 +12,6 @@ link-citations: yes
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(eval = TRUE)
-library(robotstxt)
-library(rvest)
-library(tidyverse)
 ```
 
 ---
@@ -113,13 +110,20 @@ knitr::include_graphics("img/data-upload.png")
 
 Then, you can load the data as usual using the following.
 
-```{r data-hide, include=FALSE}
-evals <- read_csv(here::here("static/data", "evals-mod.csv"))
-```
-
 ```{r data-show, eval=FALSE}
 evals <- read_csv("data/evals-mod.csv")
 ```
+
+## Load packages
+
+We will use the following packages in this analysis:
+
+```{r}
+library(tidyverse)
+library(broom)
+```
+
+
 
 # Part 1: Data Manipulation 
 
