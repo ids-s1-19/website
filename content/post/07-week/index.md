@@ -20,7 +20,7 @@ title: 'Week 7 - The language of models'
 
 | <div style="width:60px"></div>  | <div style="width:420px"></div> |  <div style="width:190px"></div>   |
 |---:|---|---|
-| Lec 13     | The language of models |
+| Lec 13     | [The language of models](/slides/w7_d1-language-of-models/w7_d1-language-of-models.html) |
 | Lab 07     | TBA |
 | Lec 14     | Simple linear regression |
 | HW 07      | TBA |
