@@ -1,5 +1,5 @@
 ---
-title: "Functions and iteration <br> `r emo::ji('robot')`"
+title: "The language of models <br> `r emo::ji('chart_with_upwards_trend')`"
 author: "Dr. Çetinkaya-Rundel"
 output:
   xaringan::moon_reader:
