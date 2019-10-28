@@ -71,7 +71,7 @@ The variables in the data and their descriptions are as follows:
 In this week's workshop you will analyze the data from this study in order to start  
 exploring what goes into a positive professor evaluation.
 
-```{r}
+```{r echo=FALSE}
 knitr::knit_exit()
 ```
 
