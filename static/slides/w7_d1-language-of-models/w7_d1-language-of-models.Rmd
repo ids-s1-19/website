@@ -87,7 +87,9 @@ PhD students in the Duke Art, Law, and Markets Initiative in 2013
 
 ## Auctions today
 
-![](img/auction-video.png)
+```{r out.width="90%", fig.align="center", echo=FALSE}
+knitr::include_graphics("img/auction-video.png")
+```
 
 .tiny[
 https://www.youtube.com/watch?v=apaE1Q7r4so
@@ -97,7 +99,9 @@ https://www.youtube.com/watch?v=apaE1Q7r4so
 
 ## Auctions back in the day
 
-![](img/old-auction.png)
+```{r out.width="80%", fig.align="center", echo=FALSE}
+knitr::include_graphics("img/old-auction.png")
+```
 
 Pierre-Antoine de Machy, Public Sale at the Hôtel Bullion, Musée Carnavalet, Paris (18th century)
 
@@ -105,21 +109,26 @@ Pierre-Antoine de Machy, Public Sale at the Hôtel Bullion, Musée Carnavalet, P
 
 ## Paris auction market
 
-![](img/auction-trend-paris.png)
+```{r out.width="75%", fig.align="center", echo=FALSE}
+knitr::include_graphics("img/auction-trend-paris.png")
+```
 
 ---
 
 ## Depart pour la chasse
 
-![](img/depart-pour-la-chasse.png)
+```{r out.width="75%", fig.align="center", echo=FALSE}
+knitr::include_graphics("img/depart-pour-la-chasse.png")
+```
 
 ---
 
 ## Auction catalog text
 
 .pull-left[
-![](img/auction-catalogue.png)
-
+```{r out.width="70%", fig.align="center", echo=FALSE}
+knitr::include_graphics("img/auction-catalogue.png")
+```
 ]
 .pull-right[
 .small[
@@ -129,9 +138,11 @@ Two paintings very rich in composition, of a beautiful execution, and whose meri
 
 ---
 
-![](img/painting1.png)
-![](img/painting2.png)
-![](img/painting3.png)
+```{r out.width="80%", fig.align="center", echo=FALSE}
+knitr::include_graphics("img/painting1.png")
+knitr::include_graphics("img/painting2.png")
+knitr::include_graphics("img/painting3.png")
+```
 
 ---
 
