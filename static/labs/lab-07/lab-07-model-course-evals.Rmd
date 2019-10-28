@@ -21,10 +21,10 @@ library(tidyverse)
 
 ```{marginfigure}
 **Learning goals:**  
-+ Web scraping from a single page
-+ Writing functions
-+ Iteration
-+ Writing data
++ Calculating row-level summaries within a data frame  
++ Fitting simple linear regression models  
++ Interpreting simple linear regression models  
++ Visualizing simple linear regression models
 ```
 
 Many college courses conclude by giving students the opportunity to evaluate 
@@ -68,13 +68,8 @@ The variables in the data and their descriptions are as follows:
 | `bty_m1upper`    | Beauty rating of professor from upper level male: (1) lowest - (10) highest
 | `bty_m2upper`    | Beauty rating of professor from upper level male: (1) lowest - (10) highest
 
-In this week's workshop you will analyze the data from this study in order to start  
-exploring what goes into a positive professor evaluation.
-
-```{r echo=FALSE}
-knitr::knit_exit()
-```
-
+In this week's workshop you will analyze the data from this study in order to 
+start exploring what goes into a positive professor evaluation.
 
 # Getting started
 
@@ -110,58 +105,57 @@ In this lab you will first download the data, then upload it to the `data/` fold
 in your RStudio Cloud project.
 
 ```{r data-upload, fig.margin = TRUE, echo = FALSE, eval=TRUE, fig.width=3}
-knitr::include_graphics("img/07-model-course-evals/data-upload.png")
+knitr::include_graphics("img/data-upload.png")
 ```
 
-- Click [here](http://www.introds.org/courses/Spring18/Sta199/labs/data/evals-mod.csv) to download the data. The file is called `evals-mod.csv`.
+- Click [here](https://introds.org/data/evals-mod.csv) to download the data. The file is called `evals-mod.csv`.
 - Navigate to the data folder in your project and upload the `evals-mod.csv` file.
 
 Then, you can load the data as usual using the following.
 
-```{r data, eval=FALSE}
+```{r data-hide, include=FALSE}
+evals <- read_csv(here::here("static/data", "evals-mod.csv"))
+```
+
+```{r data-show, eval=FALSE}
 evals <- read_csv("data/evals-mod.csv")
 ```
 
-## Part 1: Data Manipulation 
-
-```{marginfigure}
-The `rowwise` function is useful for applying mathematical operations to each row.
-```
+# Part 1: Data Manipulation 
 
 1.  Create a new variable called `bty_avg` that is the average attractiveness
-    score of the six students for each professor (`bty_f1lower` through `bty_m2upper`). 
-    Add this new variable to the `evals` data frame. Do this in one pipe, using the 
-    `rowwise` function. Incomplete code is given below to guide you in the right direction, 
-    however you will need to fill in the blanks.
+    score of the six students for each professor (`bty_f1lower` through 
+    `bty_m2upper`). Add this new variable to the `evals` data frame. Do this in 
+    one pipe, using the `rowMeans()` function within a `mutate()`.
 
 ```{r eval=FALSE}
-___ <- evals %>%
-  rowwise() %>%
-  ___(bty_avg = mean( c( ___ ) )) %>%
-  ungroup()
+evals <- evals %>%
+  mutate(bty_avg = rowMeans(select(., bty_f1lower:bty_m2upper)))
 ```
 
-Note that we end the pipeline with `ungroup()` to remove the effect of the `rowwise` function from earlier in the pipeline. The `rowwise` function works a lot like `group_by`, except it groups the data frame one row at a time so that any operations applied to the data frame is done once per each row. This is helpful for finding the mean beauty score *for each row*. However in the remainder of the analysis we don't want to, say, calculate summary statistics for each row, or fit a model for each row. Hence we need to undo the effect of `rowwise`, which we can do with `ungroup`.
+Let's pause for a second to see what is happening in this piece of code. 
+We are mutating the `evals` data frame by adding a new variable, `bty_avg`, 
+that is calculated as the mean of the columns titled `bty_f1lower` through 
+`bty_m2upper` in the `evals` data frame (denoted with a `.` here).
 
-## Part 2: Exploratory Data Analysis
+# Part 2: Exploratory Data Analysis
 
 2.  Visualize the distribution of `score`. Is the distribution skewed? What does 
     that tell you about how students rate courses? Is this what you expected to 
     see? Why, or why not? Include any summary statistics and visualizations
     you use in your response.
 
-3.  Visualize and describe the relationship between `score` and the new variable you 
-    created, `bty_avg`.
+3.  Visualize and describe the relationship between `score` and the new variable 
+    you created, `bty_avg`.
     
 ```{marginfigure}
 **Hint:** See the help page for the function at http://ggplot2.tidyverse.org/reference/index.html.
 ```
     
-4.  Replot the scatterplot from Exercise 3, but this time use  
-    `geom_jitter()`? What does "jitter" mean? 
-    What was misleading about the initial scatterplot?
+4.  Replot the scatterplot from Exercise 3, but this time use `geom_jitter()`? 
+    What does "jitter" mean? What was misleading about the initial scatterplot?
 
-## Part 3: Linear regression with a numerical predictor
+# Part 3: Linear regression with a numerical predictor
 
 ```{marginfigure}
 Linear model is in the form $\hat{y} = b_0 + b_1 x$.
@@ -170,21 +164,26 @@ Linear model is in the form $\hat{y} = b_0 + b_1 x$.
 5.  Let's see if the apparent trend in the plot is something more than
     natural variation. Fit a linear model called `m_bty` to predict average
     professor evaluation `score` by average beauty rating (`bty_avg`). Based on the 
-    regression output, write the linear model.
+    regression output, which you can obtain with `tidy(m_bty)`, write the linear model.
     
-6.  Replot your visualization from Exercise 3, and add the regression line to this plot
-    in orange color. Turn off the shading for the uncertainty of the line.
+6.  Replot your visualization from Exercise 3, and add the regression line to 
+    this plot in orange color. Turn off the shading for the uncertainty of the line.
     
 7.  Interpret the slope of the linear model in context of the data.
 
-8.  Interpret the intercept of the linear model in context of the data. Comment on whether 
-    or not the intercept makes sense in this context.
-    
-9.  Determine the $R^2$ of the model and interpret it in context of the data.
+8.  Interpret the intercept of the linear model in context of the data. Comment 
+    on whether or not the intercept makes sense in this context.
 
-## Part 4: Linear regression with a categorical predictor
+```{marginfigure}
+Refer back to this week's reading if you don't remember what $R^2$ means.
+```
 
-10.  Fit a new linear model called `m_gen` to predict average professor evaluation `score` 
+9.  Determine the $R^2$ of the model and interpret it in context of the data. 
+    You can obtain this value with `glance(m_bty)`.
+
+# Part 4: Linear regression with a categorical predictor
+
+10. Fit a new linear model called `m_gen` to predict average professor evaluation `score` 
     based on `gender` of the professor. Based on the regression output, write the linear 
     model and interpret the slope and intercept in context of the data.
     
@@ -196,7 +195,7 @@ Linear model is in the form $\hat{y} = b_0 + b_1 x$.
     model and interpret the slopes and intercept in context of the data.
     
 ```{marginfigure}
-See the course slides on using the forcats package for changing the order of levels.
+Refer to the [forcats package](http://forcats.tidyverse.org/) for changing the order of levels.
 ```
 
 13. Create a new variable called `rank_relevel` where `"tenure track"` is the baseline level. 
@@ -206,14 +205,3 @@ See the course slides on using the forcats package for changing the order of lev
     you created in Exercise 13. Based on the regression output, write the linear 
     model and interpret the slopes and intercept in context of the data. Also determine and 
     interpret the $R^2$ of the model.
-    
-15. Create another new variable called `tenure_eligible` that labels `"teaching"` faculty as 
-    `"no"` and labels `"tenure track"` and `"tenured"` faculty as `"yes"`.
-  
-16. Fit a new linear model called `m_tenure_eligible` to predict average professor evaluation 
-    `score` based on `tenure_eligible`ness of the professor. This is the new (regrouped) variable 
-    you created in Exercise 15. Based on the regression output, write the linear 
-    model and interpret the slopes and intercept in context of the data. Also determine and 
-    interpret the $R^2$ of the model.
-
-
