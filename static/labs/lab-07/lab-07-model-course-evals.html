@@ -615,7 +615,7 @@ text-align: center;
 <ol style="list-style-type: decimal">
 <li>Create a new variable called <code>bty_avg</code> that is the average attractiveness score of the six students for each professor (<code>bty_f1lower</code> through <code>bty_m2upper</code>). Add this new variable to the <code>evals</code> data frame. Do this in one pipe, using the <code>rowMeans()</code> function within a <code>mutate()</code>.</li>
 </ol>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">evals &lt;-<span class="st"> </span>evals <span class="op">%&gt;%</span></a>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">evals &lt;-<span class="st"> </span>evals <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb4-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">bty_avg =</span> <span class="kw">rowMeans</span>(<span class="kw">select</span>(., bty_f1lower<span class="op">:</span>bty_m2upper)))</a></code></pre></div>
 <p>Let’s pause for a second to see what is happening in this piece of code. We are mutating the <code>evals</code> data frame by adding a new variable, <code>bty_avg</code>, that is calculated as the mean of the columns titled <code>bty_f1lower</code> through <code>bty_m2upper</code> in the <code>evals</code> data frame (denoted with a <code>.</code> here).</p>
 </div>

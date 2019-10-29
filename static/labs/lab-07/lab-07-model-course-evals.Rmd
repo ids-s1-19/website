@@ -133,7 +133,7 @@ library(broom)
     one pipe, using the `rowMeans()` function within a `mutate()`.
 
 ```{r eval=FALSE}
-evals <- evals %>%
+evals <- evals %>% 
   mutate(bty_avg = rowMeans(select(., bty_f1lower:bty_m2upper)))
 ```
 
