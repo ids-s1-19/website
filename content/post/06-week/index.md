@@ -25,7 +25,7 @@ title: 'Week 6 - Web scraping and iteration'
 | Lec 12 | [Functions and iteration](/slides/w6_d2-functions-iteration/w6_d2-functions-iteration.html) |
 | HW 06  | [Money in politics](/hw/hw-06/hw-06-money-in-politics.html) | **Due:** Wed, 30 Oct, 17:00 |
 | RT 05  | Interactive tutorial covering week’s material: [Write functions](https://rstudio.cloud/learn/primers/6) (Function basics, How to write a function, and Arguments) + [Iterate](https://rstudio.cloud/learn/primers/5) (Introduction to iteration, Map, and Map shortcuts) |
-| OQ 05  | [TBA]() |  **Due:** Fri, 1 Nov, 17:00 |
+| OQ 06  | [Scrape and iterate](https://minecr.shinyapps.io/06-scrape-iterate/) |  **Due:** Fri, 1 Nov, 17:00 |
 
 ### Readings
 
