@@ -22,7 +22,7 @@ title: 'Week 7 - The language of models'
 |---:|---|---|
 | Lec 13     | [The language of models](/slides/w7_d1-language-of-models/w7_d1-language-of-models.html) |
 | Lab 07     | [Modeling course evaluations, Pt. 1](/labs/lab-07/lab-07-model-course-evals.html) |
-| Lec 14     | Simple linear regression |
+| Lec 14     | [Simple linear regression](/slides/w7_d1-language-of-models/w7_d1-language-of-models.html) |
 | HW 07      | TBA |
 | OQ 07      | TBA |
 | RT 07      | Interactive tutorial covering week’s material |
