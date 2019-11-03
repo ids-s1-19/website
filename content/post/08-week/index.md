@@ -16,11 +16,19 @@ summary: Multiple and non-linear regression
 title: 'Week 8 - Extending modeling'
 ---
 
-|            |  |
-|------------|----------|
-| Lecture 15 | Modeling non-linear relationships |
-| Lecture 16 | Multiple linear regression |
-| Lab 08     | Modeling course evaluations |
-| OQ 08      | Models with multiple predictors |
-| HW 08      | Regression overview |
-| RT 08      | Interactive tutorial covering week’s material |
+### Schedule
+
+| <div style="width:60px"></div>  | <div style="width:420px"></div> |  <div style="width:190px"></div>   |
+|---:|---|---|
+| Lec 15     | Modeling non-linear relationships |
+| Lab 08     | Modeling course evaluations, Pt. 2 | **Due:** Fri, 8 Nov, 17:00 |
+| Lec 16     | Multiple regression |
+| HW 07      | Regression overview | **Due:** Wed, 13 Nov, 17:00 |
+| OQ 07      | Multiple regression |
+| RT 08      | Interactive tutorial covering week’s material | **Due:** Fri, 15 Nov, 17:00 |
+
+### Readings
+
+| <div style="width:60px"></div>  | <div style="width:420px"></div>  |  <div style="width:190px"></div> |
+|----:|---|---|
+| :open_book: | OS: [Chp 9 - Muliple regression](https://www.openintro.org/stat/textbook.php?stat_book=os), Sections 9.1 - 9.4 | **Required** |
