@@ -1,0 +1,42 @@
+---
+title: "HW 07 - Peer review"
+output: 
+  tufte::tufte_html:
+    css: ../hw.css
+    tufte_variant: "envisioned"
+    highlight: pygments
+link-citations: yes
+---
+
+```{r photo, fig.margin = TRUE, echo = FALSE, fig.width=3, fig.cap="Photo by Wynand van Poortvliet on Unsplash"}
+knitr::include_graphics("img/wynand-van-poortvliet-4AmyOdXZAQc-unsplash.jpg")
+```
+
+This week you'll be reviewing project proposals from other teams.
+
+Each of you should see a new repo on the course GitHub organization titled 
+`hw-05-project-proposal-review-YOUR_GITHUB_USERNAME`. This folder contains two subfolders, one for each of the projects you will review. Suppose you were 
+reviewing project proposals of author 1 and author 2, these subfolders would 
+be called `aut1` and `aut2`. I will generically refer to these as `aut*` in the 
+remainder of this assignment.
+
+Each of these subfolders contains the contents of a team's project proposal submission, as well as an R Markdown file called `peer-review-feedback.Rmd`.
+
+Below are the steps for completing this homework assignment:
+
+- Clone the homework repo in RStudio Cloud.
+- Open the first `aut*` folder and try to knit the team's project proposal and read it, then add your comments to the peer review feedback form found in that folder. Also make any edits you see fit/necessary in the proposal R Markdown file (for example, correct errors, fix styling, etc.). Then, push your changes back to your repo.
+- Then, open the second `aut*` folder and repeat the same process.
+- Now that you've done two reviews, think about whether you want to go back to the first one to make any edits. If yes, go back and implement them.
+- And voila! You're done! On your own, think about how what you've seen from others might serve as an inspiration for your own team's project (but you don't need to write about this).
+
+A few important notes:
+
+- The peer evaluation requires you to score the teams on a similar scale as I did, but note that these scores won't affect the team's official grades, they're used for informational purposes for you and the team receiving your feedback and I'll use them for some internal assessment to see how close the peer evaluation scores are to mine. So don't be harsh but don't feel like you're taking away points from anyone -- mark fairly!
+- Be positive and constructive in your tone.
+- You are not anonymous to your reviewees, which I hope will help keep things collegial. People can sometimes get carried away when things are anonymous online, so we want to avoid that.
+- When you push your review to your repo, the team whose work you reviewed won't see it right away. I will move these reviews back to the teams after the homework deadline. So you can make edits until that time.
+- You will be evaluated on the quality of the feedback you give.
+- Your homework repos are titled `hw-05-project-proposal-review-...` when we're working on `hw-07`. I hope this is not too confusing. Your score will be recorded as your `hw-07` score.
+- You should all have received your proposal feedback from me. If you don't see it as a feedback issue in your team repo, please ping me asap and I'll get it up there. I'm hoping my reviews will not only be informative for your project, but also serve as a model for this homework. You should thrive to do better than me in your review of your classmates' projects!
+- If the data file is missing from a project you're reviewing, please send me an email. It might not be the team's fault. The code I used to move these files around was bugging out for some of the large data files. So if any of those got lost in the shuffle, I'll manually add it to your review folder.
