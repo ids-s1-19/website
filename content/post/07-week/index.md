@@ -24,8 +24,7 @@ title: 'Week 7 - The language of models'
 | Lab 07     | [Modeling course evaluations, Pt. 1](/labs/lab-07/lab-07-model-course-evals.html) |
 | Lec 14     | [Simple linear regression](/slides/w7_d2-simple-linear-regression/w7_d2-simple-linear-regression.html) |
 | HW 07      | TBA |
-| OQ 07      | TBA |
-| RT 07      | Interactive tutorial covering week’s material |
+| OQ 07      | [Simple linear regression](https://minecr.shinyapps.io/07-modeling-simple/) |
 
 ### Readings
 
