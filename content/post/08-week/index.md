@@ -23,9 +23,9 @@ title: 'Week 8 - Extending modeling'
 | Lec 15     | Modeling non-linear relationships |
 | Lab 08     | Modeling course evaluations, Pt. 2 | **Due:** Fri, 8 Nov, 17:00 |
 | Lec 16     | Multiple regression |
-| HW 07      | Regression overview | **Due:** Wed, 13 Nov, 17:00 |
-| OQ 07      | Multiple regression |
-| RT 08      | Interactive tutorial covering week’s material | **Due:** Fri, 15 Nov, 17:00 |
+| HW 08      | Regression overview | **Due:** Wed, 13 Nov, 17:00 |
+| OQ 08      | Multiple regression | **Due:** Fri, 15 Nov, 17:00 |
+| RT 08      | Interactive tutorial covering week’s material | 
 
 ### Readings
 
