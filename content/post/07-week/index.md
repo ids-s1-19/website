@@ -22,7 +22,7 @@ title: 'Week 7 - The language of models'
 |---:|---|---|
 | Lec 13     | [The language of models](/slides/w7_d1-language-of-models/w7_d1-language-of-models.html) |
 | Lab 07     | [Modeling course evaluations, Pt. 1](/labs/lab-07/lab-07-model-course-evals.html) | **Due:** Fri, 1 Nov, 17:00 |
-| Lec 14     | [Simple linear regression](/slides/w7_d2-simple-linear-regression/w7_d2-simple-linear-regression.html) |
+| Lec 14     | [Linear model with single predictor](/slides/w7_d2-linear-model-single-predictor/w7_d2-linear-model-single-predictor.html) |
 | HW 07      | [Peer review](/hw/hw-07/hw-07-peer-review.html) | **Due:** Wed, 6 Nov, 17:00 |
 | OQ 07      | [Simple linear regression](https://minecr.shinyapps.io/07-modeling-simple/) | **Due:** Fri, 8 Nov, 17:00 |
 
