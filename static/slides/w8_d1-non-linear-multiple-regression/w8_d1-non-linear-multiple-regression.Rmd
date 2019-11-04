@@ -285,7 +285,7 @@ ggplot(data = m_price_wt,
 ```{r fig.width=5, fig.height=4, message=FALSE, echo=FALSE}
 m_lprice_wt <- lm(log(price) ~ Width_in, data = pp_wt_lt_100)
 m_lprice_wt_aug <- augment(m_lprice_wt)
-ggplot(data = m_log_wi_pr_tidy, 
+ggplot(data = m_lprice_wt_aug, 
        mapping = aes(x = .fitted, y = .resid)) +
   geom_point(alpha = 0.5) +
   labs(
@@ -394,7 +394,6 @@ countdown(minutes = 3)
 >For each additional inch the painting is wider, the price of the
 painting is expected to be `___` , on average, by a factor of `___`.
 
-<!--
 
 $$ log(\text{price for width x+1}) - log(\text{price for width x}) = 0.02 $$
 
@@ -415,7 +414,6 @@ $$ \frac{\text{price for width x+1}}{\text{price for width x}} \approx 1.02 $$
 For each additional inch the painting is wider, the price of the
 painting is expected to be higher, on average, by a factor of 1.02.
 
--->
 
 ---
 
