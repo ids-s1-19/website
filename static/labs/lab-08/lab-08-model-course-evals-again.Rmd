@@ -86,7 +86,7 @@ evals <- read_csv("data/evals-mod.csv")
 
 We will use the following packages in this analysis:
 
-```{r}
+```{r message=FALSE}
 library(tidyverse)
 library(broom)
 ```
