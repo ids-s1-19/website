@@ -20,7 +20,7 @@ title: 'Week 8 - Extending modeling'
 
 | <div style="width:60px"></div>  | <div style="width:420px"></div> |  <div style="width:190px"></div>   |
 |---:|---|---|
-| Lec 15     | Modeling non-linear relationships |
+| Lec 15     | [Non-linear relationships and many predictors](/slides/w8_d1-non-linear-multiple-regression/w8_d1-non-linear-multiple-regression.html) |
 | Lab 08     | Modeling course evaluations, Pt. 2 | **Due:** Fri, 8 Nov, 17:00 |
 | Lec 16     | Multiple regression |
 | HW 08      | Regression overview | **Due:** Wed, 13 Nov, 17:00 |

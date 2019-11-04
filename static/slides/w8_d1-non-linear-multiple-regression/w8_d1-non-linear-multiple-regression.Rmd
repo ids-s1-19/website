@@ -1,0 +1,830 @@
+---
+title: "Non-linear and multiple regression <br> `r emo::ji('woman_juggling')`"
+author: "Dr. Çetinkaya-Rundel"
+output:
+  xaringan::moon_reader:
+    css: "../slides.css"
+    lib_dir: libs
+    nature:
+      ratio: "16:9"
+      highlightLines: true
+      highlightStyle: solarized-light
+      countIncrementalSlides: false
+---
+
+```{r child = "../setup.Rmd"}
+```
+
+```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(scales)
+library(broom)
+library(here)
+library(plotly)
+library(widgetframe)
+```
+
+```{r load-pp, include=FALSE}
+pp <- read_csv(here::here("csv/paris-paintings.csv"), na = c("n/a", "", "NA"))
+```
+
+
+## Announcements
+
+- Website is back up with most up to date information / links
+- HW 07 - Project peer review
+- Student hours this week:
+  - Tue, 14:30 - 15:30 @ JCMB 2257 (An hour shorter than usual)
+  - Wed, 14:30 - 15:30 @ [bit.ly/ids-zoom-week-08](http://bit.ly/ids-zoom-week-08) (Online!)
+
+<br>
+
+---
+
+class: center, middle
+
+# Model checking
+
+---
+
+## "Linear" models
+
+- We're fitting a "linear" model, which assumes a linear relationship between 
+our explanatory and response variables.
+- But how do we assess this?
+
+---
+
+## Graphical diagnostic: residuals plot
+
+.small[
+```{r fig.height=2, fig.width=5}
+m_ht_wt <- lm(Height_in ~ Width_in, data = pp)
+m_ht_wt_aug <- augment(m_ht_wt)
+ggplot(m_ht_wt_aug, mapping = aes(x = .fitted, y = .resid)) +
+  geom_point(alpha = 0.5) +
+  geom_hline(yintercept = 0, color = "gray", lty = "dashed") +
+  labs(x = "Predicted height", y = "Residuals")
+```
+]
+
+---
+
+## Looking for...
+
+- Residuals distributed randomly around 0
+- With no visible pattern along the x or y axes
+
+```{r fig.height=2, fig.width=5, echo=FALSE}
+set.seed(12346)
+df <- tibble(
+  fake_resid = rnorm(1000, mean = 0, sd = 30),
+  fake_predicted = runif(1000, min = 0, max = 200)
+)
+ggplot(df, mapping = aes(x = fake_predicted, y = fake_resid)) +
+  geom_point(alpha = 0.5) +
+  geom_hline(yintercept = 0, color = "gray", lty = "dashed") +
+  labs(x = "Predicted", y = "Residuals")
+```
+
+---
+
+## Not looking for...
+
+### Fan shapes
+
+```{r fig.height=2, fig.width=5, echo=FALSE}
+set.seed(12346)
+df <- tibble(
+  fake_resid = c(rnorm(100, mean = 0, sd = 1), 
+                 rnorm(100, mean = 0, sd = 15), 
+                 rnorm(100, mean = 0, sd = 25), 
+                 rnorm(100, mean = 0, sd = 20), 
+                 rnorm(100, mean = 0, sd = 25), 
+                 rnorm(100, mean = 0, sd = 50), 
+                 rnorm(100, mean = 0, sd = 35), 
+                 rnorm(100, mean = 0, sd = 40),
+                 rnorm(200, mean = 0, sd = 80)),
+  fake_predicted = seq(0.2, 200, 0.2)
+)
+ggplot(df, mapping = aes(x = fake_predicted, y = fake_resid)) +
+  geom_point(alpha = 0.5) +
+  geom_hline(yintercept = 0, color = "gray", lty = "dashed") +
+  labs(x = "Predicted", y = "Residuals")
+```
+
+---
+
+## Not looking for...
+
+### Residuals correlated with predicted values
+
+```{r fig.height=2, fig.width=5, echo=FALSE}
+set.seed(12346)
+df <- tibble(
+  fake_predicted = seq(0.2, 200, 0.2),
+  fake_resid = c(
+    rnorm(500, mean = -20, sd = 10),
+    rnorm(500, mean = 10, sd = 10)
+  )
+)
+ggplot(df, mapping = aes(x = fake_predicted, y = fake_resid)) +
+  geom_point(alpha = 0.5) +
+  geom_hline(yintercept = 0, color = "gray", lty = "dashed") +
+  labs(x = "Predicted", y = "Residuals")
+```
+
+---
+
+## Not looking for...
+
+### Groups of patterns
+
+```{r fig.height=2, fig.width=5, echo=FALSE}
+set.seed(12346)
+df <- tibble(
+  fake_predicted = seq(0.2, 200, 0.2),
+  fake_resid = fake_predicted + rnorm(1000, mean = 0, sd = 50)
+)
+ggplot(df, mapping = aes(x = fake_predicted, y = fake_resid)) +
+  geom_point(alpha = 0.5) +
+  geom_hline(yintercept = 0, color = "gray", lty = "dashed") +
+  labs(x = "Predicted", y = "Residuals")
+```
+
+---
+
+## Not looking for...
+
+### Any patterns!
+
+```{r fig.height=2, fig.width=5, echo=FALSE}
+set.seed(12346)
+df <- tibble(
+  fake_predicted = seq(-100, 100, 0.4),
+  fake_resid = -5*fake_predicted^2 - 3*fake_predicted + 20000 + rnorm(501, mean = 0, sd = 10000)
+)
+ggplot(df, mapping = aes(x = fake_predicted, y = fake_resid)) +
+  geom_point(alpha = 0.5) +
+  geom_hline(yintercept = 0, color = "gray", lty = "dashed") +
+  labs(x = "Predicted", y = "Residuals")
+```
+
+---
+
+.question[
+What patterns does the residuals plot reveal that should make us question 
+whether a linear model is a good fit for modeling the relationship 
+between height and width of paintings?
+]
+
+```{r fig.height=2, fig.width=5, echo=FALSE}
+ggplot(m_ht_wt_aug, mapping = aes(x = .fitted, y = .resid)) +
+  geom_point(alpha = 0.5) +
+  geom_hline(yintercept = 0, color = "gray", lty = "dashed") +
+  labs(x = "Predicted height", y = "Residuals")
+```
+
+---
+
+class: center, middle
+
+# Exploring linearity
+
+---
+
+## Data: Paris Paintings
+
+```{r echo=FALSE}
+ggplot(data = pp, aes(x = price)) +
+  geom_histogram(binwidth = 1000) +
+  labs(title = "Prices of paintings")
+```
+
+---
+
+## Price vs. width
+
+.question[
+Describe the relationship between price and width of painting.
+]
+
+```{r echo=FALSE, fig.height=2}
+ggplot(data = pp, aes(x = Width_in, y = price)) +
+  geom_point(alpha = 0.5) +
+  labs(x = "Width (in)", y = "Price (livres)")
+```
+
+---
+
+## Let's focus on paintings with `Width_in < 100`
+
+That is, paintings with width < 2.54 cm
+
+```{r}
+pp_wt_lt_100 <- pp %>% 
+  filter(Width_in < 100)
+```
+
+---
+
+## Price vs. width
+
+.question[
+Which plot shows a more linear relationship?
+]
+
+.small[
+  
+.pull-left[
+```{r fig.width=5, fig.height=4, message=FALSE, echo=FALSE}
+ggplot(data = pp_wt_lt_100, 
+       mapping = aes(x = Width_in, y = price)) +
+  geom_point(alpha = 0.5) +
+  labs(title = "Price vs. width", subtitle = "For width < 100 in",
+       x = "Width (in)", y = "Price (livres)")
+```
+]
+
+.pull-right[
+```{r fig.width=5, fig.height=4, message=FALSE, echo=FALSE}
+ggplot(data = pp_wt_lt_100, 
+       mapping = aes(x = Width_in, y = log(price))) +
+  geom_point(alpha = 0.5) +
+  labs(title = "Log(price) vs. width", subtitle = "For width < 100 in",
+       x = "Width (in)", y = "Log(price) (log livres)")
+```
+]
+
+]
+
+---
+
+## Price vs. width, residuals
+
+.question[
+Which plot shows a residuals that are uncorrelated with predicted values from the model? Also, what is the unit of the residuals?
+]
+  
+.pull-left[
+```{r fig.width=5, fig.height=4, message=FALSE, echo=FALSE}
+m_price_wt <- lm(price ~ Width_in, data = pp_wt_lt_100)
+m_price_wt_aug <- augment(m_price_wt)
+ggplot(data = m_price_wt, 
+       mapping = aes(x = .fitted, y = .resid)) +
+  geom_point(alpha = 0.5) +
+  labs(
+    title = "Price vs. width, residuals", 
+    subtitle = "For width < 100 in",
+    x = "Predicted price (livres)", 
+    y = "Residuals"
+    )
+```
+]
+.pull-right[
+```{r fig.width=5, fig.height=4, message=FALSE, echo=FALSE}
+m_lprice_wt <- lm(log(price) ~ Width_in, data = pp_wt_lt_100)
+m_lprice_wt_aug <- augment(m_lprice_wt)
+ggplot(data = m_log_wi_pr_tidy, 
+       mapping = aes(x = .fitted, y = .resid)) +
+  geom_point(alpha = 0.5) +
+  labs(
+    title = "Log(Price) vs. width, residuals", 
+    subtitle = "For width < 100 in",
+    x = "Predicted log(price) (log livres)", 
+    y = "Residuals"
+    )
+```
+]
+---
+
+## Transforming the data
+
+- We saw that `price` has a right-skewed distribution, and the relationship between price and width of painting is non-linear.
+
+--
+- In these situations a transformation applied to the response variable may be useful.
+
+--
+- In order to decide which transformation to use, we should examine the distribution of the response variable.
+
+--
+- The extremely right skewed distribution suggests that a log transformation may 
+be useful.
+    - log = natural log, $ln$
+    - Default base of the `log` function in R is the natural log: <br>
+    `log(x, base = exp(1))`
+    
+---
+
+## Logged price vs. width
+
+.question[
+How do we interpret the slope of this model?
+]
+
+```{r echo=FALSE}
+ggplot(data = pp_wt_lt_100, mapping = aes(x = Width_in, y = log(price))) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = "lm", color = "#A7D5E8", se = FALSE) +
+  labs(x = "Width (in)", y = "Log(price) (log livres)")
+```
+
+---
+
+## Models with log transformation
+
+```{r}
+m_lprice_wt <- lm(log(price) ~ Width_in, data = pp_wt_lt_100)
+tidy(m_lprice_wt)
+```
+
+---
+
+## Interpreting the slope
+
+$$ \widehat{log(price)} = 4.67 + 0.02 Width $$
+
+--
+- For each additional inch the painting is wider, the log price of the
+painting is expected to be higher, on average, by 0.02 livres.
+
+--
+- which is not a very useful statement...
+
+---
+
+## Working with logs
+
+- Subtraction and logs: $log(a) − log(b) = log(a / b)$
+
+--
+- Natural logarithm: $e^{log(x)} = x$
+
+--
+- We can use these identities to "undo" the log transformation
+
+---
+
+## Interpreting the slope
+
+The slope coefficient for the log transformed model is 0.02, meaning the log 
+price difference between paintings whose widths are one inch apart is predicted 
+to be 0.02 log livres.
+
+--
+
+<br>
+
+.question[
+Using this information, and properties of logs that we just reviewed, fill in 
+the blanks in the following alternate interpretation of the slope:
+
+>For each additional inch the painting is wider, the price of the
+painting is expected to be `___` , on average, by a factor of `___`.
+]
+
+```{r echo=FALSE}
+countdown(minutes = 3)
+```
+
+
+---
+
+>For each additional inch the painting is wider, the price of the
+painting is expected to be `___` , on average, by a factor of `___`.
+
+<!--
+
+$$ log(\text{price for width x+1}) - log(\text{price for width x}) = 0.02 $$
+
+--
+
+$$ log\left(\frac{\text{price for width x+1}}{\text{price for width x}}\right) = 0.02 $$
+
+--
+
+$$ e^{log\left(\frac{\text{price for width x+1}}{\text{price for width x}}\right)} = e^{0.02} $$
+
+--
+
+$$ \frac{\text{price for width x+1}}{\text{price for width x}} \approx 1.02 $$
+
+--
+
+For each additional inch the painting is wider, the price of the
+painting is expected to be higher, on average, by a factor of 1.02.
+
+-->
+
+---
+
+## Interpreting the intercept
+
+.question[
+What is the interpretation of the intercept for the logged model?
+]
+
+```{r}
+tidy(m_lprice_wt)
+```
+
+
+```{r echo=FALSE}
+countdown(minutes = 3)
+```
+
+---
+
+## Using R
+
+.pull-left[
+**Original model:**
+
+```{r}
+m_price_wt %>%
+  tidy() %>%
+  select(term, estimate)
+```
+]
+
+.pull-right[
+**Logged model:**
+
+```{r}
+m_lprice_wt %>%
+  tidy() %>%
+  select(term, estimate) %>%
+  mutate(
+    estimate_exp = exp(estimate)
+    )
+```
+]
+
+---
+
+## Recap
+
+- Non-constant variance is one of the most common model violations, however it 
+is usually fixable by transforming the response (y) variable.
+
+--
+- The most common transformation when the response variable is right skewed is 
+the log transform: $log(y)$, especially useful when the response variable is 
+(extremely) right skewed.
+
+--
+- This transformation is also useful for variance stabilization.
+
+--
+- When using a log transformation on the response variable the interpretation of 
+the slope changes: *"For each unit increase in x, y is expected on average to be higher/lower <br> by a factor of $e^{b_1}$."*
+
+--
+- Another useful transformation is the square root: $\sqrt{y}$, especially 
+useful when the response variable is counts.
+
+---
+
+## Transform, or learn more?
+
+- Data transformations may also be useful when the relationship is non-linear
+- However in those cases a polynomial regression may be more appropriate
+  + This is beyond the scope of this course, but you’re welcomed to try it for your final project, and I’d be happy to provide further guidance
+
+---
+
+## Aside: when $y = 0$
+
+In some cases the value of the response variable might be 0, and
+
+```{r}
+log(0)
+```
+
+--
+
+The trick is to add a very small number to the value of the response variable for these cases so that the `log` function can still be applied:
+
+```{r}
+log(0 + 0.00001)
+```
+
+---
+
+class: center, middle
+
+# The linear model with multiple predictors
+
+---
+
+## Multiple predictors
+
+- Response variable: log(price)
+- Explanatory variables: Width and height
+
+```{r model-price-width-height}
+m_wi_hgt <- lm(log(price) ~ Width_in + Height_in, data = pp)
+tidy(m_wi_hgt)
+```
+
+---
+
+##  Linear model with multiple predictors
+
+```{r model-price-width-height-tidy, echo=FALSE}
+tidy(m_wi_hgt)
+```
+
+$$\widehat{log(price)} = 4.77 + 0.0269 width - 0.0133 height$$
+
+---
+
+## Visualizing models with multiple predictors
+
+```{r plotly, echo=FALSE, warning=FALSE, cache=TRUE}
+p <- plot_ly(pp, x = ~Width_in, y = ~Height_in, z = ~log(price),
+        marker = list(size = 3,
+                       color = "lightgray",
+                       alpha = 0.5,
+                       line = list(color = "gray",
+                                   width = 2))) %>%
+  add_markers() %>%
+  plotly::layout(scene = list(xaxis = list(title = "Width (in)"),
+                      yaxis = list(title = "Height (in)"),
+                      zaxis = list(title = "Log(price)"))) %>%
+  config(displayModeBar = FALSE)
+frameWidget(p, width = "100%", height = "100%")
+```
+
+---
+
+## Exploration 1
+
+### Price, surface area, and living artist
+
+- Explore the relationship between price of paintings and surface area, conditioned 
+on whether or not the artist is still living
+- First visualize and explore, then model
+
+---
+
+## Typical surface area
+
+.question[
+What is the typical surface area for paintings?
+]
+
+```{r viz-surf-artistliving, echo=FALSE,warning=FALSE, fig.width=5, fig.height=2}
+ggplot(data = pp, 
+       mapping = aes(y = log(price), x = Surface, color = factor(artistliving))) +
+  geom_point(alpha = 0.3) +
+  labs(color = "Living artist")
+```
+
+--
+
+Less than 1000 square inches (which is roughly a painting that is 80cm x 80cm). There are very few paintings that have surface area above 5000 square inches.
+
+---
+
+## Narrowing the scope
+
+For simplicity let's focus on the paintings with `Surface < 5000`:
+
+```{r surf-lt-5000}
+pp_Surf_lt_5000 <- pp %>%
+  filter(Surface < 5000)
+```
+
+```{r viz-surf-lt-5000-artistliving, echo=FALSE, warning=FALSE, fig.width=5, fig.height=1.8}
+ggplot(data = pp_Surf_lt_5000, 
+       mapping = aes(y = log(price), x = Surface, color = factor(artistliving))) +
+  geom_point(alpha = 0.3) +
+  labs(color = "Living artist")
+```
+
+---
+
+## Two ways to model
+
+- **Main effects:** Assuming relationship between surface and logged price 
+**does not vary** by whether or not the artist is living.
+- **Interaction effects:** Assuming relationship between surface and logged 
+price **varies** by whether or not the artist is living.
+
+.pull-left[
+```{r viz-main-effects, fig.height=3.8, echo=FALSE}
+m_main <- lm(log(price) ~ Surface + factor(artistliving), data = pp_Surf_lt_5000)
+m_main_aug <- augment(m_main)
+ggplot(data = m_main_aug, 
+       mapping = aes(y = log.price., x = Surface, color = factor.artistliving.)) +
+  geom_point(alpha = 0.3) +
+  geom_line(aes(y = .fitted), size = 1.2) +
+  labs(x = "Surface", y = "Log(price)", color = "Living artist", 
+       title = "Main effects") +
+  theme_minimal()
+```
+]
+.pull-right[
+```{r viz-interaction-effects, fig.height=3.8, echo=FALSE}
+ggplot(data = pp_Surf_lt_5000,
+       mapping = aes(y = log(price), x = Surface, 
+                     color = factor(artistliving))) +
+  geom_point(alpha = 0.3) +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(y = "Log(price)", color = "Living artist", title = "Interaction effects") +
+  theme_minimal()
+```
+]
+
+---
+
+## Fit model with main effects
+
+- Response variable: log(price)
+- Explanatory variables: Surface area and artist living (0/1 variable)
+
+.midi[
+```{r model-main-effects}
+m_main <- lm(log(price) ~ Surface + factor(artistliving), 
+             data = pp_Surf_lt_5000)
+tidy(m_main)
+```
+]
+
+
+--
+- Linear model:
+$$ \widehat{log(price)} = 4.88 + 0.000265~surface + 0.137~artistliving $$
+
+---
+
+## Solving the model
+
+- Non-living artist: Plug in 0 for `artistliving`
+$\widehat{log(price)} = 4.88 + 0.000265~surface + 0.137 \times 0$  
+$= 4.88 + 0.000265~surface$
+
+--
+- Living artist: Plug in 1 for `artistliving`
+$\widehat{log(price)} = 4.88 + 0.000265~surface + 0.137 \times 1$  
+$= 5.017 + 0.000265~surface$
+
+---
+
+## Visualizing main effects
+
+```{r fig.height=2, echo = FALSE}
+ggplot(data = m_main_aug, 
+       mapping = aes(y = log.price., x = Surface, color = factor.artistliving.)) +
+  geom_point(alpha = 0.3) +
+  geom_line(aes(y = .fitted)) +
+  labs(x = "Surface", y = "Log(price)", color = "Living artist")
+```
+
+- **Same slope:** Rate of change in price as the surface area increases does 
+not vary between paintings by living and non-living artists.
+- **Different intercept:** Paintings by living artists are consistently more 
+expensive than paintings by non-living artists.
+
+---
+
+## Interpreting main effects
+
+.midi[
+```{r exp-coefs}
+tidy(m_main) %>% 
+  mutate(exp_estimate = exp(estimate)) %>%
+  select(term, estimate, exp_estimate)
+```
+]
+
+- All else held constant, for each additional square inch in painting's surface area, the price of the painting is predicted, on average, to be higher by a factor of 1.
+- All else held constant, paintings by a living artist are predicted, on average, to be higher by a factor of 1.15 compared to paintings by an artist who is no longer alive.
+- Paintings that are by an artist who is not alive and that have a surface area of 0 square inches are predicted, on average, to be 132 livres.
+
+---
+
+## What went wrong?
+
+.question[
+Why is our linear regression model different from what we got from `geom_smooth(method = "lm")`?
+]
+
+.pull-left[
+```{r echo=FALSE, fig.height=4}
+ggplot(pp_Surf_lt_5000, aes(x = Surface, y = log(price), color = factor(artistliving))) + 
+  geom_point(alpha = 0.3) +
+  geom_smooth(method = "lm") +
+  labs(x = "Surface", y = "Log(price)", color = "Living artist")
+```
+]
+.pull-right[
+```{r viz-main-effects3, echo=FALSE, fig.height=4}
+m_pr <- lm(log(price) ~ Surface + factor(artistliving), data = pp_Surf_lt_5000)
+m_pr_aug <- augment(m_pr)
+ggplot(data = m_pr_aug, mapping = aes(y = log.price., x = Surface, color = factor.artistliving.)) +
+  geom_point(alpha = 0.3) +
+  geom_line(aes(y = .fitted)) +
+  labs(x = "Surface", y = "Log(price)", color = "Living artist")
+```
+]
+
+---
+
+## What went wrong? (cont.)
+
+- The way we specified our model only lets `artistliving` affect the intercept.
+- Model implicitly assumes that paintings with living and deceased artists have the *same slope* and only allows for *different intercepts*.  
+- What seems more appropriate in this case? 
+    + Same slope and same intercept for both colors
+    + Same slope and different intercept for both colors
+    + Different slope and different intercept for both colors?
+
+---
+
+## Interacting explanatory variables
+
+- Including an interaction effect in the model allows for different slopes, i.e. 
+nonparallel lines.
+- This implies that the regression coefficient for an explanatory variable would 
+change as another explanatory variable changes.
+- This can be accomplished by adding an interaction variable: the product of two 
+explanatory variables.
+
+---
+
+## Interaction: surface * artist living
+
+.small[
+```{r viz-interaction-effects1, fig.height=2.5}
+ggplot(data = pp_Surf_lt_5000,
+       mapping = aes(y = log(price), x = Surface, 
+                     color = factor(artistliving))) +
+  geom_point(alpha = 0.3) +
+  geom_smooth(method = "lm") +
+  labs(x = "Surface", y = "Log(price)", color = "Living artist")
+```
+]
+
+---
+
+## Fit model with interaction effects
+
+- Response variable: log(price)
+- Explanatory variables: Surface area, artist living (0/1 variable), and 
+their interaction
+
+.midi[
+```{r model-interaction-effects}
+m_int <- lm(log(price) ~ Surface + factor(artistliving) + 
+              Surface * factor(artistliving), 
+            data = pp_Surf_lt_5000)
+tidy(m_int)
+```
+]
+
+- Linear model:
+$$ \widehat{log(price)} = 4.91 + 0.00021~surface - 0.126~artistliving $$
+$$+ ~ 0.00048~surface \times artistliving $$
+
+---
+
+## Interpretation of interaction effects
+
+- Rate of change in price as the surface area of the painting increases does 
+vary between paintings by living and non-living artists (different slopes), 
+- Some paintings by living artists are more expensive than paintings by
+non-living artists, and some are not (different intercept).
+
+.small[
+.pull-left[
+- Non-living artist: 
+$\widehat{log(price)} = 4.91 + 0.00021~surface$
+$- 0.126 \times 0 + 0.00048~surface \times 0$
+$= 4.91 + 0.00021~surface$
+- Living artist: 
+$\widehat{log(price)} = 4.91 + 0.00021~surface$
+$- 0.126 \times 1 + 0.00048~surface \times 1$
+$= 4.91 + 0.00021~surface$
+$- 0.126 + 0.00048~surface$
+$= 4.784 + 0.00069~surface$
+]
+.pull-right[
+```{r viz-interaction-effects2, fig.height=4, echo = FALSE}
+ggplot(data = pp_Surf_lt_5000,
+       aes(y = log(price), x = Surface, color = factor(artistliving))) +
+  geom_point(alpha = 0.3) +
+  stat_smooth(method = "lm", fullrange = TRUE)
+```
+]
+]
+
+---
+
+## Third order interactions
+
+- Can you? Yes
+- Should you? Probably not if you want to interpret these interactions in context
+of the data.
