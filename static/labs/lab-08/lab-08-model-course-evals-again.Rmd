@@ -1,0 +1,153 @@
+---
+title: "Lab 08 - Modeling course evaluations, Pt. 2"
+subtitle: "Single predictor"
+output: 
+  tufte::tufte_html:
+    css: ../lab.css
+    tufte_variant: "envisioned"
+    highlight: pygments
+    toc: yes
+link-citations: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(eval = TRUE)
+```
+
+```{marginfigure}
+**Learning goals:**  
++ Calculating row-level summaries within a data frame  
++ Fitting simple linear regression models  
++ Interpreting simple linear regression models  
++ Visualizing simple linear regression models
+```
+
+This week we revisit the professor evaluations data we modeled in the previous 
+lab. In the last lab we modeled evaluation scores using a single predictor at a 
+time. However this time we use multiple predictors to model evaluation scores.
+
+If you don't remember the data, review the [previous lab](/labs/lab-07/lab-07-model-course-evals.html) 
+before continuing to the exercises.
+
+As before, we will start with a data prep step where we calculate average 
+beauty scores for each professor. Then we'll fit a simple linear regression 
+model predicting evaluation score from beauty score. And then for the majority 
+of the workshop we will work on fitting, interpreting, and evaluating the fit 
+of various multiple regression models predicting evaluation scores from 
+beauty score along with other variables like gender and rank of the professor.
+
+# Getting started
+
+## Clone your repo
+
+```{marginfigure}
+You can find your team assignment for the rest of the semester [here](https://github.com/ids-s1-19/team-assignments/blob/master/roster-team.csv).
+```
+
+Go to the course [GitHub organization](https://github.com/ids-s1-19) and locate 
+your Lab 06 repo, which should be named `lab-08-model-course-evals-again-YOUR_TEAMNAME`. 
+Grab the URL of the repo, and clone it in RStudio Cloud.
+
+## Introduce yourself to Git
+
+```{marginfigure}
+Your email address is the address tied to your GitHub account and your name 
+should be first and last name.
+```
+
+Run the following (but update it for your name and email!) in the Console to 
+configure Git:
+
+```{r git-config, eval=FALSE}
+library(usethis)
+use_git_config(user.name = "Your Name", 
+               user.email = "your.email@address.com")
+``` 
+  
+## Download the data
+
+In this lab you will first download the data, then upload it to the `data/` folder 
+in your RStudio Cloud project.
+
+```{r data-upload, fig.margin = TRUE, echo = FALSE, eval=TRUE, fig.width=3}
+knitr::include_graphics("img/data-upload.png")
+```
+
+- Click [here](https://introds.org/data/evals-mod.csv) to download the data. The file is called `evals-mod.csv`.
+- Navigate to the data folder in your project and upload the `evals-mod.csv` file.
+
+Then, you can load the data as usual using the following.
+
+```{r data-show, eval=FALSE}
+evals <- read_csv("data/evals-mod.csv")
+```
+
+## Load packages
+
+We will use the following packages in this analysis:
+
+```{r}
+library(tidyverse)
+library(broom)
+```
+
+```{r}
+knitr::knit_exit()
+```
+
+
+# Part 1: Data Manipulation 
+
+1.  Create a new variable called `bty_avg` that is the average attractiveness
+    score of the six students for each professor (`bty_f1lower` through 
+    `bty_m2upper`). Add this new variable to the `evals` data frame. Do this in 
+    one pipe, using the `rowMeans()` function within a `mutate()`.
+
+```{r eval=FALSE}
+evals <- evals %>% 
+  mutate(bty_avg = rowMeans(select(., bty_f1lower:bty_m2upper)))
+```
+
+If you have questions about what is happening in the code above, refer to 
+[last week's lab](/labs/lab-07/lab-07-model-course-evals.html).
+
+## Part 2: Simple linear regression
+
+2. Fit a linear model (one you have fit before): `m_bty`, predicting average
+   professor evaluation `score` based on average beauty rating (`bty_avg`) only. Write the 
+   linear model, and note the $R^2$ and the adjusted $R^2$.
+
+## Part 3: Multiple linear regression
+
+3. Fit a linear model (one you have fit before): `m_bty_gen`, predicting average
+   professor evaluation `score` based on average beauty rating (`bty_avg`) and `gender`. 
+   Write the linear model, and note the $R^2$ and the adjusted $R^2$.
+   
+4. Interpret the slope and intercept of `m_bty_gen` in context of the data.
+
+5. What percent of the variability in `score` is explained by the model `m_bty_gen`.
+
+6. What is the equation of the line corresponding to *just* male professors?
+    
+7. For two professors who received the same beauty rating, which gender tends 
+   to have the higher course evaluation score?
+    
+8. How does the relationship between beauty and evaluation score
+   vary between male and female professors?
+    
+9. How do the adjusted $R^2$ values of `m_bty_gen` and `m_bty` compare? What does this tell us 
+   about how useful `gender` is in explaining the variability in evaluation scores when we 
+   already have information on the beaty score of the professor.
+
+10. Compare the slopes of `bty_avg` under the two models (`m_bty` and `m_bty_gen`). Has the 
+    addition of `gender` to the model changed the parameter estimate (slope) for `bty_avg`?
+    
+11. Create a new model called `m_bty_rank` with `gender` removed and `rank` 
+    added in. Write the equation of the linear model and interpret the slopes and intercept 
+    in context of the data. 
+
+## Part 4: Scope of inference
+
+12. Would you be comfortable generalizing your conclusions to apply to professors
+    generally (at any university)? Why or why not?
+    
