@@ -16,7 +16,9 @@ knitr::opts_chunk$set(eval = TRUE)
 
 ```{marginfigure}
 **Learning goals:**  
-+ ...
++ Using inline code in interpretations of model estimates.
++ Fitting simple and multiple regression models.
++ Comparing models using adjusted $R^2$.
 ```
 
 This week we revisit the professor evaluations data we modeled in the previous 
@@ -105,15 +107,94 @@ If you have questions about what is happening in the code above, refer to
 
 # Part 2: Simple linear regression
 
-2. Fit a linear model (one you have fit before): `m_bty`, predicting average
-   professor evaluation `score` based on average beauty rating (`bty_avg`) only. Write the 
-   linear model, interpret the slope, the intercept, and the $R^2$ of the model.
-   
+We start with a linear model for predicting average professor evaluation `score` 
+based on average beauty rating (`bty_avg`) only.
+
 ```{r include=FALSE}
 m_bty <- lm(score ~ bty_avg, data = evals)
 ```
 
-Next we should use a graphical diagnostic, the residuals plot, to assess model 
+```{marginfigure}
+**Remember:** The linear model is of the form $\hat{y} = b_0 + b_1 * x$, but you should 
+replace $y$ and $x$ with the actual variables and $b_0$ and $b_1$ with the 
+model estimates. Unfortunately math text doesn't work well in GitHub documents, 
+so instead of $\hat{y}$, you can type out y-hat.
+```
+
+2. Write the linear model, interpret the slope, the intercept, and the $R^2$ of 
+   the model. Use `tidy()` to obtain the slope and intercept estimates from the 
+   tidy model output, and `glance()` to obtain the $R^2$. Your answer should use 
+   inline code. Below are some tips for extracting these values from the model 
+   output to use in your inline code.
+
+Let's start with the intercept. You have two options for extracting the value of 
+the intercept from the regression output. Remember, the output looks like 
+this:
+
+```{r}
+tidy(m_bty)
+```
+
+So the intercept is in the `estimate` column, and it's the first element in there.
+   
+```{r}
+# Option 1
+tidy(m_bty)$estimate[1]
+```
+
+We can also extract it using a dplyr pipeline:
+
+```{r}
+# Option 2
+tidy(m_bty) %>% 
+  filter(term == "(Intercept)") %>%   # filter for the intercept
+  select(estimate) %>%                # select the estimate column
+  pull()                              # pull value out of data frame
+```
+
+Regardless of which option you use, you might consider storing the value in an 
+object that you can easily refer to in your inline code, e.g.
+
+```{r}
+m_bty_intercept <- tidy(m_bty) %>% 
+  filter(term == "(Intercept)") %>%
+  select(estimate) %>%
+  pull()
+```
+
+And then, you can use the `m_bty_intercept` in inline code, e.g.
+
+```
+The intercept of the model is 'r m_bty_intercept'...
+```
+
+which will render to
+
+
+```
+The intercept of the model is `r m_bty_intercept`...
+```
+
+There is still one small issue here though, the number of decimal places reported. 
+It would be better to round the value in our narrative, for which we can 
+use the `round()` function. This function takes two arguments: the first one 
+is the value (or vector of values) you want to round, and the second one is 
+the number of digits.
+
+```
+The intercept of the model is 'r round(m_bty_intercept, 2)'...
+```
+
+which will render to
+
+
+```
+The intercept of the model is `r round(m_bty_intercept, 2)`...
+```
+
+<br>
+
+We should also use a graphical diagnostic, the residuals plot, to assess model 
 fit. To do so we need to calculate the predicted evaluation scores for each 
 professor in the dataset as well as the residuals for each observation. 
 
@@ -134,47 +215,57 @@ We also have the predicted values (`.fitted`) and the residuals (`.resid`).
 We'll talk about a few of the other variables later in the course, and some 
 others you will encounter in future courses.
 
+```{marginfigure}
+**Hint:** You can use `geom_hline()` with `linetype = "dashed"` for this.
+```
+
 3. Make a residuals vs. predicted values plot for the model above. Use 
    `geom_jitter()` instead of `geom_point()`, and overlay a dashed horizontal 
-   line at `y = 0`.^[Hint: You can use `geom_hline()` with `linetype = "dashed"` 
-   for this.] Then, comment on whether the linear model is appropriate for 
+   line at `y = 0`. Then, comment on whether the linear model is appropriate for 
    modeling the relationship between evaluation scores and beauty scores.
 
 # Part 3: Multiple linear regression
 
-4. Fit a linear model `m_bty_gen`, predicting average professor evaluation `score` 
-   based on average beauty rating (`bty_avg`) and `gender`. Write the 
-   linear model.
+Next, we fit a multiple linear regression model, predicting average professor 
+evaluation `score` based on average beauty rating (`bty_avg`) and `gender`:
 
-5. Interpret the intercept.
+```{r}
+m_bty_gen <- lm(score ~ bty_avg + gender, data = evals)
+```
 
-6. Interpret the slopes of `bty_avg` and `gender`.
+4. Write the linear model.
+   
+5. Interpret the intercept and the slopes of `bty_avg` and `gender`. Use inline 
+   code in your answer.
 
-7. What percent of the variability in `score` is explained by the model `m_bty_gen`.
+6. What percent of the variability in `score` is explained by the model `m_bty_gen`. 
+   Once again, use inline code in your answer.
 
-8. What is the equation of the line corresponding to *just* male professors?
+7. What is the equation of the line corresponding to *just* male professors?
     
-9. For two professors who received the same beauty rating, which gender tends 
+8. For two professors who received the same beauty rating, which gender tends 
    to have the higher course evaluation score?
     
-10. How does the relationship between beauty and evaluation score
-    vary between male and female professors?
+9. How does the relationship between beauty and evaluation score
+   vary between male and female professors?
    
-11. What is the definition of adjusted  $R^2$? Explain how it is different than 
-    $R^2$ using values from this model.
+10. What is the definition of adjusted  $R^2$? Explain how it is different than 
+    $R^2$ using values from this model. Once again, use inline code in your answer.
     
-12. How do the adjusted $R^2$ values of `m_bty_gen` and `m_bty` compare? What does this tell us 
-    about how useful `gender` is in explaining the variability in evaluation scores when we 
-    already have information on the beauty score of the professor.
+11. How do the adjusted $R^2$ values of `m_bty_gen` and `m_bty` compare? What 
+    does this tell us about how useful `gender` is in explaining the variability 
+    in evaluation scores when we already have information on the beauty score of 
+    the professor. Once again, use inline code in your answer.
 
-13. Compare the slopes of `bty_avg` under the two models (`m_bty` and `m_bty_gen`). Has the 
+12. Compare the slopes of `bty_avg` under the two models (`m_bty` and `m_bty_gen`). Has the 
     addition of `gender` to the model changed the parameter estimate (slope) for `bty_avg`?
     
-14. Create a new model called `m_bty_gen_rank` predicting average professor evaluation 
+13. Create a new model called `m_bty_gen_rank` predicting average professor evaluation 
    `score` based on average beauty rating (`bty_avg`), `gender`, and `rank`.  
     Write the linear model and interpret the slopes and intercept in context of the data. 
+    Once again, use inline code in your answer.
     
-15. How do the adjusted $R^2$ values of `m_bty_gen_rank` and `m_bty_gen` compare? 
+14. How do the adjusted $R^2$ values of `m_bty_gen_rank` and `m_bty_gen` compare? 
     What does this tell us about how useful `rank` is in explaining the variability 
     in evaluation scores when we already have information on the beauty score and 
-    gender of the professor.
+    gender of the professor. And yet again, use inline code in your answer.

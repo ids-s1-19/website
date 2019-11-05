@@ -479,7 +479,7 @@ text-align: center;
 </ul>
 </div>
 
-<p><label for="tufte-mn-1" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-1" class="margin-toggle"><span class="marginnote"><span style="display: block;"><strong>Learning goals:</strong><br /> + …</span></span></p>
+<p><label for="tufte-mn-1" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-1" class="margin-toggle"><span class="marginnote"><span style="display: block;"><strong>Learning goals:</strong><br /> + Using inline code in interpretations of model estimates. + Fitting simple and multiple regression models. + Comparing models using adjusted <span class="math inline"><span class="math inline">\(R^2\)</span></span>.</span></span></p>
 <p>This week we revisit the professor evaluations data we modeled in the previous lab. In the last lab we modeled evaluation scores using a single predictor at a time. However this time we use multiple predictors to model evaluation scores.</p>
 <p>If you don’t remember the data, review the <a href="/labs/lab-07/lab-07-model-course-evals.html">previous lab</a> before continuing to the exercises.</p>
 <p>As before, we will start with a data prep step where we calculate average beauty scores for each professor. Then we’ll fit a simple linear regression model predicting evaluation score from beauty score. And then for the majority of the workshop we will work on fitting, interpreting, and evaluating the fit of various multiple regression models predicting evaluation scores from beauty score along with other variables like gender and rank of the professor.</p>
@@ -531,37 +531,73 @@ text-align: center;
 </div>
 <div id="part-2-simple-linear-regression" class="section level1">
 <h1>Part 2: Simple linear regression</h1>
+<p>We start with a linear model for predicting average professor evaluation <code>score</code> based on average beauty rating (<code>bty_avg</code>) only.</p>
+<p><label for="tufte-mn-4" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-4" class="margin-toggle"><span class="marginnote"><span style="display: block;"><strong>Remember:</strong> The linear model is of the form <span class="math inline"><span class="math inline">\(\hat{y} = b_0 + b_1 * x\)</span></span>, but you should replace <span class="math inline"><span class="math inline">\(y\)</span></span> and <span class="math inline"><span class="math inline">\(x\)</span></span> with the actual variables and <span class="math inline"><span class="math inline">\(b_0\)</span></span> and <span class="math inline"><span class="math inline">\(b_1\)</span></span> with the model estimates. Unfortunately math text doesn’t work well in GitHub documents, so instead of <span class="math inline"><span class="math inline">\(\hat{y}\)</span></span>, you can type out y-hat.</span></span></p>
 <ol start="2" style="list-style-type: decimal">
-<li>Fit a linear model (one you have fit before): <code>m_bty</code>, predicting average professor evaluation <code>score</code> based on average beauty rating (<code>bty_avg</code>) only. Write the linear model, interpret the slope, the intercept, and the <span class="math inline">\(R^2\)</span> of the model.</li>
+<li>Write the linear model, interpret the slope, the intercept, and the <span class="math inline">\(R^2\)</span> of the model. Use <code>tidy()</code> to obtain the slope and intercept estimates from the tidy model output, and <code>glance()</code> to obtain the <span class="math inline">\(R^2\)</span>. Your answer should use inline code. Below are some tips for extracting these values from the model output to use in your inline code.</li>
 </ol>
-<p>Next we should use a graphical diagnostic, the residuals plot, to assess model fit. To do so we need to calculate the predicted evaluation scores for each professor in the dataset as well as the residuals for each observation.</p>
+<p>Let’s start with the intercept. You have two options for extracting the value of the intercept from the regression output. Remember, the output looks like this:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">tidy</span>(m_bty)</a></code></pre></div>
+<pre><code>## # A tibble: 2 x 5
+##   term        estimate std.error statistic   p.value
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+## 1 (Intercept)   3.88      0.0761     51.0  1.56e-191
+## 2 bty_avg       0.0666    0.0163      4.09 5.08e-  5</code></pre>
+<p>So the intercept is in the <code>estimate</code> column, and it’s the first element in there.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="co"># Option 1</span></a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw">tidy</span>(m_bty)<span class="op">$</span>estimate[<span class="dv">1</span>]</a></code></pre></div>
+<pre><code>## [1] 3.880333</code></pre>
+<p>We can also extract it using a dplyr pipeline:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="co"># Option 2</span></a>
+<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="kw">tidy</span>(m_bty) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="st">  </span><span class="kw">filter</span>(term <span class="op">==</span><span class="st"> &quot;(Intercept)&quot;</span>) <span class="op">%&gt;%</span><span class="st">   </span><span class="co"># filter for the intercept</span></a>
+<a class="sourceLine" id="cb9-4" data-line-number="4"><span class="st">  </span><span class="kw">select</span>(estimate) <span class="op">%&gt;%</span><span class="st">                </span><span class="co"># select the estimate column</span></a>
+<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="st">  </span><span class="kw">pull</span>()                              <span class="co"># pull value out of data frame</span></a></code></pre></div>
+<pre><code>## [1] 3.880333</code></pre>
+<p>Regardless of which option you use, you might consider storing the value in an object that you can easily refer to in your inline code, e.g.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">m_bty_intercept &lt;-<span class="st"> </span><span class="kw">tidy</span>(m_bty) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb11-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(term <span class="op">==</span><span class="st"> &quot;(Intercept)&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb11-3" data-line-number="3"><span class="st">  </span><span class="kw">select</span>(estimate) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb11-4" data-line-number="4"><span class="st">  </span><span class="kw">pull</span>()</a></code></pre></div>
+<p>And then, you can use the <code>m_bty_intercept</code> in inline code, e.g.</p>
+<pre><code>The intercept of the model is 'r m_bty_intercept'...</code></pre>
+<p>which will render to</p>
+<pre><code>The intercept of the model is 3.8803326...</code></pre>
+<p>There is still one small issue here though, the number of decimal places reported. It would be better to round the value in our narrative, for which we can use the <code>round()</code> function. This function takes two arguments: the first one is the value (or vector of values) you want to round, and the second one is the number of digits.</p>
+<pre><code>The intercept of the model is 'r round(m_bty_intercept, 2)'...</code></pre>
+<p>which will render to</p>
+<pre><code>The intercept of the model is 3.88...</code></pre>
+<p><br></p>
+<p>We should also use a graphical diagnostic, the residuals plot, to assess model fit. To do so we need to calculate the predicted evaluation scores for each professor in the dataset as well as the residuals for each observation.</p>
 <p>We use the <code>augment()</code> function for this:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">m_bty_aug &lt;-<span class="st"> </span><span class="kw">augment</span>(m_bty)</a></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1">m_bty_aug &lt;-<span class="st"> </span><span class="kw">augment</span>(m_bty)</a></code></pre></div>
 <p>Let’s take a look at what’s in this augmented dataset:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">names</span>(m_bty_aug)</a></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw">names</span>(m_bty_aug)</a></code></pre></div>
 <pre><code>## [1] &quot;score&quot;      &quot;bty_avg&quot;    &quot;.fitted&quot;    &quot;.se.fit&quot;    &quot;.resid&quot;    
 ## [6] &quot;.hat&quot;       &quot;.sigma&quot;     &quot;.cooksd&quot;    &quot;.std.resid&quot;</code></pre>
 <p>First, we have the variables used to build the model: <code>score</code> and <code>bty_avg</code>. We also have the predicted values (<code>.fitted</code>) and the residuals (<code>.resid</code>). We’ll talk about a few of the other variables later in the course, and some others you will encounter in future courses.</p>
+<p><label for="tufte-mn-5" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-5" class="margin-toggle"><span class="marginnote"><span style="display: block;"><strong>Hint:</strong> You can use <code>geom_hline()</code> with <code>linetype = “dashed”</code> for this.</span></span></p>
 <ol start="3" style="list-style-type: decimal">
-<li>Make a residuals vs. predicted values plot for the model above. Use <code>geom_jitter()</code> instead of <code>geom_point()</code>, and overlay a dashed horizontal line at <code>y = 0</code>.<label for="tufte-sn-1" class="margin-toggle sidenote-number">1</label><input type="checkbox" id="tufte-sn-1" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">1</span> Hint: You can use <code>geom_hline()</code> with <code>linetype = &quot;dashed&quot;</code> for this.</span> Then, comment on whether the linear model is appropriate for modeling the relationship between evaluation scores and beauty scores.</li>
+<li>Make a residuals vs. predicted values plot for the model above. Use <code>geom_jitter()</code> instead of <code>geom_point()</code>, and overlay a dashed horizontal line at <code>y = 0</code>. Then, comment on whether the linear model is appropriate for modeling the relationship between evaluation scores and beauty scores.</li>
 </ol>
 </div>
 <div id="part-3-multiple-linear-regression" class="section level1">
 <h1>Part 3: Multiple linear regression</h1>
+<p>Next, we fit a multiple linear regression model, predicting average professor evaluation <code>score</code> based on average beauty rating (<code>bty_avg</code>) and <code>gender</code>:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1">m_bty_gen &lt;-<span class="st"> </span><span class="kw">lm</span>(score <span class="op">~</span><span class="st"> </span>bty_avg <span class="op">+</span><span class="st"> </span>gender, <span class="dt">data =</span> evals)</a></code></pre></div>
 <ol start="4" style="list-style-type: decimal">
-<li><p>Fit a linear model <code>m_bty_gen</code>, predicting average professor evaluation <code>score</code> based on average beauty rating (<code>bty_avg</code>) and <code>gender</code>. Write the linear model.</p></li>
-<li><p>Interpret the intercept.</p></li>
-<li><p>Interpret the slopes of <code>bty_avg</code> and <code>gender</code>.</p></li>
-<li><p>What percent of the variability in <code>score</code> is explained by the model <code>m_bty_gen</code>.</p></li>
+<li><p>Write the linear model.</p></li>
+<li><p>Interpret the intercept and the slopes of <code>bty_avg</code> and <code>gender</code>. Use inline code in your answer.</p></li>
+<li><p>What percent of the variability in <code>score</code> is explained by the model <code>m_bty_gen</code>. Once again, use inline code in your answer.</p></li>
 <li><p>What is the equation of the line corresponding to <em>just</em> male professors?</p></li>
 <li><p>For two professors who received the same beauty rating, which gender tends to have the higher course evaluation score?</p></li>
 <li><p>How does the relationship between beauty and evaluation score vary between male and female professors?</p></li>
-<li><p>What is the definition of adjusted <span class="math inline">\(R^2\)</span>? Explain how it is different than <span class="math inline">\(R^2\)</span> using values from this model.</p></li>
-<li><p>How do the adjusted <span class="math inline">\(R^2\)</span> values of <code>m_bty_gen</code> and <code>m_bty</code> compare? What does this tell us about how useful <code>gender</code> is in explaining the variability in evaluation scores when we already have information on the beauty score of the professor.</p></li>
+<li><p>What is the definition of adjusted <span class="math inline">\(R^2\)</span>? Explain how it is different than <span class="math inline">\(R^2\)</span> using values from this model. Once again, use inline code in your answer.</p></li>
+<li><p>How do the adjusted <span class="math inline">\(R^2\)</span> values of <code>m_bty_gen</code> and <code>m_bty</code> compare? What does this tell us about how useful <code>gender</code> is in explaining the variability in evaluation scores when we already have information on the beauty score of the professor. Once again, use inline code in your answer.</p></li>
 <li><p>Compare the slopes of <code>bty_avg</code> under the two models (<code>m_bty</code> and <code>m_bty_gen</code>). Has the addition of <code>gender</code> to the model changed the parameter estimate (slope) for <code>bty_avg</code>?</p></li>
 <li><p>Create a new model called <code>m_bty_gen_rank</code> predicting average professor evaluation <code>score</code> based on average beauty rating (<code>bty_avg</code>), <code>gender</code>, and <code>rank</code>.<br />
-Write the linear model and interpret the slopes and intercept in context of the data.</p></li>
-<li><p>How do the adjusted <span class="math inline">\(R^2\)</span> values of <code>m_bty_gen_rank</code> and <code>m_bty_gen</code> compare? What does this tell us about how useful <code>rank</code> is in explaining the variability in evaluation scores when we already have information on the beauty score and gender of the professor.</p></li>
+Write the linear model and interpret the slopes and intercept in context of the data. Once again, use inline code in your answer.</p></li>
+<li><p>How do the adjusted <span class="math inline">\(R^2\)</span> values of <code>m_bty_gen_rank</code> and <code>m_bty_gen</code> compare? What does this tell us about how useful <code>rank</code> is in explaining the variability in evaluation scores when we already have information on the beauty score and gender of the professor. And yet again, use inline code in your answer.</p></li>
 </ol>
 </div>
 
