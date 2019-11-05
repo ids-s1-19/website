@@ -160,24 +160,21 @@ others you will encounter in future courses.
 10. How does the relationship between beauty and evaluation score
     vary between male and female professors?
    
-11. Interpret the $R^2$ of the model.
-
-12. What is the definition of adjusted  $R^2$? Explain how it is different than 
+11. What is the definition of adjusted  $R^2$? Explain how it is different than 
     $R^2$ using values from this model.
     
-13. How do the adjusted $R^2$ values of `m_bty_gen` and `m_bty` compare? What does this tell us 
+12. How do the adjusted $R^2$ values of `m_bty_gen` and `m_bty` compare? What does this tell us 
     about how useful `gender` is in explaining the variability in evaluation scores when we 
     already have information on the beauty score of the professor.
 
-14. Compare the slopes of `bty_avg` under the two models (`m_bty` and `m_bty_gen`). Has the 
+13. Compare the slopes of `bty_avg` under the two models (`m_bty` and `m_bty_gen`). Has the 
     addition of `gender` to the model changed the parameter estimate (slope) for `bty_avg`?
     
-15. Create a new model called `m_bty_gen_rank` predicting average professor evaluation 
-   `score` based on average beauty rating (`bty_avg`), `gender`, and `rank`. Write the 
+14. Create a new model called `m_bty_gen_rank` predicting average professor evaluation 
+   `score` based on average beauty rating (`bty_avg`), `gender`, and `rank`.  
     Write the linear model and interpret the slopes and intercept in context of the data. 
     
-16. How do the adjusted $R^2$ values of `m_bty_gen_rank` and `m_bty_gen` compare? 
+15. How do the adjusted $R^2$ values of `m_bty_gen_rank` and `m_bty_gen` compare? 
     What does this tell us about how useful `rank` is in explaining the variability 
     in evaluation scores when we already have information on the beauty score and 
     gender of the professor.
-    
