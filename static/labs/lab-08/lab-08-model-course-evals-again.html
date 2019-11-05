@@ -462,7 +462,7 @@ text-align: center;
 
 
 <h1 class="title toc-ignore">Lab 08 - Modeling course evaluations, Pt. 2</h1>
-<h3 class="subtitle">Single predictor</h3>
+<h3 class="subtitle">Multiple predictors</h3>
 
 
 <div id="TOC">
@@ -470,13 +470,16 @@ text-align: center;
 <li><a href="#getting-started">Getting started</a><ul>
 <li><a href="#clone-your-repo">Clone your repo</a></li>
 <li><a href="#introduce-yourself-to-git">Introduce yourself to Git</a></li>
-<li><a href="#download-the-data">Download the data</a></li>
 <li><a href="#load-packages">Load packages</a></li>
+<li><a href="#download-the-data">Download the data</a></li>
 </ul></li>
+<li><a href="#part-1-data-manipulation">Part 1: Data Manipulation</a></li>
+<li><a href="#part-2-simple-linear-regression">Part 2: Simple linear regression</a></li>
+<li><a href="#part-3-multiple-linear-regression">Part 3: Multiple linear regression</a></li>
 </ul>
 </div>
 
-<p><label for="tufte-mn-1" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-1" class="margin-toggle"><span class="marginnote"><span style="display: block;"><strong>Learning goals:</strong><br /> + Calculating row-level summaries within a data frame<br /> + Fitting simple linear regression models<br /> + Interpreting simple linear regression models<br /> + Visualizing simple linear regression models</span></span></p>
+<p><label for="tufte-mn-1" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-1" class="margin-toggle"><span class="marginnote"><span style="display: block;"><strong>Learning goals:</strong><br /> + …</span></span></p>
 <p>This week we revisit the professor evaluations data we modeled in the previous lab. In the last lab we modeled evaluation scores using a single predictor at a time. However this time we use multiple predictors to model evaluation scores.</p>
 <p>If you don’t remember the data, review the <a href="/labs/lab-07/lab-07-model-course-evals.html">previous lab</a> before continuing to the exercises.</p>
 <p>As before, we will start with a data prep step where we calculate average beauty scores for each professor. Then we’ll fit a simple linear regression model predicting evaluation score from beauty score. And then for the majority of the workshop we will work on fitting, interpreting, and evaluating the fit of various multiple regression models predicting evaluation scores from beauty score along with other variables like gender and rank of the professor.</p>
@@ -485,7 +488,7 @@ text-align: center;
 <div id="clone-your-repo" class="section level2">
 <h2>Clone your repo</h2>
 <p><label for="tufte-mn-2" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-2" class="margin-toggle"><span class="marginnote"><span style="display: block;">You can find your team assignment for the rest of the semester <a href="https://github.com/ids-s1-19/team-assignments/blob/master/roster-team.csv">here</a>.</span></span></p>
-<p>Go to the course <a href="https://github.com/ids-s1-19">GitHub organization</a> and locate your Lab 06 repo, which should be named <code>lab-08-model-course-evals-again-YOUR_TEAMNAME</code>. Grab the URL of the repo, and clone it in RStudio Cloud.</p>
+<p>Go to the course <a href="https://github.com/ids-s1-19">GitHub organization</a> and locate your Lab 08 repo, which should be named <code>lab-08-model-course-evals-again-YOUR_TEAMNAME</code>. Grab the URL of the repo, and clone it in RStudio Cloud.</p>
 </div>
 <div id="introduce-yourself-to-git" class="section level2">
 <h2>Introduce yourself to Git</h2>
@@ -494,6 +497,12 @@ text-align: center;
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(usethis)</a>
 <a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">use_git_config</span>(<span class="dt">user.name =</span> <span class="st">&quot;Your Name&quot;</span>, </a>
 <a class="sourceLine" id="cb1-3" data-line-number="3">               <span class="dt">user.email =</span> <span class="st">&quot;your.email@address.com&quot;</span>)</a></code></pre></div>
+</div>
+<div id="load-packages" class="section level2">
+<h2>Load packages</h2>
+<p>We will use the following packages in this analysis:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">library</span>(tidyverse)</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw">library</span>(broom)</a></code></pre></div>
 </div>
 <div id="download-the-data" class="section level2">
 <h2>Download the data</h2>
@@ -508,15 +517,52 @@ text-align: center;
 <li>Navigate to the data folder in your project and upload the <code>evals-mod.csv</code> file.</li>
 </ul>
 <p>Then, you can load the data as usual using the following.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">evals &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/evals-mod.csv&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">evals &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/evals-mod.csv&quot;</span>)</a></code></pre></div>
 </div>
-<div id="load-packages" class="section level2">
-<h2>Load packages</h2>
-<p>We will use the following packages in this analysis:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">library</span>(tidyverse)</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw">library</span>(broom)</a></code></pre></div>
-<p>Rest of the instructions to be added soon…</p>
 </div>
+<div id="part-1-data-manipulation" class="section level1">
+<h1>Part 1: Data Manipulation</h1>
+<ol style="list-style-type: decimal">
+<li>Create a new variable called <code>bty_avg</code> that is the average attractiveness score of the six students for each professor (<code>bty_f1lower</code> through <code>bty_m2upper</code>). Add this new variable to the <code>evals</code> data frame. Do this in one pipe, using the <code>rowMeans()</code> function within a <code>mutate()</code>.</li>
+</ol>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">evals &lt;-<span class="st"> </span>evals <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">bty_avg =</span> <span class="kw">rowMeans</span>(<span class="kw">select</span>(., bty_f1lower<span class="op">:</span>bty_m2upper)))</a></code></pre></div>
+<p>If you have questions about what is happening in the code above, refer to <a href="/labs/lab-07/lab-07-model-course-evals.html">last week’s lab</a>.</p>
+</div>
+<div id="part-2-simple-linear-regression" class="section level1">
+<h1>Part 2: Simple linear regression</h1>
+<ol start="2" style="list-style-type: decimal">
+<li>Fit a linear model (one you have fit before): <code>m_bty</code>, predicting average professor evaluation <code>score</code> based on average beauty rating (<code>bty_avg</code>) only. Write the linear model, interpret the slope, the intercept, and the <span class="math inline">\(R^2\)</span> of the model.</li>
+</ol>
+<p>Next we should use a graphical diagnostic, the residuals plot, to assess model fit. To do so we need to calculate the predicted evaluation scores for each professor in the dataset as well as the residuals for each observation.</p>
+<p>We use the <code>augment()</code> function for this:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">m_bty_aug &lt;-<span class="st"> </span><span class="kw">augment</span>(m_bty)</a></code></pre></div>
+<p>Let’s take a look at what’s in this augmented dataset:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">names</span>(m_bty_aug)</a></code></pre></div>
+<pre><code>## [1] &quot;score&quot;      &quot;bty_avg&quot;    &quot;.fitted&quot;    &quot;.se.fit&quot;    &quot;.resid&quot;    
+## [6] &quot;.hat&quot;       &quot;.sigma&quot;     &quot;.cooksd&quot;    &quot;.std.resid&quot;</code></pre>
+<p>First, we have the variables used to build the model: <code>score</code> and <code>bty_avg</code>. We also have the predicted values (<code>.fitted</code>) and the residuals (<code>.resid</code>). We’ll talk about a few of the other variables later in the course, and some others you will encounter in future courses.</p>
+<ol start="3" style="list-style-type: decimal">
+<li>Make a residuals vs. predicted values plot for the model above. Use <code>geom_jitter()</code> instead of <code>geom_point()</code>, and overlay a dashed horizontal line at <code>y = 0</code>.<label for="tufte-sn-1" class="margin-toggle sidenote-number">1</label><input type="checkbox" id="tufte-sn-1" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">1</span> Hint: You can use <code>geom_hline()</code> with <code>linetype = &quot;dashed&quot;</code> for this.</span> Then, comment on whether the linear model is appropriate for modeling the relationship between evaluation scores and beauty scores.</li>
+</ol>
+</div>
+<div id="part-3-multiple-linear-regression" class="section level1">
+<h1>Part 3: Multiple linear regression</h1>
+<ol start="4" style="list-style-type: decimal">
+<li><p>Fit a linear model <code>m_bty_gen</code>, predicting average professor evaluation <code>score</code> based on average beauty rating (<code>bty_avg</code>) and <code>gender</code>. Write the linear model.</p></li>
+<li><p>Interpret the intercept.</p></li>
+<li><p>Interpret the slopes of <code>bty_avg</code> and <code>gender</code>.</p></li>
+<li><p>What percent of the variability in <code>score</code> is explained by the model <code>m_bty_gen</code>.</p></li>
+<li><p>What is the equation of the line corresponding to <em>just</em> male professors?</p></li>
+<li><p>For two professors who received the same beauty rating, which gender tends to have the higher course evaluation score?</p></li>
+<li><p>How does the relationship between beauty and evaluation score vary between male and female professors?</p></li>
+<li><p>Interpret the <span class="math inline">\(R^2\)</span> of the model.</p></li>
+<li><p>What is the definition of adjusted <span class="math inline">\(R^2\)</span>? Explain how it is different than <span class="math inline">\(R^2\)</span> using values from this model.</p></li>
+<li><p>How do the adjusted <span class="math inline">\(R^2\)</span> values of <code>m_bty_gen</code> and <code>m_bty</code> compare? What does this tell us about how useful <code>gender</code> is in explaining the variability in evaluation scores when we already have information on the beauty score of the professor.</p></li>
+<li><p>Compare the slopes of <code>bty_avg</code> under the two models (<code>m_bty</code> and <code>m_bty_gen</code>). Has the addition of <code>gender</code> to the model changed the parameter estimate (slope) for <code>bty_avg</code>?</p></li>
+<li><p>Create a new model called <code>m_bty_gen_rank</code> predicting average professor evaluation <code>score</code> based on average beauty rating (<code>bty_avg</code>), <code>gender</code>, and <code>rank</code>. Write the Write the linear model and interpret the slopes and intercept in context of the data.</p></li>
+<li><p>How do the adjusted <span class="math inline">\(R^2\)</span> values of <code>m_bty_gen_rank</code> and <code>m_bty_gen</code> compare? What does this tell us about how useful <code>rank</code> is in explaining the variability in evaluation scores when we already have information on the beauty score and gender of the professor.</p></li>
+</ol>
 </div>
 
 

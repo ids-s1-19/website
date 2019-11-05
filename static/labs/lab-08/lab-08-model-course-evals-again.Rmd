@@ -1,6 +1,6 @@
 ---
 title: "Lab 08 - Modeling course evaluations, Pt. 2"
-subtitle: "Single predictor"
+subtitle: "Multiple predictors"
 output: 
   tufte::tufte_html:
     css: ../lab.css
@@ -16,10 +16,7 @@ knitr::opts_chunk$set(eval = TRUE)
 
 ```{marginfigure}
 **Learning goals:**  
-+ Calculating row-level summaries within a data frame  
-+ Fitting simple linear regression models  
-+ Interpreting simple linear regression models  
-+ Visualizing simple linear regression models
++ ...
 ```
 
 This week we revisit the professor evaluations data we modeled in the previous 
@@ -45,7 +42,7 @@ You can find your team assignment for the rest of the semester [here](https://gi
 ```
 
 Go to the course [GitHub organization](https://github.com/ids-s1-19) and locate 
-your Lab 06 repo, which should be named `lab-08-model-course-evals-again-YOUR_TEAMNAME`. 
+your Lab 08 repo, which should be named `lab-08-model-course-evals-again-YOUR_TEAMNAME`. 
 Grab the URL of the repo, and clone it in RStudio Cloud.
 
 ## Introduce yourself to Git
@@ -63,6 +60,15 @@ library(usethis)
 use_git_config(user.name = "Your Name", 
                user.email = "your.email@address.com")
 ``` 
+
+## Load packages
+
+We will use the following packages in this analysis:
+
+```{r message=FALSE}
+library(tidyverse)
+library(broom)
+```
   
 ## Download the data
 
@@ -78,25 +84,9 @@ knitr::include_graphics("img/data-upload.png")
 
 Then, you can load the data as usual using the following.
 
-```{r data-show, eval=FALSE}
+```{r data-show, message=FALSE}
 evals <- read_csv("data/evals-mod.csv")
 ```
-
-## Load packages
-
-We will use the following packages in this analysis:
-
-```{r message=FALSE}
-library(tidyverse)
-library(broom)
-```
-
-Rest of the instructions to be added soon...
-
-```{r echo=FALSE}
-knitr::knit_exit()
-```
-
 
 # Part 1: Data Manipulation 
 
@@ -105,7 +95,7 @@ knitr::knit_exit()
     `bty_m2upper`). Add this new variable to the `evals` data frame. Do this in 
     one pipe, using the `rowMeans()` function within a `mutate()`.
 
-```{r eval=FALSE}
+```{r}
 evals <- evals %>% 
   mutate(bty_avg = rowMeans(select(., bty_f1lower:bty_m2upper)))
 ```
@@ -113,43 +103,81 @@ evals <- evals %>%
 If you have questions about what is happening in the code above, refer to 
 [last week's lab](/labs/lab-07/lab-07-model-course-evals.html).
 
-## Part 2: Simple linear regression
+# Part 2: Simple linear regression
 
 2. Fit a linear model (one you have fit before): `m_bty`, predicting average
    professor evaluation `score` based on average beauty rating (`bty_avg`) only. Write the 
-   linear model, and note the $R^2$ and the adjusted $R^2$.
-
-## Part 3: Multiple linear regression
-
-3. Fit a linear model (one you have fit before): `m_bty_gen`, predicting average
-   professor evaluation `score` based on average beauty rating (`bty_avg`) and `gender`. 
-   Write the linear model, and note the $R^2$ and the adjusted $R^2$.
+   linear model, interpret the slope, the intercept, and the $R^2$ of the model.
    
-4. Interpret the slope and intercept of `m_bty_gen` in context of the data.
+```{r include=FALSE}
+m_bty <- lm(score ~ bty_avg, data = evals)
+```
 
-5. What percent of the variability in `score` is explained by the model `m_bty_gen`.
+Next we should use a graphical diagnostic, the residuals plot, to assess model 
+fit. To do so we need to calculate the predicted evaluation scores for each 
+professor in the dataset as well as the residuals for each observation. 
 
-6. What is the equation of the line corresponding to *just* male professors?
+We use the `augment()` function for this:
+
+```{r}
+m_bty_aug <- augment(m_bty)
+```
+
+Let's take a look at what's in this augmented dataset:
+
+```{r}
+names(m_bty_aug)
+```
+
+First, we have the variables used to build the model: `score` and `bty_avg`. 
+We also have the predicted values (`.fitted`) and the residuals (`.resid`).
+We'll talk about a few of the other variables later in the course, and some 
+others you will encounter in future courses.
+
+3. Make a residuals vs. predicted values plot for the model above. Use 
+   `geom_jitter()` instead of `geom_point()`, and overlay a dashed horizontal 
+   line at `y = 0`.^[Hint: You can use `geom_hline()` with `linetype = "dashed"` 
+   for this.] Then, comment on whether the linear model is appropriate for 
+   modeling the relationship between evaluation scores and beauty scores.
+
+# Part 3: Multiple linear regression
+
+4. Fit a linear model `m_bty_gen`, predicting average professor evaluation `score` 
+   based on average beauty rating (`bty_avg`) and `gender`. Write the 
+   linear model.
+
+5. Interpret the intercept.
+
+6. Interpret the slopes of `bty_avg` and `gender`.
+
+7. What percent of the variability in `score` is explained by the model `m_bty_gen`.
+
+8. What is the equation of the line corresponding to *just* male professors?
     
-7. For two professors who received the same beauty rating, which gender tends 
+9. For two professors who received the same beauty rating, which gender tends 
    to have the higher course evaluation score?
     
-8. How does the relationship between beauty and evaluation score
-   vary between male and female professors?
-    
-9. How do the adjusted $R^2$ values of `m_bty_gen` and `m_bty` compare? What does this tell us 
-   about how useful `gender` is in explaining the variability in evaluation scores when we 
-   already have information on the beaty score of the professor.
+10. How does the relationship between beauty and evaluation score
+    vary between male and female professors?
+   
+11. Interpret the $R^2$ of the model.
 
-10. Compare the slopes of `bty_avg` under the two models (`m_bty` and `m_bty_gen`). Has the 
+12. What is the definition of adjusted  $R^2$? Explain how it is different than 
+    $R^2$ using values from this model.
+    
+13. How do the adjusted $R^2$ values of `m_bty_gen` and `m_bty` compare? What does this tell us 
+    about how useful `gender` is in explaining the variability in evaluation scores when we 
+    already have information on the beauty score of the professor.
+
+14. Compare the slopes of `bty_avg` under the two models (`m_bty` and `m_bty_gen`). Has the 
     addition of `gender` to the model changed the parameter estimate (slope) for `bty_avg`?
     
-11. Create a new model called `m_bty_rank` with `gender` removed and `rank` 
-    added in. Write the equation of the linear model and interpret the slopes and intercept 
-    in context of the data. 
-
-## Part 4: Scope of inference
-
-12. Would you be comfortable generalizing your conclusions to apply to professors
-    generally (at any university)? Why or why not?
+15. Create a new model called `m_bty_gen_rank` predicting average professor evaluation 
+   `score` based on average beauty rating (`bty_avg`), `gender`, and `rank`. Write the 
+    Write the linear model and interpret the slopes and intercept in context of the data. 
+    
+16. How do the adjusted $R^2$ values of `m_bty_gen_rank` and `m_bty_gen` compare? 
+    What does this tell us about how useful `rank` is in explaining the variability 
+    in evaluation scores when we already have information on the beauty score and 
+    gender of the professor.
     
