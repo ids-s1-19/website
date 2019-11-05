@@ -155,6 +155,13 @@ tidy(m_bty) %>%
 Regardless of which option you use, you might consider storing the value in an 
 object that you can easily refer to in your inline code, e.g.
 
+```{marginfigure}
+You can hide the code for chunks like this where you are simply preparing 
+objects for later use by adding `echo = FALSE` in the code chunk options, 
+that is, where you label your code chunk, separated by a comma, i.e.  
+`{r label, echo = FALSE}`
+```
+
 ```{r}
 m_bty_intercept <- tidy(m_bty) %>% 
   filter(term == "(Intercept)") %>%

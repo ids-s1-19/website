@@ -555,6 +555,7 @@ text-align: center;
 <a class="sourceLine" id="cb9-5" data-line-number="5"><span class="st">  </span><span class="kw">pull</span>()                              <span class="co"># pull value out of data frame</span></a></code></pre></div>
 <pre><code>## [1] 3.880333</code></pre>
 <p>Regardless of which option you use, you might consider storing the value in an object that you can easily refer to in your inline code, e.g.</p>
+<p><label for="tufte-mn-5" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-5" class="margin-toggle"><span class="marginnote"><span style="display: block;">You can hide the code for chunks like this where you are simply preparing objects for later use by adding <code>echo = FALSE</code> in the code chunk options, that is, where you label your code chunk, separated by a comma, i.e.<br /> <code>{r label, echo = FALSE}</code></span></span></p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">m_bty_intercept &lt;-<span class="st"> </span><span class="kw">tidy</span>(m_bty) <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb11-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(term <span class="op">==</span><span class="st"> &quot;(Intercept)&quot;</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb11-3" data-line-number="3"><span class="st">  </span><span class="kw">select</span>(estimate) <span class="op">%&gt;%</span></a>
@@ -576,7 +577,7 @@ text-align: center;
 <pre><code>## [1] &quot;score&quot;      &quot;bty_avg&quot;    &quot;.fitted&quot;    &quot;.se.fit&quot;    &quot;.resid&quot;    
 ## [6] &quot;.hat&quot;       &quot;.sigma&quot;     &quot;.cooksd&quot;    &quot;.std.resid&quot;</code></pre>
 <p>First, we have the variables used to build the model: <code>score</code> and <code>bty_avg</code>. We also have the predicted values (<code>.fitted</code>) and the residuals (<code>.resid</code>). We’ll talk about a few of the other variables later in the course, and some others you will encounter in future courses.</p>
-<p><label for="tufte-mn-5" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-5" class="margin-toggle"><span class="marginnote"><span style="display: block;"><strong>Hint:</strong> You can use <code>geom_hline()</code> with <code>linetype = “dashed”</code> for this.</span></span></p>
+<p><label for="tufte-mn-6" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-6" class="margin-toggle"><span class="marginnote"><span style="display: block;"><strong>Hint:</strong> You can use <code>geom_hline()</code> with <code>linetype = “dashed”</code> for this.</span></span></p>
 <ol start="3" style="list-style-type: decimal">
 <li>Make a residuals vs. predicted values plot for the model above. Use <code>geom_jitter()</code> instead of <code>geom_point()</code>, and overlay a dashed horizontal line at <code>y = 0</code>. Then, comment on whether the linear model is appropriate for modeling the relationship between evaluation scores and beauty scores.</li>
 </ol>
