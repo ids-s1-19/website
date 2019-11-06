@@ -9,6 +9,8 @@
     <script src="libs/htmlwidgets/htmlwidgets.js"></script>
     <script src="libs/pymjs/pym.v1.js"></script>
     <script src="libs/widgetframe-binding/widgetframe.js"></script>
+    <link href="libs/countdown/countdown.css" rel="stylesheet" />
+    <script src="libs/countdown/countdown.js"></script>
     <link rel="stylesheet" href="../slides.css" type="text/css" />
   </head>
   <body>
@@ -91,24 +93,50 @@ tidy(m_wi_hgt)
 ## 3 Height_in    -0.0133   0.00395     -3.36 7.93e- 4
 ```
 
-`$$\widehat{log(price)} = 4.77 + 0.0269 width - 0.0133 height$$`
+&lt;br&gt;
+
+`$$\widehat{log(price)} = 4.77 + 0.0269~width - 0.0133~height$$`
 
 ---
 
 ## Visualizing models with multiple predictors
 
-<div id="htmlwidget-8ec14109e08154651364" style="width:100%;height:100%;" class="widgetframe html-widget"></div>
-<script type="application/json" data-for="htmlwidget-8ec14109e08154651364">{"x":{"url":"w8_d2-linear-model-multiple-predictors_files/figure-html//widgets/widget_plotly.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-aa5276a360202d453334" style="width:100%;height:100%;" class="widgetframe html-widget"></div>
+<script type="application/json" data-for="htmlwidget-aa5276a360202d453334">{"x":{"url":"w8_d2-linear-model-multiple-predictors_files/figure-html//widgets/widget_plotly.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script>
 
 ---
 
-## Exploration 1
+class: center, middle
 
-### Price, surface area, and living artist
+# Exploration: Price, surface area, and living artist
+
+---
+
+## Price, surface area, and living artist
 
 - Explore the relationship between price of paintings and surface area, conditioned 
 on whether or not the artist is still living
 - First visualize and explore, then model
+- But first, prep the data
+
+.midi[
+
+```r
+pp &lt;- pp %&gt;%
+  mutate(artistliving = if_else(artistliving == 0, "Deceased", "Living"))
+
+pp %&gt;%
+  count(artistliving)
+```
+
+```
+## # A tibble: 2 x 2
+##   artistliving     n
+##   &lt;chr&gt;        &lt;int&gt;
+## 1 Deceased      2937
+## 2 Living         456
+```
+]
 
 ---
 
@@ -137,6 +165,246 @@ pp_Surf_lt_5000 &lt;- pp %&gt;%
 ```
 
 &lt;img src="w8_d2-linear-model-multiple-predictors_files/figure-html/viz-surf-lt-5000-artistliving-1.png" width="1500" /&gt;
+
+---
+
+## Facet to get a better look
+
+&lt;img src="w8_d2-linear-model-multiple-predictors_files/figure-html/viz-surf-lt-5000-artistliving-facet-1.png" width="1500" /&gt;
+
+---
+
+## Two ways to model
+
+- **Main effects:** Assuming relationship between surface and logged price 
+**does not vary** by whether or not the artist is living.
+- **Interaction effects:** Assuming relationship between surface and logged 
+price **varies** by whether or not the artist is living.
+
+---
+
+## Interacting explanatory variables
+
+- Including an interaction effect in the model allows for different slopes, i.e. 
+nonparallel lines.
+- This implies that the regression coefficient for an explanatory variable would 
+change as another explanatory variable changes.
+- This can be accomplished by adding an interaction variable: the product of two 
+explanatory variables.
+
+---
+
+class: center, middle
+
+# Side-step: Weights of books
+
+---
+
+.question[
+Suppose we want to predict weight of books from their volume and cover type 
+(hardback vs. paperback). Do you think a model with main effects or 
+interaction effects is more appropriate? Explain your reasoning.
+
+**Hint:** Main effects would mean rate at which weight changes as volume 
+increases would be the same for hardback and paperback books and interaction 
+effects would mean the rate at which weight changes as volume 
+increases would be different for hardback and paperback books.
+]
+
+<div class="countdown" id="timer_5dc2a95d" style="right:0;bottom:0;" data-warnwhen="0">
+<code class="countdown-time"><span class="countdown-digits minutes">03</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
+</div>
+
+---
+
+The `allbacks` data frame gives measurements on the volume and weight of 15 books, some of which are softback and some of which are hardback.
+
+.small[
+
+```r
+library(DAAG)
+as_tibble(allbacks)
+```
+
+```
+## # A tibble: 15 x 4
+##    volume  area weight cover
+##     &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;fct&gt;
+##  1    885   382    800 hb   
+##  2   1016   468    950 hb   
+##  3   1125   387   1050 hb   
+##  4    239   371    350 hb   
+##  5    701   371    750 hb   
+##  6    641   367    600 hb   
+##  7   1228   396   1075 hb   
+##  8    412     0    250 pb   
+##  9    953     0    700 pb   
+## 10    929     0    650 pb   
+## 11   1492     0    975 pb   
+## 12    419     0    350 pb   
+## 13   1010     0    950 pb   
+## 14    595     0    425 pb   
+## 15   1034     0    725 pb
+```
+]
+
+.footnote[
+The bookshelf of J. H. Maindonald at Australian National University.
+]
+
+---
+
+
+```r
+ggplot(allbacks, aes(x = volume, y = weight, color = cover)) +
+  geom_point(alpha = 0.7) +
+  theme_minimal()
+```
+
+&lt;img src="w8_d2-linear-model-multiple-predictors_files/figure-html/unnamed-chunk-5-1.png" width="1500" /&gt;
+
+---
+
+&lt;img src="w8_d2-linear-model-multiple-predictors_files/figure-html/unnamed-chunk-6-1.png" width="1800" /&gt;
+
+
+&lt;img src="w8_d2-linear-model-multiple-predictors_files/figure-html/unnamed-chunk-7-1.png" width="1800" /&gt;
+
+---
+
+## In pursuit of Occam's razor
+
+- Occam's Razor states that among competing hypotheses that predict equally 
+well, the one with the fewest assumptions should be selected.
+- Model selection follows this principle.
+- We only want to add another variable to the model if the addition of that
+variable brings something valuable in terms of predictive power to the model.
+- In other words, we prefer the simplest best model, i.e. **parsimonious** model.
+
+---
+
+.question[
+Visually, which of the two models is preferable under Occam's razor?
+]
+
+&lt;img src="w8_d2-linear-model-multiple-predictors_files/figure-html/unnamed-chunk-8-1.png" width="1800" /&gt;
+
+
+&lt;img src="w8_d2-linear-model-multiple-predictors_files/figure-html/unnamed-chunk-9-1.png" width="1800" /&gt;
+
+---
+
+## R-squared
+
+- `\(R^2\)` is the percentage of variability in the response variable explained by 
+the regression model.
+
+
+```r
+glance(m_main)$r.squared
+```
+
+```
+## [1] 0.9274776
+```
+
+```r
+glance(m_int)$r.squared
+```
+
+```
+## [1] 0.9297137
+```
+
+--
+- Clearly the model with interactions has a higher `\(R^2\)`.
+
+--
+- However using `\(R^2\)` for model selection in models with multiple explanatory 
+variables is not a good idea as `\(R^2\)` increases when **any** variable is added 
+to the model.
+
+---
+
+## Adjusted R-squared
+
+... a (more) objective measure for model selection
+
+- Adjusted `\(R^2\)` doesn't increase if the new variable does not provide any new 
+informaton or is completely unrelated, as it applies a penalty for number of 
+variables included in the model.
+- This makes adjusted `\(R^2\)` a preferable metric for model selection in multiple
+regression models.
+
+---
+
+## Comparing models
+
+.pull-left[
+
+```r
+glance(m_main)$r.squared
+```
+
+```
+## [1] 0.9274776
+```
+
+```r
+glance(m_int)$r.squared
+```
+
+```
+## [1] 0.9297137
+```
+]
+.pull-right[
+
+```r
+glance(m_main)$adj.r.squared
+```
+
+```
+## [1] 0.9153905
+```
+
+```r
+glance(m_int)$adj.r.squared
+```
+
+```
+## [1] 0.9105447
+```
+]
+
+--
+
+.small[
+
+```r
+# Is R-sq higher for int model?
+glance(m_int)$r.squared &gt; glance(m_main)$r.squared 
+```
+
+```
+## [1] TRUE
+```
+
+```r
+# Is R-sq adj. higher for int model?
+glance(m_int)$adj.r.squared &gt; glance(m_main)$adj.r.squared
+```
+
+```
+## [1] FALSE
+```
+]
+
+---
+
+class: center, middle
+
+# Back to exploration: Price, surface area, and living artist
 
 ---
 
@@ -171,17 +439,17 @@ tidy(m_main)
 
 ```
 ## # A tibble: 3 x 5
-##   term                  estimate std.error statistic  p.value
-##   &lt;chr&gt;                    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-## 1 (Intercept)           4.88     0.0424       115.   0.      
-## 2 Surface               0.000265 0.0000415      6.39 1.85e-10
-## 3 factor(artistliving)1 0.137    0.0970         1.41 1.57e- 1
+##   term                       estimate std.error statistic  p.value
+##   &lt;chr&gt;                         &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+## 1 (Intercept)                4.88     0.0424       115.   0.      
+## 2 Surface                    0.000265 0.0000415      6.39 1.85e-10
+## 3 factor(artistliving)Living 0.137    0.0970         1.41 1.57e- 1
 ```
 ]
 
 
 --
-- Linear model:
+
 $$ \widehat{log(price)} = 4.88 + 0.000265~surface + 0.137~artistliving $$
 
 ---
@@ -189,19 +457,21 @@ $$ \widehat{log(price)} = 4.88 + 0.000265~surface + 0.137~artistliving $$
 ## Solving the model
 
 - Non-living artist: Plug in 0 for `artistliving`
+
 `\(\widehat{log(price)} = 4.88 + 0.000265~surface + 0.137 \times 0\)`  
 `\(= 4.88 + 0.000265~surface\)`
 
 --
 - Living artist: Plug in 1 for `artistliving`
-`\(\widehat{log(price)} = 4.88 + 0.000265~surface + 0.137 \times 1\)`  
+
+`\(\widehat{log(price)} = 4.88 + 0.000265~surface + 0.137 \times 1\)`   
 `\(= 5.017 + 0.000265~surface\)`
 
 ---
 
 ## Visualizing main effects
 
-&lt;img src="w8_d2-linear-model-multiple-predictors_files/figure-html/unnamed-chunk-2-1.png" width="1500" /&gt;
+&lt;img src="w8_d2-linear-model-multiple-predictors_files/figure-html/unnamed-chunk-14-1.png" width="1500" /&gt;
 
 - **Same slope:** Rate of change in price as the surface area increases does 
 not vary between paintings by living and non-living artists.
@@ -222,11 +492,11 @@ tidy(m_main) %&gt;%
 
 ```
 ## # A tibble: 3 x 3
-##   term                  estimate exp_estimate
-##   &lt;chr&gt;                    &lt;dbl&gt;        &lt;dbl&gt;
-## 1 (Intercept)           4.88           132.  
-## 2 Surface               0.000265         1.00
-## 3 factor(artistliving)1 0.137            1.15
+##   term                       estimate exp_estimate
+##   &lt;chr&gt;                         &lt;dbl&gt;        &lt;dbl&gt;
+## 1 (Intercept)                4.88           132.  
+## 2 Surface                    0.000265         1.00
+## 3 factor(artistliving)Living 0.137            1.15
 ```
 ]
 
@@ -236,14 +506,14 @@ tidy(m_main) %&gt;%
 
 ---
 
-## What went wrong?
+## 
 
 .question[
 Why is our linear regression model different from what we got from `geom_smooth(method = "lm")`?
 ]
 
 .pull-left[
-&lt;img src="w8_d2-linear-model-multiple-predictors_files/figure-html/unnamed-chunk-3-1.png" width="1500" /&gt;
+&lt;img src="w8_d2-linear-model-multiple-predictors_files/figure-html/unnamed-chunk-15-1.png" width="1500" /&gt;
 ]
 .pull-right[
 &lt;img src="w8_d2-linear-model-multiple-predictors_files/figure-html/viz-main-effects3-1.png" width="1500" /&gt;
@@ -251,47 +521,23 @@ Why is our linear regression model different from what we got from `geom_smooth(
 
 ---
 
-## What went wrong? (cont.)
+## What went ~wrong~ diferently?
 
 - The way we specified our model only lets `artistliving` affect the intercept.
 - Model implicitly assumes that paintings with living and deceased artists have the *same slope* and only allows for *different intercepts*.  
-- What seems more appropriate in this case? 
-    + Same slope and same intercept for both colors
-    + Same slope and different intercept for both colors
-    + Different slope and different intercept for both colors?
 
----
-
-## Interacting explanatory variables
-
-- Including an interaction effect in the model allows for different slopes, i.e. 
-nonparallel lines.
-- This implies that the regression coefficient for an explanatory variable would 
-change as another explanatory variable changes.
-- This can be accomplished by adding an interaction variable: the product of two 
-explanatory variables.
+.question[
+What seems more appropriate in this case?
++ Same slope and same intercept for both colors
++ Same slope and different intercept for both colors
++ Different slope and different intercept for both colors
+]
 
 ---
 
 ## Interaction: surface * artist living
 
-&lt;img src="w8_d2-linear-model-multiple-predictors_files/figure-html/unnamed-chunk-4-1.png" width="1500" /&gt;
-
----
-
-.small[
-
-```r
-ggplot(data = pp_Surf_lt_5000,
-       mapping = aes(y = log(price), x = Surface, 
-                     color = factor(artistliving))) +
-  geom_point(alpha = 0.3) +
-  geom_smooth(method = "lm") +
-  labs(x = "Surface", y = "Log(price)", color = "Living artist")
-```
-
-&lt;img src="w8_d2-linear-model-multiple-predictors_files/figure-html/viz-interaction-effects1-1.png" width="1500" /&gt;
-]
+&lt;img src="w8_d2-linear-model-multiple-predictors_files/figure-html/unnamed-chunk-16-1.png" width="1500" /&gt;
 
 ---
 
@@ -312,16 +558,32 @@ tidy(m_int)
 
 ```
 ## # A tibble: 4 x 5
-##   term                           estimate std.error statistic    p.value
-##   &lt;chr&gt;                             &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;
-## 1 (Intercept)                    4.91     0.0432       114.   0         
-## 2 Surface                        0.000206 0.0000442      4.65 0.00000337
-## 3 factor(artistliving)1         -0.126    0.119         -1.06 0.289     
-## 4 Surface:factor(artistliving)1  0.000479 0.000126       3.81 0.000139
+##   term                               estimate std.error statistic   p.value
+##   &lt;chr&gt;                                 &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+## 1 (Intercept)                        4.91     0.0432       114.     0.     
+## 2 Surface                            0.000206 0.0000442      4.65   3.37e-6
+## 3 factor(artistliving)Living        -0.126    0.119         -1.06   2.89e-1
+## 4 Surface:factor(artistliving)Livi…  0.000479 0.000126       3.81   1.39e-4
 ```
 ]
 
-- Linear model:
+---
+
+## Linear model with interaction effects
+
+.midi[
+
+```
+## # A tibble: 4 x 5
+##   term                               estimate std.error statistic   p.value
+##   &lt;chr&gt;                                 &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+## 1 (Intercept)                        4.91     0.0432       114.     0.     
+## 2 Surface                            0.000206 0.0000442      4.65   3.37e-6
+## 3 factor(artistliving)Living        -0.126    0.119         -1.06   2.89e-1
+## 4 Surface:factor(artistliving)Livi…  0.000479 0.000126       3.81   1.39e-4
+```
+]
+
 $$ \widehat{log(price)} = 4.91 + 0.00021~surface - 0.126~artistliving $$
 $$+ ~ 0.00048~surface \times artistliving $$
 
@@ -351,6 +613,30 @@ non-living artists, and some are not (different intercept).
 &lt;img src="w8_d2-linear-model-multiple-predictors_files/figure-html/viz-interaction-effects2-1.png" width="1500" /&gt;
 ]
 ]
+
+---
+
+## Comparing models
+
+It appears that adding the interaction actually increased adjusted `\(R^2\)`, so we 
+should indeed use the model with the interactions.
+
+
+```r
+glance(m_main)$adj.r.squared
+```
+
+```
+## [1] 0.01258977
+```
+
+```r
+glance(m_int)$adj.r.squared
+```
+
+```
+## [1] 0.01676753
+```
 
 ---
 
