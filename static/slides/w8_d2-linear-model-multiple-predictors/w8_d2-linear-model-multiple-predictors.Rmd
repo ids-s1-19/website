@@ -33,11 +33,7 @@ pp <- read_csv(here::here("csv/paris-paintings.csv"), na = c("n/a", "", "NA"))
 
 ## Announcements
 
-- Student hours later today:
-  - Wed, 14:30 - 15:30 @ [bit.ly/ids-zoom-week-08](http://bit.ly/ids-zoom-week-08) (Online!)
-- ...
-
-<br>
+- Student hours later today: Wed, 14:30 - 15:30 @ [bit.ly/ids-zoom-week-08](http://bit.ly/ids-zoom-week-08) (Online!)
 
 ---
 
