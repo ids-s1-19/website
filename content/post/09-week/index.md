@@ -16,6 +16,8 @@ summary: Interpreting model results and perming model selection
 title: 'Week 9 - Interpreting and selecting models'
 ---
 
+### Schedule
+
 | <div style="width:60px"></div>  | <div style="width:420px"></div> |  <div style="width:190px"></div>   |
 |---:|---|---|
 | Lec 17 | Model selection | |
