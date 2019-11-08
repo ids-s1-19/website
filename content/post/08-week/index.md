@@ -30,4 +30,4 @@ title: 'Week 8 - Extending modeling'
 
 | <div style="width:60px"></div>  | <div style="width:420px"></div>  |  <div style="width:190px"></div> |
 |----:|---|---|
-| :open_book: | OS: [Chp 9 - Muliple regression](https://www.openintro.org/stat/textbook.php?stat_book=os), Sections 9.1 - 9.4 | **Required** |
+| :open_book: | OS: [Chp 9 - Multiple regression](https://www.openintro.org/stat/textbook.php?stat_book=os), Sections 9.1 - 9.4 | **Required** |

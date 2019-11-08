@@ -31,4 +31,4 @@ title: 'Week 9 - Interpreting and selecting models'
 
 | <div style="width:60px"></div>  | <div style="width:420px"></div>  |  <div style="width:190px"></div> |
 |----:|---|---|
-| :open_book: | OS: [Chp 9 - Muliple regression](https://www.openintro.org/stat/textbook.php?stat_book=os), Section 9.5 | **Required** |
+| :open_book: | OS: [Chp 9 - Logistic regression](https://www.openintro.org/stat/textbook.php?stat_book=os), Section 9.5 | **Required** |
