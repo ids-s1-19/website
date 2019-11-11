@@ -1,4 +1,5 @@
 base
+countdown
 tidyverse
 ggplot2
 tibble
@@ -8,10 +9,8 @@ purrr
 dplyr
 stringr
 forcats
-scales
 broom
 here
-GGally
-countdown
 DT
 modelr
+GGally
