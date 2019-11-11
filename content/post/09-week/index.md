@@ -20,15 +20,21 @@ title: 'Week 9 - Interpreting and selecting models'
 
 | <div style="width:60px"></div>  | <div style="width:420px"></div> |  <div style="width:190px"></div>   |
 |---:|---|---|
-| Lec 17 | Logistic regression | |
-| Lec 18 | Model selection | |
-| Lab 09     | Work on projects | |
-| OQ 09      | Model selection | |
-| HW 09      | Building, interpreting, and selecting regression models | |
-| RT 09      | Interactive tutorial covering week’s material | |
+| Lec 17 | [Model selection and validation](/slides/w9_d1-model-selection/w9_d1-model-selection.html)  | |
+| Lab 09 | Work on projects | Nothing official due |
+| Lec 18 | Logistic regression | |
+| HW 09  | Building, interpreting, and selecting regression models | **Due:** Wed, 20 Nov, 17:00 |
+| OQ 09  | Model selection | **Due:** Fri, 22 Nov, 17:00 |
 
 ### Readings
 
 | <div style="width:60px"></div>  | <div style="width:420px"></div>  |  <div style="width:190px"></div> |
 |----:|---|---|
 | :open_book: | OS: [Chp 9 - Logistic regression](https://www.openintro.org/stat/textbook.php?stat_book=os), Section 9.5 | **Required** |
+
+### Miscellaneous
+
+| <div style="width:60px"></div>  | <div style="width:420px"></div>  |  <div style="width:190px"></div> |
+|----:|---|---|
+| :radio_button:  | Project proposal redo (optional) | **Due:** Mon, 11 Oct, 17:00 |
+| :radio_button:  | Peer evaluation 02 | **Due:** Tue, 12 Oct, 17:00 |

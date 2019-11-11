@@ -40,6 +40,5 @@ title: 'Week 5 - Extracting meaning from data'
 
 | <div style="width:60px"></div>  | <div style="width:420px"></div>  |  <div style="width:190px"></div> |
 |----:|---|---|
-| :radio_button:  | Take survey: [Mid-semester feedback (anonymous)](https://www.learn.ed.ac.uk/webapps/assessment/take/launchAssessment.jsp?course_id=_75012_1&content_id=_4369037_1&mode=cpview) | **Due:** Fri, 18 Oct, 17:00 |
-| :radio_button:  | Take survey: [Team feedback - Link to be posted]() | **Due:** Fri, 18 Oct, 17:00 |
+| :radio_button:  | [Mid-semester feedback (anonymous)](https://www.learn.ed.ac.uk/webapps/assessment/take/launchAssessment.jsp?course_id=_75012_1&content_id=_4369037_1&mode=cpview) | **Due:** Fri, 18 Oct, 17:00 |
 

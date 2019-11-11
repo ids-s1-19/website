@@ -35,3 +35,9 @@ title: 'Week 6 - Web scraping and iteration'
 | :page_facing_up: | [Ethical challenges in online research: Public/private perceptions](https://journals.sagepub.com/doi/pdf/10.1177/1747016116650720) | **Required** |
 | :open_book: | R4DS: [Chp 19, Functions](https://r4ds.had.co.nz/functions.html) | **Required** |
 | :open_book: | R4DS: [Chp 21, Iteration](https://r4ds.had.co.nz/iteration.html) - Only the following sections: 21.1, 21.2, 21.5.1, and 21.5.2 | **Optional** |
+
+### Miscellaneous
+
+| <div style="width:60px"></div>  | <div style="width:420px"></div>  |  <div style="width:190px"></div> |
+|----:|---|---|
+| :radio_button:  | Peer evaluation 01 | **Due:** Fri, 25 Oct, 17:00 |

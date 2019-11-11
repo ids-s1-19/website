@@ -1,0 +1,17 @@
+base
+tidyverse
+ggplot2
+tibble
+tidyr
+readr
+purrr
+dplyr
+stringr
+forcats
+scales
+broom
+here
+GGally
+countdown
+DT
+modelr
