@@ -113,7 +113,7 @@ in the course.
 Prepare a slide deck using the template in your repo. This template uses a 
 package called `xaringan`, and allows you to make presentation slides using 
 R Markdown syntax. There isn't a limit to how many slides you can use, just a  
-time limit (10 minutes total). Each team member should get a chance to speak 
+time limit (5 minutes total). Each team member should get a chance to speak 
 during the presentation. Your presentation should not just be an account of 
 everything you tried ("then we did this, then we did this, etc."), instead it 
 should convey what choices you made, and why, and what you found.
