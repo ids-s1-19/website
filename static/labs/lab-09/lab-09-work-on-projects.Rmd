@@ -35,6 +35,14 @@ take a few minutes. Click on the link to confirm that the website has been built
   **Theme Chooser**.
   - Also, once the website is built, you'll need to pull changes to your project
   in RStudio.
+  - You can see how the template project repo looks [here](https://github.com/ids-s1-19/project). Click on the link in the presentation 
+  section and you should be able to view the rendered slides. This is the link
+  we will use to project your slides during the presentations.
+  - **Note:** This website is public, but your repository will remain private,
+  unless... you as a team decide you would like to feature your repos in your 
+  personal GitHub profiles. If so, I will help you convert your repo to a 
+  public repo at the end of the semester. I will not add any marks to 
+  your repos so that your public work won't contain your score for the project. 
 - Add your dataset to the `data` folder and add your codebook to the README in
 that folder.
   - If in your proposal you were advised to update your codebook, make sure to 
