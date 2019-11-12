@@ -35,7 +35,7 @@ take a few minutes. Click on the link to confirm that the website has been built
   **Theme Chooser**.
   - Also, once the website is built, you'll need to pull changes to your project
   in RStudio.
-  - You can see how the template project repo looks [here](https://github.com/ids-s1-19/project). Click on the link in the presentation 
+  - You can see how the template project repo looks [here](https://ids-s1-19.github.io/project/). Click on the link in the presentation 
   section and you should be able to view the rendered slides. This is the link
   we will use to project your slides during the presentations.
   - On your repo you should see a text on top *No description, website, or topics provided.*. Next to it there's an **Edit** button. Add a short description as well 
