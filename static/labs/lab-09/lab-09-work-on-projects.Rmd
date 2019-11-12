@@ -70,4 +70,6 @@ works. Commit and push your updated proposal to your project repo.
   - Open issues for things you want to accomplish. Assign them to specific team 
   member(s) if you like. And as you complete the tasks, close the issues. You 
   can also use the issues for discussion on the specific tasks.
+- Fill out [this form](https://forms.office.com/Pages/ResponsePage.aspx?id=sAafLmkWiUWHiRCgaTTcYRiRHjHRDWhOuLE_6JyNA0dUMVlOQ0ZOM0pGSU9QM09YUlhHNEtTT0hHRy4u) to help with presentation 
+scheduling. Only one response per team.
 - **Strongly recommended:** Get a hold of a tutor and run your ideas by them.
