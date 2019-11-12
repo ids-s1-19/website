@@ -104,7 +104,7 @@ that column are `TRUE`s. But this is only one way, you might come up with anothe
 ## Exploratory data analysis
 
 7. Recreate the following visualization, and interpret it in context of the data. 
-*Hint: You will need to use one of the variables you created above.*
+*Hint: You will need to use one of the variables you created above. The temperature plotted is the feeling temperature.*
 
 ```{r fig.width=9, echo=FALSE}
 bike %>%
