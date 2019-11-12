@@ -72,7 +72,7 @@ them. But you might find something interesting there:
 - [Youth Risk Behavior Surveillance System (YRBSS)](https://chronicdata.cdc.gov/Youth-Risk-Behaviors/DASH-Youth-Risk-Behavior-Surveillance-System-YRBSS/q6p7-56au)
 - [PRISM Data Archive Project](https://www.icpsr.umich.edu/icpsrweb/content/ICPSR/fenway.html)
 - [Harvard Dataverse](https://dataverse.harvard.edu/)
-- More to come... (if you know of others, let me know, and we'll add here)
+- If you know of others, let me know, and we'll add here...
 
 ### Deliverables
 
