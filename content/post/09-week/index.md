@@ -11,8 +11,8 @@ image:
   preview_only: true
 lastmod: "2019-11-11T00:00:00Z"
 projects: []
-subtitle: 'Interpreting model results and perming model selection :monocle:'
-summary: Interpreting model results and perming model selection
+subtitle: 'Interpreting model results and peforming model selection :mag:'
+summary: Interpreting model results and peforming model selection
 title: 'Week 9 - Interpreting and selecting models'
 ---
 
