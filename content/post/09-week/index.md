@@ -20,9 +20,9 @@ title: 'Week 9 - Interpreting and selecting models'
 
 | <div style="width:60px"></div>  | <div style="width:420px"></div> |  <div style="width:190px"></div>   |
 |---:|---|---|
-| Lec 17 | [Model selection and validation](/slides/w9_d1-model-selection/w9_d1-model-selection.html)  | |
+| Lec 17 | [Model selection](/slides/w9_d1-model-selection/w9_d1-model-selection.html)  | |
 | Lab 09 | [Work on projects](/labs/lab-09/lab-09-work-on-projects.html) | **Due:** Fri, 15 Nov, 17:00 |
-| Lec 18 | Logistic regression | |
+| Lec 18 | [Model validation and logistic regression](/slides/w9_d2-model-validation/w9_d2-model-validation.html) | |
 | HW 09  | Building, interpreting, and selecting regression models | **Due:** Wed, 20 Nov, 17:00 |
 | OQ 09  | Model selection | **Due:** Fri, 22 Nov, 17:00 |
 
