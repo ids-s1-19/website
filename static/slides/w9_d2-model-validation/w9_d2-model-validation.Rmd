@@ -30,6 +30,13 @@ evals <- read_csv(here::here("csv/evals-mod.csv"))
 
 evals <- evals %>% 
   mutate(bty_avg = rowMeans(select(., bty_f1lower:bty_m2upper)))
+
+full_model <- lm(score ~ rank + ethnicity + gender + language + 
+                         age + cls_perc_eval + cls_did_eval + 
+                         cls_students + cls_level + cls_profs + 
+                         cls_credits + bty_avg, data = evals)
+
+selected_model <- step(full_model, direction = "backward")
 ```
 
 
@@ -347,3 +354,248 @@ Prediction interval around $\hat{y}$ for new data (score for a prof with given c
 ```{r}
 predict(selected_model, newdata = new_prof, interval = "prediction")
 ```
+
+---
+
+class: center, middle
+
+# Logistic regression
+
+---
+
+```{r}
+email <- email %>%
+  mutate(
+    spam = if_else(spam == 0, "No", "Yes"),
+    urgent_subj = if_else(urgent_subj == 0, "No", "Yes")
+    )
+```
+
+
+# Spam filters
+
+We will examine a data set of emails where we are interested in identifying 
+spam messages. 
+
+- Data from 3921 emails and 21 variables on them.
+- The outcome is whether the email is spam or not.
+- Explanatory variables are number of characters, whether the word inherit 
+was in the email, number of times the word inherit shows up in the email, etc.
+
+---
+
+# Spam vs. number of characters and urgent subject
+
+.pull-left[
+```{r echo=FALSE}
+ggplot(email, aes(y = num_char, x = spam)) +
+  geom_boxplot() +
+  theme_minimal() +
+  labs(
+    y = "Number of characters (in thousands)", 
+    x = "Spam",
+    title = "Spam vs. number of characters"
+    )
+```
+]
+.pull-right[
+```{r echo=FALSE}
+ggplot(email, aes(x = urgent_subj, fill = spam)) +
+  geom_bar(position = "fill") +
+  theme_minimal() +
+  labs(
+    x = 'Whether the word “urgent” was in the email subject.', 
+    fill = "Spam", 
+    y = "",
+    title = "Spam vs. urgent subject"
+    )
+```
+]
+---
+
+# Modeling spam
+
+It seems clear that both number of characters and urgent message are related 
+to whether the email is spam. How do we come up with a model that will let us 
+explore this relationship?
+
+---
+
+# Modeling spam
+
+Even if we set not spam to 0 and spam to 1, this isn’t something we can 
+reasonably fit a linear model to - we need something more.
+
+```{r echo=FALSE}
+email <- email %>%
+  mutate(spam = if_else(spam == "No", 0, 1) %>% as.factor())
+
+means <- email %>%
+  group_by(spam) %>%
+  summarise(mean_num_char = mean(num_char)) %>%
+  mutate(group = 1)
+
+ggplot(email, aes(x = num_char, y = spam)) +
+  geom_jitter(alpha = 0.2) +
+  geom_line(data = means, aes(x = mean_num_char, y = spam, group = group), 
+            color = "blue", size = 1.5) +
+  theme_minimal() +
+  labs(x = "Number of characters (in thousands)", y = "Spam")
+```
+
+---
+
+Another way to think about the problem:
+
+- We can treat each outcome (spam and not) as successes and failures arising 
+from separate Bernoulli trials
+
+- Each Bernoulli trial can have a separate probability of success
+
+$$ y_i ∼ Bern(p) $$
+- We can then use the predictor variables to model that probability of success, $p_i$
+
+- We can’t just use a linear model for $p_i$ (since $p_i$ must be between 0 and 
+1) but we can transform the linear model to have the appropriate range
+
+---
+
+## Generalized linear models
+
+- It turns out that this is a very general way of addressing many
+problem in regression, and the resulting models are called
+generalized linear models (GLMs)
+
+--
+- Logistic regression is just one example.
+
+---
+- All generalized linear models have the following three characteristics:
+  -  A probability distribution describing a generative model for the 
+  outcome variable
+  - A linear model:
+  $$ \eta = \beta_0 + \beta_1 X_1 + \cdots + \beta_k X_k $$
+  - A link function that relates the linear model to the parameter of the 
+  outcome distribution
+  
+---
+
+## Logistic regression
+
+Logistic regression is a GLM used to model a binary categorical outcome using numerical and categorical predictors.
+
+--
+To finish specifying the Logistic model we just need to define a reasonable link function that connects $\eta_i$ to $p_i$. There are a variety of options but the most commonly used is the logit function.
+
+Logit function:
+
+$$logit(p) = \log\left(\frac{p}{1-p}\right),\text{ for $0\le p \le 1$}$$
+
+---
+
+```{r}
+d <- tibble(p = seq(0.001, 0.999, len = 1000)) %>%
+  mutate(logit_p = log(p/(1-p)))
+
+ggplot(d, aes(x=p,y=logit_p)) + 
+  geom_line() + 
+  xlim(0,1) + 
+  ylab("logit(p)") +
+  theme_minimal()
+```
+
+---
+
+```{r}
+d <- tibble(x = seq(-5, 5, len = 1000)) %>%
+  mutate(inv_logit_x = exp(x)/(1+exp(x)))
+
+ggplot(d, aes(x=x,y=inv_logit_x)) + 
+  geom_line() + 
+  xlim(-5,5) + 
+  ylab("p = inv_logit(x)") +
+  theme_minimal()
+```
+
+---
+
+## Properties of the logit
+
+- The logit function takes a value between 0 and 1 and maps it to a value between $-\infty$ and $\infty$.
+
+--
+- Inverse logit (logistic) function:
+$$g^{-1}(x) = \frac{\exp(x)}{1+\exp(x)} = \frac{1}{1+\exp(-x)}$$
+
+--
+- The inverse logit function takes a value between $-\infty$ and $\infty$ and maps it to a value between 0 and 1.
+
+--
+- This formulation is also useful for interpreting the model, since the logit can be interpreted as the log odds of a success - more on this later.
+
+---
+
+## The logistic regression model
+
+- The three GLM criteria give us:
+  - $y_i \sim \text{Bern}(p_i)$
+  - $\eta_i = \beta_0+\beta_1 x_{1,i} + \cdots + \beta_n x_{n,i}$
+  - $\text{logit}(p_i) = \eta_i$
+
+--
+- From which we get,
+
+$$p_i = \frac{\exp(\beta_0+\beta_1 x_{1,i} + \cdots + \beta_k x_{k,i})}{1+\exp(\beta_0+\beta_1 x_{1,i} + \cdots + \beta_k x_{k,i})}$$
+---
+
+## Modeling spam
+
+- In R we fit a GLM in the same way as a linear model except we
+use `glm()` instead of `lm()`. 
+
+--
+- We specify the type of GLM to fit using the `family` argument.
+
+```{r}
+spam_model <- glm(spam ~ num_char, data = email, family = "binomial")
+tidy(spam_model)
+```
+
+---
+
+## Spam model
+
+```{r}
+tidy(spam_model)
+```
+
+--
+
+Model:
+$$\log\left(\frac{p}{1-p}\right) = -1.80-0.0621\times \text{num_char}$$
+
+---
+
+## P(spam) for an email with 2000 characters 
+
+$$\log\left(\frac{p}{1-p}\right) = -1.80-0.0621\times 2$$
+--
+$$\frac{p}{1-p} = \exp(-1.9242) = 0.15$$
+--
+$$p = 0.15 \times (1 - p)$$
+--
+$$p = 0.15 - 0.15p \rightarrow 1.15p = 0.15$$
+--
+$$p = 0.15 / 1.15 = 0.13$$
+
+---
+
+.question[
+What is the probability that an email with 5000 characters is spam? What about 
+an email with 10000 characters?
+]
+
+```{r echo=FALSE}
+countdown(minutes = 5)
+```
+
