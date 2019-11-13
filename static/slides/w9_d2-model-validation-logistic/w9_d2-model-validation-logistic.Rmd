@@ -1,5 +1,5 @@
 ---
-title: "Model validation <br> `r emo::ji('check')`"
+title: "Model validation and logistic regression <br> `r emo::ji('check')`"
 author: "Dr. Çetinkaya-Rundel"
 output:
   xaringan::moon_reader:
@@ -42,7 +42,8 @@ selected_model <- step(full_model, direction = "backward")
 
 ## Announcements
 
-- ...
+- Office hours later today online
+- Peer evaluations -> team meetings
 
 ---
 
@@ -359,7 +360,7 @@ predict(selected_model, newdata = new_prof, interval = "prediction")
 
 class: center, middle
 
-# Logistic regression
+# Predicting categorical data
 
 ---
 
@@ -493,7 +494,7 @@ $$logit(p) = \log\left(\frac{p}{1-p}\right),\text{ for $0\le p \le 1$}$$
 
 ---
 
-```{r}
+```{r echo=FALSE}
 d <- tibble(p = seq(0.001, 0.999, len = 1000)) %>%
   mutate(logit_p = log(p/(1-p)))
 
@@ -506,7 +507,7 @@ ggplot(d, aes(x=p,y=logit_p)) +
 
 ---
 
-```{r}
+```{r echo=FALSE}
 d <- tibble(x = seq(-5, 5, len = 1000)) %>%
   mutate(inv_logit_x = exp(x)/(1+exp(x)))
 
@@ -580,9 +581,7 @@ $$\log\left(\frac{p}{1-p}\right) = -1.80-0.0621\times \text{num_char}$$
 
 $$\log\left(\frac{p}{1-p}\right) = -1.80-0.0621\times 2$$
 --
-$$\frac{p}{1-p} = \exp(-1.9242) = 0.15$$
---
-$$p = 0.15 \times (1 - p)$$
+$$\frac{p}{1-p} = \exp(-1.9242) = 0.15 \rightarrow p = 0.15 \times (1 - p)$$
 --
 $$p = 0.15 - 0.15p \rightarrow 1.15p = 0.15$$
 --
@@ -599,3 +598,15 @@ an email with 10000 characters?
 countdown(minutes = 5)
 ```
 
+---
+
+Next class... visualize the model
+
+```{r include=FALSE}
+spam_model_aug <- augment(spam_model) %>%
+  mutate(prob = exp(.fitted) / (1 + exp(.fitted)))
+ggplot(spam_model_aug, aes(x = num_char)) +
+  geom_point(aes(y = as.numeric(spam)-1), alpha = 0.2) +
+  geom_line(aes(y = prob)) +
+  theme_minimal()
+```
