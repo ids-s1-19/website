@@ -364,7 +364,7 @@ class: center, middle
 
 ---
 
-```{r}
+```{r echo=FALSE}
 email <- email %>%
   mutate(
     spam = if_else(spam == 0, "No", "Yes"),
@@ -488,8 +488,8 @@ Logistic regression is a GLM used to model a binary categorical outcome using nu
 --
 To finish specifying the Logistic model we just need to define a reasonable link function that connects $\eta_i$ to $p_i$. There are a variety of options but the most commonly used is the logit function.
 
+--
 Logit function:
-
 $$logit(p) = \log\left(\frac{p}{1-p}\right),\text{ for $0\le p \le 1$}$$
 
 ---
