@@ -24,7 +24,7 @@ title: 'Week 8 - Extending modeling'
 | Lab 08     | [Modeling course evaluations, Pt. 2](/labs/lab-08/lab-08-model-course-evals-again.html) | **Due:** Fri, 8 Nov, 17:00 |
 | Lec 16     | [Linear model with multiple predictors](/slides/w8_d2-linear-model-multiple-predictors/w8_d2-linear-model-multiple-predictors.html) |
 | HW 08      | [Bike rentals in DC](/hw/hw-08/hw-08-bike-rentals-dc.html) | **Due:** Wed, 13 Nov, 17:00 |
-| OQ 08      | Multiple regression | **Due:** Fri, 15 Nov, 17:00 |
+| OQ 08      | [Multiple linear regression](https://minecr.shinyapps.io/08-modeling-multiple/) | **Due:** Fri, 22 Nov, 17:00 (note extended time) |
 
 ### Readings
 
