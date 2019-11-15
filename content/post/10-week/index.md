@@ -11,16 +11,16 @@ image:
   preview_only: true
 lastmod: "2019-11-18T00:00:00Z"
 projects: []
-subtitle: 'Making predictons and validating models :crystal_ball:'
-summary: Making predictons and validating models
-title: 'Week 10 - Prediction and model validation'
+subtitle: 'Predicting categorical data and quantifying uncertainty :crystal_ball:'
+summary: Predicting categorical data and quantifying uncertainty
+title: 'Week 10 - Logistic regression and quantifying uncertainty'
 ---
 
 | <div style="width:60px"></div>  | <div style="width:420px"></div> |  <div style="width:190px"></div>   |
 |---:|---|---|
-| Lec 19 | Logistic regression | **Due:** Fri, 22 Nov, 17:00 |
-| Lab 10 | End-to-end data science case study  |
-| Lec 20 | Model validation |
-| HW 10  | Peer review of projects | **Due:** Wed, 27 Nov, 17:00 |
-| OQ 10  | Prediction and model validation | **Due:** Fri, 29 Nov, 17:00 |
+| Lec 19 | Logistic regression |  |
+| Lab 10 | End-to-end data science case study  | **Due:** Fri, 22 Nov, 17:00 |
+| Lec 20 | A brief foray quantifying uncertainty around estimates |  |
+| HW 10  | ???    | **Due:** Wed, 27 Nov, 17:00 |
+| OQ 10  | Review | **Due:** Fri, 29 Nov, 17:00 |
 

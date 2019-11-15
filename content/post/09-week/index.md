@@ -11,9 +11,9 @@ image:
   preview_only: true
 lastmod: "2019-11-11T00:00:00Z"
 projects: []
-subtitle: 'Interpreting model results and peforming model selection :mag:'
-summary: Interpreting model results and peforming model selection
-title: 'Week 9 - Interpreting and selecting models'
+subtitle: 'Peforming model selection and validation :mag:'
+summary: Peforming model selection and validation selection
+title: 'Week 9 - Model selection and validation'
 ---
 
 ### Schedule
