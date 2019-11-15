@@ -62,7 +62,8 @@ your project, you'll see that our data file, `gss2016.csv`, is already listed th
 
 - Click [here](https://introds.org/data/gss2016.csv) to download the data. 
 The file is called `gss2016.csv`.
-- Navigate to the data folder in your project and upload the `gss2016.csv` file.
+- Create a `data` folder in your project -- in the Files pane, click on New Folder.
+- Navigate to the data folder you just created and upload the `gss2016.csv` file.
 - Note that even though you made a change in your files by adding the data, 
 `gss2016.csv` does not appear in your Git pane. This is because it's being ignored 
 by git.
