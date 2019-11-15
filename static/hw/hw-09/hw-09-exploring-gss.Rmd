@@ -68,7 +68,7 @@ The file is called `gss2016.csv`.
 by git.
 
 ```{r eval=FALSE}
-gss <- read_csv("data/gss2016.csv", 
+gss <- read_csv("https://introds.org/csv/gss2016.csv", 
                 na = c("", "Don't know",
                        "No answer", "Not applicable"),
                 guess_max = 2867) %>%
