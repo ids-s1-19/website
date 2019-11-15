@@ -16,12 +16,11 @@ summary: Making predictons and validating models
 title: 'Week 10 - Prediction and model validation'
 ---
 
-|            |  |
-|------------|----------|
-| Lecture 19 | Prediction |
-| Lecture 20 | Model validation |
-| Lab 10     | End-to-end data science case study  |
-| OQ 10      | Prediction and model validation |
-| HW 10      | Peer review of projects |
-| RT 10      | Interactive tutorial covering week’s material |
+| <div style="width:60px"></div>  | <div style="width:420px"></div> |  <div style="width:190px"></div>   |
+|---:|---|---|
+| Lec 19 | Logistic regression | **Due:** Fri, 22 Nov, 17:00 |
+| Lab 10 | End-to-end data science case study  |
+| Lec 20 | Model validation |
+| HW 10  | Peer review of projects | **Due:** Wed, 27 Nov, 17:00 |
+| OQ 10  | Prediction and model validation | **Due:** Fri, 29 Nov, 17:00 |
 
