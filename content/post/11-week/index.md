@@ -18,8 +18,8 @@ title: 'Week 11 - Wrap up'
 
 | <div style="width:60px"></div>  | <div style="width:420px"></div> |  <div style="width:190px"></div>   |
 |---:|---|---|
-| Lec 21 | A brief foray quantifying uncertainty around estimates |
-| Lec 22 | Data science ethics |
+| Lec 21 | Data science ethics |
+| Lec 22 | Text analysis |
 | Lab 11 | Project presentations (JCMB 5327) |
 | No OQ  |   |
 | No HW  |   |
