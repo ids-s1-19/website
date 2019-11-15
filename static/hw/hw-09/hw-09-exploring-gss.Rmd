@@ -60,7 +60,7 @@ Enter `.gitignore`! The `.gitignore` file contains a list of the files you don't
 want to to commit to Git or push to GitHub. If you open the `.gitignore` file in 
 your project, you'll see that our data file, `gss2016.csv`, is already listed there.
 
-- Click [here](https://introds.org/csv/gss2016.csv) to download the data. 
+- Click [here](https://introds.org/data/gss2016.csv) to download the data. 
 The file is called `gss2016.csv`.
 - Navigate to the data folder in your project and upload the `gss2016.csv` file.
 - Note that even though you made a change in your files by adding the data, 
@@ -68,7 +68,7 @@ The file is called `gss2016.csv`.
 by git.
 
 ```{r eval=FALSE}
-gss <- read_csv("https://introds.org/csv/gss2016.csv", 
+gss <- read_csv("data/gss2016.csv", 
                 na = c("", "Don't know",
                        "No answer", "Not applicable"),
                 guess_max = 2867) %>%
@@ -78,7 +78,7 @@ gss <- read_csv("https://introds.org/csv/gss2016.csv",
 
 Note that we're doing two new things here:
 
-- New argument: `guess_max`. If you look in the documentation for `read_csv` 
+- **New argument:** `guess_max`. If you look in the documentation for `read_csv` 
 you'll see that the function uses the first 1,000 observations in a data frame 
 to determine the classes of each variable (column) in the data frame. It so turns 
 out we have some variables in this data frame that have numeric data within the 
@@ -88,7 +88,7 @@ scan all rows to determine the variable class, we end up with some warnings
 when loading the data. You could see this for yourself by removing the 
 `guess_max` argument.
 
-- Selecting columns of interest: We know which variables we will be using from 
+- **Selecting columns of interest:** We know which variables we will be using from 
 the data, so we can just select those and not load the entire dataset. This is a 
 helpful tip for working with large data. You might be wondering -- but how would 
 I know ahead of time which variables I'll be working with. Good question! You 
