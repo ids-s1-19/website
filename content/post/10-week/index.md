@@ -18,7 +18,7 @@ title: 'Week 10 - Logistic regression and quantifying uncertainty'
 
 | <div style="width:60px"></div>  | <div style="width:420px"></div> |  <div style="width:190px"></div>   |
 |---:|---|---|
-| Lec 19 | Logistic regression |  |
+| Lec 19 | [Logistic regression](/slides/w10_d1-logistic-regression/w10_d1-logistic-regression.html) |  |
 | Lab 10 | End-to-end data science case study  | **Due:** Fri, 22 Nov, 17:00 |
 | Lec 20 | A brief foray quantifying uncertainty around estimates |  |
 | HW 10  | ???    | **Due:** Wed, 27 Nov, 17:00 |

@@ -20,10 +20,15 @@ editor_options:
 ```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
 library(tidyverse)
 library(broom)
-library(here)
 library(openintro)
-library(modelr)
 ```
+
+## Announcements
+
+- Student hours this week Tuesday 14:30 - 15:30 (JCMB 2257) and Wednesday 14:30 - 15:30 (online: [bit.ly/ids-zoom](http://bit.ly/ids-zoom))
+- Developing a narrative for your project... [[Watch video]](https://www.youtube.com/watch?reload=9&v=vGUNqq3jVLg)
+
+---
 
 class: center, middle
 
@@ -34,10 +39,11 @@ class: center, middle
 ```{r echo=FALSE}
 email <- email %>%
   mutate(
-    spam = if_else(spam == 0, "No", "Yes"),
-    urgent_subj = if_else(urgent_subj == 0, "No", "Yes")
+    spam = factor(spam),
+    re_subj = factor(re_subj)
     )
 ```
+
 
 
 # Spam filters
@@ -52,40 +58,58 @@ was in the email, number of times the word inherit shows up in the email, etc.
 
 ---
 
-# Spam vs. number of characters and urgent subject
+.question[
+Would you expect longer or shorter emails to be spam?
+]
 
-.pull-left[
+--
+
 ```{r echo=FALSE}
-ggplot(email, aes(y = num_char, x = spam)) +
+email %>%
+  mutate(spam = if_else(spam == 1, "Yes", "No")) %>%
+  ggplot(aes(y = num_char, x = spam)) +
   geom_boxplot() +
   theme_minimal() +
   labs(
     y = "Number of characters (in thousands)", 
     x = "Spam",
     title = "Spam vs. number of characters"
-    )
+    ) +
+  coord_flip()
 ```
+
+---
+
+.question[
+Would you expect emails that have subjects starting with "Re:", "RE:", "re:", or "rE:" to be more likely to be spam or not?
 ]
-.pull-right[
+
+--
+
 ```{r echo=FALSE}
-ggplot(email, aes(x = urgent_subj, fill = spam)) +
+email %>%
+  mutate(
+    re_subj = if_else(re_subj == 1, "Yes", "No"),
+    spam = if_else(spam == 1, "Yes", "No")
+    ) %>%
+  ggplot(aes(x = re_subj, fill = spam)) +
   geom_bar(position = "fill") +
   theme_minimal() +
   labs(
-    x = 'Whether the word “urgent” was in the email subject.', 
+    x = 'Whether “re:”, "RE:", etc. was in the email subject.', 
     fill = "Spam", 
     y = "",
-    title = "Spam vs. urgent subject"
+    title = "Spam vs. re subject"
     )
 ```
-]
 ---
 
 # Modeling spam
 
-It seems clear that both number of characters and urgent message are related 
-to whether the email is spam. How do we come up with a model that will let us 
-explore this relationship?
+- It seems clear that both number of characters and whether the message has "re:" in the subject are somewhat related to whether the email is spam. How do we come up with a model that will let us explore this relationship?
+
+--
+- For simplicity, we'll focus on the number of character (`num_char`) as the explanatory variable, but the model we describe can be expanded to take multiple explanatory variables as well.
 
 ---
 
@@ -95,9 +119,6 @@ Even if we set not spam to 0 and spam to 1, this isn’t something we can
 reasonably fit a linear model to - we need something more.
 
 ```{r echo=FALSE, fig.height=2.25}
-email <- email %>%
-  mutate(spam = if_else(spam == "No", 0, 1) %>% as.factor())
-
 means <- email %>%
   group_by(spam) %>%
   summarise(mean_num_char = mean(num_char)) %>%
@@ -106,7 +127,7 @@ means <- email %>%
 ggplot(email, aes(x = num_char, y = spam)) +
   geom_jitter(alpha = 0.2) +
   geom_line(data = means, aes(x = mean_num_char, y = spam, group = group), 
-            color = "blue", size = 1.5) +
+            color = "cyan", size = 1.5) +
   theme_minimal() +
   labs(x = "Number of characters (in thousands)", y = "Spam")
 ```
@@ -117,6 +138,7 @@ ggplot(email, aes(x = num_char, y = spam)) +
 
 - We can treat each outcome (spam and not) as successes and failures arising 
 from separate Bernoulli trials
+  - Bernoulli trial: a random experiment with exactly two possible outcomes, "success" and "failure", in which the probability of success is the same every time the experiment is conducted
 
 --
 - Each Bernoulli trial can have a separate probability of success
@@ -184,20 +206,6 @@ ggplot(d, aes(x = p, y = logit_p)) +
   ylab("logit(p)") +
   theme_minimal() +
   labs(title = "logit(p) vs. p")
-```
-
----
-
-```{r echo=FALSE}
-d <- tibble(x = seq(-5, 5, length.out = 1000)) %>%
-  mutate(inv_logit_x = exp(x)/(1+exp(x)))
-
-ggplot(d, aes(x = x, y = inv_logit_x)) + 
-  geom_line() + 
-  xlim(-5,5) + 
-  ylab("p = inv_logit(x)") +
-  theme_minimal() +
-  labs(title = "Inverse logit(x) vs. x")
 ```
 
 ---
@@ -272,8 +280,8 @@ $$p = 0.15 / 1.15 = 0.13$$
 ---
 
 .question[
-What is the probability that an email with 5000 characters is spam? What about 
-an email with 10000 characters?
+What is the probability that an email with 10000 characters is spam? What about 
+an email with 30000 characters?
 ]
 
 ```{r echo=FALSE}
@@ -283,10 +291,112 @@ countdown(minutes = 5)
 ---
 
 ```{r echo=FALSE}
+newdata <- tibble(
+  num_char = c(2, 15, 40),
+  color    = c("#E274A8", "#A7D5E8", "#1E5C65")
+  )
+newdata <- newdata %>%
+  mutate(
+    y_hat = predict(spam_model, newdata),
+    p_hat = exp(y_hat) / (1 + exp(y_hat))
+  )
+
 spam_model_aug <- augment(spam_model) %>%
   mutate(prob = exp(.fitted) / (1 + exp(.fitted)))
 ggplot(spam_model_aug, aes(x = num_char)) +
-  geom_point(aes(y = as.numeric(spam)-1), alpha = 0.2) +
+  geom_point(aes(y = as.numeric(spam)-1), alpha = 0.3, color = "darkgray") +
   geom_line(aes(y = prob)) +
-  theme_minimal()
+  geom_point(data = newdata, aes(x = num_char, y = p_hat), 
+             color = newdata$color) +
+  geom_text(x = 25, y = 0.75, 
+            label = paste0(newdata$num_char[1], "K chars, P(spam) = ", round(newdata$p_hat[1], 2)), 
+            color = newdata$color[1], hjust = "left") +
+  geom_text(x = 25, y = 0.60,
+            label = paste0(newdata$num_char[2], "K chars, P(spam) = ", round(newdata$p_hat[2], 2)),
+            color = newdata$color[2], hjust = "left") +
+  geom_text(x = 25, y = 0.45, 
+            label = paste0(newdata$num_char[3], "K chars, P(spam) = ", round(newdata$p_hat[3], 2)),
+            color = newdata$color[3], hjust = "left") +
+  theme_minimal() +
+  labs(
+    x = "Number of characters (in thousands)",
+    y = "Spam", 
+    title = "Spam vs. number of characters"
+  )
 ```
+
+---
+
+.question[
+Would you prefer an email with 2000 characters to be labeled as spam or not? How about 40,000 characters?
+]
+
+```{r echo=FALSE}
+ggplot(spam_model_aug, aes(x = num_char)) +
+  geom_point(aes(y = as.numeric(spam)-1), alpha = 0.3, color = "darkgray") +
+  geom_line(aes(y = prob)) +
+  theme_minimal() +
+  labs(
+    x = "Number of characters (in thousands)",
+    y = "Spam", 
+    title = "Spam vs. number of characters"
+  ) +
+  geom_vline(xintercept = newdata$num_char[1], 
+             color = newdata$color[1], size = 1, alpha = 0.5) +
+  geom_vline(xintercept = newdata$num_char[3], 
+             color = newdata$color[3], size = 1, alpha = 0.5) +
+  geom_text(x = 55, y = 0.75, 
+            label = paste0(newdata$num_char[1], "K chars, P(spam) = ", round(newdata$y_hat[1], 2)), 
+            color = newdata$color[1], hjust = "left") +
+  geom_text(x = 55, y = 0.65, 
+            label = paste0(newdata$num_char[3], "K chars, P(spam) = ", round(newdata$y_hat[3], 2)), 
+            color = newdata$color[3], hjust = "left") 
+```
+
+---
+
+class: center, middle
+
+# Sensitivity and specificity
+
+---
+
+|                         | Email is spam                 | Email is not spam             |
+|-------------------------|-------------------------------|-------------------------------|
+| Email labelled spam     | True positive                 | False positive (Type 1 error) |
+| Email labelled not spam | False negative (Type 2 error) | True negative                 |
+
+--
+- False negative rate = P(Labelled not spam | Email spam) = FN / (TP + FN) 
+- False positive rate = P(Labelled spam | Email not spam) = FP / (FP + TN)
+
+--
+- Sensitivity = P(Labelled spam | Email spam) = TP / (TP + FN)
+  - Sensitivity = 1 − False negative rate
+- Specificity = P(Labelled not spam | Email not spam) = TN / (FP + TN) 
+  - Specificity = 1 − False positive rate
+
+---
+
+.question[
+If you were designing a spam filter, would you want sensitivity and specificity to be high or low? What are the tradeoffs associated with each decision? 
+]
+
+```{r echo=FALSE}
+countdown(minutes = 3)
+```
+
+---
+
+## Using logistic regression to build a spam filter
+
+- We have a set of emails we are interested in identifying spam messages.
+- Using logistic regression we can predict the probability an incoming message is spam. 
+- Using model selection, we can pick a model with the highest predictive power.
+
+--
+- But when designing a spam filter this is only half of the battle, we would also need to design a decision rule about which emails get flagged as spam (e.g. what probability should we use as out cutoff?)
+
+--
+- While not the only possible solution, we can consider a simple approach where we choose a single threshold probability and any email that exceeds that probability is flagged as spam.
+
