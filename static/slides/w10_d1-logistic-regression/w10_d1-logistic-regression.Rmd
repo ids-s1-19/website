@@ -280,8 +280,8 @@ $$p = 0.15 / 1.15 = 0.13$$
 ---
 
 .question[
-What is the probability that an email with 10000 characters is spam? What about 
-an email with 30000 characters?
+What is the probability that an email with 15000 characters is spam? What about 
+an email with 40000 characters?
 ]
 
 ```{r echo=FALSE}
