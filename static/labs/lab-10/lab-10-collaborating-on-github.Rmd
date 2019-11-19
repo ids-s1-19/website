@@ -157,15 +157,25 @@ project repo.
 knitr::include_graphics("img/project-description.png")
 ```
 
-13. **Confirming presentation format:** Go to the website for your repo and 
+13. **Citing your data:** Now is the time to fix up those citations! In your 
+project README there is a link to a resource for properly citing data. Develop 
+a citation for your dataset and add it under the data section using this guidance. If you have questions, ask a tutor for help!
+
+14. **Confirming presentation format:** Go to the website for your repo and 
 click on the link that should take you to your presentation. Confirm that your 
 latest changes to the presentation are reflected at this link (which means you 
 must have pushed the resulting HTML file along with the Rmd file where you 
 wrote your presentation).
 
-14. **Confirming schedules:** Go to the [schedule for presentations]() and 
+15. **Confirming schedules:** Go to the [schedule for presentations]() and 
 confirm that all team members can make it at the beginning of the hour you're 
 assigned to present in. Also note that we will not be meeting in the computer 
 lab. **Presentations will be held in JCMB 5327.**
+  - Some of you who have an ILA workshop before this class have been assigned 
+  to the first hour due to the sheer number of such students with conflicts. 
+  I have checked in with the ILA course organizer and have been told that next 
+  week's workshop is revision, and the presentations in IDS should take priority. 
+  So please make sure to leave your workshop by 11:30 at the lastest to get to 
+  King's Buildings in time for the presentations.
 
-15. **Strongly recommended:** Get a hold of a tutor and run your ideas by them.
+16. **Strongly recommended:** Get a hold of a tutor and run your ideas by them.
