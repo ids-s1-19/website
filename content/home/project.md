@@ -77,8 +77,8 @@ them. But you might find something interesting there:
 ### Deliverables
 
 1. Proposal     - due Wednesday, 23 Oct, at 17:00
-1. Presentation - due Tuesday, 27 Nov, at 12:00
-1. Summary      - due Tuesday, 27 Nov, at 12:00
+1. Presentation - due Tuesday, 26 Nov, at 12:00
+1. Summary      - due Tuesday, 26 Nov, at 12:00
 
 #### Proposal - due Wednesday, 23 Oct, at 17:00
 
@@ -106,7 +106,7 @@ Each section should be no more than 1 page (excluding figures). You can check a
 print preview to confirm length. You will turn in your proposal as your HW 05 
 in the course.
 
-#### Presentation - due Tuesday, 27 Nov, at 12:00
+#### Presentation - due Tuesday, 26 Nov, at 12:00
 
 5 minutes maximum, and each team member should say something substantial.
 
@@ -133,7 +133,7 @@ let me know asap!
 
 - Presentation location: Presentations will be held in JCMB 5327.
 
-#### Summary - due Tuesday, 27 Nov, at 12:00
+#### Summary - due Tuesday, 26 Nov, at 12:00
 
 Along with your presentation slides, we want you to provide a brief summary of 
 your project in the README of your repository.
