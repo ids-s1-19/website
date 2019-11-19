@@ -177,5 +177,11 @@ lab. **Presentations will be held in JCMB 5327.**
   week's workshop is revision, and the presentations in IDS should take priority. 
   So please make sure to leave your workshop by 11:30 at the lastest to get to 
   King's Buildings in time for the presentations.
+  
+16. **Tidying up your coding style:** Go to the pull requests tab and take a 
+look at the code styling suggestions. Implement them in the relevant files. 
+Styling suggestions are generated daily at 13:30, so if you do more work today, 
+there may be more suggestions tomorrow. Make sure to check these before you 
+finalize work on your repo.
 
-16. **Strongly recommended:** Get a hold of a tutor and run your ideas by them.
+17. **Strongly recommended:** Get a hold of a tutor and run your ideas by them.
