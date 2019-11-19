@@ -184,4 +184,9 @@ Styling suggestions are generated daily at 13:30, so if you do more work today,
 there may be more suggestions tomorrow. Make sure to check these before you 
 finalize work on your repo.
 
+```{r echo=FALSE}
+knitr::include_graphics("img/styler-1.png")
+knitr::include_graphics("img/styler-2.png")
+```
+
 17. **Strongly recommended:** Get a hold of a tutor and run your ideas by them.
