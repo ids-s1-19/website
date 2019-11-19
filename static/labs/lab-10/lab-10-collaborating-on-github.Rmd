@@ -133,8 +133,8 @@ GitHub themes' demo pages at the following links.
   - [time machine](https://pages-themes.github.io/time machine)
 
 Once you decide which theme you prefer (and it's perfectly fine if it's the 
-default theme you had to begin with), go to the `config.yml` file in your repo 
-on RStudio and edit the theme name in the `config.yml` file. For example, if 
+default theme you had to begin with), go to the `_config.yml` file in your repo 
+on RStudio and edit the theme name in the `_config.yml` file. For example, if 
 you were going from `cayman` to `hacker`, your diff would look like the 
 following. Once you commit and push this change, give it a couple minutes 
 for the website to rebuild, and confirm that the theme was changed.
