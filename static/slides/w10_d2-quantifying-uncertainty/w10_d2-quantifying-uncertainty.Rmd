@@ -25,7 +25,8 @@ theme_set(theme_minimal())
 
 ## Announcements
 
-- 
+- Check presentation schedule and let me know if there are any concerns.
+- We'll start presentations at 12pm (not 12:10pm)!
 
 ---
 
@@ -326,7 +327,7 @@ boot_df %>%
 
 ---
 
-## modelr $\in$ tidyverse
+## infer $\in$ tidymodels
 
 .pull-left[
 ```{r echo=FALSE, out.width=350}
@@ -506,7 +507,7 @@ u99 <- boot_df %>% summarize(lower_bound = quantile(stat, 0.995)) %>% round(2) %
 ggplot(data = boot_df, mapping = aes(x = stat)) +
   geom_histogram(binwidth = 100) +
   geom_vline(xintercept = c(lower_bound, upper_bound), color = "#A7D5E8", lty = 2) +
-  geom_vline(xintercept = c(l90, u90), color = "#1E5C65", lty = 3) +
+  geom_vline(xintercept = c(l90, u90), color = "chartreuse4", lty = 3) +
   geom_vline(xintercept = c(l99, u99), color = "orange", lty = 6) +
   labs(title = "Bootstrap distribution of means",
        subtitle = "and various confidence intervals")
