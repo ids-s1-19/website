@@ -20,7 +20,7 @@ title: 'Week 10 - Logistic regression and quantifying uncertainty'
 |---:|---|---|
 | Lec 19 | [Logistic regression](/slides/w10_d1-logistic-regression/w10_d1-logistic-regression.html) |  |
 | Lab 10 | [Collaborating on GitHub](/labs/lab-10/lab-10-collaborating-on-github.html) | **Due:** Fri, 22 Nov, 17:00 |
-| Lec 20 | A brief foray quantifying uncertainty around estimates |  |
+| Lec 20 | [Quantifying uncertainty around estimates](/slides/w10_d2-quantifying-uncertainty/w10_d2-quantifying-uncertainty) |  |
 | HW 10  | ???    | **Due:** Wed, 27 Nov, 17:00 |
 | OQ 10  | Review | **Due:** Fri, 29 Nov, 17:00 |
 
