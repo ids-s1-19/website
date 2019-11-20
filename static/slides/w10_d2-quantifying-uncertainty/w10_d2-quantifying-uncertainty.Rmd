@@ -1,5 +1,5 @@
 ---
-title: "Estimation via bootstrapping <br> `r emo::ji('boot')`"
+title: "Quantifying uncertainty <br> `r emo::ji('boot')`"
 author: "Dr. Çetinkaya-Rundel"
 output:
   xaringan::moon_reader:
