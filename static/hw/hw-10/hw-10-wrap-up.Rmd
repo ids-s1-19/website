@@ -29,7 +29,16 @@ you can refer to one of the earlier assignments.
 # Part 1 - Bootstrapping the GSS
 
 In this part we continue our exploration of the 2016 GSS dataset from last week. 
-Once again we'll read in the data using the following:
+
+- Click [here](https://introds.org/data/gss2016.csv) to download the data. 
+The file is called `gss2016.csv`.
+- Create a `data` folder in your project -- in the Files pane, click on New Folder.
+- Navigate to the data folder you just created and upload the `gss2016.csv` file.
+- Note that even though you made a change in your files by adding the data, 
+`gss2016.csv` does not appear in your Git pane. This is because it's being ignored 
+by git.
+
+Then, read in the data using the following:
 
 ```{r eval=FALSE}
 gss <- read_csv("data/gss2016.csv", 
@@ -38,8 +47,6 @@ gss <- read_csv("data/gss2016.csv",
                 guess_max = 2867) %>%
   select(harass5, emailmin, emailhr, educ, born, polviews, advfront)
 ```
-
-Once again, the dataset will be `.gitignore`d due to its size.
 
 Remember that the GSS asked respondents how many hours and minutes they spend on 
 email weekly. The responses to these questions are recorded in the `emailhr` and 
@@ -189,7 +196,7 @@ The package manuals are linked below, however developers of the packages might h
   - https://github.com/brooke-watson/BRRR
   
   
-# Part 3 - Make the ugliest ggplot you can!
+# Part 3 - Mirror, mirror on the wall, who's the ugliest of them all?
 
 Here is a simple plot using the `mpg` dataset, which contains information on fuel economy of cars. We're plotting highway miles per gallon vs. city miles per gallon, colored by whether the car is 
 front-wheel drive, rear wheel drive, or four-wheel drive.

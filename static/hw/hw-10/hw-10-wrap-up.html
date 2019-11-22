@@ -480,13 +480,19 @@ padding-left: 1em;
 </div>
 <div id="part-1---bootstrapping-the-gss" class="section level1">
 <h1>Part 1 - Bootstrapping the GSS</h1>
-<p>In this part we continue our exploration of the 2016 GSS dataset from last week. Once again we’ll read in the data using the following:</p>
+<p>In this part we continue our exploration of the 2016 GSS dataset from last week.</p>
+<ul>
+<li>Click <a href="https://introds.org/data/gss2016.csv">here</a> to download the data. The file is called <code>gss2016.csv</code>.</li>
+<li>Create a <code>data</code> folder in your project – in the Files pane, click on New Folder.</li>
+<li>Navigate to the data folder you just created and upload the <code>gss2016.csv</code> file.</li>
+<li>Note that even though you made a change in your files by adding the data, <code>gss2016.csv</code> does not appear in your Git pane. This is because it’s being ignored by git.</li>
+</ul>
+<p>Then, read in the data using the following:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">gss &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/gss2016.csv&quot;</span>, </a>
 <a class="sourceLine" id="cb1-2" data-line-number="2">                <span class="dt">na =</span> <span class="kw">c</span>(<span class="st">&quot;&quot;</span>, <span class="st">&quot;Don't know&quot;</span>,</a>
 <a class="sourceLine" id="cb1-3" data-line-number="3">                       <span class="st">&quot;No answer&quot;</span>, <span class="st">&quot;Not applicable&quot;</span>),</a>
 <a class="sourceLine" id="cb1-4" data-line-number="4">                <span class="dt">guess_max =</span> <span class="dv">2867</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb1-5" data-line-number="5"><span class="st">  </span><span class="kw">select</span>(harass5, emailmin, emailhr, educ, born, polviews, advfront)</a></code></pre></div>
-<p>Once again, the dataset will be <code>.gitignore</code>d due to its size.</p>
 <p>Remember that the GSS asked respondents how many hours and minutes they spend on email weekly. The responses to these questions are recorded in the <code>emailhr</code> and <code>emailmin</code> variables. For example, if the response is 2.5 hrs, this would be recorded as <code>emailhr = 2</code> and <code>emailmin = 30</code>.</p>
 <p><label for="tufte-mn-1" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-1" class="margin-toggle"><span class="marginnote"><span style="display: block;">Yes, this exercise is a repeat of what you did last week!</span></span></p>
 <ol style="list-style-type: decimal">
@@ -629,8 +635,8 @@ padding-left: 1em;
 </ul>
 </div>
 </div>
-<div id="part-3---make-the-ugliest-ggplot-you-can" class="section level1">
-<h1>Part 3 - Make the ugliest ggplot you can!</h1>
+<div id="part-3---mirror-mirror-on-the-wall-whos-the-ugliest-of-them-all" class="section level1">
+<h1>Part 3 - Mirror, mirror on the wall, who’s the ugliest of them all?</h1>
 <p>Here is a simple plot using the <code>mpg</code> dataset, which contains information on fuel economy of cars. We’re plotting highway miles per gallon vs. city miles per gallon, colored by whether the car is front-wheel drive, rear wheel drive, or four-wheel drive.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg, <span class="kw">aes</span>(<span class="dt">x =</span> cty, <span class="dt">y =</span> hwy, <span class="dt">color =</span> drv)) <span class="op">+</span></a>
 <a class="sourceLine" id="cb4-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_point</span>()</a></code></pre></div>
