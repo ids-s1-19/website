@@ -27,12 +27,12 @@ title: 'Week 11 - Wrap up'
 | <div style="width:60px"></div>  | <div style="width:420px"></div>  |  <div style="width:190px"></div> |
 |----:|---|---|
 | :open_book: | MDSR: [Chp 6 - Professional Ethics](https://mdsr-book.github.io/excerpts/mdsr-ethics.pdf) | **Required** |
-| :fountain_pen: | [Algorithmic Unfairness Without Any Bias Baked In](http://aaronsadventures.blogspot.com/2019/01/discussion-of-unfairness-in-machine.html) |  |
+| :fountain_pen: | [Algorithmic Unfairness Without Any Bias Baked In](http://aaronsadventures.blogspot.com/2019/01/discussion-of-unfairness-in-machine.html) | (Optional)  |
 
 
 ### Miscellaneous
 
 | <div style="width:60px"></div>  | <div style="width:420px"></div>  |  <div style="width:190px"></div> |
 |----:|---|---|
-| :projector:  | [Joy Buolamwini - How I’m fighting bias in algorithms](https://www.ted.com/talks/joy_buolamwini_how_i_m_fighting_bias_in_algorithms) | |
-| :projector:  | [Cathy O'Neil - The era of blind faith in big data must end](https://www.youtube.com/watch?v=_2u_eHHzRto) | |
+| :film_projector:  | [Joy Buolamwini - How I’m fighting bias in algorithms](https://www.ted.com/talks/joy_buolamwini_how_i_m_fighting_bias_in_algorithms) | |
+| :film_projector:  | [Cathy O'Neil - The era of blind faith in big data must end](https://www.youtube.com/watch?v=_2u_eHHzRto) | |
