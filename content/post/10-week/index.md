@@ -22,5 +22,5 @@ title: 'Week 10 - Logistic regression and quantifying uncertainty'
 | Lab 10 | [Collaborating on GitHub](/labs/lab-10/lab-10-collaborating-on-github.html) | **Due:** Fri, 22 Nov, 17:00 |
 | Lec 20 | [Quantifying uncertainty around estimates](/slides/w10_d2-quantifying-uncertainty/w10_d2-quantifying-uncertainty) |  |
 | HW 10  | [Wrap up](/hw/hw-10/hw-10-wrap-up.html)    | **Due:** Fri, 29 Nov, 17:00 (Note extended deadline) |
-| OQ 10  | Review | **Due:** Fri, 29 Nov, 17:00 |
+| OQ 10  | [Review](https://minecr.shinyapps.io/10-review/) | **Due:** Fri, 29 Nov, 17:00 |
 
