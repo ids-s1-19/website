@@ -23,13 +23,84 @@ library(broom)
 theme_set(theme_minimal())
 ```
 
-## Announcements
+## Presentations
 
-- 
+- You only need to show up for the period you're assigned to (12-13 or 13-14) -- make sure to be there on the hour!
+- When you come in pick up your evaluation sheet and take a seat. 
+- We will start presentation after just a couple minutes of introductory remarks.
+- Presentations will be off of my computer, using the link to your presentation on the README of your repository. 
+- You will have a handheld mic you can pass between presenters, please use the mic. 
 
 ---
 
-## Outline
+## Evaluating other teams
+
+Out of 5 points. Score each of the following on a 0/1 scale, add up scores, and go to webform *after* class to enter your scores.
+
+.small[
+- **Content:** Is the research question well designed and is the data being used relevant to the research question?
+- **Content:** Did the team use appropriate statistical procedures and interpretations of results accurately?
+- **Creativity and Critical Thought:** Is the project carefully thought out? Are the limitations carefully considered? Does it appear that time and effort went into the planning and implementation of the project?
+- **Slides:** Are the slides well organized, readable, not full of text, featuring figures with legible labels, legends, etc.?
+- **Professionalism:** How well did the team present? Does the presentation appear to be well practiced? Are they reading off of a script? Did everyone get a chance to say something meaningful about the project? 
+]
+
+.instructions[
+You **must** enter your scores by 17:00 on Wednesday to receive your own score. Otherwise you get a 0 on the "classmate's evaluation" portion of your project. URL to be provided tomorrow.
+]
+
+---
+
+## Evaluating your own team
+
+Same team peer evaluation process as before, with one additional question asking you to score your teammates (not yourself) on a scale of 0-10.
+
+- Intellectual contribution
+- Presence (physical and mental) during team meetings
+- Presentation
+
+.instructions[
+You **must** enter your scores by 17:00 on Wednesday to receive your own score. Otherwise you get a 0 on the "team peer evaluation" portion of your project. Opens tomorrow.
+]
+
+---
+
+```{r echo=FALSE, fig.align="center",out.width=700}
+knitr::include_graphics("img/presentation-schedule.png")
+```
+
+<br>
+
+.center[
+.tiny[
+[github.com/ids-s1-19/team-assignments/blob/master/project-presentation-schedule.csv](https://github.com/ids-s1-19/team-assignments/blob/master/project-presentation-schedule.csv)
+]
+]
+
+---
+
+## How are we evaluating you?
+
+.small[
+- **Content:** Is the research question well designed and is the data being used relevant to the research question? (0 - 5)
+- **Content:** Did the team use appropriate statistical procedures and interpretations of results accurately? (0 - 10)
+- **Creativity and Critical Thought:** Is the project carefully thought out? Are the limitations carefully considered? Does it appear that time and effort went into the planning and implementation of the project? (0 - 10)
+- **Slides:** Are the slides well organized, readable, not full of text, featuring figures with legible labels, legends, etc.? (0 - 10)
+- **Professionalism:** How well did the team present? Does the presentation appear to be well practiced? Are they reading off of a script? Did everyone get a chance to say something meaningful about the project? (0 - 5)
+- **Teamwork:** Did the team present a unified story, or did it seem like independent pieces of work patched together? (0 - 6)
+- **Time management:** Did the team divide the time well amongst themselves or got cut off going over time? (0 - 4)
+]
+
+---
+
+## What shall we do on Wednesday?
+
+- Option 1: Building interactive web apps in R
+- Option 2: Text analysis in R (song lyrics, books, etc.)
+
+---
+
+## Data science ethics
 
 - Misrepresentation
 - Privacy
