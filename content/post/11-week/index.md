@@ -20,7 +20,7 @@ title: 'Week 11 - Wrap up'
 |---:|---|---|
 | Lec 21 | [Data science ethics](/slides/w11-d1-data-science-ethics/w11-d1-data-science-ethics.html) |
 | Lab 11 | Project presentations (JCMB 5327) |
-| Lec 22 | Text analysis / Interactive visualizations |
+| Lec 22 | [Text analysis](/slides/w11-d2-text-analysis/w11-d2-text-analysis.html) |
 
 ### Readings
 
