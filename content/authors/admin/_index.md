@@ -23,3 +23,5 @@ superuser: true
 ---
 
 Learn to explore, visualize, and analyze data to understand natural phenomena, investigate patterns, model outcomes, and make predictions, and do so in a reproducible and shareable manner. Gain experience in data collection, wrangling, and visualization, exploratory data analysis, predictive modeling, and effective communication of results while working on problems and case studies inspired by and based on real-world questions. The course will focus on the R statistical computing language. No statistical or computing background is necessary.
+
+**Note: This is the Fall 2019 version of the course. To see the current version, please visit [introds.org](https://introds.org/).

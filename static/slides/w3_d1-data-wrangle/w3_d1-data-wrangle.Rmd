@@ -239,7 +239,7 @@ starwars %>%
   summarize(
     avg_height = mean(height, na.rm = TRUE) %>% round(2)
   )
-````
+```
 
 ---
 

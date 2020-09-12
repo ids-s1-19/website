@@ -1,5 +1,5 @@
 ---
-title: "Model validation and logistic regression <br> `r emo::ji('check')`"
+title: "Model validation <br> `r emo::ji('check')`"
 author: "Dr. Çetinkaya-Rundel"
 output:
   xaringan::moon_reader:
@@ -38,12 +38,6 @@ full_model <- lm(score ~ rank + ethnicity + gender + language +
 
 selected_model <- step(full_model, direction = "backward")
 ```
-
-
-## Announcements
-
-- Office hours later today online
-- Peer evaluations -> team meetings
 
 ---
 
