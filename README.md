@@ -8,5 +8,5 @@
 
 - The course highlights tools and techniques from statistics, mathematics, computer science, as well as the social sciences and digital humanities to introduce students to various facets of data analysis such as data visualization, wrangling, and sampling to get a suitable data set; data management to be able to access data quickly and reproducibly; exploratory data analysis to generate hypotheses and intuition; modeling to understand and quantify patterns and prediction; and effective communication of results using visualizations and interpretable summaries.
 
--- As part of each assignment, assessment, the semester long project, and case study, students will use data analysis skills to solve problems, and present their process and their results as fully reproducible written reports as well as oral presentations.
+-As part of each assignment, assessment, the semester long project, and case study, students will use data analysis skills to solve problems, and present their process and their results as fully reproducible written reports as well as oral presentations.
 
